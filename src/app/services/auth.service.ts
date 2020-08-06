@@ -58,7 +58,7 @@ export class AuthService {
     this.user_type = user_type;
     localStorage.setItem("user_type", user_type);
     localStorage.setItem("AUTH_TOKEN", authToken);
-    // this.router.navigateByUrl("/admin");
+    this.router.navigateByUrl("/admin/profile");
   }
 
   //Logout call
@@ -74,12 +74,12 @@ export class AuthService {
   }
 
   //get user authentication token
-  getAuthToken(): string {
+  getToken(): string {
     return localStorage.getItem("AUTH_TOKEN");
   }
 
   public isAuthenticated(): boolean {
-    const authToken = this.getAuthToken();
+    const authToken = this.getToken();
     const status = authToken ? true : false;
     return status;
   }

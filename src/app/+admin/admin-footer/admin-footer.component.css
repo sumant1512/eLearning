@@ -1,0 +1,84 @@
+footer {
+
+    background: #00205b;
+    color: white;
+    margin-top: 100px;
+  }
+  .mainfooter {
+    max-width: 1366px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  footer a {
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  footer a:hover {
+    color: #fa944b;
+    text-decoration: none;
+  }
+  
+  .copy {
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #ffffff;
+  }
+  
+  .footer-middle {
+    padding-top: 2em;
+    color: white;
+  }
+  .col-xs-12 {
+    text-align: center;
+  }
+  
+  ul.social-network {
+    list-style: none;
+    display: inline;
+    margin-left: 0 !important;
+    padding: 0;
+  }
+  
+  ul.social-network li {
+    display: inline;
+    margin: 0 5px;
+  }
+  
+  .social-network a.icoFacebook:hover {
+    background-color: #3b5998;
+  }
+  
+  .social-network a.icoLinkedin:hover {
+    background-color: #007bb7;
+  }
+  
+  .social-network a.icoFacebook:hover i,
+  .social-network a.icoLinkedin:hover i {
+    color: #fff;
+  }
+  .social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+  }
+  
+  .social-circle li i {
+    margin: 0;
+    line-height: 30px;
+    text-align: center;
+  }
+  
+  .social-circle i {
+    color: #595959;
+  }
+  
+  .social-network a {
+    background-color: #f9f9f9;
+  }
+  

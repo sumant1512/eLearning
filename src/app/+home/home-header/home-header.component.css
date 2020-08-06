@@ -1,0 +1,58 @@
+
+.log{
+	display: inline-block;
+	display: flex;
+	margin-bottom: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.logo{
+	height: 31px;
+}
+.c{
+	color: white;
+	font-size:0.875rem;
+	font-weight: 700;
+	font-family: JBAvenir,avenir,Arial,Helvetica,sans-serif!important;
+}
+
+
+
+#men{
+	top:0;
+	
+}
+#men.cus-nav{
+	position:sticky;
+-webkit-animation: .7s slide-down;
+	animation: .7s slide-down;	
+z-index:2;
+}
+
+@-webkit-keyframes slide-down {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-100%);
+		transform: translateY(-100%)
+	}
+	100% {
+		opacity: .9;
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
+
+
+@keyframes slide-down {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-100%);
+		transform: translateY(-100%)
+	}
+	100% {
+		opacity: .9;
+		-webkit-transform: translateY(0);
+		transform: translateY(0)
+	}
+}
