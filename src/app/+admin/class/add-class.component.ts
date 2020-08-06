@@ -9,6 +9,7 @@ import { addClassForm } from "./add-class.utils";
 })
 export class AddClassComponent implements OnInit {
   addClassForm: FormGroup;
+  loader: boolean;
   constructor() {
     this.addClassForm = addClassForm();
   }
@@ -16,4 +17,8 @@ export class AddClassComponent implements OnInit {
   ngOnInit(): void {}
 
   addClass() {}
+
+  login() {
+    this.loader = true;
+  }
 }
