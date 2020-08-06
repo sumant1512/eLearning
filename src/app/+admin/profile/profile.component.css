@@ -1,0 +1,43 @@
+
+.profile-info-left {
+    position: relative;
+    top: -165px;
+  } 
+  .card-body{
+    background-color:#0062cc29;
+    border-radius: 5px ;
+   }
+   .modal{
+    background-color:rgb(161, 214, 221) ;
+  }
+   .user-profile {
+    padding-bottom: 30px;
+  }
+ .profile-info-left {
+    position: relative;
+    top: -102px;
+ } 
+  .profile-info-left h2 {
+    font-family: "josefinslab-semibold";
+    margin-bottom: 30px;
+  }
+ .section {
+    margin-top: 50px;
+  }
+  .section h3 {
+    font-size: 1.1em;
+    font-weight: 700;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+  }
+ .profile-info-left ul.list-about > li {
+  line-height: 2.3;
+}
+
+  
+  
+
+
+
+
+
