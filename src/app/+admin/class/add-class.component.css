@@ -1,0 +1,10 @@
+.formSlide {
+  right: -1600px;
+  animation: formSlide 2s forwards;
+}
+
+@keyframes formSlide {
+  100% {
+    right: 0;
+  }
+}

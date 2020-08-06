@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Open Sans", sans-serif;
+}
+.container-max-width {
+  max-width: 1320px !important;
+}
+
+.dark-blue {
+  color: #00205b !important;
+}
+
+.b-dark-blue {
+  border-color: #00205b !important;
+}
+
+.bg-dark-blue {
+  background-color: #00205b !important;
+}
+
+.core-blue {
+  color: #193e82 !important;
+}
+
+.b-core-blue {
+  border-color: #193e82 !important;
+}
+
+.bg-core-blue {
+  background-color: #193e82 !important;
+}
+
+.light-blue {
+  color: #0033a0 !important;
+}
+
+.b-light-blue {
+  border-color: #0033a0 !important;
+}
+
+.bg-light-blue {
+  background-color: #0033a0 !important;
+}
+
+.sky-blue {
+  color: #1b97ca !important;
+}
+
+.b-sky-blue {
+  border-color: #1b97ca !important;
+}
+
+.bg-sky-blue {
+  background-color: #1b97ca !important;
+}
+
+.fade-blue {
+  color: #f5f5f5 !important;
+}
+
+.b-fade-blue {
+  border-color: #f5f5f5 !important;
+}
+
+.bg-fade-blue {
+  background-color: #f5f5f5 !important;
+}
+
+.core-orange {
+  color: #ff8200 !important;
+}
+
+.b-core-orange {
+  border-color: #ff8200 !important;
+}
+
+.bg-core-orange {
+  background-color: #ff8200 !important;
+}
+
+.charcoal {
+  color: #303234 !important;
+}
+
+.b-charcoal {
+  border-color: #303234 !important;
+}
+
+.bg-charcoal {
+  background-color: #303234 !important;
+}
+
+.f6 {
+  font-size: 14px;
+}
+
+input {
+  border: 1px solid #d5dae2;
+  padding: 15px;
+  min-height: 45px;
+  font-size: 14px;
+}
+
+.br-10 {
+  border-radius: 10px;
+}

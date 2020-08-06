@@ -1,0 +1,6 @@
+li::before {
+  content: "\27A3";
+  color: #00205b;
+  font-weight: bold;
+  padding-right: 10px;
+}

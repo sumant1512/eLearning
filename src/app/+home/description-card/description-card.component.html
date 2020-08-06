@@ -1,0 +1,30 @@
+<div class="mt-3 mt-md-0 text-center text-md-left px-md-5">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+      <img
+        class="img-fluid p-0 pr-md-5 py-md-5"
+        src="../../assets/images/detailimg.jpeg"
+        alt="image"
+      />
+    </div>
+    <div class="mt-4 my-md-auto col-12 col-sm-12 col-md-6 col-lg-6">
+      <div>
+        <h4 class="dark-blue">From Principle's Pen</h4>
+        <p class="f6">
+          Dear Reader “With determination for a mission of Excellence and well
+          prepared with the supreme art to inspire hope, ignite the imagination,
+          and instill joy in creative expression and knowledge, We, extend you a
+          warm welcome to the new session 2020-21”.
+        </p>
+      </div>
+      <div>
+        <h5 class="dark-blue"><a>Steps for Online Learning</a></h5>
+        <ul class="list-unstyled pl-0">
+          <li *ngFor="let description of descriptionList" class="f6">
+            {{ description.description }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

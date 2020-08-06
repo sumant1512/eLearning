@@ -1,0 +1,19 @@
+<p>profile works!</p>
+<div class="row">
+  <div class="col-12 text-center">
+    <form [formGroup]="schoolImageForm">
+      <div><img class="image img-fluid" [src]="studentImageUrl" /></div>
+      <div><i class="camera-icon fa fa-camera camera"></i></div>
+      <div>
+        <input
+          class="cursor-pointer choose-image-input pb-5 mb-3 mb-lg-0"
+          type="file"
+          formControlName="studentImage"
+          (change)="onImageSelect($event, 'school')"
+        />
+      </div>
+      <div class="upload-tag">Upload school's Image</div>
+      <button type="submit" (click)="saveSchoolImage()">Submit</button>
+    </form>
+  </div>
+</div>

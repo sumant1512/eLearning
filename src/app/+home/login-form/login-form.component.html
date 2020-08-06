@@ -1,0 +1,118 @@
+<div class="mt-4 mt-lg-0 px-md-5">
+  <div class="card login-card">
+    <div class="row">
+      <div class="bg-light-blue col-md-5">
+        <img
+          src="assets/images/tcslogowhite.svg"
+          alt="login"
+          class="login-card-img"
+        />
+      </div>
+      <div class="col-12 col-md-7">
+        <div class="px-3 px-md-5 py-4 py-lg-5">
+          <div class="brand-wrapper">
+            <img src="assets/images/loginlogo.png" alt="logo" class="logo" />
+            <h3 class="charcoal mb-2">SignIn</h3>
+          </div>
+
+          <form [formGroup]="loginForm">
+            <div class="form-group">
+              <div>
+                <i class="charcoal">Email Id</i>
+              </div>
+              <input
+                type="text"
+                formControlName="email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': f.email.touched && f.email.errors
+                }"
+              />
+              <div
+                *ngIf="f.email.touched && f.email.errors"
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.email.errors.required">
+                  School Email is required
+                </div>
+                <div *ngIf="f.email.errors.pattern">
+                  School Email must be a valid email address
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-4">
+              <div class="input-group-prepend">
+                <i class="charcoal">Password</i>
+              </div>
+              <input
+                type="password"
+                formControlName="password"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid':
+                    (f.password.touched || f.password.dirty) &&
+                    f.password.errors
+                }"
+              />
+              <div
+                *ngIf="
+                  (f.password.touched || f.password.dirty) && f.password.errors
+                "
+                class="invalid-feedback"
+              >
+                <div *ngIf="f.password.errors.required">
+                  Password is required
+                </div>
+                <div *ngIf="f.password.errors.pattern">
+                  Password must contain a lowercase, a uppercase, a digit and a
+                  special symbol
+                </div>
+              </div>
+            </div>
+            <button
+              [ngClass]="loader ? 'bg-light' : 'bg-light-blue'"
+              class="br-10 b-light-blue btn btn-block login-btn text-light font-weight-bold py-3 mb-3"
+              (click)="login()"
+              type="button"
+            >
+              <span *ngIf="loader; else button">
+                <span
+                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </span>
+              <ng-template #button>
+                <span>Login</span>
+              </ng-template>
+            </button>
+          </form>
+          <div class="text-center text-md-left">
+            <a href="#!" class="sky-blue f6">Forgot password?</a>
+            <p class="mb-0 charcoal">
+              Don't have an account?
+              <a
+                type="button"
+                tabIndex="0"
+                class="light-blue font-italic"
+                (click)="register()"
+                >Register here</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<app-home-header
+  (scrollToLogin)="scrollToLogin($event)"
+  id="homehead"
+></app-home-header>
+<div class="mx-auto mb-5 container-max-width container-fluid">
+  <div class="row">
+    <div class="mx-0 px-0 col-12">
+      <app-carousel></app-carousel>
+    </div>
+    <div class="col-12 home-align">
+      <app-description-card></app-description-card>
+    </div>
+    <div id="loginForm" class="col-12 home-align">
+      <app-login-form></app-login-form>
+    </div>
+  </div>
+</div>
+<app-home-footer></app-home-footer>
