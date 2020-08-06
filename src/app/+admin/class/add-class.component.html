@@ -8,35 +8,15 @@
         <form [formGroup]="addClassForm">
           <div class="form-group">
             <i class="charcoal">Class Name</i>
-            <input
-              class="form-control"
-              formControlName="className"
-              type="text"
-            />
+            <input class="form-control" formControlName="className" type="text" />
           </div>
           <div>
-            <button
-              [ngClass]="loader ? 'bg-light' : 'bg-light-blue'"
-              class="br-10 b-light-blue btn btn-block login-btn text-light font-weight-bold py-3 mb-3"
-              (click)="login()"
-              type="button"
-            >
+            <button [ngClass]="loader ? 'bg-light' : 'bg-light-blue'"
+              class="br-10 b-light-blue btn btn-block login-btn text-light font-weight-bold py-3 mb-3" type="button">
               <span *ngIf="loader; else button">
-                <span
-                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                <span
-                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                <span
-                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
+                <span class="mx-1 dark-blue spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                <span class="mx-1 dark-blue spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                <span class="mx-1 dark-blue spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
               </span>
               <ng-template #button>
                 <span>Add</span>

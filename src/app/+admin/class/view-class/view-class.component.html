@@ -1,1 +1,30 @@
-<p>view-class works!</p>
+<div class="classSlide mx-2 mx-md-4 mx-lg-5 card">
+    <div>
+        <div class="bg-core-blue text-light font-weight-bold card-header">
+        Current Classes
+    </div>
+    <div class="container" style="overflow: auto; height: 21.50rem;">
+    <div class ="table responsive">
+        <table class ="table table-bordered" >
+            <thead >
+                <tr>
+                    <th>Class Name</th>
+                    <th>Created on</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            
+                <tr *ngFor="let class of classes">
+                    <td>{{ class.class }}</td>
+                    <td>{{ class.dates|date }}</td>
+                    <td>
+                        <button type="button" class="btn btn-outline-danger-sm">Delete</button>
+                        <button type="button" class="btn btn-outline-success-sm">Edit</button>
+                    </td>
+                </tr>
+            
+        </table>
+    </div>
+    </div>
+    </div>
+    </div>

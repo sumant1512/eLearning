@@ -1,1 +1,55 @@
-<p>admin-header works!</p>
+<nav class="navbar navbar-expand-lg   navbar-dark " id="men">
+  <div class="container-fluid">
+   
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+       
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Admin
+          </a>
+          <div class="dropdown-menu  text-center" aria-labelledby="navbarDropdown2">
+           
+            <a class="dropdown-item"  style="color:black;">Class I</a>
+            <a class="dropdown-item"  style="color:black;">Class II</a>
+            <a class="dropdown-item"  style="color:black;">Class III</a>
+            
+          </div>
+        </li>
+        <li class="nav-item">
+          <a routerLink="student" class="nav-link ">Student</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="teacher"  class="nav-link" >Teacher</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="class" class="nav-link" >Class</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="subject"  class="nav-link" >Subject</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="topic"  class="nav-link">Topic</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="syllabus"  class="nav-link" >Syllabus</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="sample-paper"  class="nav-link" >Sample Paper</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="settings"  class="nav-link" >Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()">Logout</a>
+        </li>
+       
+        
+      </ul>
+      
+    </div>
+  </div>
+</nav>
