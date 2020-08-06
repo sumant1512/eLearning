@@ -18,10 +18,9 @@
             <button
               [ngClass]="loader ? 'bg-light' : 'bg-light-blue'"
               class="br-10 b-light-blue btn btn-block login-btn text-light font-weight-bold py-3 mb-3"
-              (click)="login()"
               type="button"
             >
-              <span *ngIf="loader; else button">
+              <span>
                 <span
                   class="mx-1 dark-blue spinner-grow spinner-grow-sm"
                   role="status"
