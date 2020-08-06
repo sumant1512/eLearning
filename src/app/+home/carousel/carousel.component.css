@@ -1,31 +1,28 @@
 @media only screen and (max-width: 767px) {
   .carousel {
     display: none;
+    margin-top: 0%;
   }
 }
-#carouselExampleIndicators {
-  margin-top: 0%;
+
+@media only screen and (min-width: 1366px) {
+  .image {
+  height:90vh;
+  }
 }
-.carousel-item {
-  position: relative !important;
-}
+
 .carousel-caption {
   right: initial;
-
   width: 500px;
-  z-index: 10;
-  top: 35%;
-  left: 8%;
-  bottom: auto;
-  -webkit-transform: translate(0, -50%);
-  -ms-transform: translate(0, -50%);
-  transform: translate(0, -50%);
+  top: 1%;
+  left: 10px;
 }
 .overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  z-index: 2;
-  background-color: #555961;
-  opacity: 0.5;
+  z-index: 1;
+  background-color: #0a0003;
+  opacity: 0.72;
 }
+

@@ -12,7 +12,7 @@ import { AdminSettingsComponent } from "./admin-settings/admin-settings.componen
 import { ProfileRoutesEnum } from "./admin-routes.constants";
 import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper.component";
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
-
+import{ PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 const routes: Routes = [
   {
     path: "",
@@ -31,6 +31,7 @@ const routes: Routes = [
         component: AddSamplePaperComponent,
       },
       { path: ProfileRoutesEnum.SETTINGS, component: AdminSettingsComponent },
+      { path: ProfileRoutesEnum.PRIVACY_POLICY, component:PrivacyPolicyComponent},
     ],
   },
 ];
