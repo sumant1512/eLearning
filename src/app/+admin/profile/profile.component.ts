@@ -12,6 +12,9 @@ import { AdminProfileService } from "src/app/services/admin-profile.service";
 })
 export class ProfileComponent implements OnInit {
   schoolImageForm: FormGroup;
+  coverImageUrl=this.sanitizer.bypassSecurityTrustResourceUrl(
+    CONSTANTS.School_Building
+  );
   studentImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     CONSTANTS.USER_IMAGE
   );
@@ -33,6 +36,9 @@ export class ProfileComponent implements OnInit {
           case "school":
             this.studentImageUrl = event.target.result;
             break;
+            case "cover_image":
+              this.coverImageUrl = event.target.result;
+              break;
         }
       };
       reader.readAsDataURL(event.target.files[0]);
@@ -43,6 +49,19 @@ export class ProfileComponent implements OnInit {
     this.schoolImageForm.value.schoolImage = this.studentImageUrl;
     this.adminProfileService
       .saveSchoolImage(this.schoolImageForm.value)
+      .subscribe((response) => {
+        if (response["status"]) {
+          alert("Image saved");
+        } else {
+          alert("Error");
+        }
+      });
+  }
+
+  saveCoverImage(){
+    this.schoolImageForm.value.schoolImage = this.coverImageUrl;
+    this.adminProfileService
+      .saveCoverImage(this.schoolImageForm.value)
       .subscribe((response) => {
         if (response["status"]) {
           alert("Image saved");

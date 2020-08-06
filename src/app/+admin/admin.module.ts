@@ -21,6 +21,7 @@ import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     ViewSyllabusComponent,
     AdminSettingsComponent,
     AdminLandingPageComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule],
 })
