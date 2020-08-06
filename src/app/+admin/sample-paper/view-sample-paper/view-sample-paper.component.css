@@ -1,0 +1,29 @@
+.nav-link {
+    color: black;
+  }
+  .nav-link.active {
+    color: #fff;
+    background-color: #455a64;
+  }
+  .card-link {
+    color: Black;
+    font-weight: 300;
+  }
+  .card-header {
+    background-color: #009688;
+  }
+  .card-header a:after {
+    content: "\f077";
+    position: absolute;
+    font-family: "FontAwesome";
+    right: 0.5em;
+    top: 0.5em;
+    font-size: 1.3em;
+    transform: rotate(0deg);
+    transition: all 0.5s;
+  }
+  .card-header a.collapsed:after {
+    transform: rotate(180deg);
+    transition: all 0.5s;
+  }
+  

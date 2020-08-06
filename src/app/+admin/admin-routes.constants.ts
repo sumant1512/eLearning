@@ -8,4 +8,5 @@ export enum ProfileRoutesEnum {
   SAMPLE_PAPER = "sample-paper",
   SYLLABUS = "syllabus",
   SETTINGS = "settings",
+  PRIVACY_POLICY="privacy-policy"
 }
