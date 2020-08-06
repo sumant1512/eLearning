@@ -1,8 +1,395 @@
 <app-home-header></app-home-header>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <p>registration works!</p>
+<div class="container-fluid bg-cover">
+  <div class="display d-flex justify-content-center pt-4 pb-4">
+    <div
+      class="formSlide col-md-7 shadow animate__animated animate__bounceInDown"
+      style="background-color: white;"
+    >
+      <div class="row">
+        <div class="card-body">
+          <div class="col-sm-3offset-sm-2">
+            <p class="h2 text-center" style="margin-bottom: 15px;">
+              Registration
+            </p>
+            <form [formGroup]="schoolRegisterForm">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-users" aria-hidden="true"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  formControlName="schoolName"
+                  class="form-control"
+                  placeholder="School Name"
+                  [ngClass]="{
+                    'is-invalid': f.schoolName.touched && f.schoolName.errors
+                  }"
+                />
+                <div
+                  *ngIf="f.schoolName.touched && f.schoolName.errors"
+                  class="invalid-feedback"
+                >
+                  <div class="ml-5" *ngIf="f.schoolName.errors.required">
+                    School Name is required*
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"
+                    ><i class="fa fa-user" aria-hidden="true"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Admin Name"
+                  formControlName="adminName"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': f.adminName.touched && f.adminName.errors
+                  }"
+                />
+                <div
+                  *ngIf="f.adminName.touched && f.adminName.errors"
+                  class="invalid-feedback"
+                >
+                  <div class="ml-5" *ngIf="f.adminName.errors.required">
+                    Admin Name is required*
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-address-book" aria-hidden="true"></i
+                      ></span>
+                    </div>
+
+                    <input
+                      type="text"
+                      placeholder="Admin Aadhar"
+                      formControlName="adminAdhar"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.adminAdhar.touched && f.adminAdhar.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.adminAdhar.touched && f.adminAdhar.errors"
+                      class="invalid-feedback"
+                    >
+                      <div class="ml-5" *ngIf="f.adminAdhar.errors.required">
+                        Admin Aadhar is required*
+                      </div>
+                      <div class="ml-5" *ngIf="f.adminAdhar.errors.pattern">
+                        Admin Aadhar is not valid*
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-user-circle-o" aria-hidden="true"></i
+                      ></span>
+                    </div>
+                    <input
+                      type="text"
+                      formControlName="schoolRegistrationNo"
+                      placeholder="School Registration No."
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.schoolRegistrationNo.touched &&
+                          f.schoolRegistrationNo.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        f.schoolRegistrationNo.touched &&
+                        f.schoolRegistrationNo.errors
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div
+                        class="ml-5"
+                        *ngIf="f.schoolRegistrationNo.errors.required"
+                      >
+                        Registration No. is required*
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  formControlName="email"
+                  placeholder="School Email"
+                  class="form-control"
+                  [ngClass]="{
+                    'is-invalid': f.email.touched && f.email.errors
+                  }"
+                />
+                <div
+                  *ngIf="f.email.touched && f.email.errors"
+                  class="invalid-feedback"
+                >
+                  <div class="ml-5" *ngIf="f.email.errors.required">
+                    School Email is required*
+                  </div>
+                  <div class="ml-5" *ngIf="f.email.errors.pattern">
+                    School Email must be a valid email address
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      formControlName="adminContactNo"
+                      placeholder="Admin Mobile No."
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.adminContactNo.touched && f.adminContactNo.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        f.adminContactNo.touched && f.adminContactNo.errors
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div
+                        class="ml-5"
+                        *ngIf="f.adminContactNo.errors.required"
+                      >
+                        Admin mobile number is required*
+                      </div>
+                      <div class="ml-5" *ngIf="f.adminContactNo.errors.pattern">
+                        Mobile number must be 10 digits
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-phone" aria-hidden="true"></i>
+                      </span>
+                    </div>
+
+                    <input
+                      type="text"
+                      formControlName="studentContactNo"
+                      placeholder="School mobile No."
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.studentContactNo.touched &&
+                          f.studentContactNo.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        f.studentContactNo.touched && f.studentContactNo.errors
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div
+                        class="ml-5"
+                        *ngIf="f.studentContactNo.errors.required"
+                      >
+                        School contact no is required*
+                      </div>
+                      <div
+                        class="ml-5"
+                        *ngIf="f.studentContactNo.errors.pattern"
+                      >
+                        Mobile number must be 10 digits
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                      </span>
+                    </div>
+
+                    <input
+                      type="password"
+                      formControlName="password"
+                      placeholder="Password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': f.password.touched && f.password.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.password.touched && f.password.errors"
+                      class="invalid-feedback"
+                    >
+                      <div class="ml-5" *ngIf="f.password.errors.required">
+                        Password is required*
+                      </div>
+                      <div class="ml-5" *ngIf="f.password.errors.pattern">
+                        Password must contain a lowercase, a uppercase, a digit
+                        and a special symbol
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-key" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="password"
+                      formControlName="confirmPassword"
+                      placeholder="Re-type Password"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.confirmPassword.touched && f.confirmPassword.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="
+                        f.confirmPassword.touched && f.confirmPassword.errors
+                      "
+                      class="invalid-feedback"
+                    >
+                      <div
+                        class="ml-5"
+                        *ngIf="f.confirmPassword.errors.required"
+                      >
+                        Confirm password is required*
+                      </div>
+                      <div
+                        class="ml-5"
+                        *ngIf="f.confirmPassword.errors.MustMatch"
+                      >
+                        Passwords must match
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg btn-block"
+                style="background-color: #3664b7; margin-bottom: 8px;"
+                value="Register"
+                data-toggle="modal"
+                data-target="#staticBackdrop"
+                [disabled]="!this.schoolRegisterForm.valid"
+              >
+                Register
+              </button>
+              <div>
+                <p class="login-card-footer-text text-center">
+                  Already Registered?
+                  <a
+                    routerLink="/otp"
+                    style="font-weight: bold;"
+                    target="_parent"
+                    type="button"
+                    class="text-reset text-center"
+                    >Verify here</a
+                  >
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button
+    *ngIf="error"
+    type="button"
+    class="btn btn-primary"
+    data-toggle="modal"
+    data-target="#exampleModal"
+  >
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    #content
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="bg-danger modal-header">
+          <h5
+            class="text-light font-weight-bold modal-title"
+            id="exampleModalLabel"
+          >
+            ERROR!
+          </h5>
+          <button
+            type="button"
+            class="text-light close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <i class="text-danger fa fa-warning"></i
+          ><span>{{ errorMessage }}</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
