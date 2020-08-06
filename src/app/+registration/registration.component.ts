@@ -1,8 +1,13 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 //import { RegistrationService } from '../Services/registration.service';
-import { FormGroup, Validators, FormControl, FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
-import { schoolRegisterForm } from './registration.utils';
+import {
+  FormGroup,
+  Validators,
+  FormControl,
+  FormBuilder,
+} from "@angular/forms";
+import { Router } from "@angular/router";
+import { schoolRegisterForm } from "./registration.utils";
 //import Swal from 'sweetalert2';
 
 @Component({
@@ -10,18 +15,18 @@ import { schoolRegisterForm } from './registration.utils';
   templateUrl: "./registration.component.html",
   styleUrls: ["./registration.component.css"],
 })
-export class RegistrationComponent implements OnInit { 
-   schoolRegisterForm: FormGroup;
+export class RegistrationComponent implements OnInit {
+  schoolRegisterForm: FormGroup;
   enteredOtp: number;
   error = false;
   validDetails = false;
   errorMessage: string;
 
-  constructor( private router: Router, private formBuilder: FormBuilder
-      // private RegistrationService: RegistrationService 
-       ) 
-      {
-        this.schoolRegisterForm = schoolRegisterForm();
+  constructor(
+    private router: Router,
+    private formBuilder: FormBuilder // private RegistrationService: RegistrationService
+  ) {
+    this.schoolRegisterForm = schoolRegisterForm();
   }
 
   ngOnInit() {}
