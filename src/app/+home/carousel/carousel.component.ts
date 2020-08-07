@@ -6,9 +6,6 @@ import { LABELS } from "./carousel.constants";
   templateUrl: "./carousel.component.html",
   styleUrls: ["./carousel.component.css"],
 })
-export class CarouselComponent implements OnInit {
+export class CarouselComponent {
   labels = LABELS;
-  constructor() {}
-
-  ngOnInit() {}
 }

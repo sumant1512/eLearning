@@ -13,6 +13,7 @@ import { ViewSyllabusComponent } from "./+admin/view-syllabus/view-syllabus.comp
 import { AddSamplePaperComponent } from "./+admin/sample-paper/add-sample-paper.component";
 import { AdminSettingsComponent } from "./+admin/admin-settings/admin-settings.component";
 import { AdminLandingPageComponent } from "./+admin/admin-landing-page/admin-landing-page.component";
+import { PrivacyPolicyComponent } from "./shared/privacy-policy/privacy-policy.component";
 
 const routes: Routes = [
   { path: "", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
@@ -39,6 +40,10 @@ const routes: Routes = [
     loadChildren: () =>
       import("./+admin/admin.module").then((m) => m.AdminModule),
   },
+  // {
+  //   path: RoutesEnum.PRIVACY_POLICY,
+  //   component: PrivacyPolicyComponent,
+  // },
   { path: "**", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
 ];
 

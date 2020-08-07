@@ -1,0 +1,49 @@
+.slide {
+  background-image: url(https://images.creativemarket.com/0.1.0/ps/4850427/300/200/m2/fpc/wm0/dnymiaf7ow9kzicwspjuet4qomn2jnsmmudq44thohxaocptpr2bxukdlrl34rud-.jpg?1533277366&s=577c80035cb44d968d4943eeeb566561);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 500px;
+  position: relative;
+  opacity: 0.95;
+}
+.btext {
+  position: absolute;
+  bottom: 60px;
+  margin: auto;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+}
+.innerdiv1 {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 172, 55, 1) 0%,
+    rgba(209, 33, 159, 1) 100%
+  );
+  position: absolute;
+  height: 200px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.7;
+  filter: blur(10px);
+}
+
+.content {
+  font-size: 1.25rem;
+  line-height: 2;
+  font-weight: 400;
+  color: #474747;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 1.625rem;
+  max-width: 752px;
+  overflow-x: hidden !important;
+}
+h2 {
+  font-size: 2.25rem;
+  line-height: 1.22;
+  font-weight: 300;
+}

@@ -21,7 +21,7 @@ import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -43,8 +43,12 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     ViewSyllabusComponent,
     AdminSettingsComponent,
     AdminLandingPageComponent,
-    PrivacyPolicyComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
 export class AdminModule {}
