@@ -7,6 +7,7 @@ import { Component, ViewChild, ElementRef, HostListener } from "@angular/core";
 export class AdminHeaderComponent {
   @ViewChild("header", { static: false }) header: ElementRef;
   scrollStatus: boolean = false;
+  sideNavStatus: boolean;
   @HostListener("window:scroll", [])
   onWindowScroll() {
     const number =
