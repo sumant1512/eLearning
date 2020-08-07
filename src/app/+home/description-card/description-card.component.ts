@@ -5,7 +5,7 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./description-card.component.html",
   styleUrls: ["./description-card.component.css"],
 })
-export class DescriptionCardComponent implements OnInit {
+export class DescriptionCardComponent {
   descriptionList = [
     {
       description: "Enroll yourself now",
@@ -17,7 +17,4 @@ export class DescriptionCardComponent implements OnInit {
       description: "Fall in love with learning",
     },
   ];
-  constructor() {}
-
-  ngOnInit() {}
 }

@@ -9,12 +9,17 @@ import { addClassForm } from "./add-class.utils";
 })
 export class AddClassComponent implements OnInit {
   addClassForm: FormGroup;
+  isAddClassFormOpen = false;
   loader: boolean;
   constructor() {
     this.addClassForm = addClassForm();
   }
 
   ngOnInit(): void {}
+
+  openAddClassForm() {
+    this.isAddClassFormOpen = true;
+  }
 
   addClass() {}
 

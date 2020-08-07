@@ -4,4 +4,5 @@ export enum RoutesEnum {
   PROFILE = "profile",
   ADMIN = "admin",
   VERIFICATION = "verification",
+  PRIVACY_POLICY = "privacy-policy",
 }

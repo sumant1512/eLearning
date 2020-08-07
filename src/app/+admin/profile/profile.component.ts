@@ -12,7 +12,7 @@ import { AdminProfileService } from "src/app/services/admin-profile.service";
 })
 export class ProfileComponent implements OnInit {
   schoolImageForm: FormGroup;
-  coverImageUrl=this.sanitizer.bypassSecurityTrustResourceUrl(
+  coverImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     CONSTANTS.School_Building
   );
   studentImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
@@ -36,16 +36,16 @@ export class ProfileComponent implements OnInit {
           case "school":
             this.studentImageUrl = event.target.result;
             break;
-            case "cover_image":
-              this.coverImageUrl = event.target.result;
-              break;
+          case "cover_image":
+            this.coverImageUrl = event.target.result;
+            break;
         }
       };
       reader.readAsDataURL(event.target.files[0]);
     }
   }
 
-  saveSchoolImage() {
+  saveSchoolImage(): void {
     this.schoolImageForm.value.schoolImage = this.studentImageUrl;
     this.adminProfileService
       .saveSchoolImage(this.schoolImageForm.value)
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  saveCoverImage(){
+  saveCoverImage() {
     this.schoolImageForm.value.schoolImage = this.coverImageUrl;
     this.adminProfileService
       .saveCoverImage(this.schoolImageForm.value)

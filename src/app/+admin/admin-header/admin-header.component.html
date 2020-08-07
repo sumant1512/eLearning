@@ -1,66 +1,86 @@
-<nav class="navbar navbar-expand-lg navbar-dark" id="men">
-  <div class="container-fluid">
+<header
+  [ngClass]="scrollStatus ? 'position-fixed' : 'position-relative'"
+  class="w-100 text-center"
+  #header
+>
+  <nav
+    [ngClass]="scrollStatus ? 'box-shadow' : ''"
+    class="bg-dark-blue navbar navbar-expand-lg navbar-dark pt-3 pb-3 justify-content-sm-start"
+  >
+    <a class="navbar-brand order-0 pt-0 order-lg-0 ml-lg-0 ml-2 mr-auto"> </a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler border-0 mt-2 pt-1 align-self-start"
+      (click)="sideNavStatus = !sideNavStatus"
       type="button"
-      data-toggle="collapse"
-      data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon"></span>
+      <div *ngIf="sideNavStatus; else cross">
+        <i class="text-light fa fa-times"></i>
+      </div>
+      <ng-template #cross>
+        <i class="fa fa-bars text-light"></i>
+      </ng-template>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
+
+    <div
+      [ngClass]="sideNavStatus ? 'open' : ''"
+      class="collapse bg-dark-blue navbar-collapse mt-sm-9 mt-md-9 mt-lg-0 d-flex flex-column p-3 p-lg-0 flex-lg-row flex-xl-row justify-content-lg-end mobile-menu"
+      id="navbarSupportedContent"
+    >
+      <ul
+        class="navbar-nav align-self-stretch text-center text-sm-center text-md-left"
+      >
+        <li class="nav-item">
           <a
-            class="nav-link dropdown-toggle"
-            id="navbarDropdown2"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
+            class="nav-link"
+            routerLink="syllabus"
+            (click)="sideNavStatus = !sideNavStatus"
+            >View-Syllabus</a
           >
-            Admin
-          </a>
-          <div
-            class="dropdown-menu text-center"
-            aria-labelledby="navbarDropdown2"
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="sample-paper"
+            (click)="sideNavStatus = !sideNavStatus"
+            >Sample-papers</a
           >
-            <a class="dropdown-item" style="color: black;">Class I</a>
-            <a class="dropdown-item" style="color: black;">Class II</a>
-            <a class="dropdown-item" style="color: black;">Class III</a>
-          </div>
         </li>
         <li class="nav-item">
-          <a routerLink="student" class="nav-link">Student</a>
+          <a
+            class="nav-link"
+            routerLink="class"
+            (click)="sideNavStatus = !sideNavStatus"
+            >Class</a
+          >
         </li>
         <li class="nav-item">
-          <a routerLink="teacher" class="nav-link">Teacher</a>
+          <a
+            class="nav-link"
+            routerLink="subject"
+            (click)="sideNavStatus = !sideNavStatus"
+            >Subject</a
+          >
         </li>
         <li class="nav-item">
-          <a routerLink="class" class="nav-link">Class</a>
+          <a
+            class="nav-link"
+            routerLink="topic"
+            (click)="sideNavStatus = !sideNavStatus"
+            >Topic</a
+          >
         </li>
         <li class="nav-item">
-          <a routerLink="subject" class="nav-link">Subject</a>
+          <a
+            class="nav-link"
+            routerLink="student"
+            (click)="sideNavStatus = !sideNavStatus"
+            >Students</a
+          >
         </li>
         <li class="nav-item">
-          <a routerLink="topic" class="nav-link">Topic</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="syllabus" class="nav-link">Syllabus</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="sample-paper" class="nav-link">Sample Paper</a>
-        </li>
-        <li class="nav-item">
-          <a routerLink="settings" class="nav-link">Settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" (click)="logout()">Logout</a>
+          <a class="nav-link" routerLink="profile">Profile</a>
         </li>
       </ul>
     </div>
-  </div>
-</nav>
+  </nav>
+</header>

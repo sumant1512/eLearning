@@ -7,14 +7,14 @@
 
 @media only screen and (min-width: 1366px) {
   .image {
-  height:90vh;
+    height: 90vh;
   }
 }
 
 .carousel-caption {
   right: initial;
   width: 500px;
-  top: 1%;
+  top: 25%;
   left: 10px;
 }
 .overlay {
@@ -23,6 +23,5 @@
   height: 100%;
   z-index: 1;
   background-color: #0a0003;
-  opacity: 0.72;
+  opacity: 0.3;
 }
-
