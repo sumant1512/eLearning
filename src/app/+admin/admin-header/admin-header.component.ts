@@ -17,7 +17,7 @@ export class AdminHeaderComponent implements OnInit {
     window.addEventListener("scroll", function () {
       let menuArea = document.getElementById("men");
 
-      if (window.pageYOffset > 0) {
+      if (window.pageYOffset > 250) {
         menuArea.classList.add("cus-nav");
       } else {
         menuArea.classList.remove("cus-nav");
