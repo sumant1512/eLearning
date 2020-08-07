@@ -45,12 +45,12 @@ a {
 }
 
 .formSlide {
-  top: -1600px;
+  bottom: -1600px;
   animation: formSlide 1.5s forwards;
 }
 
 @keyframes formSlide {
   100% {
-    top: 0;
+    bottom: 0;
   }
 }
