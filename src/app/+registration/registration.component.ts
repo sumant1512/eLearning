@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { schoolRegisterForm } from "./registration.utils";
+import { RegistrationService } from "../services/registration.service";
 //import Swal from 'sweetalert2';
 
 @Component({
@@ -24,7 +25,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private formBuilder: FormBuilder // private RegistrationService: RegistrationService
+    private registationService: RegistrationService
   ) {
     this.schoolRegisterForm = schoolRegisterForm();
   }
@@ -35,21 +36,24 @@ export class RegistrationComponent implements OnInit {
     return this.schoolRegisterForm.controls;
   }
 
-  // registerSchool() {
-  //   const schoolRegistrationDetails = this.schoolRegisterForm.value;
-  //   this.RegistrationService.schoolRegistration(
-  //     schoolRegistrationDetails
-  //   ).subscribe((response) => {
-  //     console.log(response);
-  //     if (response['status']) {
-  //       // this.validDetails = true;
-  //     } else {
-  //       this.error = true;
-  //       this.errorMessage = response['messageEmail'];
-  //       Swal.fire('Error!' , response['message'], 'error');
-  //     }
-  //   });
-  // }
+  registerSchool() {
+    const schoolRegistrationDetails = this.schoolRegisterForm.value;
+    this.registationService
+      .schoolRegistration(schoolRegistrationDetails)
+      .subscribe((response) => {
+        console.log(response);
+        if (response["status"]) {
+          this.router.navigate(["verification"]);
+          alert("success");
+          // this.validDetails = true;
+        } else {
+          this.error = true;
+          this.errorMessage = response["messageEmail"];
+          alert(this.errorMessage);
+          // Swal.fire("Error!", response["message"], "error");
+        }
+      });
+  }
 
   // sendOtp() {
   //   const schoolRegistrationDetails = this.schoolRegisterForm.value;

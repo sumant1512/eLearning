@@ -1,9 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class RegistrationService {
+  constructor(private http: HttpClient) {}
 
-  constructor() { }
+  // service for schoolRegistration api call
+  schoolRegistration(userDetails) {
+    return this.http.post(
+      "https://tcslearningapplication.herokuapp.com/schoolRegistration",
+      userDetails
+    );
+  }
 }
