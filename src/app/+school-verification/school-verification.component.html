@@ -10,78 +10,74 @@
           <div class="form-group">
             <div class="input-group">
               <input
-              type="text"
-              formControlName="email"
-              placeholder="School Email"
-              class="form-control"
-              [ngClass]="{
-                'is-invalid': f.email.touched && f.email.invalid
-              }"
-            />
-            <div
-            *ngIf="(f.email.touched || f.email.dirty) && f.email.errors"
-            class="invalid-feedback"
-          >
-            <div
-              class=""
-              style="font-weight: bold;"
-              *ngIf="f.email.errors.required"
-            >
-              School Email is required*
-            </div>
-            <div
-              class=""
-              style="font-weight: bold;"
-              *ngIf="f.email.errors.pattern && f.email.touched"
-            >
-              School Email must be a valid email address
-            </div>
-          </div>
+                type="text"
+                formControlName="email"
+                placeholder="School Email"
+                class="form-control"
+                [ngClass]="{
+                  'is-invalid': f.email.touched && f.email.invalid
+                }"
+              />
+              <div
+                *ngIf="(f.email.touched || f.email.dirty) && f.email.errors"
+                class="invalid-feedback"
+              >
+                <div
+                  class=""
+                  style="font-weight: bold;"
+                  *ngIf="f.email.errors.required"
+                >
+                  School Email is required*
+                </div>
+                <div
+                  class=""
+                  style="font-weight: bold;"
+                  *ngIf="f.email.errors.pattern && f.email.touched"
+                >
+                  School Email must be a valid email address
+                </div>
+              </div>
             </div>
           </div>
           <div class="form-group">
-            <div class="input-group">    
-          <input
-          type="text"
-          class="form-control"
-          formControlName="otp"
-          placeholder="Enter OTP"
-          maxlength="6"
-          [ngClass]="{
-            'is-invalid': (f.otp.touched || f.otp.dirty) && f.otp.errors
-          }"
-        /> <div
-        *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
-        class="invalid-feedback"
-      >
-        <div
-          class=""
-          style="font-weight: bold;"
-          *ngIf="f.otp.errors.required"
-        >
-          OTP is required*
-        </div>
-        <div
-          class=""
-          style="font-weight: bold;"
-          *ngIf="f.otp.errors.pattern"
-        >
-          Enter 6 digits
-        </div>
-      </div>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="otp"
+                placeholder="Enter OTP"
+                maxlength="6"
+                [ngClass]="{
+                  'is-invalid': (f.otp.touched || f.otp.dirty) && f.otp.errors
+                }"
+              />
+              <div
+                *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
+                class="invalid-feedback"
+              >
+                <div
+                  class=""
+                  style="font-weight: bold;"
+                  *ngIf="f.otp.errors.required"
+                >
+                  OTP is required*
+                </div>
+                <div
+                  class=""
+                  style="font-weight: bold;"
+                  *ngIf="f.otp.errors.pattern"
+                >
+                  Enter 6 digits
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- <div class="form-group text-center">
-            <button type="submit" class="btn btn-success btn-lg">VERIFY</button>
-            <a href="#" class="btn btn-link">Resend OTP</a>
-          </div> -->
           <div class="form-group text-center">
             <button
               type="button"
               class="btn btn-success btn-lg"
               name="verifyotp"
-              (click)="sendOtp()"
+              (click)="verifiyOtp()"
               [disabled]="!this.otpForm.valid"
             >
               Verify
@@ -92,7 +88,5 @@
       </div>
     </div>
   </div>
-
-
 </div>
 <app-home-footer></app-home-footer>

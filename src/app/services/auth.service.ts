@@ -22,7 +22,7 @@ export class AuthService {
   public login(userInfo): void {
     console.log(userInfo);
     const result = this.http.post(
-      "http://localhost:" + SERVER_PORT + "/login",
+      "https://tcslearningapplication.herokuapp.com/login",
       userInfo,
       {
         observe: "response",
@@ -37,6 +37,7 @@ export class AuthService {
         console.log(authToken);
         this.loginUser(response.body["user_type"], authToken);
       } else {
+        alert("failed");
         // Swal.fire("Sorry!", response.body["message"], "error");
       }
     });
@@ -45,7 +46,7 @@ export class AuthService {
   public getProfile(userInfo): void {
     console.log(userInfo);
     const result = this.http.post(
-      "http://localhost:" + SERVER_PORT + "/getProfile",
+      "https://tcslearningapplication.herokuapp.com/getProfile",
       userInfo,
       {
         observe: "response",

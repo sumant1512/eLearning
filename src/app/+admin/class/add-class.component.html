@@ -23,7 +23,7 @@
               <i class="charcoal">Class Name</i>
               <input
                 class="form-control"
-                formControlName="className"
+                formControlName="class_name"
                 type="text"
               />
             </div>
@@ -32,6 +32,7 @@
                 [ngClass]="loader ? 'bg-light' : 'bg-light-blue'"
                 class="br-10 b-light-blue btn btn-block login-btn text-light font-weight-bold py-3 mb-3"
                 type="button"
+                (click)="addClass()"
               >
                 <span *ngIf="loader; else button">
                   <span

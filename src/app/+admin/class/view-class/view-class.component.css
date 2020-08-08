@@ -1,7 +1,6 @@
 .classSlide {
   animation: classSlide 0.5s;
 }
-
 @keyframes classSlide {
   0% {
     opacity: 0;
@@ -35,21 +34,13 @@
   }
 }
 th {
-  padding-top: 12px;
-  text-align: left;
   background-color: #0033a0;
   color: white;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-tr {
-  text-align: center;
-}
-.table {
-  position: relative;
-}
-th {
+  border: 1px solid #d5dae2;
   position: sticky;
   top: 0;
   box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+tr {
+  text-align: center;
 }

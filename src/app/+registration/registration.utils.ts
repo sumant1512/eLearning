@@ -24,11 +24,11 @@ export function schoolRegisterForm() {
       ]),
       adminContactNo: new FormControl("", [
         Validators.required,
-        Validators.pattern("^[6-9]{1}][0-9]{9}$"),
+        Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
       ]),
       studentContactNo: new FormControl("", [
         Validators.required,
-        Validators.pattern("^[6-9]{1}][0-9]{9}$"),
+        Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
       ]),
       password: new FormControl("", [
         Validators.required,
