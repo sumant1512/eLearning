@@ -10,7 +10,7 @@ import { AddStudentComponent } from "./student/add-student.component";
 import { AddTeacherComponent } from "./teacher/add-teacher.component";
 import { ViewStudentComponent } from "./student/view-student/view-student.component";
 import { ViewTeacherComponent } from "./teacher/view-teacher/view-teacher.component";
-import { AddClassComponent } from "./class/add-class.component";
+import { AddClassComponent } from "./class/add-class/add-class.component";
 import { AddSubjectComponent } from "./subject/add-subject.component";
 import { AddTopicComponent } from "./topic/add-topic.component";
 import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper.component";
@@ -22,6 +22,8 @@ import { AdminSettingsComponent } from "./admin-settings/admin-settings.componen
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
 import { ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
+import { ClassComponent } from "./class/class.component";
+import { AddClassMobileComponent } from './class/add-class-mobile/add-class-mobile.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { SharedModule } from "../shared/shared.module";
     ViewStudentComponent,
     ViewTeacherComponent,
     AddClassComponent,
+    ClassComponent,
     AddSubjectComponent,
     AddTopicComponent,
     AddSamplePaperComponent,
@@ -43,6 +46,7 @@ import { SharedModule } from "../shared/shared.module";
     ViewSyllabusComponent,
     AdminSettingsComponent,
     AdminLandingPageComponent,
+    AddClassMobileComponent,
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { RoutesEnum } from "./routing.constants";
 import { AdminComponent } from "./+admin/admin.component";
-import { AddClassComponent } from "./+admin/class/add-class.component";
+import { AddClassComponent } from "./+admin/class/add-class/add-class.component";
 import { AddSubjectComponent } from "./+admin/subject/add-subject.component";
 import { ProfileRoutesEnum } from "./+admin/admin-routes.constants";
 import { ProfileComponent } from "./+admin/profile/profile.component";

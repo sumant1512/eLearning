@@ -4,7 +4,6 @@
   #header
 >
   <nav
-    [ngClass]="scrollStatus ? 'box-shadow' : ''"
     class="bg-dark-blue navbar navbar-expand-lg navbar-dark pt-3 pb-3 justify-content-sm-start"
   >
     <a class="navbar-brand order-0 pt-0 order-lg-0 ml-lg-0 ml-2 mr-auto"> </a>
@@ -14,16 +13,16 @@
       type="button"
     >
       <div *ngIf="sideNavStatus; else cross">
-        <i class="text-light fa fa-times"></i>
+        <i class="text-light nav-icon fa fa-times"></i>
       </div>
       <ng-template #cross>
-        <i class="fa fa-bars text-light"></i>
+        <i class="fa fa-bars nav-icon text-light"></i>
       </ng-template>
     </button>
 
     <div
       [ngClass]="sideNavStatus ? 'open' : ''"
-      class="collapse bg-dark-blue navbar-collapse mt-sm-9 mt-md-9 mt-lg-0 d-flex flex-column p-3 p-lg-0 flex-lg-row flex-xl-row justify-content-lg-end mobile-menu"
+      class="collapse bg-dark-blue navbar-collapse mt-sm-9 mt-md-9 d-flex flex-column p-3 p-lg-0 flex-lg-row flex-xl-row justify-content-lg-end mobile-menu"
       id="navbarSupportedContent"
     >
       <ul

@@ -8,7 +8,7 @@ import {
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { schoolRegisterForm } from "./registration.utils";
-import { RegistrationService } from "../services/registration.service";
+import { RegistrationService } from "../store/services/registration.service";
 //import Swal from 'sweetalert2';
 
 @Component({

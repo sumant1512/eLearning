@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { addClassForm } from "./add-class.utils";
-import { ClassService } from "src/app/services/class.service";
+import { ClassService } from "src/app/store/services/class.service";
 
 @Component({
   selector: "app-add-class",
@@ -17,10 +17,6 @@ export class AddClassComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  openAddClassForm() {
-    this.isAddClassFormOpen = true;
-  }
 
   addClass(): void {
     this.loader = true;

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { ClassService } from "../../../services/class.service";
+import { ClassService } from "src/app/store/services/class.service";
 
 @Component({
   selector: "app-view-class",

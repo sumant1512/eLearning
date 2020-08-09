@@ -1,3 +1,6 @@
+.add-class-btn {
+  width: 150px;
+}
 .formSlide {
   bottom: -700px;
   animation: formSlide 1.5s forwards;

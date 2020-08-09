@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
-import { VerificationService } from "../services/verification.service";
 import { otpVerificationForm } from "./school--verification.utils";
+import { VerificationService } from "../store/services/verification.service";
 
 @Component({
   selector: "app-school-verification",
