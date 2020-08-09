@@ -2,7 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { loginForm } from "./login-form.utils";
-import { AuthService } from "src/app/services/auth.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/store/app.state";
+import * as AuthActions from ".././../store/auth/auth.actions";
 
 @Component({
   selector: "app-login-form",
@@ -14,7 +16,7 @@ export class LoginFormComponent implements OnInit {
   submitted = false;
   loader: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.loginForm = loginForm();
   }
 
@@ -25,37 +27,11 @@ export class LoginFormComponent implements OnInit {
 
   login() {
     this.loader = true;
-    const loginDetails = this.loginForm.value;
-    this.authService.login(loginDetails);
-    setTimeout(function () {
-      this.loader = false;
-    }, 300);
-  }
-  onLoad() {
-    let timerInterval;
-    // Swal.fire({
-    //   title: 'Your profile is loading',
-    //   html: 'It will take few seconds.',
-    //   timer: 5000,
-    //   timerProgressBar: true,
-    //   onBeforeOpen: () => {
-    //     Swal.showLoading()
-    //     timerInterval = setInterval(() => {
-    //       const content = Swal.getContent();
-    //     }, 100);
-    //   },
-    //   onClose: () => {
-    //     clearInterval(timerInterval)
-    //   }
-    // }).then((result) => {
-    //   if (result.dismiss === Swal.DismissReason.timer) {
-    //     console.log('I was closed by the timer')
-    //   }
-    // })
+    const classDetail = this.loginForm.value;
+    this.store.dispatch(new AuthActions.UserLogin(classDetail));
   }
 
   register() {
     this.router.navigateByUrl("/registration");
-    window.scrollTo(0, 0);
   }
 }

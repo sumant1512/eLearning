@@ -104,3 +104,15 @@ input {
 .br-10 {
   border-radius: 10px;
 }
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .mt-md-9 {
+    margin-top: 4rem !important;
+  }
+}
+
+@media only screen and (min-width: 30px) and (max-width: 767px) {
+  .mt-sm-9 {
+    margin-top: 4rem !important;
+  }
+}

@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
 import { schoolImageForm } from "./profile.utils";
 import { CONSTANTS } from "./profile.constants";
-import { AdminProfileService } from "src/app/services/admin-profile.service";
+import { AdminProfileService } from "src/app/store/services/admin-profile.service";
 
 @Component({
   selector: "app-profile",

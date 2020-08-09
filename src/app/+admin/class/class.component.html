@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="text-center text-md-right col-12 col-md-6">
+      <button
+        class="br-10 bg-core-orange btn add-class-btn text-light font-weight-bold py-3 mt-3 mb-3"
+        type="button"
+        (click)="openAddClassForm()"
+      >
+        Add-Class
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="isAddClassFormOpen" class="col-12 col-md-4">
+      <app-add-class></app-add-class>
+    </div>
+    <div
+      [ngClass]="isAddClassFormOpen ? 'col-md-8' : 'col-md-12'"
+      class="col-12"
+    >
+      <app-view-class></app-view-class>
+    </div>
+  </div>
+</div>

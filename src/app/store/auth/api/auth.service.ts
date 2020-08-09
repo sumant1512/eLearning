@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Subject } from "rxjs";
-import { SERVER_PORT } from "config.constants";
+import { Subject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -19,9 +18,8 @@ export class AuthService {
     this.msgsrc.next(message);
   }
 
-  public login(userInfo): void {
-    console.log(userInfo);
-    const result = this.http.post(
+  public login(userInfo): Observable<any> {
+    return this.http.post(
       "https://tcslearningapplication.herokuapp.com/login",
       userInfo,
       {
@@ -29,28 +27,17 @@ export class AuthService {
         headers: new HttpHeaders().set("Content-Type", "application/json"),
       }
     );
-    result.subscribe((response) => {
-      console.log(response);
-      if (response.status === 200) {
-        this.msgsrc.next("login success");
-        const authToken = response.body["authToken"];
-        console.log(authToken);
-        this.loginUser(response.body["user_type"], authToken);
-      } else {
-        alert("failed");
-        // Swal.fire("Sorry!", response.body["message"], "error");
-      }
-    });
   }
 
-  public getProfile(userInfo): void {
-    console.log(userInfo);
-    const result = this.http.post(
+  getProfile(authToken) {
+    var reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + authToken,
+    });
+    return this.http.get<any[]>(
       "https://tcslearningapplication.herokuapp.com/getProfile",
-      userInfo,
       {
-        observe: "response",
-        headers: new HttpHeaders().set("Content-Type", "application/json"),
+        headers: reqHeader,
       }
     );
   }

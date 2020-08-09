@@ -4,7 +4,7 @@ import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AddStudentComponent } from "./student/add-student.component";
 import { AddTeacherComponent } from "./teacher/add-teacher.component";
-import { AddClassComponent } from "./class/add-class.component";
+import { AddClassComponent } from "./class/add-class/add-class.component";
 import { AddSubjectComponent } from "./subject/add-subject.component";
 import { AddTopicComponent } from "./topic/add-topic.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
@@ -13,6 +13,7 @@ import { ProfileRoutesEnum } from "./admin-routes.constants";
 import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper.component";
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
 import { PrivacyPolicyComponent } from "../shared/privacy-policy/privacy-policy.component";
+import { ClassComponent } from "./class/class.component";
 const routes: Routes = [
   {
     path: "",
@@ -22,7 +23,7 @@ const routes: Routes = [
       { path: ProfileRoutesEnum.PROFILE, component: ProfileComponent },
       { path: ProfileRoutesEnum.STUDENT, component: AddStudentComponent },
       { path: ProfileRoutesEnum.TEACHER, component: AddTeacherComponent },
-      { path: ProfileRoutesEnum.CLASS, component: AddClassComponent },
+      { path: ProfileRoutesEnum.CLASS, component: ClassComponent },
       { path: ProfileRoutesEnum.SUBJECT, component: AddSubjectComponent },
       { path: ProfileRoutesEnum.TOPIC, component: AddTopicComponent },
       { path: ProfileRoutesEnum.SYLLABUS, component: ViewSyllabusComponent },
