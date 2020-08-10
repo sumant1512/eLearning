@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { addClassForm } from "./add-class.utils";
-import { ClassService } from "src/app/store/services/class.service";
+import { ClassService } from "src/app/store/class/api/class.service";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/store/app.state";
+import * as ClassActions from "src/app/store/class/class.actions";
 
 @Component({
   selector: "app-add-class",
@@ -12,7 +15,7 @@ export class AddClassComponent implements OnInit {
   addClassForm: FormGroup;
   isAddClassFormOpen = false;
   loader: boolean;
-  constructor(private classService: ClassService) {
+  constructor(private store: Store<AppState>) {
     this.addClassForm = addClassForm();
   }
 
@@ -21,15 +24,16 @@ export class AddClassComponent implements OnInit {
   addClass(): void {
     this.loader = true;
     const classDetails = this.addClassForm.value;
-    this.classService.addClass(classDetails).subscribe((response) => {
-      if (response["status"]) {
-        alert("class added");
-        this.loader = false;
-      } else {
-        alert("failed");
-        this.loader = false;
-      }
-    });
+    this.store.dispatch(new ClassActions.AddClass(classDetails));
+    // this.classService.addClass(classDetails).subscribe((response) => {
+    //   if (response["status"]) {
+    //     alert("class added");
+    //     this.loader = false;
+    //   } else {
+    //     alert("failed");
+    //     this.loader = false;
+    //   }
+    // });
   }
 
   login() {

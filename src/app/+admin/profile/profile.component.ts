@@ -4,6 +4,10 @@ import { DomSanitizer } from "@angular/platform-browser";
 import { schoolImageForm } from "./profile.utils";
 import { CONSTANTS } from "./profile.constants";
 import { AdminProfileService } from "src/app/store/services/admin-profile.service";
+import { AppState } from "src/app/store/app.state";
+import { Store } from "@ngrx/store";
+import { ProfileType } from "src/app/store/auth/types/profile.type";
+import * as AuthActions from "../../store/auth/auth.actions";
 
 @Component({
   selector: "app-profile",
@@ -12,6 +16,7 @@ import { AdminProfileService } from "src/app/store/services/admin-profile.servic
 })
 export class ProfileComponent implements OnInit {
   schoolImageForm: FormGroup;
+  adminProfile: ProfileType;
   coverImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     CONSTANTS.School_Building
   );
@@ -20,13 +25,34 @@ export class ProfileComponent implements OnInit {
   );
 
   constructor(
+    private store: Store<AppState>,
     private sanitizer: DomSanitizer,
     private adminProfileService: AdminProfileService
   ) {
     this.schoolImageForm = schoolImageForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUserProfile();
+  }
+
+  getUserProfile(): void {
+    this.store.select("profile").subscribe((response) => {
+      if (response.userDetails.user_id) {
+        this.adminProfile = response;
+      } else {
+        this.fetchUserProfile();
+      }
+    });
+  }
+
+  fetchUserProfile() {
+    const authToken = localStorage.getItem("AUTH_TOKEN");
+    this.store.dispatch(new AuthActions.FetchProfile(authToken));
+    this.store.select("profile").subscribe((response) => {
+      this.adminProfile = response;
+    });
+  }
 
   onImageSelect(event: any, name) {
     if (event.target.files && event.target.files[0]) {

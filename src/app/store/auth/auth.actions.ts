@@ -1,4 +1,5 @@
 import { Action } from "@ngrx/store";
+import { ProfileType } from "./types/profile.type";
 
 export enum AuthActions {
   USER_LOGIN = "[User] User Login",
