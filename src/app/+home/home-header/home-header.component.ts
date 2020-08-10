@@ -1,4 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+} from "@angular/core";
 import { Router } from "@angular/router";
 
 @Component({
@@ -7,6 +14,7 @@ import { Router } from "@angular/router";
   styleUrls: ["./home-header.component.css"],
 })
 export class HomeHeaderComponent implements OnInit {
+  @ViewChild("homeHeader", { static: false }) homeHeader: ElementRef;
   @Output() scrollToLogin = new EventEmitter<string>();
   constructor(private router: Router) {}
 
