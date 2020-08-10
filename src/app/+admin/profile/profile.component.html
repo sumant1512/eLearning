@@ -76,22 +76,32 @@
           <div class="section" id="abt">
             <h3 class="card-title text-center">About School</h3>
             <ul class="list-unstyled list-about">
-              <li><i class="fa fa-home"></i> Delhi Public School</li>
               <li>
-                <i class="fa fa-envelope"></i> &nbsp;delhischool@gmail.com
+                <i class="fa fa-home"></i
+                >{{ adminProfile.userDetails.school_name }}
+              </li>
+              <li>
+                <i class="fa fa-envelope"></i> &nbsp;{{ adminProfile.email }}
               </li>
 
               <li>
-                <i class="fa fa-map-marker"></i> &nbsp;Mahatma Gandhi
-                square,Delhi
+                <i class="fa fa-map-marker"></i> &nbsp;{{
+                  adminProfile.userDetails.address
+                }}
               </li>
 
-              <li><i class="fa fa-phone"></i> +91- 7869564456</li>
+              <li>
+                <i class="fa fa-phone"></i>
+                {{ adminProfile.userDetails.admin_contact_no }}
+              </li>
             </ul>
           </div>
           <div class="section">
             <div class="text-center"><h3>Statistics</h3></div>
-            <p><span class="badge">3000</span> Students Registered</p>
+            <p>
+              <span class="badge">{{ adminProfile.students }}</span> Students
+              Registered
+            </p>
             <p><span class="badge">124</span> Teachers Registered</p>
             <p><span class="badge">620 hrs</span> Videos Available</p>
           </div>

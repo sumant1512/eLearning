@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
+import { ProfileType } from "../types/profile.type";
 
 @Injectable({
   providedIn: "root",
@@ -29,12 +30,12 @@ export class AuthService {
     );
   }
 
-  getProfile(authToken) {
+  getProfile(authToken): Observable<ProfileType[]> {
     var reqHeader = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: "Bearer " + authToken,
     });
-    return this.http.get<any[]>(
+    return this.http.get<ProfileType[]>(
       "https://tcslearningapplication.herokuapp.com/getProfile",
       {
         headers: reqHeader,
