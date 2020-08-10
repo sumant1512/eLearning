@@ -1,4 +1,4 @@
-import { Actions, Effect, ofType, createEffect } from "@ngrx/effects";
+import { Actions, Effect, ofType } from "@ngrx/effects";
 import { AuthService } from "./api/auth.service";
 import { Injectable } from "@angular/core";
 import {
@@ -31,6 +31,12 @@ export class AuthEffects {
           localStorage.setItem("user_type", res.body["user_type"]);
           localStorage.setItem("AUTH_TOKEN", authToken);
           return new FetchProfile(authToken);
+        }),
+        tap(() => {
+          const userType = localStorage.getItem("user_type");
+          if (userType === "Admin") {
+            this.router.navigate(["admin"]);
+          }
         })
       );
     })
@@ -46,12 +52,6 @@ export class AuthEffects {
       return response.pipe(
         map((res) => {
           return new FetchedProfile(res);
-        }),
-        tap(() => {
-          const userType = localStorage.getItem("user_type");
-          if (userType === "Admin") {
-            this.router.navigate(["admin"]);
-          }
         })
       );
     })
