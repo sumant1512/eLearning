@@ -29,15 +29,15 @@ const routes: Routes = [
       import("./+admin/admin.module").then((m) => m.AdminModule),
     canActivate: [AuthService],
   },
-  // {
-  //   path: RoutesEnum.PRIVACY_POLICY,
-  //   component: PrivacyPolicyComponent,
-  // },
   { path: "**", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: "enabled",
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

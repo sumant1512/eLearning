@@ -2,7 +2,7 @@
 <div class="container-fluid bg-cover">
   <div class="display d-flex justify-content-center pt-4 pb-4">
     <div
-      class="formSlide col-md-7 shadow animate__animated animate__bounceInDown"
+      class="br-20 formSlide col-md-7 shadow animate__animated animate__bounceInDown"
       style="background-color: white;"
     >
       <div class="row">
@@ -280,7 +280,7 @@
                     <input
                       type="password"
                       formControlName="confirmPassword"
-                      placeholder="Re-type Password"
+                      placeholder="Confirm Password"
                       class="form-control"
                       [ngClass]="{
                         'is-invalid':
@@ -301,7 +301,7 @@
                       </div>
                       <div
                         class="ml-5"
-                        *ngIf="f.confirmPassword.errors.MustMatch"
+                        *ngIf="f.confirmPassword.value.password"
                       >
                         Passwords must match
                       </div>
@@ -326,11 +326,10 @@
                 <p class="login-card-footer-text text-center">
                   Already Registered?
                   <a
-                    routerLink="/verification"
-                    style="font-weight: bold;"
-                    target="_parent"
                     type="button"
-                    class="text-reset text-center"
+                    tabIndex="0"
+                    class="light-blue font-italic"
+                    (click)="navigateToVerification()"
                     >Verify here</a
                   >
                 </p>
