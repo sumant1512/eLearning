@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { ClassService } from "src/app/store/class/api/class.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
+import * as ClassActions from "../../../store/class/class.actions";
 
 @Component({
   selector: "app-view-class",
@@ -11,8 +12,6 @@ import { AppState } from "src/app/store/app.state";
 })
 export class ViewClassComponent implements OnInit {
   addClassForm: FormGroup;
-  loader: boolean;
-
   classes = [];
 
   constructor(
@@ -26,11 +25,12 @@ export class ViewClassComponent implements OnInit {
 
   fetchClasses(): void {
     this.store.select("classList").subscribe((response) => {
-      this.classes = response;
+      if (Object.keys(response).length) {
+        this.classes = response;
+      } else {
+        this.store.dispatch(new ClassActions.FetchClass());
+      }
     });
-    // this.classService.getClasses().subscribe((response) => {
-    //   this.classes = response;
-    // });
   }
 
   removeClass(class_id): void {
