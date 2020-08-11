@@ -56,4 +56,12 @@ export class AuthEffects {
       );
     })
   );
+
+  @Effect()
+  userLogout$ = this.action$.pipe(
+    ofType(AuthActions.USER_LOGOUT),
+    map(() => {
+      return this.authService.logout();
+    })
+  );
 }

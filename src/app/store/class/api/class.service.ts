@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { AuthService } from "../auth/api/auth.service";
+import { AuthService } from "../../auth/api/auth.service";
 
 @Injectable({
   providedIn: "root",
@@ -14,10 +14,11 @@ export class ClassService {
     "Content-Type": "application/json",
     Authorization: "Bearer " + this.token,
   });
-  addClass(class_name) {
+  addClass(className) {
+    console.log(this.token);
     return this.http.post<any>(
       "https://tcslearningapplication.herokuapp.com/addClass",
-      class_name,
+      className,
       { headers: this.reqHeader }
     );
   }

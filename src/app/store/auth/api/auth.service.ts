@@ -43,13 +43,6 @@ export class AuthService {
     );
   }
 
-  private loginUser(user_type: string, authToken: string): void {
-    this.user_type = user_type;
-    localStorage.setItem("user_type", user_type);
-    localStorage.setItem("AUTH_TOKEN", authToken);
-    this.router.navigateByUrl("/admin/profile");
-  }
-
   //Logout call
   public logout(): void {
     this.logoutUser();
@@ -60,6 +53,7 @@ export class AuthService {
   private logoutUser(): void {
     this.user_type = null;
     localStorage.removeItem("AUTH_TOKEN");
+    localStorage.removeItem("user_type");
   }
 
   //get user authentication token
@@ -67,9 +61,17 @@ export class AuthService {
     return localStorage.getItem("AUTH_TOKEN");
   }
 
-  public isAuthenticated(): boolean {
+  public isLoggedIn(): boolean {
     const authToken = this.getToken();
     const status = authToken ? true : false;
     return status;
+  }
+
+  canActivate(): boolean {
+    if (!this.isLoggedIn()) {
+      this.router.navigate(["login"]);
+      return false;
+    }
+    return true;
   }
 }
