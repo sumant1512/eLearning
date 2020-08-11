@@ -23,7 +23,7 @@ a {
 }
 
 .display {
-  animation: displayIn 1.5s;
+  animation: displayIn 1s;
 }
 
 @keyframes displayIn {
@@ -46,7 +46,7 @@ a {
 
 .formSlide {
   bottom: -1600px;
-  animation: formSlide 1.5s forwards;
+  animation: formSlide 1s forwards;
 }
 
 @keyframes formSlide {

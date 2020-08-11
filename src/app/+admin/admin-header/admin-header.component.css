@@ -11,6 +11,10 @@ a {
   font-style: normal;
 }
 
+.logout-icon {
+  font-size: 16px;
+}
+
 /* This is for header animation for slide to down when page is scrolled */
 
 header {

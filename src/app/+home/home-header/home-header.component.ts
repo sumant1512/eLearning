@@ -35,9 +35,10 @@ export class HomeHeaderComponent implements OnInit {
   }
 
   scrollLogin() {
-    if (this.router.url === "/registration") {
+    if (this.router.url !== "/home") {
       this.router.navigate(["home"]);
+    } else {
+      this.scrollToLogin.emit("loginForm");
     }
-    this.scrollToLogin.emit("loginForm");
   }
 }

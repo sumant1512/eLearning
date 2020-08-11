@@ -5,6 +5,7 @@ import {
   Validators,
   FormControl,
   FormBuilder,
+  AbstractControl,
 } from "@angular/forms";
 import { Router } from "@angular/router";
 import { schoolRegisterForm } from "./registration.utils";
@@ -27,13 +28,35 @@ export class RegistrationComponent implements OnInit {
     private router: Router,
     private registationService: RegistrationService
   ) {
-    this.schoolRegisterForm = schoolRegisterForm();
+    (this.schoolRegisterForm = schoolRegisterForm()),
+      {
+        validator: this.MustMatch("password", "confirmPassword"),
+      };
   }
 
   ngOnInit() {}
 
   get f() {
     return this.schoolRegisterForm.controls;
+  }
+
+  MustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+        // return if another validator has already found an error on the matchingControl
+        return;
+      }
+
+      // set error on matchingControl if validation fails
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 
   registerSchool() {
@@ -53,6 +76,10 @@ export class RegistrationComponent implements OnInit {
           // Swal.fire("Error!", response["message"], "error");
         }
       });
+  }
+
+  navigateToVerification() {
+    this.router.navigate(["verification"]);
   }
 
   // sendOtp() {
