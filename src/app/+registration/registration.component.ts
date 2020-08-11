@@ -67,11 +67,9 @@ export class RegistrationComponent implements OnInit {
         console.log(response);
         if (response["status"]) {
           this.router.navigate(["verification"]);
-          alert("success");
-          // this.validDetails = true;
         } else {
           this.error = true;
-          this.errorMessage = response["messageEmail"];
+          this.errorMessage = response["message"];
           alert(this.errorMessage);
           // Swal.fire("Error!", response["message"], "error");
         }
