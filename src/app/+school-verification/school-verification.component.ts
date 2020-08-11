@@ -26,16 +26,15 @@ export class SchoolVerificationComponent implements OnInit {
   }
 
   verifiyOtp() {
-    alert("hi");
     const verificationDetails = this.otpForm.value;
     this.verificationService
       .verifyOtp(verificationDetails)
       .subscribe((response) => {
         if (response["status"]) {
           this.router.navigateByUrl("/home");
-          alert("School verified successfully.");
+          alert(response["message"]);
         } else {
-          alert("Wrong Otp");
+          alert(response["message"]);
         }
       });
   }

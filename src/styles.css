@@ -94,6 +94,10 @@ body {
   font-size: 14px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 input {
   border: 1px solid #d5dae2;
   padding: 15px;
@@ -103,6 +107,10 @@ input {
 
 .br-10 {
   border-radius: 10px;
+}
+
+.br-20 {
+  border-radius: 20px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
