@@ -1,9 +1,9 @@
 <div class="container-fluid">
-  <div *ngIf="!isAddClassMobile" class="row mt-3">
+  <div *ngIf="!isAddClassMobile" class="row">
     <div class="col-12">
       <div class="text-center text-md-right">
         <button
-          class="add-cls-btn bg-core-orange br-10 b-core-orange btn text-light font-weight-bold py-3"
+          class="my-3 add-cls-btn bg-core-orange br-10 b-core-orange btn text-light font-weight-bold py-3"
           type="button"
           (click)="openAddClassForm()"
         >
@@ -12,7 +12,7 @@
       </div>
     </div>
   </div>
-  <div class="row mt-3">
+  <div class="row">
     <div *ngIf="isAddClassMobile; else desktop" class="col-12 my-3">
       <div class="bg-light zindex-fixed fixed-bottom w-100 slider" #slider>
         <div class="d-flex justify-content-center">
