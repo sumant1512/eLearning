@@ -17,7 +17,6 @@ const profile: ProfileType = {
     address: "",
   },
   email: "",
-  students: "",
 };
 
 export function profileReducer(state = profile, action: AuthActionsUnion): any {
@@ -26,7 +25,6 @@ export function profileReducer(state = profile, action: AuthActionsUnion): any {
       return {
         userDetails: action.payload.profile,
         email: action.payload.email,
-        students: action.payload.students,
       };
     default:
       return state;

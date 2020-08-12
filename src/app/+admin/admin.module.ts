@@ -12,7 +12,6 @@ import { AddTeacherComponent } from "./teacher/add-teacher.component";
 import { ViewStudentComponent } from "./student/view-student/view-student.component";
 import { ViewTeacherComponent } from "./teacher/view-teacher/view-teacher.component";
 import { AddClassComponent } from "./class/add-class/add-class.component";
-import { AddSubjectComponent } from "./subject/add-subject.component";
 import { ViewSamplePaperComponent } from "./sample-paper/view-sample-paper/view-sample-paper.component";
 import { ViewClassComponent } from "./class/view-class/view-class.component";
 import { ViewSubjectComponent } from "./subject/view-subject/view-subject.component";
@@ -30,6 +29,9 @@ import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 import { AddSamplePaperMobileComponent } from "./sample-paper/add-sample-paper-mobile/add-sample-paper-mobile.component";
 import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper/add-sample-paper.component";
 import { AddTopicComponent } from "./topic/add-topic/add-topic.component";
+import { SubjectComponent } from "./subject/subject.component";
+import { AddSubjectMobileComponent } from "./subject/add-subject-mobile/add-subject-mobile.component";
+import { AddSubjectComponent } from "./subject/add-subject/add-subject.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,6 @@ import { AddTopicComponent } from "./topic/add-topic/add-topic.component";
     ViewTeacherComponent,
     AddClassComponent,
     ClassComponent,
-    AddSubjectComponent,
     ViewSamplePaperComponent,
     ViewClassComponent,
     ViewSubjectComponent,
@@ -58,6 +59,10 @@ import { AddTopicComponent } from "./topic/add-topic/add-topic.component";
     SamplePaperComponent,
     AddSamplePaperComponent,
     AddSamplePaperMobileComponent,
+    SubjectComponent,
+    AddSubjectComponent,
+    AddSubjectMobileComponent,
+    ViewSubjectComponent,
   ],
   imports: [
     CommonModule,

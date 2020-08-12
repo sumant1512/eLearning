@@ -1,7 +1,6 @@
 export interface ProfileType {
   userDetails: UserDetailsType;
   email: string;
-  students: string;
 }
 
 export interface UserDetailsType {
