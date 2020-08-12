@@ -16,7 +16,7 @@ export class AuthEffects {
     private action$: Actions<AuthActionsUnion>,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   @Effect()
   userLogin$ = this.action$.pipe(
@@ -60,8 +60,10 @@ export class AuthEffects {
   @Effect()
   userLogout$ = this.action$.pipe(
     ofType(AuthActions.USER_LOGOUT),
-    map(() => {
+    tap(() => {
       return this.authService.logout();
-    })
+    }),
+    map(() => { return { type: 'NO_ACTION' }; })
   );
+ 
 }

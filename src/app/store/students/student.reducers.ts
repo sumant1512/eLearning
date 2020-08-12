@@ -1,6 +1,6 @@
 import {StudentActions, StudentActionsUnion } from "./student.actions";
 
-const studentList: any = {};
+const studentList=[];
 
 export function studentReducer(
   state = studentList,

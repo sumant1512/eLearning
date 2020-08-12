@@ -9,33 +9,29 @@ import { Observable } from "rxjs";
 export class StudentService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  token = this.authService.getToken();
-
-  // token = localStorage.getItem("JWT_TOKEN");
-  reqHeader = new HttpHeaders({
-    "Content-Type": "application/json",
-    Authorization: "Bearer " + this.token,
-  });
+  //token = this.authService.getToken()
 
   // service for Student studentRegistration api call
   studentRegistration(Student) {
     return this.http.post<any>(
       "https://tcslearningapplication.herokuapp.com/studentRegistration",
       Student,
-      { headers: this.reqHeader }
+      { headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+      }
     );
   }
 
   // service for View of all registered Students  api call
-  studentFromSchool(authToken): Observable<any[]> {
-    const reqHeader = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + authToken,
-    });
+  studentFromSchool(): Observable<any[]> {
     return this.http.get<any[]>(
       "https://tcslearningapplication.herokuapp.com/studentFromSchool",
-      {
-        headers: this.reqHeader,
+      { headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
       }
     );
   }
@@ -43,9 +39,10 @@ export class StudentService {
   startSession() {
     return this.http.get(
       "https://tcslearningapplication.herokuapp.com/startSession",
-      {
-        observe: "response",
-        headers: this.reqHeader,
+      { headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
       }
     );
   }

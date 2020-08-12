@@ -31,4 +31,4 @@ export type AuthActionsUnion =
   | UserLogin
   | FetchProfile
   | FetchedProfile
-  | UserLogout;
+  | UserLogout

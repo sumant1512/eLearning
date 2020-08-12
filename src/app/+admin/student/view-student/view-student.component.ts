@@ -10,7 +10,7 @@ import * as StudentActions from "src/app/store/students/student.actions";
   styleUrls: ["./view-student.component.css"],
 })
 export class ViewStudentComponent implements OnInit {
-  students: string;
+  students=[];
   studentName: string;
   constructor(
     private AdminprofileService: AdminProfileService,

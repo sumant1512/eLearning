@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { FormGroup, FormBuilder, NgForm } from "@angular/forms";
+import { editClassForm } from "./view-class.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../store/app.state";
 import * as ClassActions from "../../../store/class/class.actions";
@@ -10,14 +11,17 @@ import * as ClassActions from "../../../store/class/class.actions";
   styleUrls: ["./view-class.component.css"],
 })
 export class ViewClassComponent implements OnInit {
-  addClassForm: FormGroup;
+  editClassForm: FormGroup;
   loader: boolean;
-  newClass: string;
+  oldClassName: string;
+  newClassName: string='';
   selectClassId: number;
 
   classes = [];
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {
+    this.editClassForm=editClassForm()
+  }
 
   ngOnInit(): void {
     this.fetchClasses();
@@ -37,17 +41,19 @@ export class ViewClassComponent implements OnInit {
     this.store.dispatch(
       new ClassActions.EditClass({
         class_id: this.selectClassId,
-        class_name: this.newClass,
+        class_name:this.editClassForm.value.class_name
       })
     );
-  }
+  } 
+
 
   removeClass(class_id): void {
     if (confirm("Are You Sure You want to Delete the Class?")) {
       this.store.dispatch(new ClassActions.DeleteClass(class_id));
     }
   }
-  newClassName(value): void {
-    this.newClass = value;
+  selectedClass(value,id): void {
+    this.oldClassName = value;
+    this.selectClassId = id
   }
 }

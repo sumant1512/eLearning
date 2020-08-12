@@ -35,8 +35,7 @@ export class StudentEffects {
   fetchStudent$ = this.action$.pipe(
     ofType(StudentActions.FETCH_STUDENT),
     map((action) => {
-      const authToken = localStorage.getItem("AUTH_TOKEN");
-      return this.studentService.studentFromSchool(authToken);
+      return this.studentService.studentFromSchool();
     }),
     mergeMap((response) => {
       return response.pipe(

@@ -23,9 +23,9 @@ export class HomeHeaderComponent implements OnInit {
       let menuArea = document.getElementById("men");
 
       if (window.pageYOffset > 350) {
-        menuArea.classList.add("cus-nav");
+        //menuArea.classList.add("cus-nav");
       } else {
-        menuArea.classList.remove("cus-nav");
+       // menuArea.classList.remove("cus-nav");
       }
     });
   }
