@@ -6,14 +6,14 @@ import { AddStudentComponent } from "./student/add-student.component";
 import { AddTeacherComponent } from "./teacher/add-teacher.component";
 import { AddClassComponent } from "./class/add-class/add-class.component";
 import { AddSubjectComponent } from "./subject/add-subject.component";
-import { AddTopicComponent } from "./topic/add-topic.component";
+import { TopicComponent } from "./topic/topic.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
 import { ProfileRoutesEnum } from "./admin-routes.constants";
-import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper.component";
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
 import { PrivacyPolicyComponent } from "../shared/privacy-policy/privacy-policy.component";
 import { ClassComponent } from "./class/class.component";
+import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 const routes: Routes = [
   {
     path: "",
@@ -25,11 +25,11 @@ const routes: Routes = [
       { path: ProfileRoutesEnum.TEACHER, component: AddTeacherComponent },
       { path: ProfileRoutesEnum.CLASS, component: ClassComponent },
       { path: ProfileRoutesEnum.SUBJECT, component: AddSubjectComponent },
-      { path: ProfileRoutesEnum.TOPIC, component: AddTopicComponent },
+      { path: ProfileRoutesEnum.TOPIC, component: TopicComponent },
       { path: ProfileRoutesEnum.SYLLABUS, component: ViewSyllabusComponent },
       {
         path: ProfileRoutesEnum.SAMPLE_PAPER,
-        component: AddSamplePaperComponent,
+        component: SamplePaperComponent,
       },
       { path: ProfileRoutesEnum.SETTINGS, component: AdminSettingsComponent },
       {

@@ -11,6 +11,10 @@ export class AdminProfileService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   token = this.authService.getToken();
+  reqHeader = new HttpHeaders({
+    "Content-Type": "application/json",
+    Authorization: "Bearer " + this.token,
+  });
 
   // service to call current school
   getCurrentSchool(): Observable<any[]> {
@@ -21,6 +25,16 @@ export class AdminProfileService {
     return this.http.get<any[]>("http://localhost:3000" + "/getProfile", {
       headers: reqHeader,
     });
+  }
+
+  startSession() {
+    return this.http.get(
+      "https://tcslearningapplication.herokuapp.com/startSession",
+      {
+        observe: "response",
+        headers: this.reqHeader,
+      }
+    );
   }
 
   // common service for assigning to class

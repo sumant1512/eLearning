@@ -9,7 +9,7 @@ export class AddTopicComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }
