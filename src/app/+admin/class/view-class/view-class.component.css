@@ -1,6 +1,5 @@
 .container {
   animation: container 0.5s;
- 
 }
 @keyframes container {
   0% {
@@ -45,14 +44,7 @@ th {
 tr {
   text-align: center;
 }
-.curve{
-     border-top-left-radius: 100% 200%;
-        border-top-right-radius: 100% 200%;
-        text-align: center;
-}
 
-
-.container{
+.container {
   box-shadow: 16px;
 }
-

@@ -1,44 +1,41 @@
-<div class="container-fluid test">
-  <div class="row">
-    <div [ngClass]="isAddClassMobile ? 'col-md-12' : 'col-md-8'" class="">
-      <app-view-class></app-view-class>
+<div class="container-fluid">
+  <div *ngIf="!isAddClassMobile" class="row mt-3">
+    <div class="col-12">
+      <div class="text-center text-md-right">
+        <button
+          class="add-cls-btn bg-core-orange br-10 b-core-orange btn text-light font-weight-bold py-3"
+          type="button"
+          (click)="openAddClassForm()"
+        >
+          <span>Add Class</span>
+        </button>
+      </div>
     </div>
-
-    <div
-      *ngIf="isAddClassMobile; else elseBlock"
-      class="col-12 my-3 p-0"
-      id="s"
-    >
-      <div id="slider" class="w-100 slider">
-        <div class="d-flex justify-content-center wh">
-          <div class="content col-12 col-md-12">
-            <div class="text-center">
-              <button
-                type="submit"
-                class="btn btn-block btn-default footer__btn"
-                data-toggle="modal"
-                data-target="#myModal2"
-              >
-                <i
-                  (click)="myFunction()"
-                  class="fa fa-ellipsis-h"
-                  id="hide"
-                  style="font-size: 35px; color: rgb(0, 0, 0);"
-                ></i>
-                <div class="add text-light font-weight-bold p-1">
-                  Add Class
-                </div>
-              </button>
+  </div>
+  <div class="row mt-3">
+    <div *ngIf="isAddClassMobile; else desktop" class="col-12 my-3">
+      <div class="bg-light zindex-fixed fixed-bottom w-100 slider" #slider>
+        <div class="d-flex justify-content-center">
+          <div class="col-12 p-2">
+            <div (click)="sliderOpen()" class="pointer text-center">
+              <i class="charcoal fa-2x fa fa-ellipsis-h" id="hide"></i>
             </div>
             <app-add-class-mobile></app-add-class-mobile>
           </div>
         </div>
       </div>
     </div>
-    <ng-template #elseBlock>
-      <div class="col-12 col-md-4">
+    <ng-template #desktop>
+      <div *ngIf="isAddClassFormOpen" class="form-slide col-lg-4">
         <app-add-class></app-add-class>
       </div>
     </ng-template>
+    <div
+      [ngClass]="
+        isAddClassMobile || isAddClassFormOpen ? 'col-lg-8' : 'col-lg-12'
+      "
+    >
+      <app-view-class></app-view-class>
+    </div>
   </div>
 </div>

@@ -1,88 +1,42 @@
-<!-- <div class="container-fluid"> -->
-  <div class="formSlide card mt-3">
-    <div class="bg-core-blue text-light font-weight-bold card-header">
-      Add Class
-    </div>
-    <div class="card-body">
-      <form [formGroup]="addClassForm">
-        <div class="form-group">
-          <i class="charcoal">Class Name</i>
-          <input
-            class="form-control"
-            formControlName="class_name"
-            type="text"
-          />
-        </div>
-        <div>
-          <button
-            [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
-            class="br-10 b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
-            type="button"
-            (click)="addClass()"
-          >
-            <span *ngIf="loader; else button">
-              <span
-                class="mx-1 core-orange spinner-grow spinner-grow-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              <span
-                class="mx-1 core-orange spinner-grow spinner-grow-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              <span
-                class="mx-1 core-orange spinner-grow spinner-grow-sm"
-                role="status"
-                aria-hidden="true"
-              ></span>
-            </span>
-            <ng-template #button>
-              <span>Add</span>
-            </ng-template>
-          </button>
-        </div>
-      </form>
-    </div>
+<div class="formSlide card">
+  <div class="bg-core-blue text-light font-weight-bold card-header">
+    Add Class
   </div>
-<!-- </div> -->
-
-<!-- <div class="container-fluid pt-3">
-  <div class="row">
-
-   <div class="col-12 col-md-7">
-      <app-view-class></app-view-class>
-    </div> 
-    <div class="col-12 col-md-5">
-      <div class="formSlide mx-2 mx-md-4 mx-md-5 card">
-        <div class="bg-core-blue text-light font-weight-bold card-header">
-          Add Class
-        </div>
-        <div class="card-body">
-          <form [formGroup]="addClassForm">
-            <div class="form-group">
-              <i class="charcoal">Class Name</i>
-              <input class="form-control" formControlName="className" type="text" />
-            </div>
-            <div>
-              <button [ngClass]="loader ? 'bg-light' : 'bg-light-blue'" (click)="addClass()"
-                class="br-10 b-light-blue btn btn-block login-btn text-light font-weight-bold py-3 mb-3" type="button">
-                <span *ngIf="loader; else button">
-                  <span class="mx-1 dark-blue spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                  <span class="mx-1 dark-blue spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                  <span class="mx-1 dark-blue spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                </span>
-                <ng-template #button>
-                  <span>Add</span>
-                </ng-template>
-              </button>
-            </div>
-          </form>
-        </div>
+  <div class="card-body">
+    <form [formGroup]="addClassForm">
+      <div class="form-group">
+        <i class="charcoal">Class Name</i>
+        <input class="form-control" formControlName="className" type="text" />
       </div>
-    </div>
-   <div class="col-12 col-md-7">
-      <app-view-class></app-view-class>
-    </div> 
+      <div>
+        <button
+          [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
+          class="br-10 b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
+          type="button"
+          (click)="addClass()"
+        >
+          <span *ngIf="loader; else button">
+            <span
+              class="mx-1 core-orange spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="mx-1 core-orange spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="mx-1 core-orange spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          </span>
+          <ng-template #button>
+            <span>Add</span>
+          </ng-template>
+        </button>
+      </div>
+    </form>
   </div>
-  </div>  -->
+</div>

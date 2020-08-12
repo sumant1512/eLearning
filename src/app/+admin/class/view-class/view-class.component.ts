@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, NgForm } from "@angular/forms";
-import { editClassForm } from "./view-class.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../../store/app.state";
 import * as ClassActions from "../../../store/class/class.actions";
+import { addClassForm } from "../add-class.utils";
 
 @Component({
   selector: "app-view-class",
@@ -20,7 +20,7 @@ export class ViewClassComponent implements OnInit {
   classes = [];
 
   constructor(private store: Store<AppState>) {
-    this.editClassForm = editClassForm();
+    this.editClassForm = addClassForm();
   }
 
   ngOnInit(): void {
@@ -41,7 +41,7 @@ export class ViewClassComponent implements OnInit {
     this.store.dispatch(
       new ClassActions.EditClass({
         class_id: this.selectClassId,
-        class_name: this.editClassForm.value.class_name,
+        className: this.editClassForm.value.className,
       })
     );
   }
