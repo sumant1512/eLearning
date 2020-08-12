@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
@@ -7,25 +7,24 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./class.component.css"],
 })
 export class ClassComponent {
-
+  @ViewChild("slider", { static: false }) slider: ElementRef;
   isAddClassMobile = false;
-
- 
-  ngOnInit() {
-  
-    if (window.innerWidth < 1024) {
-    this.isAddClassMobile=true;
-     }
-     window.onresize = () => this.isAddClassMobile = window.innerWidth < 1024;
-  
-    
+  isAddClassFormOpen = false;
+  openAddClassForm() {
+    this.isAddClassFormOpen = true;
   }
 
-  myFunction() {
-    var element = document.getElementById("slider");
-    element.classList.toggle("show");
- }
-            
-     }
-    
+  ngOnInit() {
+    if (window.innerWidth < 1024) {
+      this.isAddClassMobile = true;
+    }
+    window.onresize = () => {
+      this.isAddClassMobile = window.innerWidth < 1024;
+      this.isAddClassFormOpen = false;
+    };
+  }
 
+  sliderOpen() {
+    this.slider.nativeElement.classList.toggle("show");
+  }
+}

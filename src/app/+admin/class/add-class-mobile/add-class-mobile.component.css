@@ -1,24 +1,39 @@
-.animate-bottom {
-  position: relative;
-  animation: animatebottom 0.8s;
+.formSlide {
+  animation: formSlide 1s forwards;
 }
 
-@keyframes animatebottom {
-  from {
-    bottom: -300px;
+@keyframes formSlide {
+  100% {
+    right: 0;
   }
-
-  to {
-    bottom: 0;
+  0% {
+    opacity: 0;
   }
-}
-
-.modal {
-  padding: 0 !important;
-}
-.modal .modal-dialog {
-  max-width: none;
-}
-.modal .modal-body {
-  overflow-y: auto;
+  10% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
 }

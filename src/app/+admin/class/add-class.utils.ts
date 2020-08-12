@@ -1,7 +1,7 @@
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 
-export function editClassForm() {
+export function addClassForm() {
   return new FormGroup({
-    class_name: new FormControl("", [Validators.required]),
+    className: new FormControl("", [Validators.required]),
   });
 }

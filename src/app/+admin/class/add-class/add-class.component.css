@@ -1,50 +1,10 @@
-/* .add-class-btn {
-  width: 150px;
-}
-.formSlide {
-  bottom: -700px;
-  animation: formSlide 1.5s forwards;
-}
 
-@keyframes formSlide {
-  100% {
-    bottom: 0;
-  }
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.1;
-  }
-  15% {
-    opacity: 0.15;
-  }
-  25% {
-    opacity: 0.25;
-  }
-  35% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  60% {
-    opacity: 0.6;
-  }
-  75% {
-    opacity: 0.75;
-  }
-  85% {
-    opacity: 0.85;
-  }
-  100% {
-    opacity: 1;
-  }
-} */
 
 .formSlide {
-  /* bottom: -1600px; */
+ 
+
   animation: formSlide 1s forwards;
+
 }
 @keyframes formSlide {
   100% {
@@ -61,13 +21,3 @@
   85%{opacity: 0.85;}
   100% {opacity: 1;}
 }
-/* .container-fluid{
-  background: linear-gradient(180deg, #455a64 0%, #67818d 100%);
-} */
-
-/* @media only screen and (max-width: 1024px) {
-  .formslide {
-    display: none;
-
-  }
-} */
