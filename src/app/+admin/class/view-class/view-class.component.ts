@@ -14,13 +14,13 @@ export class ViewClassComponent implements OnInit {
   editClassForm: FormGroup;
   loader: boolean;
   oldClassName: string;
-  newClassName: string='';
+  newClassName: string = "";
   selectClassId: number;
 
   classes = [];
 
   constructor(private store: Store<AppState>) {
-    this.editClassForm=editClassForm()
+    this.editClassForm = editClassForm();
   }
 
   ngOnInit(): void {
@@ -41,19 +41,18 @@ export class ViewClassComponent implements OnInit {
     this.store.dispatch(
       new ClassActions.EditClass({
         class_id: this.selectClassId,
-        class_name:this.editClassForm.value.class_name
+        class_name: this.editClassForm.value.class_name,
       })
     );
-  } 
-
+  }
 
   removeClass(class_id): void {
     if (confirm("Are You Sure You want to Delete the Class?")) {
       this.store.dispatch(new ClassActions.DeleteClass(class_id));
     }
   }
-  selectedClass(value,id): void {
+  selectedClass(value, id): void {
     this.oldClassName = value;
-    this.selectClassId = id
+    this.selectClassId = id;
   }
 }

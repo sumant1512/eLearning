@@ -18,7 +18,7 @@ export class AdminHeaderComponent {
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0;
-    if (number > 450) {
+    if (number > 300) {
       this.scrollStatus = true;
       this.header.nativeElement.classList.add("sticky");
     } else {
