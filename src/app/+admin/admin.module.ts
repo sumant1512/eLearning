@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 
-
 import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
@@ -29,6 +28,8 @@ import { AddTopicMobileComponent } from "./topic/add-topic-mobile/add-topic-mobi
 import { ViewTopicComponent } from "./topic/view-topic/view-topic.component";
 import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 import { AddSamplePaperMobileComponent } from "./sample-paper/add-sample-paper-mobile/add-sample-paper-mobile.component";
+import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper/add-sample-paper.component";
+import { AddTopicComponent } from "./topic/add-topic/add-topic.component";
 
 @NgModule({
   declarations: [
@@ -51,9 +52,11 @@ import { AddSamplePaperMobileComponent } from "./sample-paper/add-sample-paper-m
     AdminLandingPageComponent,
     AddClassMobileComponent,
     TopicComponent,
+    AddTopicComponent,
     AddTopicMobileComponent,
     ViewTopicComponent,
     SamplePaperComponent,
+    AddSamplePaperComponent,
     AddSamplePaperMobileComponent,
   ],
   imports: [
@@ -61,7 +64,7 @@ import { AddSamplePaperMobileComponent } from "./sample-paper/add-sample-paper-m
     AdminRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
   ],
 })
 export class AdminModule {}
