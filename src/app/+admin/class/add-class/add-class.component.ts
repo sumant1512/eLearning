@@ -25,15 +25,6 @@ export class AddClassComponent implements OnInit {
     this.loader = true;
     const classDetails = this.addClassForm.value;
     this.store.dispatch(new ClassActions.AddClass(classDetails));
-    // this.classService.addClass(classDetails).subscribe((response) => {
-    //   if (response["status"]) {
-    //     alert("class added");
-    //     this.loader = false;
-    //   } else {
-    //     alert("failed");
-    //     this.loader = false;
-    //   }
-    // });
   }
 
   login() {
