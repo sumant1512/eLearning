@@ -1,7 +1,8 @@
-.classSlide {
-  animation: classSlide 0.5s;
+.container {
+  animation: container 0.5s;
+ 
 }
-@keyframes classSlide {
+@keyframes container {
   0% {
     opacity: 0;
   }
@@ -44,3 +45,14 @@ th {
 tr {
   text-align: center;
 }
+.curve{
+     border-top-left-radius: 100% 200%;
+        border-top-right-radius: 100% 200%;
+        text-align: center;
+}
+
+
+.container{
+  box-shadow: 16px;
+}
+

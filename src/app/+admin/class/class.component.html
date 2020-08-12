@@ -1,25 +1,29 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-6"></div>
-    <div class="text-center text-md-right col-12 col-md-6">
-      <button
-        class="br-10 bg-core-orange btn add-class-btn text-light font-weight-bold py-3 mt-3 mb-3"
-        type="button"
-        (click)="openAddClassForm()"
-      >
-        Add-Class
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div *ngIf="isAddClassFormOpen" class="col-12 col-md-4">
-      <app-add-class></app-add-class>
-    </div>
-    <div
-      [ngClass]="isAddClassFormOpen ? 'col-md-8' : 'col-md-12'"
-      class="col-12"
-    >
+<div class="container-fluid test">
+  <div class="row my-3">
+    <div [ngClass]="isAddClassMobile ? 'col-md-12' : 'col-md-8'" class="">
       <app-view-class></app-view-class>
     </div>
+    <div *ngIf="isAddClassMobile else elseBlock" class="col-12  my-3 " id="s">
+      <div id="slider" class="slider  mt-3 ">
+        <div class="d-flex justify-content-center wh">
+          <div class="content col-12 col-md-12 p-1">
+            <div class="text-center">
+              <button type="submit" class="btn btn-block btn-default footer__btn" data-toggle="modal" data-target="#myModal2"><i (click)="myFunction()" class="fa fa-ellipsis-h" id="hide"
+                style="font-size: 35px; color: rgb(0, 0, 0);"></i>
+                <div class="add text-light font-weight-bold p-1">
+                  Add Class
+                </div>
+              </button>
+            </div>
+            <app-add-class-mobile></app-add-class-mobile>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #elseBlock>
+      <div class="col-12 col-md-4">
+        <app-add-class></app-add-class>
+      </div>
+    </ng-template>
   </div>
 </div>

@@ -7,8 +7,7 @@ import {
   FetchClass,
   FetchedClass,
 } from "./class.actions";
-import { mergeMap, map, tap } from "rxjs/operators";
-import { Router } from "@angular/router";
+import { mergeMap, map } from "rxjs/operators";
 
 @Injectable()
 export class ClassEffects {
@@ -21,12 +20,11 @@ export class ClassEffects {
   addClass$ = this.action$.pipe(
     ofType(ClassActions.ADD_CLASS),
     map((action) => {
-      const authToken = localStorage.getItem("AUTH_TOKEN");
-      return this.classService.addClass(action.payload, authToken);
+      return this.classService.addClass(action.payload);
     }),
     mergeMap((response) => {
       return response.pipe(
-        map((res) => {
+        map(() => {
           return new FetchClass();
         })
       );
@@ -34,11 +32,40 @@ export class ClassEffects {
   );
 
   @Effect()
-  fetchClass$ = this.action$.pipe(
-    ofType(ClassActions.FETCH_CLASS),
+  deleteClass$ = this.action$.pipe(
+    ofType(ClassActions.DELETE_CLASS),
     map((action) => {
-      const authToken = localStorage.getItem("AUTH_TOKEN");
-      return this.classService.getClasses(authToken);
+      return this.classService.removeClass(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchClass();
+        })
+      );
+    })
+  );
+
+  @Effect()
+  editClass$ = this.action$.pipe(
+    ofType(ClassActions.EDIT_CLASS),
+    map((action) => {
+      return this.classService.editClassName(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchClass();
+        })
+      );
+    })
+  );
+
+  @Effect()
+  fetchClasses$ = this.action$.pipe(
+    ofType(ClassActions.FETCH_CLASS),
+    map(() => {
+      return this.classService.getClasses();
     }),
     mergeMap((response) => {
       return response.pipe(
