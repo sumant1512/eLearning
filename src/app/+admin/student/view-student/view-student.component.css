@@ -1,0 +1,37 @@
+
+    @media only screen and (max-width: 890px) {
+     
+      .wrapper{
+        width: 100%;
+       overflow-x: scroll; 
+       overflow-y:hidden;
+     }
+ 
+       .scrollx {
+         width: 8px;
+          height:200px; 
+       overflow: auto;
+     }
+
+     }
+
+
+
+
+    
+   /* this css for search pipe!!! search pipe is not avalible */
+     /* .searchForm{
+      width: 25%;
+      float:right;
+      }
+      .searchForm input[type=text]{
+        background-color: #454d55;
+        color: white;
+      }
+      .searchForm ::placeholder{
+        color: white;
+      }
+      .active-cyan-2 input.form-control[type=text]:focus:not([readonly]) {
+        border-bottom: 2px solid #4dd0e1;
+        box-shadow: 0 2px 0 0 #4dd0e1;
+      } */

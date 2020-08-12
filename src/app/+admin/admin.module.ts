@@ -12,8 +12,6 @@ import { ViewStudentComponent } from "./student/view-student/view-student.compon
 import { ViewTeacherComponent } from "./teacher/view-teacher/view-teacher.component";
 import { AddClassComponent } from "./class/add-class/add-class.component";
 import { AddSubjectComponent } from "./subject/add-subject.component";
-import { AddTopicComponent } from "./topic/add-topic.component";
-import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper.component";
 import { ViewSamplePaperComponent } from "./sample-paper/view-sample-paper/view-sample-paper.component";
 import { ViewClassComponent } from "./class/view-class/view-class.component";
 import { ViewSubjectComponent } from "./subject/view-subject/view-subject.component";
@@ -23,7 +21,12 @@ import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-pa
 import { ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
 import { ClassComponent } from "./class/class.component";
-import { AddClassMobileComponent } from './class/add-class-mobile/add-class-mobile.component';
+import { AddClassMobileComponent } from "./class/add-class-mobile/add-class-mobile.component";
+import { TopicComponent } from "./topic/topic.component";
+import { AddTopicMobileComponent } from "./topic/add-topic-mobile/add-topic-mobile.component";
+import { ViewTopicComponent } from "./topic/view-topic/view-topic.component";
+import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
+import { AddSamplePaperMobileComponent } from "./sample-paper/add-sample-paper-mobile/add-sample-paper-mobile.component";
 
 @NgModule({
   declarations: [
@@ -38,8 +41,6 @@ import { AddClassMobileComponent } from './class/add-class-mobile/add-class-mobi
     AddClassComponent,
     ClassComponent,
     AddSubjectComponent,
-    AddTopicComponent,
-    AddSamplePaperComponent,
     ViewSamplePaperComponent,
     ViewClassComponent,
     ViewSubjectComponent,
@@ -47,6 +48,11 @@ import { AddClassMobileComponent } from './class/add-class-mobile/add-class-mobi
     AdminSettingsComponent,
     AdminLandingPageComponent,
     AddClassMobileComponent,
+    TopicComponent,
+    AddTopicMobileComponent,
+    ViewTopicComponent,
+    SamplePaperComponent,
+    AddSamplePaperMobileComponent,
   ],
   imports: [
     CommonModule,

@@ -2,6 +2,7 @@ import { ActionReducerMap } from "@ngrx/store";
 import { AppState } from "./app.state";
 import { profileReducer } from "./auth/auth.reducers";
 import { classReducer } from "./class/class.reducers";
+import { studentReducer } from "./students/student.reducers";
 
 // import { classReducer } from "./class/class.reducers";
 // import { sectionReducer } from "./section/section.reducers";
@@ -19,4 +20,5 @@ import { classReducer } from "./class/class.reducers";
 export const appReducers: ActionReducerMap<AppState> = {
   profile: profileReducer,
   classList: classReducer,
+  students: studentReducer,
 };

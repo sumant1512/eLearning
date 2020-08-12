@@ -9,7 +9,7 @@ export class AddSamplePaperComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }
