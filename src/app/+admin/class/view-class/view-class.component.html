@@ -1,10 +1,13 @@
-<div class="classSlide mx-2 mx-md-4 mx-lg-5 card">
-  <div>
-    <div class="bg-core-blue text-light font-weight-bold card-header">
+<div class="bg-core-blue text-light font-weight-bold card-header curve">
       Current Classes
     </div>
-    <div class="container p-0" style="overflow: auto; height: 21.5rem;">
-      <table class="table table-bordered position-relative">
+<div class="classSlide  card">
+  <div>
+    
+    <div class="container-shadow p-0 " style="overflow: auto; height: 21.5rem;">
+     
+
+      <table class="table table-hover  table-bordered position-relative">
         <thead>
           <tr>
             <th>Class Name</th>
@@ -12,34 +15,31 @@
             <th>Action</th>
           </tr>
         </thead>
-
-        <tr *ngFor="let class of classes">
-          <td>{{ class.class_name }}</td>
-          <td>{{ class.created_on | date: "mediumDate" }}</td>
-          <td>
-            <button
-              type="button"
-              (click)="removeClass(class.class_id)"
-              class="btn btn-outline-danger-sm"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-success-sm"
+        <tbody>
+          <tr *ngFor="let class of classes">
+            <td >{{ class.class_name }}</td>
+            <td>{{ class.created_on | date: "mediumDate" }}</td>
+            <td>
+              <i  
               data-toggle="modal"
-              data-target="#modelId"
-            >
-              Edit
-            </button>
-          </td>
-        </tr>
+                data-target="#modelId"
+              class="fa fa-pencil mx-3"
+            ></i>
+            
+              <i (click)="removeClass(class.class_id)" class="fa fa-trash" aria-hidden="true"></i>
+            
+            </td>
+          </tr>
+          
+         
+         
+        </tbody>
       </table>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+
 <div
   class="modal fade"
   id="modelId"

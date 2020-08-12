@@ -1,9 +1,7 @@
-.add-class-btn {
-  width: 150px;
-}
+
 .formSlide {
-  bottom: -700px;
-  animation: formSlide 1.5s forwards;
+  /* bottom: -700px; */
+  animation: formSlide 2s forwards;
 }
 
 @keyframes formSlide {
@@ -41,3 +39,54 @@
     opacity: 1;
   }
 }
+/* .test {
+  position: relative;
+
+} */
+
+
+/*.slider {
+position: fixed;
+  bottom:  100px;
+
+
+  width: 97%;
+  height: 15%;
+  transition: height 2s;
+ 
+  background-color: rgb(255, 255, 255);
+  z-index:1;
+overflow: hidden;
+}
+*/
+.slider{
+    background-color: rgb(255, 255, 255);
+    bottom:0;
+     margin-bottom: -60px;
+  
+     
+  
+}
+
+.show {
+  width: 97%;
+  transition:height 2s ;
+
+  height: 60%;                                
+}
+.add{
+  background: #00205b;
+}
+.wh{
+  background-color: rgb(255, 255, 255);
+}
+/*.slider .content {
+  width: 97%;
+height: 20%;
+  display: block;
+
+  top:0;
+}
+*/
+
+

@@ -1,0 +1,28 @@
+.animate-bottom {
+  position: relative;
+  animation: animatebottom 0.8s;
+}
+
+@keyframes animatebottom {
+  from {
+    bottom: -300px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
+}
+
+
+.modal {
+  padding: 0 !important;                                    
+}
+.modal .modal-dialog {
+   max-width: none;
+}
+.modal .modal-body {
+  overflow-y: auto;
+}
+

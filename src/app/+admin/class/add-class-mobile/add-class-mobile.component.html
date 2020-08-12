@@ -1,1 +1,70 @@
-<p>add-class-mobile works!</p>
+ 
+ 
+
+
+    <div class="modal fade animate"  data-backdrop="" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog w-100 h-100 m-0 " role="document">
+    <div class="modal-content animate-bottom h-100 border-0 rounded-0">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"> </h4>
+      </div>
+      <div class="modal-body">
+        <div class="container py-5">
+      <div class="card" id="c" class="w-100" >
+         <div class="bg-core-blue text-light font-weight-bold card-header">
+      Add Class
+    </div>
+    <div class="card-body">
+      <form [formGroup]="addClassForm">
+          <div class="form-group">
+            <i class="charcoal">Class Name</i>
+            <input
+              class="form-control"
+              formControlName="class_name"
+              type="text"
+            />
+          </div>
+          <div>
+            <button
+              [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
+              class="br-10 b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
+              type="button"
+              (click)="addClass()"
+            >
+              <span *ngIf="loader; else button">
+                <span
+                  class="mx-1 core-orange spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="mx-1 core-orange spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  class="mx-1 core-orange spinner-grow spinner-grow-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              </span>
+              <ng-template #button>
+                <span>Add</span>
+              </ng-template>
+            </button>
+          </div>
+        </form>
+    </div>
+    
+  </div>
+
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
