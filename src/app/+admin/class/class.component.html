@@ -1,15 +1,30 @@
 <div class="container-fluid test">
-  <div class="row my-3">
+  <div class="row">
     <div [ngClass]="isAddClassMobile ? 'col-md-12' : 'col-md-8'" class="">
       <app-view-class></app-view-class>
     </div>
-    <div *ngIf="isAddClassMobile else elseBlock" class="col-12  my-3 " id="s">
-      <div id="slider" class="slider  mt-3 ">
+
+    <div
+      *ngIf="isAddClassMobile; else elseBlock"
+      class="col-12 my-3 p-0"
+      id="s"
+    >
+      <div id="slider" class="w-100 slider">
         <div class="d-flex justify-content-center wh">
-          <div class="content col-12 col-md-12 p-1">
+          <div class="content col-12 col-md-12">
             <div class="text-center">
-              <button type="submit" class="btn btn-block btn-default footer__btn" data-toggle="modal" data-target="#myModal2"><i (click)="myFunction()" class="fa fa-ellipsis-h" id="hide"
-                style="font-size: 35px; color: rgb(0, 0, 0);"></i>
+              <button
+                type="submit"
+                class="btn btn-block btn-default footer__btn"
+                data-toggle="modal"
+                data-target="#myModal2"
+              >
+                <i
+                  (click)="myFunction()"
+                  class="fa fa-ellipsis-h"
+                  id="hide"
+                  style="font-size: 35px; color: rgb(0, 0, 0);"
+                ></i>
                 <div class="add text-light font-weight-bold p-1">
                   Add Class
                 </div>

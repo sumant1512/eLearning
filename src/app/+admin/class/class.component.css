@@ -1,4 +1,3 @@
-
 .formSlide {
   /* bottom: -700px; */
   animation: formSlide 2s forwards;
@@ -44,7 +43,6 @@
 
 } */
 
-
 /*.slider {
 position: fixed;
   bottom:  100px;
@@ -59,27 +57,39 @@ position: fixed;
 overflow: hidden;
 }
 */
-.slider{
-    background-color: rgb(255, 255, 255);
-    bottom:0;
-     margin-bottom: -60px;
-  
-     
-  
+.slider {
+  background-color: rgb(255, 255, 255);
+  bottom: 0;
+  margin-bottom: -62px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
 }
 
 .show {
   width: 97%;
-  transition:height 2s ;
+  transition: height 2s;
 
-  height: 60%;                                
+  height: 60%;
 }
-.add{
+.add {
   background: #00205b;
 }
-.wh{
+.wh {
   background-color: rgb(255, 255, 255);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  box-shadow: 0px -4px 3px rgba(50, 50, 50, 0.75);
 }
+
+.text-center {
+  width: 100%;
+  left: 0;
+  margin-bottom: 0;
+  background-color: white;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
 /*.slider .content {
   width: 97%;
 height: 20%;
@@ -88,5 +98,3 @@ height: 20%;
   top:0;
 }
 */
-
-
