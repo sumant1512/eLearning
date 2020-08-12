@@ -8,24 +8,30 @@ import { AuthService } from "../../auth/api/auth.service";
 })
 export class ClassService {
   constructor(private http: HttpClient, private authService: AuthService) {}
-  token = this.authService.getToken();
 
   reqHeader = new HttpHeaders({
     "Content-Type": "application/json",
-    Authorization: "Bearer " + this.token,
+    Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
   });
-  addClass(className) {
-    console.log(this.token);
+  addClass(className, authToken) {
+    const reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + authToken,
+    });
     return this.http.post<any>(
       "https://tcslearningapplication.herokuapp.com/addClass",
       className,
-      { headers: this.reqHeader }
+      { headers: reqHeader }
     );
   }
-  getClasses(): Observable<any[]> {
+  getClasses(authToken): Observable<any[]> {
+    const reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + authToken,
+    });
     return this.http.get<any[]>(
       "https://tcslearningapplication.herokuapp.com/getClasses",
-      { headers: this.reqHeader }
+      { headers: reqHeader }
     );
   }
   editClassName(classDetails) {

@@ -18,10 +18,11 @@ export class ClassEffects {
   ) {}
 
   @Effect()
-  userLogin$ = this.action$.pipe(
+  addClass$ = this.action$.pipe(
     ofType(ClassActions.ADD_CLASS),
     map((action) => {
-      return this.classService.addClass(action.payload);
+      const authToken = localStorage.getItem("AUTH_TOKEN");
+      return this.classService.addClass(action.payload, authToken);
     }),
     mergeMap((response) => {
       return response.pipe(
@@ -33,10 +34,11 @@ export class ClassEffects {
   );
 
   @Effect()
-  fetchProfile$ = this.action$.pipe(
+  fetchClass$ = this.action$.pipe(
     ofType(ClassActions.FETCH_CLASS),
     map((action) => {
-      return this.classService.getClasses();
+      const authToken = localStorage.getItem("AUTH_TOKEN");
+      return this.classService.getClasses(authToken);
     }),
     mergeMap((response) => {
       return response.pipe(
