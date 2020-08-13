@@ -1,11 +1,12 @@
 import { ClassActions, ClassActionsUnion } from "./class.actions";
+import { ClassListType } from "./types/class.type";
 
-const classList: any = {};
+const classList: ClassListType[] = [];
 
 export function classReducer(
   state = classList,
   action: ClassActionsUnion
-): any {
+): ClassListType[] {
   switch (action.type) {
     case ClassActions.FETCHED_CLASS:
       return action.payload;
