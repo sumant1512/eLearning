@@ -20,17 +20,12 @@
             <td>{{ class.created_on | date: "mediumDate" }}</td>
             <td>
               <i
-                (click)="selectedClass(class.class_name, class.class_id)"
                 data-toggle="modal"
                 data-target="#modelId"
                 class="fa fa-pencil mx-3"
               ></i>
 
-              <i
-                (click)="removeClass(class.class_id)"
-                class="fa fa-trash"
-                aria-hidden="true"
-              ></i>
+              <i class="fa fa-trash" aria-hidden="true"></i>
             </td>
           </tr>
         </tbody>
