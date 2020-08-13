@@ -1,4 +1,5 @@
 import { Action } from "@ngrx/store";
+import { ClassListType } from "./types/class.type";
 
 export enum ClassActions {
   ADD_CLASS = "[Class] Add Class",
@@ -28,7 +29,7 @@ export class FetchClass implements Action {
 
 export class FetchedClass implements Action {
   readonly type = ClassActions.FETCHED_CLASS;
-  constructor(public payload: any) {}
+  constructor(public payload: ClassListType[]) {}
 }
 
 export type ClassActionsUnion =

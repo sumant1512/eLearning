@@ -7,6 +7,12 @@ import { SchoolVerificationComponent } from "./school-verification.component";
 
 @NgModule({
   declarations: [SchoolVerificationComponent],
-  imports: [CommonModule, SchoolVerificationRoutingModule, HomeModule,CommonModule ,FormsModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    SchoolVerificationRoutingModule,
+    HomeModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
 export class SchoolVerificationModule {}
