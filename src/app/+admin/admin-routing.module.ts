@@ -15,6 +15,7 @@ import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 import { SubjectComponent } from "./subject/subject.component";
 import { ViewSaplePaperComponent } from "./view-saple-paper/view-saple-paper.component";
 import { SettingsComponent } from "./settings/settings.component";
+import { ConferencingComponent } from "./conferencing/conferencing.component";
 const routes: Routes = [
   {
     path: "",
@@ -44,6 +45,10 @@ const routes: Routes = [
       {
         path: ProfileRoutesEnum.PRIVACY_POLICY,
         component: PrivacyPolicyComponent,
+      },
+      {
+        path: ProfileRoutesEnum.CONFERENCING,
+        component: ConferencingComponent,
       },
     ],
   },
