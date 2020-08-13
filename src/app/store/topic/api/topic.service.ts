@@ -1,18 +1,17 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { AuthService } from "../../auth/api/auth.service";
 
 @Injectable({
   providedIn: "root",
 })
-export class SubjectService {
-  constructor(private http: HttpClient, private authService: AuthService) {}
+export class TopicService {
+  constructor(private http: HttpClient) {}
 
-  addSubject(subjectDetails) {
+  addTopic(topicDetails) {
     return this.http.post<any>(
-      "https://tcslearningapplication.herokuapp.com" + "/addSubject",
-      subjectDetails,
+      "https://tcslearningapplication.herokuapp.com/addTopic",
+      topicDetails,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
@@ -22,9 +21,9 @@ export class SubjectService {
     );
   }
 
-  getSubjects(): Observable<any[]> {
+  getAllTopics(): Observable<any[]> {
     return this.http.get<any[]>(
-      "https://tcslearningapplication.herokuapp.com" + "/getSubjects",
+      "https://tcslearningapplication.herokuapp.com/getAllTopics",
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
@@ -33,11 +32,10 @@ export class SubjectService {
       }
     );
   }
-
-  editSubjectName(subjectDetails) {
+  editTopicName(topicDetails) {
     return this.http.post<any>(
-      "https://tcslearningapplication.herokuapp.com/editSubjectName",
-      subjectDetails,
+      "https://tcslearningapplication.herokuapp.com/editTopicName",
+      topicDetails,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
@@ -47,11 +45,10 @@ export class SubjectService {
     );
   }
 
-  getClassesOfUnassignedSubjects(subject_id) {
+  getSubjectsOfClass(classDetail) {
     return this.http.post<any>(
-      "https://tcslearningapplication.herokuapp.com" +
-        "/getClassesOfUnassignedSubjects",
-      subject_id,
+      "https://tcslearningapplication.herokuapp.com/getSubjectsOfClass",
+      classDetail,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
@@ -61,10 +58,10 @@ export class SubjectService {
     );
   }
 
-  assignSubjectToClass(Details) {
+  getTopicsOfSubject(topicDetail): Observable<any[]> {
     return this.http.post<any>(
-      "https://tcslearningapplication.herokuapp.com" + "/assignSubjectToClass",
-      Details,
+      "https://tcslearningapplication.herokuapp.com/getTopicsOfSubject",
+      topicDetail,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
@@ -74,9 +71,9 @@ export class SubjectService {
     );
   }
 
-  removeSubject(id: number) {
+  removeTopic(id: number) {
     return this.http.delete<any>(
-      `https://tcslearningapplication.herokuapp.com/removeSubject/${id}`,
+      `https://tcslearningapplication.herokuapp.com/removeTopic/${id}`,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",

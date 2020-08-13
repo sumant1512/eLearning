@@ -1,1 +1,53 @@
-<p>common-add works!</p>
+
+<div class="formSlide card">
+  <div class="bg-core-blue text-light font-weight-bold card-header">
+    Add {{name}}
+  </div>
+  <div class="card-body">
+    <form [formGroup]="addForm">
+      <div class="form-group">
+        <div  [hidden]=reviewStatus()>
+          <i class="charcoal">Select Class</i>
+          <select (change)="selectedClass($event.target.value)" class="form-control">
+            <option *ngFor="let class of classList" value="{{class.class_id}}">{{class.class_name}}</option>
+          </select>
+          <i class="charcoal">Select Subject</i>
+          <select (change)="selectedSubject($event.target.value)" class="form-control">
+            <!-- <option *ngFor="let subject of subjectsOfClass" value="{{subject.subject_id}}">{{subject.subject_name}}</option> -->
+          </select>
+        </div>
+        <i class="charcoal">{{name}} Name</i>
+        <input class="form-control" formControlName="itemName" type="text" />
+      </div>
+      <div>
+        <button
+          [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
+          class="br-10 b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
+          type="button"
+          (click)="add()"
+        >
+          <span *ngIf="loader; else button">
+            <span
+              class="mx-1 core-orange spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="mx-1 core-orange spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            <span
+              class="mx-1 core-orange spinner-grow spinner-grow-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          </span>
+          <ng-template #button>
+            <span>Add</span>
+          </ng-template>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -6,10 +6,10 @@ import {
   FetchSubject,
   FetchedSubject,
   FetchUnAssignedClass,
-  FetchedUnAssignedClass
+  FetchedUnAssignedClass,
 } from "./subject.actions";
 import { mergeMap, map } from "rxjs/operators";
-import { SubjectService } from './api/subject.service';
+import { SubjectService } from "./api/subject.service";
 
 @Injectable()
 export class SubjectEffects {
@@ -23,6 +23,21 @@ export class SubjectEffects {
     ofType(SubjectActions.ADD_SUBJECT),
     map((action) => {
       return this.subjectService.addSubject(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchSubject();
+        })
+      );
+    })
+  );
+
+  @Effect()
+  editSubject$ = this.action$.pipe(
+    ofType(SubjectActions.EDIT_SUBJECT),
+    map((action) => {
+      return this.subjectService.editSubjectName(action.payload);
     }),
     mergeMap((response) => {
       return response.pipe(
@@ -77,7 +92,7 @@ export class SubjectEffects {
       );
     })
   );
-    @Effect()
+  @Effect()
   fetchUnAssignedClasses$ = this.action$.pipe(
     ofType(SubjectActions.FETCH_UNASSIGNED_CLASSES),
     map((action) => {
@@ -91,5 +106,4 @@ export class SubjectEffects {
       );
     })
   );
-
 }

@@ -3,6 +3,7 @@ import { SubjectListType } from "./types/subject.type";
 
 export enum SubjectActions {
   ADD_SUBJECT = "[Subject] Add Subject",
+  EDIT_SUBJECT = "[Subject] Edit Subject",
   DELETE_SUBJECT = "[Subject] Delete Subject",
   ASSIGN_SUBJECT = "[Subject] Assign Subject",
   FETCH_UNASSIGNED_CLASSES = "[Subject] Fetch UnAssigned Classes",
@@ -13,6 +14,11 @@ export enum SubjectActions {
 
 export class AddSubject implements Action {
   readonly type = SubjectActions.ADD_SUBJECT;
+  constructor(public payload: any) {}
+}
+
+export class EditSubject implements Action {
+  readonly type = SubjectActions.EDIT_SUBJECT;
   constructor(public payload: any) {}
 }
 
@@ -45,6 +51,7 @@ export class FetchedUnAssignedClass implements Action {
 
 export type SubjectActionsUnion =
   | AddSubject
+  | EditSubject
   | DeleteSubject
   | AssignSubject
   | FetchSubject
