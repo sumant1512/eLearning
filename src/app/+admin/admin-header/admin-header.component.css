@@ -17,10 +17,6 @@ a {
 
 /* This is for header animation for slide to down when page is scrolled */
 
-header {
-  z-index: 1030;
-}
-
 header.sticky {
   animation: slide-down 0.7s;
 }
@@ -52,6 +48,7 @@ header.sticky {
   }
   .open {
     width: 30%;
+    z-index: 1040;
     transform: translateX(0);
   }
 }
@@ -70,6 +67,7 @@ header.sticky {
   }
   .open {
     width: 100%;
+    z-index: 1040;
     transform: translateX(0);
   }
 }
