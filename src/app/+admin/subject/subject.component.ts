@@ -10,8 +10,6 @@ import { SubjectListType } from "src/app/store/subject/types/subject.type";
   styleUrls: ["./subject.component.css"],
 })
 export class SubjectComponent implements OnInit {
-  loader: boolean;
-
   @ViewChild("slider", { static: false }) slider: ElementRef;
   isAddClassMobile = false;
   isAddClassFormOpen = false;
@@ -44,7 +42,6 @@ export class SubjectComponent implements OnInit {
     });
   }
   addSubject(name): void {
-    this.loader = true;
     this.store.dispatch(new SubjectActions.AddSubject({ subjectName: name }));
   }
   editSubject(editDetails): void {
@@ -62,9 +59,6 @@ export class SubjectComponent implements OnInit {
     if (confirm("Are You Sure You want to Delete the Subject?")) {
       this.store.dispatch(new SubjectActions.DeleteSubject(subject_id));
     }
-  }
-  login() {
-    this.loader = true;
   }
   sliderOpen() {
     this.slider.nativeElement.classList.toggle("show");

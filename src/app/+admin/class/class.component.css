@@ -1,11 +1,3 @@
-/* .test {
-  display: grid;
-} */
-
-.add-cls-btn {
-  width: 150px;
-}
-
 .form-slide {
   bottom: -700px;
   animation: formSlide 1s forwards;
