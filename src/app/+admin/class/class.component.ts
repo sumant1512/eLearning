@@ -10,21 +10,16 @@ import { ClassListType } from "src/app/store/class/types/class.type";
   styleUrls: ["./class.component.css"],
 })
 export class ClassComponent implements OnInit {
-
-  loader: boolean;
-
- 
-
   @ViewChild("slider", { static: false }) slider: ElementRef;
   isAddClassMobile = false;
   isAddClassFormOpen = false;
-  
+
   classList: ClassListType[];
-  
+
   openAddClassForm() {
     this.isAddClassFormOpen = true;
   }
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
     if (window.innerWidth < 1024) {
@@ -47,8 +42,7 @@ export class ClassComponent implements OnInit {
     });
   }
   addClass(name): void {
-    this.loader = true;
-    this.store.dispatch(new ClassActions.AddClass({className:name}));
+    this.store.dispatch(new ClassActions.AddClass({ className: name }));
   }
   removeClass(class_id): void {
     if (confirm("Are You Sure You want to Delete the Class?")) {
@@ -56,21 +50,16 @@ export class ClassComponent implements OnInit {
     }
   }
   editClass(editDetails): void {
-    console.log(editDetails.newName)
-      this.store.dispatch(
-        new ClassActions.EditClass({
-          classId:editDetails.id,
-          className: editDetails.newName
-        })
-      );
+    console.log(editDetails.newName);
+    this.store.dispatch(
+      new ClassActions.EditClass({
+        classId: editDetails.id,
+        className: editDetails.newName,
+      })
+    );
   }
 
-  login() {
-    this.loader = true;
-  }
   sliderOpen() {
     this.slider.nativeElement.classList.toggle("show");
   }
- 
-  
 }

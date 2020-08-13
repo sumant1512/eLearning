@@ -3,7 +3,7 @@
     <div class="col-12">
       <div class="text-center text-md-right">
         <button
-          class="my-3 add-cls-btn bg-core-orange br-10 b-core-orange btn text-light font-weight-bold py-3"
+          class="my-3 add-btn bg-core-orange br-10 b-core-orange btn text-light font-weight-bold py-3"
           type="button"
           (click)="openAddClassForm()"
         >
@@ -24,13 +24,6 @@
               name="Topic"
               (childEvent)="addTopic($event)"
             ></app-common-add-mobile>
-            <!-- <app-common-add-mobile
-              [classList]="classList"
-              [subjectsOfClass]="subjectList"
-              (subjectsOfClassChildEvent)="getSubjects($event)"
-              (childEvent)="addTopic($event)"
-              name="Topic"
-            ></app-common-add-mobile> -->
           </div>
         </div>
       </div>

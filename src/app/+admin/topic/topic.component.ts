@@ -14,7 +14,6 @@ import { FormGroup } from "@angular/forms";
 })
 export class TopicComponent implements OnInit {
   addTopicForm: FormGroup;
-  loader: boolean;
 
   @ViewChild("slider", { static: false }) slider: ElementRef;
   isAddClassMobile = false;
@@ -77,9 +76,6 @@ export class TopicComponent implements OnInit {
     console.log(classId);
   }
 
-  login() {
-    this.loader = true;
-  }
   sliderOpen() {
     this.slider.nativeElement.classList.toggle("show");
   }
