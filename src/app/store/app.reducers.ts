@@ -4,9 +4,12 @@ import { profileReducer } from "./auth/auth.reducers";
 import { classReducer } from "./class/class.reducers";
 import { studentReducer } from "./students/student.reducers";
 import { subjectReducer } from "./subject/subject.reducers";
+import { topicReducer } from "./topic/topic.reducers";
+
 export const appReducers: ActionReducerMap<AppState> = {
   profile: profileReducer,
   classList: classReducer,
   subjectList: subjectReducer,
   students: studentReducer,
+  topicList: topicReducer,
 };

@@ -1,7 +1,7 @@
 <div
   class="table-heading text-center text-lg-left bg-core-blue text-light font-weight-bold card-header"
 >
-  Current Classes
+  Current {{name}} List
 </div>
 <div class="classSlide card">
   <div>
@@ -9,23 +9,35 @@
       <table class="table table-hover table-bordered position-relative">
         <thead>
           <tr>
-            <th>Class Name</th>
+            <th>{{name}} Name</th>
             <th>Created on</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let class of viewList">
-            <td>{{ class.class_name }}</td>
-            <td>{{ class.created_on | date: "mediumDate" }}</td>
+          <tr *ngFor="let item of viewList">
+            <td>{{ item.class_name || item.subject_name || item.topic_name}}</td>
+            <td>{{ item.created_on | date: "mediumDate" }}</td>
             <td>
               <i
                 data-toggle="modal"
-                data-target="#modelId"
+                data-target="#editModelId"
                 class="fa fa-pencil mx-3"
+                (click)="selectedItem(item.class_name || item.subject_name || item.topic_name,item.class_id || item.subject_id || item.topic_id)"
+              ></i>
+              <i  
+                [hidden]=checkStatus()
+                (click)="selectSubject(item.subject_id)" 
+                data-toggle="modal"
+                data-target="#modelId"
+                class="fa fa-user-plus mx-3"
               ></i>
 
-              <i class="fa fa-trash" aria-hidden="true"></i>
+              <i
+              (click)="remove(item.class_id || item.subject_id || item.topic_id)" 
+              class="fa fa-trash" 
+              aria-hidden="true"
+              ></i>
             </td>
           </tr>
         </tbody>
@@ -34,9 +46,11 @@
   </div>
 </div>
 
-<!-- <div
+<!-- Edit Modal -->
+
+<div
   class="modal fade"
-  id="modelId"
+  id="editModelId"
   tabindex="-1"
   role="dialog"
   aria-labelledby="modelTitleId"
@@ -45,7 +59,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Edit Class</h5>
+        <h5 class="modal-title">Edit {{name}}</h5>
         <button
           type="button"
           class="close"
@@ -56,14 +70,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="editClassForm">
+        <form [formGroup]="editForm">
           <div class="form-group">
-            <i class="charcoal">Class Name</i>
+            <i class="charcoal">{{name}} Name</i>
             <input
               class="form-control"
-              formControlName="className"
+              formControlName="newitemName"
               type="text"
-              value="{{ oldClassName }}"
+              value="{{ oldName }}"
             />
           </div>
         </form>
@@ -72,10 +86,55 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button type="button" (click)="editClass()" class="btn btn-primary">
+        <button type="button" (click)="edit()" class="btn btn-primary">
           Save
         </button>
       </div>
     </div>
   </div>
-</div> -->
+</div>
+
+
+<!-- Class Assign Modal -->
+
+<div
+class="modal fade"
+id="modelId"
+tabindex="-1"
+role="dialog"
+aria-labelledby="modelTitleId"
+aria-hidden="true"
+>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Select Class</h5>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="group-gap">
+            <div class="d-block my-3">
+               <div class="mb-3">
+                  <select class="custom-select" id="selectclass_id" >
+                     <!-- <option *ngFor="let class of classes" [value]="class.class_id" >{{class.class_name}}</option> -->
+                  </select>
+               </div>
+            </div>
+         </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">
+        Close
+      </button>
+      <button type="button" class="btn btn-primary" >Save</button>
+    </div>
+  </div>
+</div>
+</div>

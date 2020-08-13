@@ -1,0 +1,64 @@
+.container {
+  animation: container 0.5s;
+}
+@keyframes container {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+th {
+  background-color: #0033a0;
+  color: white;
+  border: 1px solid #d5dae2;
+  position: sticky;
+  top: 0;
+  box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+}
+tr {
+  text-align: center;
+}
+
+.container {
+  box-shadow: 16px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .table-heading {
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+  }
+}
+
+@media only screen and (min-width: 30px) and (max-width: 767px) {
+  .table-heading {
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+  }
+}
