@@ -9,7 +9,7 @@ export class ViewSubjectComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
 
 }

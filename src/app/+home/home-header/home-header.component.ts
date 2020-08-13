@@ -5,6 +5,7 @@ import {
   EventEmitter,
   ViewChild,
   ElementRef,
+  HostListener,
 } from "@angular/core";
 import { Router } from "@angular/router";
 
@@ -13,21 +14,23 @@ import { Router } from "@angular/router";
   templateUrl: "./home-header.component.html",
   styleUrls: ["./home-header.component.css"],
 })
-export class HomeHeaderComponent implements OnInit {
-  @ViewChild("homeHeader", { static: false }) homeHeader: ElementRef;
+export class HomeHeaderComponent {
+  @ViewChild("header", { static: false }) header: ElementRef;
   @Output() scrollToLogin = new EventEmitter<string>();
   constructor(private router: Router) {}
 
-  ngOnInit() {
-    window.addEventListener("scroll", function () {
-      let menuArea = document.getElementById("men");
-
-      if (window.pageYOffset > 350) {
-        //menuArea.classList.add("cus-nav");
-      } else {
-       // menuArea.classList.remove("cus-nav");
-      }
-    });
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    const number =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+    if (number > 100) {
+      this.header.nativeElement.classList.add("cus-nav");
+    } else {
+      this.header.nativeElement.classList.remove("cus-nav");
+    }
   }
 
   navigateToRegistration() {

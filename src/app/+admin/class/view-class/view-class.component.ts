@@ -40,7 +40,7 @@ export class ViewClassComponent implements OnInit {
   editClass(): void {
     this.store.dispatch(
       new ClassActions.EditClass({
-        class_id: this.selectClassId,
+        classId: this.selectClassId,
         className: this.editClassForm.value.className,
       })
     );

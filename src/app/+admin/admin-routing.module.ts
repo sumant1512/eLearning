@@ -4,8 +4,6 @@ import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AddStudentComponent } from "./student/add-student.component";
 import { AddTeacherComponent } from "./teacher/add-teacher.component";
-import { AddClassComponent } from "./class/add-class/add-class.component";
-import { AddSubjectComponent } from "./subject/add-subject.component";
 import { TopicComponent } from "./topic/topic.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
@@ -14,6 +12,7 @@ import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-pa
 import { PrivacyPolicyComponent } from "../shared/privacy-policy/privacy-policy.component";
 import { ClassComponent } from "./class/class.component";
 import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
+import { SubjectComponent } from "./subject/subject.component";
 const routes: Routes = [
   {
     path: "",
@@ -24,7 +23,7 @@ const routes: Routes = [
       { path: ProfileRoutesEnum.STUDENT, component: AddStudentComponent },
       { path: ProfileRoutesEnum.TEACHER, component: AddTeacherComponent },
       { path: ProfileRoutesEnum.CLASS, component: ClassComponent },
-      { path: ProfileRoutesEnum.SUBJECT, component: AddSubjectComponent },
+      { path: ProfileRoutesEnum.SUBJECT, component: SubjectComponent },
       { path: ProfileRoutesEnum.TOPIC, component: TopicComponent },
       { path: ProfileRoutesEnum.SYLLABUS, component: ViewSyllabusComponent },
       {
