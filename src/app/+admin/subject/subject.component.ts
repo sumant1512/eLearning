@@ -55,7 +55,7 @@ export class SubjectComponent implements OnInit {
 
       // simulte a swipe -> less than 500 ms and more than 60 px
       if (deltaTime < 500) {
-        if (Math.abs(deltaY) > 60) {
+        if (Math.abs(deltaY) > 80) {
           // delta y is at least 60 pixels
           if (deltaY > 0) {
             this.slider.nativeElement.classList.remove("show");

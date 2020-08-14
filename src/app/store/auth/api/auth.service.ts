@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(userInfo): Observable<any> {
-    return this.http.post(HOST + " login", userInfo, {
+    return this.http.post(HOST + "login", userInfo, {
       observe: "response",
       headers: new HttpHeaders().set("Content-Type", "application/json"),
     });
@@ -25,7 +25,7 @@ export class AuthService {
       "Content-Type": "application/json",
       Authorization: "Bearer " + authToken,
     });
-    return this.http.get<ProfileType[]>(HOST + " getProfile", {
+    return this.http.get<ProfileType[]>(HOST + "getProfile", {
       headers: reqHeader,
     });
   }
