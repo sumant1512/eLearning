@@ -23,6 +23,7 @@
             <app-common-add-mobile
               name="Topic"
               (childEvent)="addTopic($event)"
+              (subjectsOfClassChildEvent)="getSubjects($event)"
             ></app-common-add-mobile>
           </div>
         </div>
@@ -31,7 +32,6 @@
     <ng-template #desktop>
       <div *ngIf="isAddClassFormOpen" class="form-slide col-lg-4">
         <app-common-add
-          [classList]="classList"
           [subjectsOfClass]="subjectList"
           (subjectsOfClassChildEvent)="getSubjects($event)"
           (childEvent)="addTopic($event)"

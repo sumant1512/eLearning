@@ -5,6 +5,30 @@
   <div class="card-body">
     <form [formGroup]="addForm">
       <div class="form-group">
+        <div [hidden]="reviewStatus()">
+          <i class="charcoal">Select Class</i>
+          <select
+            (change)="selectedClass($event.target.value)"
+            class="form-control"
+          >
+            <option
+              *ngFor="let class of classList"
+              value="{{ class.class_id }}"
+              >{{ class.class_name }}</option
+            >
+          </select>
+          <i class="charcoal">Select Subject</i>
+          <select
+            (change)="selectedSubject($event.target.value)"
+            class="form-control"
+          >
+            <option
+              *ngFor="let subject of subjectList"
+              value="{{ subject.subject_id }}"
+              >{{ subject.subject_name }}</option
+            >
+          </select>
+        </div>
         <i class="charcoal">{{ name }} Name</i>
         <input class="form-control" formControlName="itemName" type="text" />
       </div>

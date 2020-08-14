@@ -1,40 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import * as ClassActions from "../../store/class/class.actions";
+import * as ClassWithSubjectActions from "../../store/class-with-subject/class-with-subject.actions";
+import { AppState } from "src/app/store/app.state";
+import { ClassWithSubjectListType } from "src/app/store/class-with-subject/types/class-with-subject.type";
+import { ClassListType } from "src/app/store/class/types/class.type";
 
 @Component({
-  selector: 'app-view-syllabus',
-  templateUrl: './view-syllabus.component.html',
-  styleUrls: ['./view-syllabus.component.css']
+  selector: "app-view-syllabus",
+  templateUrl: "./view-syllabus.component.html",
+  styleUrls: ["./view-syllabus.component.css"],
 })
 export class ViewSyllabusComponent implements OnInit {
-
-  constructor() {}
+  classWithSubjectList: ClassWithSubjectListType[];
+  classList: ClassListType[];
+  constructor(private store: Store<AppState>) {}
   ngOnInit(): void {
+    this.fetchClassList();
+    this.fetchClassWithSubject();
     this.selectClass(1);
+  }
+
+  fetchClassList(): void {
+    this.store.select("classList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.classList = response;
+      } else {
+        this.store.dispatch(new ClassActions.FetchClass());
+      }
+    });
+  }
+
+  fetchClassWithSubject() {
+    this.store.select("classWithSubjectList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.classWithSubjectList = response;
+      } else {
+        this.store.dispatch(
+          new ClassWithSubjectActions.FetchClassWithSubject()
+        );
+      }
+    });
   }
   selectedSubjects;
   classnamewithid;
   selectClass(selectedClass) {
+    selectedClass = 5;
     this.classnamewithid = this.classes.filter(
       (topic) => topic.classid === selectedClass
-    );     // to get the class name and class ID of selected class
-
+    ); // to get the class name and class ID of selected class
 
     this.selectedSubjects = this.subjectWithTopics.filter(
       (topic) => topic.classid === selectedClass
-    );     // to filter out class with same id
-
+    ); // to filter out class with same id
 
     const groups = this.selectedSubjects.reduce((acc, cur) => {
       (acc[cur.subjectName] = acc[cur.subjectName] || []).push(cur.topicName);
       return acc;
     }, {}); // to group the array according to subject
 
-
     this.selectedSubjects = Object.keys(groups).map((key) => ({
       SubjectName: key,
       topics: groups[key],
     }));
-
   }
   classes = [
     { classid: 1, classname: "class 1" },
@@ -201,5 +229,4 @@ export class ViewSyllabusComponent implements OnInit {
       topicName: "topic1 of Chemistry class id 10",
     },
   ];
-
 }
