@@ -70,33 +70,25 @@
                 </div>
               </div>
             </div>
-            <button
-              [ngClass]="loader ? 'bg-light' : 'bg-light-blue'"
-              class="br-10 b-light-blue btn btn-block text-light font-weight-bold py-3 mb-3"
-              (click)="login()"
-              type="button"
-            >
-              <span *ngIf="loader; else button">
-                <span
-                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                <span
-                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                <span
-                  class="mx-1 dark-blue spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              </span>
-              <ng-template #button>
-                <span>Login</span>
-              </ng-template>
-            </button>
+            <div class="text-center">
+              <button
+                [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
+                class="add-btn br-10 b-light-blue btn text-light font-weight-bold py-3 mb-3"
+                (click)="login()"
+                type="button"
+              >
+                <span *ngIf="loader; else button">
+                  <div class="loading pt-1">
+                    <div class="mt-2 mx-2"></div>
+                    <div class="mt-2 mx-2"></div>
+                    <div class="mt-2 mx-2"></div>
+                  </div>
+                </span>
+                <ng-template #button>
+                  <span>Login</span>
+                </ng-template>
+              </button>
+            </div>
           </form>
           <div class="text-center text-md-left">
             <a routerLink="/reset-password" class="sky-blue f6"
