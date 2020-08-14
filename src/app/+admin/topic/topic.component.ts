@@ -40,13 +40,13 @@ export class TopicComponent implements OnInit {
   }
 
   fetchTopics(): void {
-    // this.store.select("topicList").subscribe((response) => {
-    //   if (Object.keys(response).length) {
-    //     this.topicList = response;
-    //   } else {
-    this.store.dispatch(new TopicActions.FetchTopic());
-    //   }
-    // });
+    this.store.select("topicList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.topicList = response;
+      } else {
+        this.store.dispatch(new TopicActions.FetchTopic());
+      }
+    });
 
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
@@ -62,7 +62,7 @@ export class TopicComponent implements OnInit {
   editTopic(editDetails): void {
     this.store.dispatch(
       new TopicActions.EditTopic({
-        topictId: editDetails.id,
+        topicId: editDetails.id,
         topicName: editDetails.newName,
       })
     );
