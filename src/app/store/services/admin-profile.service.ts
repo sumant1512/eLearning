@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthService } from "../auth/api/auth.service";
-import { localHost } from "config.constants";
+import { HOST } from "config.constants";
 
 @Injectable({
   providedIn: "root",
@@ -22,13 +22,13 @@ export class AdminProfileService {
       "Content-Type": "application/json",
       Authorization: "Bearer " + this.token,
     });
-    return this.http.get<any[]>(localHost + "/getProfile", {
+    return this.http.get<any[]>(HOST + " /getProfile", {
       headers: reqHeader,
     });
   }
 
   startSession() {
-    return this.http.get(localHost + "startSession", {
+    return this.http.get(HOST + " startSession", {
       observe: "response",
       headers: this.reqHeader,
     });
@@ -37,11 +37,11 @@ export class AdminProfileService {
   // common service for assigning to class
   saveSchoolImage(image) {
     console.log("test");
-    return this.http.post(localHost + "/saveSchoolImage", image);
+    return this.http.post(HOST + " /saveSchoolImage", image);
   }
 
   saveCoverImage(cover) {
     console.log("test");
-    return this.http.post(localHost + "/saveCoverImage", cover);
+    return this.http.post(HOST + " /saveCoverImage", cover);
   }
 }

@@ -2,10 +2,13 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as ClassActions from "../../store/class/class.actions";
-import { ClassListType } from "src/app/store/class/types/class.type";
 import * as TopicActions from "../../store/topic/topic.actions";
+import * as ClassWithSubjectActions from "../../store/class-with-subject/class-with-subject.actions";
+import { ClassListType } from "src/app/store/class/types/class.type";
 import { TopicListType } from "src/app/store/topic/types/topic.type";
 import { FormGroup } from "@angular/forms";
+import { SubjectListType } from "src/app/store/subject/types/subject.type";
+import { ClassWithSubjectListType } from "src/app/store/class-with-subject/types/class-with-subject.type";
 
 @Component({
   selector: "app-topic",
@@ -21,7 +24,8 @@ export class TopicComponent implements OnInit {
 
   topicList: TopicListType[];
   classList: ClassListType[];
-  subjectList;
+  subjectList: SubjectListType[];
+  classWithSubjectList: ClassWithSubjectListType[];
 
   openAddClassForm() {
     this.isAddClassFormOpen = true;
@@ -37,6 +41,8 @@ export class TopicComponent implements OnInit {
       this.isAddClassFormOpen = false;
     };
     this.fetchTopics();
+    this.fetchClassList();
+    this.fetchClassWithSubject();
   }
 
   fetchTopics(): void {
@@ -47,7 +53,9 @@ export class TopicComponent implements OnInit {
         this.store.dispatch(new TopicActions.FetchTopic());
       }
     });
+  }
 
+  fetchClassList(): void {
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.classList = response;
@@ -56,6 +64,19 @@ export class TopicComponent implements OnInit {
       }
     });
   }
+
+  fetchClassWithSubject() {
+    this.store.select("classWithSubjectList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.classWithSubjectList = response;
+      } else {
+        this.store.dispatch(
+          new ClassWithSubjectActions.FetchClassWithSubject()
+        );
+      }
+    });
+  }
+
   addTopic(topic): void {
     this.store.dispatch(new TopicActions.AddTopic(topic));
   }

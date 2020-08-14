@@ -34,6 +34,21 @@ export class SubjectEffects {
   );
 
   @Effect()
+  fetchSubjects$ = this.action$.pipe(
+    ofType(SubjectActions.FETCH_SUBJECT),
+    map(() => {
+      return this.subjectService.getSubjects();
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map((res) => {
+          return new FetchedSubject(res);
+        })
+      );
+    })
+  );
+
+  @Effect()
   editSubject$ = this.action$.pipe(
     ofType(SubjectActions.EDIT_SUBJECT),
     map((action) => {
@@ -78,20 +93,6 @@ export class SubjectEffects {
     })
   );
 
-  @Effect()
-  fetchSubjects$ = this.action$.pipe(
-    ofType(SubjectActions.FETCH_SUBJECT),
-    map(() => {
-      return this.subjectService.getSubjects();
-    }),
-    mergeMap((response) => {
-      return response.pipe(
-        map((res) => {
-          return new FetchedSubject(res);
-        })
-      );
-    })
-  );
   @Effect()
   fetchUnAssignedClasses$ = this.action$.pipe(
     ofType(SubjectActions.FETCH_UNASSIGNED_CLASSES),

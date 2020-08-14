@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthService } from "../auth/api/auth.service";
-import { localHost } from "config.constants";
+import { HOST } from "config.constants";
 
 @Injectable({
   providedIn: "root",

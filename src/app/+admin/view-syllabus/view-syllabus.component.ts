@@ -20,16 +20,16 @@ export class ViewSyllabusComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
   ngOnInit(): void {
     this.fetchClassList();
+    this.fetchClassWithSubject();
+    this.fetchTopicWithClassSubject();
   }
 
   fetchClassList(): void {
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.classList = response;
-        this.fetchClassWithSubject();
       } else {
         this.store.dispatch(new ClassActions.FetchClass());
-        this.fetchClassWithSubject();
       }
     });
   }
@@ -38,12 +38,10 @@ export class ViewSyllabusComponent implements OnInit {
     this.store.select("classWithSubjectList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.classWithSubjectList = response;
-        this.fetchTopicWithClassSubject();
       } else {
         this.store.dispatch(
           new ClassWithSubjectActions.FetchClassWithSubject()
         );
-        this.fetchTopicWithClassSubject();
       }
     });
   }
