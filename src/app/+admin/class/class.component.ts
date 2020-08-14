@@ -59,23 +59,13 @@ export class ClassComponent implements OnInit {
         if (Math.abs(deltaY) > 60) {
           // delta y is at least 60 pixels
           if (deltaY > 0) {
-            this.doSwipeDown(event);
+            this.slider.nativeElement.classList.add("show");
           } else {
-            this.doSwipeUp(event);
+            this.slider.nativeElement.classList.remove("show");
           }
         }
       }
     }
-  }
-
-  doSwipeUp(event) {
-    alert("hi");
-    this.sliderOpen();
-  }
-
-  doSwipeDown(event) {
-    alert("down");
-    this.sliderOpen();
   }
 
   ngOnInit() {
