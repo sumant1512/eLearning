@@ -4,15 +4,15 @@ import { addForm } from "../common.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as ClassActions from "../../store/class/class.actions";
-import { SubjectService } from "src/app/store/subject/api/subject.service";
 import { TopicService } from "src/app/store/topic/api/topic.service";
+import { ClassListType } from "src/app/store/class/types/class.type";
 @Component({
   selector: "app-common-add",
   templateUrl: "./common-add.component.html",
   styleUrls: ["./common-add.component.css"],
 })
 export class CommonAddComponent implements OnInit {
-  @Input() classList: any;
+  classList: ClassListType[];
   @Input() subjectsOfClass: any;
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
