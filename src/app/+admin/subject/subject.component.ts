@@ -58,9 +58,9 @@ export class SubjectComponent implements OnInit {
         if (Math.abs(deltaY) > 60) {
           // delta y is at least 60 pixels
           if (deltaY > 0) {
-            this.slider.nativeElement.classList.add("show");
-          } else {
             this.slider.nativeElement.classList.remove("show");
+          } else {
+            this.slider.nativeElement.classList.add("show");
           }
         }
       }
