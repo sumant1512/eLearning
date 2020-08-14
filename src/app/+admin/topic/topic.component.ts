@@ -57,7 +57,7 @@ export class TopicComponent implements OnInit {
     });
   }
   addTopic(topic): void {
-    this.store.dispatch(new TopicActions.AddTopic({ topicName: topic }));
+    this.store.dispatch(new TopicActions.AddTopic(topic));
   }
   editTopic(editDetails): void {
     this.store.dispatch(

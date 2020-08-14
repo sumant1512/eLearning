@@ -1,6 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/store/app.state";
+import * as ClassActions from "../../store/class/class.actions";
+import { SubjectService } from "src/app/store/subject/api/subject.service";
+import { TopicService } from "src/app/store/topic/api/topic.service";
 @Component({
   selector: "app-common-add",
   templateUrl: "./common-add.component.html",
@@ -16,13 +21,36 @@ export class CommonAddComponent implements OnInit {
   loader = false;
   selectedClassId: number;
   selectedSubjectId: number;
+  subjectList: any;
 
-  constructor() {
+  constructor(
+    private store: Store<AppState>,
+    private topicService: TopicService
+  ) {
     this.addForm = addForm();
   }
 
   ngOnInit() {
     this.reviewStatus();
+    this.fetchClassList();
+  }
+
+  fetchClassList(): void {
+    this.store.select("classList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.classList = response;
+      } else {
+        this.store.dispatch(new ClassActions.FetchClass());
+      }
+    });
+  }
+
+  getClassForSubject(classId) {
+    this.topicService.getSubjectsOfClass({ classId }).subscribe((response) => {
+      if (response.length) {
+        this.subjectList = response;
+      }
+    });
   }
   reviewStatus(): boolean {
     if ("Topic" === this.name) return false;
@@ -32,7 +60,7 @@ export class CommonAddComponent implements OnInit {
     this.loader = true;
     if ("Topic" === this.name)
       this.childEvent.emit({
-        topicId: this.addForm.value.itemName,
+        topicName: this.addForm.value.itemName,
         classId: this.selectedClassId,
         subjectId: this.selectedSubjectId,
       });
@@ -41,6 +69,7 @@ export class CommonAddComponent implements OnInit {
   selectedClass(id) {
     this.selectedClassId = id;
     this.subjectsOfClassChildEvent.emit(id);
+    this.getClassForSubject(id);
   }
   selectedSubject(id) {
     this.selectedSubjectId = id;

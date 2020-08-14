@@ -22,7 +22,11 @@
             (change)="selectedSubject($event.target.value)"
             class="form-control"
           >
-            <!-- <option *ngFor="let subject of subjectsOfClass" value="{{subject.subject_id}}">{{subject.subject_name}}</option> -->
+            <option
+              *ngFor="let subject of subjectList"
+              value="{{ subject.subject_id }}"
+              >{{ subject.subject_name }}</option
+            >
           </select>
         </div>
         <i class="charcoal">{{ name }} Name</i>
