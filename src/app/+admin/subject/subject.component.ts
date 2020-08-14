@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { AppState } from "src/app/store/app.state";
-import * as SubjectActions from "../../store/subject/subject.actions";
 import { Store } from "@ngrx/store";
+import * as SubjectActions from "../../store/subject/subject.actions";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
 
 @Component({

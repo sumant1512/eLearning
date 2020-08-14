@@ -1,6 +1,5 @@
 import { SubjectActions, SubjectActionsUnion } from "./subject.actions";
 import { SubjectListType } from "./types/subject.type";
-import { Observable } from "rxjs";
 
 const subjectList: SubjectListType[] = [];
 
