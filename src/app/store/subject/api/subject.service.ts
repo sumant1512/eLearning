@@ -11,7 +11,7 @@ export class SubjectService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   addSubject(subjectDetails) {
-    return this.http.post<any>(HOST + " /addSubject", subjectDetails, {
+    return this.http.post<any>(HOST + "addSubject", subjectDetails, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -20,7 +20,7 @@ export class SubjectService {
   }
 
   getSubjects(): Observable<any[]> {
-    return this.http.get<any[]>(HOST + " /getSubjects", {
+    return this.http.get<any[]>(HOST + "getSubjects", {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -29,7 +29,7 @@ export class SubjectService {
   }
 
   editSubjectName(subjectDetails) {
-    return this.http.post<any>(HOST + " editSubjectName", subjectDetails, {
+    return this.http.post<any>(HOST + "editSubjectName", subjectDetails, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -38,19 +38,16 @@ export class SubjectService {
   }
 
   removeSubject(id: number) {
-    return this.http.delete<any>(
-      `http://localhost:3000/` + `removeSubject/${id}`,
-      {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-        }),
-      }
-    );
+    return this.http.delete<any>(HOST + `removeSubject/${id}`, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
   }
 
   assignSubjectToClass(details) {
-    return this.http.post<any>(HOST + " /assignSubjectToClass", details, {
+    return this.http.post<any>(HOST + "assignSubjectToClass", details, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -60,7 +57,7 @@ export class SubjectService {
 
   getClassesOfUnassignedSubjects(subject_id) {
     return this.http.post<any>(
-      HOST + " /getClassesOfUnassignedSubjects",
+      HOST + "getClassesOfUnassignedSubjects",
       subject_id,
       {
         headers: new HttpHeaders({

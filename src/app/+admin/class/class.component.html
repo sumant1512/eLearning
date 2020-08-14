@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div *ngIf="!isAddClassMobile" class="row">
+  <div *ngIf="!isMobile" class="row">
     <div class="col-12">
       <div class="text-center text-md-right">
         <button
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="row">
-    <div *ngIf="isAddClassMobile; else desktop" class="col-12 my-3">
+    <div *ngIf="isMobile; else desktop" class="col-12 my-3">
       <div class="bg-light fixed-bottom w-100 slider" #slider>
         <div class="d-flex justify-content-center">
           <div class="col-12 p-2">
@@ -36,11 +36,7 @@
         ></app-common-add>
       </div>
     </ng-template>
-    <div
-      [ngClass]="
-        isAddClassMobile || isAddClassFormOpen ? 'col-lg-8' : 'col-lg-12'
-      "
-    >
+    <div [ngClass]="isMobile || isAddClassFormOpen ? 'col-lg-8' : 'col-lg-12'">
       <app-common-view
         [viewList]="classList"
         name="Class"

@@ -52,10 +52,12 @@ export class CommonAddComponent implements OnInit {
       }
     });
   }
+
   reviewStatus(): boolean {
     if ("Topic" === this.name) return false;
     return true;
   }
+
   add() {
     this.loader = true;
     if ("Topic" === this.name)
@@ -66,11 +68,13 @@ export class CommonAddComponent implements OnInit {
       });
     else this.childEvent.emit(this.addForm.value.itemName);
   }
+
   selectedClass(id) {
     this.selectedClassId = id;
     this.subjectsOfClassChildEvent.emit(id);
     this.getClassForSubject(id);
   }
+
   selectedSubject(id) {
     this.selectedSubjectId = id;
   }

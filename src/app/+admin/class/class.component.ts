@@ -1,8 +1,15 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  HostListener,
+} from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as ClassActions from "../../store/class/class.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
+import { WindowServiceService } from "src/app/store/services/window-service.service";
 
 @Component({
   selector: "app-class",
@@ -11,25 +18,32 @@ import { ClassListType } from "src/app/store/class/types/class.type";
 })
 export class ClassComponent implements OnInit {
   @ViewChild("slider", { static: false }) slider: ElementRef;
-  isAddClassMobile = false;
-  isAddClassFormOpen = false;
-
   classList: ClassListType[];
+  isMobile = false;
+  isTablet;
+  isAddClassFormOpen;
+
+  constructor(
+    private store: Store<AppState>,
+    private windowService: WindowServiceService
+  ) {}
+
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    if (event.target.innerWidth < 991) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+  }
+
+  ngOnInit() {
+    this.isMobile = window.innerWidth < 991 ? true : false;
+    this.fetchClassList();
+  }
 
   openAddClassForm() {
     this.isAddClassFormOpen = true;
-  }
-  constructor(private store: Store<AppState>) {}
-
-  ngOnInit() {
-    if (window.innerWidth < 1024) {
-      this.isAddClassMobile = true;
-    }
-    window.onresize = () => {
-      this.isAddClassMobile = window.innerWidth < 1024;
-      this.isAddClassFormOpen = false;
-    };
-    this.fetchClassList();
   }
 
   fetchClassList(): void {
@@ -41,20 +55,25 @@ export class ClassComponent implements OnInit {
       }
     });
   }
+
   addClass(name): void {
     this.store.dispatch(new ClassActions.AddClass({ className: name }));
+    setTimeout(() => {
+      this.sliderOpen();
+    }, 1000);
   }
+
   removeClass(class_id): void {
     if (confirm("Are You Sure You want to Delete the Class?")) {
       this.store.dispatch(new ClassActions.DeleteClass(class_id));
     }
   }
+
   editClass(editDetails): void {
-    console.log(editDetails.newName);
     this.store.dispatch(
       new ClassActions.EditClass({
         classId: editDetails.id,
-        className: editDetails.newName,
+        className: editDetails.updatedName,
       })
     );
   }
