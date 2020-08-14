@@ -37,6 +37,47 @@ export class ClassComponent implements OnInit {
     }
   }
 
+  defaultTouch = { x: 0, y: 0, time: 0 };
+
+  @HostListener("touchstart", ["$event"])
+  //@HostListener('touchmove', ['$event'])
+  @HostListener("touchend", ["$event"])
+  @HostListener("touchcancel", ["$event"])
+  handleTouch(event) {
+    let touch = event.touches[0] || event.changedTouches[0];
+
+    // check the events
+    if (event.type === "touchstart") {
+      this.defaultTouch.y = touch.pageY;
+      this.defaultTouch.time = event.timeStamp;
+    } else if (event.type === "touchend") {
+      let deltaY = touch.pageY - this.defaultTouch.y;
+      let deltaTime = event.timeStamp - this.defaultTouch.time;
+
+      // simulte a swipe -> less than 500 ms and more than 60 px
+      if (deltaTime < 500) {
+        if (Math.abs(deltaY) > 60) {
+          // delta y is at least 60 pixels
+          if (deltaY > 0) {
+            this.doSwipeDown(event);
+          } else {
+            this.doSwipeUp(event);
+          }
+        }
+      }
+    }
+  }
+
+  doSwipeUp(event) {
+    alert("hi");
+    this.sliderOpen();
+  }
+
+  doSwipeDown(event) {
+    alert("down");
+    this.sliderOpen();
+  }
+
   ngOnInit() {
     this.isMobile = window.innerWidth < 991 ? true : false;
     this.fetchClassList();
