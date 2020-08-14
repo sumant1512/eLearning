@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
 import { ProfileType } from "../types/profile.type";
-import { localHost } from "config.constants";
+import { HOST } from "config.constants";
 
 @Injectable({
   providedIn: "root",
@@ -13,15 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  //Header Button Change to Logout
-  private msgsrc = new Subject<string>();
-  loginmsg$ = this.msgsrc.asObservable();
-  sendmsg(message: string) {
-    this.msgsrc.next(message);
-  }
-
-  public login(userInfo): Observable<any> {
-    return this.http.post(localHost + "login", userInfo, {
+  login(userInfo): Observable<any> {
+    return this.http.post(HOST + " login", userInfo, {
       observe: "response",
       headers: new HttpHeaders().set("Content-Type", "application/json"),
     });
@@ -32,7 +25,7 @@ export class AuthService {
       "Content-Type": "application/json",
       Authorization: "Bearer " + authToken,
     });
-    return this.http.get<ProfileType[]>(localHost + "getProfile", {
+    return this.http.get<ProfileType[]>(HOST + " getProfile", {
       headers: reqHeader,
     });
   }
@@ -45,7 +38,6 @@ export class AuthService {
 
   // clear session for user
   private logoutUser(): void {
-    this.user_type = null;
     localStorage.removeItem("AUTH_TOKEN");
     localStorage.removeItem("user_type");
   }
@@ -55,15 +47,17 @@ export class AuthService {
     return localStorage.getItem("AUTH_TOKEN");
   }
 
+  // to check if token is available
   public isLoggedIn(): boolean {
     const authToken = this.getToken();
     const status = authToken ? true : false;
     return status;
   }
 
+  // to navigate to home is user is not logged in
   canActivate(): boolean {
     if (!this.isLoggedIn()) {
-      this.router.navigate(["login"]);
+      this.router.navigate(["home"]);
       return false;
     }
     return true;

@@ -1,11 +1,20 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  HostListener,
+} from "@angular/core";
+import { FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as ClassActions from "../../store/class/class.actions";
-import { ClassListType } from "src/app/store/class/types/class.type";
 import * as TopicActions from "../../store/topic/topic.actions";
+import * as ClassWithSubjectActions from "../../store/class-with-subject/class-with-subject.actions";
+import { ClassListType } from "src/app/store/class/types/class.type";
 import { TopicListType } from "src/app/store/topic/types/topic.type";
-import { FormGroup } from "@angular/forms";
+import { SubjectListType } from "src/app/store/subject/types/subject.type";
+import { ClassWithSubjectListType } from "src/app/store/class-with-subject/types/class-with-subject.type";
 
 @Component({
   selector: "app-topic",
@@ -13,30 +22,36 @@ import { FormGroup } from "@angular/forms";
   styleUrls: ["./topic.component.css"],
 })
 export class TopicComponent implements OnInit {
-  addTopicForm: FormGroup;
-
   @ViewChild("slider", { static: false }) slider: ElementRef;
-  isAddClassMobile = false;
-  isAddClassFormOpen = false;
-
+  addTopicForm: FormGroup;
   topicList: TopicListType[];
   classList: ClassListType[];
-  subjectList;
+  subjectList: SubjectListType[];
+  isMobile = false;
+  isAddClassFormOpen = false;
+
+  classWithSubjectList: ClassWithSubjectListType[];
+
+  constructor(private store: Store<AppState>) {}
+
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    if (event.target.innerWidth < 991) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+  }
+
+  ngOnInit() {
+    this.isMobile = window.innerWidth < 991 ? true : false;
+    this.fetchTopics();
+    this.fetchClassList();
+    this.fetchClassWithSubject();
+  }
 
   openAddClassForm() {
     this.isAddClassFormOpen = true;
-  }
-  constructor(private store: Store<AppState>) {}
-
-  ngOnInit() {
-    if (window.innerWidth < 1024) {
-      this.isAddClassMobile = true;
-    }
-    window.onresize = () => {
-      this.isAddClassMobile = window.innerWidth < 1024;
-      this.isAddClassFormOpen = false;
-    };
-    this.fetchTopics();
   }
 
   fetchTopics(): void {
@@ -47,7 +62,9 @@ export class TopicComponent implements OnInit {
         this.store.dispatch(new TopicActions.FetchTopic());
       }
     });
+  }
 
+  fetchClassList(): void {
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.classList = response;
@@ -56,6 +73,19 @@ export class TopicComponent implements OnInit {
       }
     });
   }
+
+  fetchClassWithSubject() {
+    this.store.select("classWithSubjectList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.classWithSubjectList = response;
+      } else {
+        this.store.dispatch(
+          new ClassWithSubjectActions.FetchClassWithSubject()
+        );
+      }
+    });
+  }
+
   addTopic(topic): void {
     this.store.dispatch(new TopicActions.AddTopic(topic));
   }
@@ -63,7 +93,7 @@ export class TopicComponent implements OnInit {
     this.store.dispatch(
       new TopicActions.EditTopic({
         topicId: editDetails.id,
-        topicName: editDetails.newName,
+        topicName: editDetails.updatedName,
       })
     );
   }

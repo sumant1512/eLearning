@@ -86,7 +86,6 @@
               class="form-control"
               formControlName="newitemName"
               type="text"
-              value="{{ oldName }}"
             />
           </div>
         </form>
@@ -95,7 +94,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button type="button" (click)="edit()" class="btn btn-primary">
+        <button type="button" (click)="editItem()" class="btn btn-primary">
           Save
         </button>
       </div>

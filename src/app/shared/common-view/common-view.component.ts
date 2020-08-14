@@ -1,11 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormGroup } from "@angular/forms";
+import { SubjectService } from "src/app/store/subject/api/subject.service";
 import { editForm, assignSubjectForm } from "../common.utils";
 import { ClassListType } from "src/app/store/class/types/class.type";
-import { Store } from "@ngrx/store";
-import { AppState } from "src/app/store/app.state";
-import * as ClassActions from "../../store/class/class.actions";
-import { SubjectService } from "src/app/store/subject/api/subject.service";
+import { SubjectListType } from "src/app/store/subject/types/subject.type";
+import { TopicListType } from "src/app/store/topic/types/topic.type";
 
 @Component({
   selector: "app-common-view",
@@ -15,39 +14,41 @@ import { SubjectService } from "src/app/store/subject/api/subject.service";
 export class CommonViewComponent implements OnInit {
   editForm: FormGroup;
   assignSubjectForm: FormGroup;
-  unassignedClassList: ClassListType[];
-  @Input() viewList: any;
+  @Input() viewList: ClassListType[] | SubjectListType[] | TopicListType[];
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
   @Output() editChildEvent = new EventEmitter();
   @Output() assignClassChildEvent = new EventEmitter();
-  oldName: string;
-  editId: number;
+  unassignedClassList: ClassListType[];
+  previousId: number;
   selectedSubjectId: number;
-  constructor(
-    private store: Store<AppState>,
-    private subejctService: SubjectService
-  ) {
+  constructor(private subejctService: SubjectService) {
     this.editForm = editForm();
     this.assignSubjectForm = assignSubjectForm();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.checkStatus();
   }
 
+  // finctuin to show/hide assign icon
   checkStatus(): boolean {
-    if ("Subject" === this.name) return false;
-    return true;
+    return this.name === "Subject" ? false : true;
   }
-  remove(id) {
+
+  // function to delete item
+  remove(id): void {
     this.childEvent.emit(id);
   }
-  selectedItem(name, id) {
-    this.oldName = name;
-    this.editId = id;
+
+  // to select the content which is selected for edit
+  selectedItem(name, id): void {
+    this.editForm.patchValue({ newitemName: name });
+    this.previousId = id;
   }
-  selectSubject(subjectId) {
+
+  // function to emit details for assigning class
+  selectSubject(subjectId): void {
     this.subejctService
       .getClassesOfUnassignedSubjects({ subjectId })
       .subscribe((response) => {
@@ -55,26 +56,21 @@ export class CommonViewComponent implements OnInit {
       });
     this.selectedSubjectId = subjectId;
   }
-  assignSubject() {
+
+  // function to assign subject, ******* in future it will be moved to store
+  assignSubject(): void {
     let assignDetails = {
       subjectId: this.selectedSubjectId,
       classId: this.assignSubjectForm.value.classId,
     };
-    console.log(assignDetails);
-    this.subejctService
-      .assignSubjectToClass(assignDetails)
-      .subscribe((response) => {
-        if (response["status"]) {
-          alert("subject assinged");
-        } else {
-          alert("Error");
-        }
-      });
+    this.assignClassChildEvent.emit(assignDetails);
   }
-  edit() {
+
+  // emit for edit item
+  editItem(): void {
     this.editChildEvent.emit({
-      newName: this.editForm.value.newitemName,
-      id: this.editId,
+      updatedName: this.editForm.value.newitemName,
+      id: this.previousId,
     });
   }
 }
