@@ -29,6 +29,13 @@ const routes: Routes = [
       import("./+admin/admin.module").then((m) => m.AdminModule),
     canActivate: [AuthService],
   },
+  {
+    path: RoutesEnum.RESET_PASSWORD,
+    loadChildren: () =>
+      import("./+reset-password/reset-password.module").then(
+        (m) => m.ResetPasswordModule
+      ),
+  },
   { path: "**", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
 ];
 

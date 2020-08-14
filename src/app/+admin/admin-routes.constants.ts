@@ -6,7 +6,8 @@ export enum ProfileRoutesEnum {
   SUBJECT = "subject",
   TOPIC = "topic",
   SAMPLE_PAPER = "sample-paper",
+  VIEW_SAMPLE_PAPER = "view-sample-paper",
   SYLLABUS = "syllabus",
   SETTINGS = "settings",
-  PRIVACY_POLICY="privacy-policy"
+  PRIVACY_POLICY = "privacy-policy",
 }

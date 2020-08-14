@@ -15,6 +15,7 @@ import { SchoolVerificationModule } from "./+school-verification/school-verifica
 
 import { appReducers } from "./store/app.reducers";
 import { AppEffects } from "./store/app.effects";
+import { ResetPasswordModule } from "./+reset-password/reset-password.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { AppEffects } from "./store/app.effects";
     StoreDevtoolsModule.instrument({
       maxAge: 10,
     }),
+    ResetPasswordModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

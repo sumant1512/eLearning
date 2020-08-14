@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { localHost } from "config.constants";
 
 @Injectable({
   providedIn: "root",
@@ -9,9 +10,6 @@ export class RegistrationService {
 
   // service for schoolRegistration api call
   schoolRegistration(userDetails) {
-    return this.http.post(
-      "https://tcslearningapplication.herokuapp.com/schoolRegistration",
-      userDetails
-    );
+    return this.http.post(localHost + "schoolRegistration", userDetails);
   }
 }

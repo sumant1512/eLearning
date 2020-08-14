@@ -5,4 +5,5 @@ export enum RoutesEnum {
   ADMIN = "admin",
   VERIFICATION = "verification",
   PRIVACY_POLICY = "privacy-policy",
+  RESET_PASSWORD = "reset-password",
 }
