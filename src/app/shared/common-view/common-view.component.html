@@ -127,25 +127,33 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="group-gap">
-          <div class="d-block my-3">
-            <div class="mb-3">
-              <select class="custom-select" id="selectclass_id">
-                <option
-                  *ngFor="let class of classList"
-                  [value]="class.class_id"
-                  >{{ class.class_name }}</option
+        <form [formGroup]="assignSubjectForm">
+          <div class="group-gap">
+            <div class="d-block my-3">
+              <div class="mb-3">
+                <select
+                  formControlName="classId"
+                  class="custom-select"
+                  id="selectclass_id"
                 >
-              </select>
+                  <option
+                    *ngFor="let class of classList"
+                    [value]="class.class_id"
+                    >{{ class.class_name }}</option
+                  >
+                </select>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button (click)="assignSubject()" type="button" class="btn btn-primary">
+          Save
+        </button>
       </div>
     </div>
   </div>

@@ -11,3 +11,9 @@ export function editForm() {
     newitemName: new FormControl("", [Validators.required]),
   });
 }
+
+export function assignSubjectForm() {
+  return new FormGroup({
+    classId: new FormControl("", [Validators.required]),
+  });
+}
