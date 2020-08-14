@@ -61,10 +61,10 @@ export class SubjectService {
     );
   }
 
-  assignSubjectToClass(Details) {
+  assignSubjectToClass(details) {
     return this.http.post<any>(
       "https://tcslearningapplication.herokuapp.com" + "/assignSubjectToClass",
-      Details,
+      details,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
