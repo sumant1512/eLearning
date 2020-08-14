@@ -39,7 +39,7 @@
             <div id="class1" class="container tab-pane active">
               <div class="card-body">
                 <h3 class="text-center">
-                  {{ classnamewithid[0].classname | titlecase }} Syllabus
+                  {{ classnamewithid[0].class_name | titlecase }} Syllabus
                 </h3>
                 <div id="accordion">
                   <div
@@ -52,7 +52,7 @@
                       href="#collapse{{ index }}"
                     >
                       <div class="card-header border-bottom-0 border-left">
-                        {{ subject.SubjectName | titlecase }}
+                        {{ subject.subject_name | titlecase }}
                       </div>
                     </a>
                     <div
