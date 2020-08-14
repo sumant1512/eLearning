@@ -1,1 +1,2 @@
-export const SERVER_PORT = 3000;
+export const localHost = "https://tcslearningapplication.herokuapp.com/";
+export const nodeServer = "http://localhost:3000/";

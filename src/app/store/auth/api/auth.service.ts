@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
 import { ProfileType } from "../types/profile.type";
+import { localHost } from "config.constants";
 
 @Injectable({
   providedIn: "root",
@@ -20,14 +21,10 @@ export class AuthService {
   }
 
   public login(userInfo): Observable<any> {
-    return this.http.post(
-      "https://tcslearningapplication.herokuapp.com/login",
-      userInfo,
-      {
-        observe: "response",
-        headers: new HttpHeaders().set("Content-Type", "application/json"),
-      }
-    );
+    return this.http.post(localHost + "login", userInfo, {
+      observe: "response",
+      headers: new HttpHeaders().set("Content-Type", "application/json"),
+    });
   }
 
   getProfile(authToken): Observable<ProfileType[]> {
@@ -35,12 +32,9 @@ export class AuthService {
       "Content-Type": "application/json",
       Authorization: "Bearer " + authToken,
     });
-    return this.http.get<ProfileType[]>(
-      "https://tcslearningapplication.herokuapp.com/getProfile",
-      {
-        headers: reqHeader,
-      }
-    );
+    return this.http.get<ProfileType[]>(localHost + "getProfile", {
+      headers: reqHeader,
+    });
   }
 
   //Logout call

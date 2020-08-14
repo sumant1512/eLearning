@@ -11,7 +11,6 @@ import { AddStudentComponent } from "./student/add-student.component";
 import { AddTeacherComponent } from "./teacher/add-teacher.component";
 import { ViewStudentComponent } from "./student/view-student/view-student.component";
 import { ViewTeacherComponent } from "./teacher/view-teacher/view-teacher.component";
-import { ViewSamplePaperComponent } from "./sample-paper/view-sample-paper/view-sample-paper.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
 import { AdminLandingPageComponent } from "./admin-landing-page/admin-landing-page.component";
@@ -20,9 +19,9 @@ import { SharedModule } from "../shared/shared.module";
 import { ClassComponent } from "./class/class.component";
 import { TopicComponent } from "./topic/topic.component";
 import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
-import { AddSamplePaperMobileComponent } from "./sample-paper/add-sample-paper-mobile/add-sample-paper-mobile.component";
-import { AddSamplePaperComponent } from "./sample-paper/add-sample-paper/add-sample-paper.component";
 import { SubjectComponent } from "./subject/subject.component";
+import { ViewSaplePaperComponent } from "./view-saple-paper/view-saple-paper.component";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -35,15 +34,14 @@ import { SubjectComponent } from "./subject/subject.component";
     ViewStudentComponent,
     ViewTeacherComponent,
     ClassComponent,
-    ViewSamplePaperComponent,
     ViewSyllabusComponent,
     AdminSettingsComponent,
     AdminLandingPageComponent,
     TopicComponent,
     SamplePaperComponent,
-    AddSamplePaperComponent,
-    AddSamplePaperMobileComponent,
     SubjectComponent,
+    ViewSaplePaperComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

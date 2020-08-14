@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { SERVER_PORT } from "config.constants";
 import { Observable } from "rxjs";
 import { AuthService } from "../auth/api/auth.service";
+import { localHost } from "config.constants";
 
 @Injectable({
   providedIn: "root",
@@ -22,35 +22,26 @@ export class AdminProfileService {
       "Content-Type": "application/json",
       Authorization: "Bearer " + this.token,
     });
-    return this.http.get<any[]>("http://localhost:3000" + "/getProfile", {
+    return this.http.get<any[]>(localHost + "/getProfile", {
       headers: reqHeader,
     });
   }
 
   startSession() {
-    return this.http.get(
-      "https://tcslearningapplication.herokuapp.com/startSession",
-      {
-        observe: "response",
-        headers: this.reqHeader,
-      }
-    );
+    return this.http.get(localHost + "startSession", {
+      observe: "response",
+      headers: this.reqHeader,
+    });
   }
 
   // common service for assigning to class
   saveSchoolImage(image) {
     console.log("test");
-    return this.http.post(
-      "http://localhost:" + SERVER_PORT + "/saveSchoolImage",
-      image
-    );
+    return this.http.post(localHost + "/saveSchoolImage", image);
   }
 
   saveCoverImage(cover) {
     console.log("test");
-    return this.http.post(
-      "http://localhost:" + SERVER_PORT + "/saveCoverImage",
-      cover
-    );
+    return this.http.post(localHost + "/saveCoverImage", cover);
   }
 }

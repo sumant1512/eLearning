@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthService } from "../../auth/api/auth.service";
+import { localHost } from "../../../../../config.constants";
 
 @Injectable({
   providedIn: "root",
@@ -35,16 +36,12 @@ export class SubjectService {
   }
 
   editSubjectName(subjectDetails) {
-    return this.http.post<any>(
-      "https://tcslearningapplication.herokuapp.com/editSubjectName",
-      subjectDetails,
-      {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-        }),
-      }
-    );
+    return this.http.post<any>(localHost + "editSubjectName", subjectDetails, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
   }
 
   getClassesOfUnassignedSubjects(subject_id) {
@@ -76,7 +73,7 @@ export class SubjectService {
 
   removeSubject(id: number) {
     return this.http.delete<any>(
-      `https://tcslearningapplication.herokuapp.com/removeSubject/${id}`,
+      `http://localhost:3000/` + `removeSubject/${id}`,
       {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
