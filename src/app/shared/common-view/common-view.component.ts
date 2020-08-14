@@ -15,7 +15,7 @@ import { SubjectService } from "src/app/store/subject/api/subject.service";
 export class CommonViewComponent implements OnInit {
   editForm: FormGroup;
   assignSubjectForm: FormGroup;
-  classList: ClassListType[];
+  unassignedClassList: ClassListType[];
   @Input() viewList: any;
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
@@ -23,7 +23,7 @@ export class CommonViewComponent implements OnInit {
   @Output() assignClassChildEvent = new EventEmitter();
   oldName: string;
   editId: number;
-  selectedSubject: number;
+  selectedSubjectId: number;
   constructor(
     private store: Store<AppState>,
     private subejctService: SubjectService
@@ -34,18 +34,8 @@ export class CommonViewComponent implements OnInit {
 
   ngOnInit() {
     this.checkStatus();
-    this.fetchClassList();
   }
 
-  fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.classList = response;
-      } else {
-        this.store.dispatch(new ClassActions.FetchClass());
-      }
-    });
-  }
   checkStatus(): boolean {
     if ("Subject" === this.name) return false;
     return true;
@@ -58,12 +48,17 @@ export class CommonViewComponent implements OnInit {
     this.editId = id;
   }
   selectSubject(subjectId) {
-    this.selectSubject = subjectId;
+    this.subejctService
+      .getClassesOfUnassignedSubjects({ subjectId })
+      .subscribe((response) => {
+        this.unassignedClassList = response;
+      });
+    this.selectedSubjectId = subjectId;
   }
   assignSubject() {
     let assignDetails = {
-      subjectId: this.selectSubject,
-      classId: [this.assignSubjectForm.value.classId],
+      subjectId: this.selectedSubjectId,
+      classId: this.assignSubjectForm.value.classId,
     };
     console.log(assignDetails);
     this.subejctService

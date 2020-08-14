@@ -137,7 +137,7 @@
                   id="selectclass_id"
                 >
                   <option
-                    *ngFor="let class of classList"
+                    *ngFor="let class of unassignedClassList"
                     [value]="class.class_id"
                     >{{ class.class_name }}</option
                   >
