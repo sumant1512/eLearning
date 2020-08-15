@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, HostListener } from "@angular/core";
 import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import * as AuthActions from "../../store/auth/auth.actions";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-admin-header",
   templateUrl: "./admin-header.component.html",
@@ -27,9 +28,16 @@ export class AdminHeaderComponent {
     }
   }
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private router: Router) {}
 
   logout() {
     this.store.dispatch(new AuthActions.UserLogout());
+  }
+
+  navigateToConference() {
+    window.open(
+      "https://rtcmulticonnection.herokuapp.com/demos/video-conferencing.html",
+      "_blank"
+    );
   }
 }

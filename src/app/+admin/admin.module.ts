@@ -21,7 +21,8 @@ import { TopicComponent } from "./topic/topic.component";
 import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 import { SubjectComponent } from "./subject/subject.component";
 import { ViewSaplePaperComponent } from "./view-saple-paper/view-saple-paper.component";
-import { SettingsComponent } from './settings/settings.component';
+import { SettingsComponent } from "./settings/settings.component";
+import { ConferencingComponent } from "./conferencing/conferencing.component";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { SettingsComponent } from './settings/settings.component';
     SubjectComponent,
     ViewSaplePaperComponent,
     SettingsComponent,
+    ConferencingComponent,
   ],
   imports: [
     CommonModule,

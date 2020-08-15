@@ -10,4 +10,5 @@ export enum ProfileRoutesEnum {
   SYLLABUS = "syllabus",
   SETTINGS = "settings",
   PRIVACY_POLICY = "privacy-policy",
+  CONFERENCING = "conference",
 }

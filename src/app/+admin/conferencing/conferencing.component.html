@@ -1,0 +1,42 @@
+<section class="make-center">
+  <div>
+    <label
+      ><input type="checkbox" id="record-entire-conference" /> Record Entire
+      Conference In The Browser?</label
+    >
+    <span id="recording-status" style="display: none;"></span>
+    <button id="btn-stop-recording" style="display: none;">
+      Stop Recording
+    </button>
+    <br /><br />
+
+    <input
+      type="text"
+      id="room-id"
+      value="abcdef"
+      autocorrect="off"
+      autocapitalize="off"
+      size="20"
+    />
+    <button (click)="openRoom('open-room')">Open Room</button>
+    <button (click)="openRoom('join-room')">Join Room</button>
+    <button (click)="openRoom('open-or-join-room')">
+      Auto Open Or Join Room
+    </button>
+  </div>
+
+  <div id="videos-container" style="margin: 20px 0;"></div>
+
+  <div
+    id="room-urls"
+    style="
+      text-align: center;
+      display: none;
+      background: #f1eded;
+      margin: 15px -10px;
+      border: 1px solid rgb(189, 189, 189);
+      border-left: 0;
+      border-right: 0;
+    "
+  ></div>
+</section>
