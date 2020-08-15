@@ -61,9 +61,9 @@ export class CommonAddMobileComponent implements OnInit {
         if (Math.abs(deltaY) > 60) {
           // delta y is at least 60 pixels
           if (deltaY > 0) {
-            this.touchEvent.emit("open");
-          } else {
             this.touchEvent.emit("close");
+          } else {
+            this.touchEvent.emit("open");
           }
         }
       }
