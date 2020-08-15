@@ -83,6 +83,7 @@ export class ClassComponent implements OnInit {
   }
 
   formToggle(action) {
+    alert("function call");
     if (action === "open") {
       this.slider.nativeElement.classList.add("show");
     } else {

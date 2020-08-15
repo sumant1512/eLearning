@@ -23,6 +23,7 @@
             <app-common-add-mobile
               name="Class"
               (childEvent)="addClass($event)"
+              (touchEvent)="formToggle($event)"
             ></app-common-add-mobile>
           </div>
         </div>
@@ -42,7 +43,6 @@
         name="Class"
         (childEvent)="removeClass($event)"
         (editChildEvent)="editClass($event)"
-        (touchEvent)="formToggle($event)"
       ></app-common-view>
     </div>
   </div>
