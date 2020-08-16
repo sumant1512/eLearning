@@ -64,7 +64,6 @@ export class RegistrationComponent implements OnInit {
     this.registationService
       .schoolRegistration(schoolRegistrationDetails)
       .subscribe((response) => {
-        console.log(response);
         if (response["status"]) {
           this.router.navigate(["verification"]);
         } else {

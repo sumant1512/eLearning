@@ -89,6 +89,7 @@ export class TopicComponent implements OnInit {
   addTopic(topic): void {
     this.store.dispatch(new TopicActions.AddTopic(topic));
   }
+
   editTopic(editDetails): void {
     this.store.dispatch(
       new TopicActions.EditTopic({
@@ -97,14 +98,13 @@ export class TopicComponent implements OnInit {
       })
     );
   }
+
   removeTopic(topic_id): void {
     if (confirm("Are You Sure You want to Delete the Topic?")) {
       this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
     }
   }
-  getSubjects(classId): void {
-    console.log(classId);
-  }
+  getSubjects(classId): void {}
 
   sliderOpen() {
     this.slider.nativeElement.classList.toggle("show");

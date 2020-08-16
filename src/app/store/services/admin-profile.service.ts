@@ -36,12 +36,10 @@ export class AdminProfileService {
 
   // common service for assigning to class
   saveSchoolImage(image) {
-    console.log("test");
     return this.http.post(HOST + " /saveSchoolImage", image);
   }
 
   saveCoverImage(cover) {
-    console.log("test");
     return this.http.post(HOST + " /saveCoverImage", cover);
   }
 }

@@ -17,6 +17,8 @@ export class ViewSyllabusComponent implements OnInit {
   classWithSubjectList: ClassWithSubjectListType[];
   topicWithClassSubjectList: TopicWithClassSubjectListType[];
   classList: ClassListType[];
+  selectedSubjects;
+  selectedClassName: string;
   constructor(private store: Store<AppState>) {}
   ngOnInit(): void {
     this.fetchClassList();
@@ -58,19 +60,16 @@ export class ViewSyllabusComponent implements OnInit {
     });
   }
 
-  selectedSubjects;
-  classnamewithid;
-  selectClass(selectedClass) {
-    this.classnamewithid = this.classList.filter(
-      (classes) => classes.class_id === selectedClass
-    ); // to get the class name and class ID of selected class
-
+  selectClass(classId, className) {
+    this.selectedClassName = className;
     this.selectedSubjects = this.topicWithClassSubjectList.filter(
-      (topic) => topic.class_id === selectedClass
-    ); // to filter out class with same id
+      (topicList) => topicList.class_id === classId
+    );
 
     const groups = this.selectedSubjects.reduce((acc, cur) => {
-      (acc[cur.subject_id] = acc[cur.subject_id] || []).push(cur.topic_name);
+      (acc[cur.subject_name] = acc[cur.subject_name] || []).push(
+        cur.topic_name
+      );
       return acc;
     }, {}); // to group the array according to subject
 

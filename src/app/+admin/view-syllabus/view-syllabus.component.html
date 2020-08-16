@@ -13,7 +13,7 @@
                   let i = index;
                   let isFirst = first
                 "
-                (click)="selectClass(class.class_id)"
+                (click)="selectClass(class.class_id, class.class_name)"
               >
                 <a
                   class="nav-link m-1"
@@ -39,7 +39,7 @@
             <div id="class1" class="container tab-pane active">
               <div class="card-body">
                 <h3 class="text-center">
-                  {{ classnamewithid[0].class_name | titlecase }} Syllabus
+                  {{ selectedClassName | titlecase }} Syllabus
                 </h3>
                 <div id="accordion">
                   <div
