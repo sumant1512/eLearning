@@ -79,7 +79,6 @@ export class AddStudentComponent implements OnInit {
       ? (this.buttonName = "Add Student")
       : (this.buttonName = "Show Students");
     this.changeClass = !this.changeClass;
-    console.log(this.changeClass);
   }
 
   registerStudent() {
