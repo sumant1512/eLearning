@@ -147,12 +147,12 @@ export class CommonSampleSyllabusComponent implements OnInit {
       }
     });
   }
-  // selectedClass(id) {
-  //   this.selectedClassId = id;
-  //   this.subjectsOfClassChildEvent.emit(id);
-  //   this.getClassForSubject(id);
-  // }
-  // selectedSubject(id) {
-  //   this.selectedSubjectId = id;
-  // }
+  selectedClass(id) {
+    this.selectedClassId = id;
+    this.subjectsOfClassChildEvent.emit(id);
+    this.getClassForSubject(id);
+  }
+  selectedSubject(id) {
+    this.selectedSubjectId = id;
+  }
 }

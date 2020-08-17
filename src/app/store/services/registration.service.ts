@@ -10,6 +10,6 @@ export class RegistrationService {
 
   // service for schoolRegistration api call
   schoolRegistration(userDetails) {
-    return this.http.post(HOST + " schoolRegistration", userDetails);
+    return this.http.post(HOST + "schoolRegistration", userDetails);
   }
 }
