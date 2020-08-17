@@ -7,24 +7,36 @@ import {
   TopicWithClassSubjectActions,
   FetchedTopicWithClassSubject,
 } from "./topic-with-class-subject.actions";
+import { Store } from "@ngrx/store";
+import { AppState } from "../app.state";
 
 @Injectable()
 export class TopicWithClassSubjectEffects {
   constructor(
     private action$: Actions<TopicWithClassSubjectActionsUnion>,
-    private topicWithClassSubjectService: TopicWithClassSubjectService
+    private topicWithClassSubjectService: TopicWithClassSubjectService,
+    private store: Store<AppState>
   ) {}
 
   @Effect()
   fetchTopicWithClassSubject$ = this.action$.pipe(
-    ofType(TopicWithClassSubjectActions.FETCH_CLASS_WITH_SUBJECT),
+    ofType(TopicWithClassSubjectActions.FETCH_TOPIC_WITH_CLASS_SUBJECT),
     map(() => {
       return this.topicWithClassSubjectService.getTopicWithClassSubject();
     }),
     mergeMap((response) => {
       return response.pipe(
         map((res) => {
-          return new FetchedTopicWithClassSubject(res);
+          const classList = this.store
+            .select("classList")
+            .subscribe((classList) => {
+              return classList;
+            });
+          const mappingObject = {
+            classList: classList,
+            topicWithClassSubject: res,
+          };
+          return new FetchedTopicWithClassSubject(mappingObject);
         })
       );
     })

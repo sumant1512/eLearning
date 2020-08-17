@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { AuthService } from "../../auth/api/auth.service";
 import { HOST } from "config.constants";
+import { catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",

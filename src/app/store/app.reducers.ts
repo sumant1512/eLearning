@@ -7,6 +7,7 @@ import { subjectReducer } from "./subject/subject.reducers";
 import { topicReducer } from "./topic/topic.reducers";
 import { classWithSubjectReducer } from "./class-with-subject/class-with-subject.reducers";
 import { topicWithClassSubjectReducer } from "./topic-with-class-subject/topic-with-class-subject.reducers";
+import { samplePaperReducer } from "./sample-paper/sample-paper.reducer";
 
 export const appReducers: ActionReducerMap<AppState> = {
   profile: profileReducer,
@@ -14,6 +15,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   subjectList: subjectReducer,
   classWithSubjectList: classWithSubjectReducer,
   topicWithClassSubjectList: topicWithClassSubjectReducer,
-  students: studentReducer,
   topicList: topicReducer,
+  samplePaperList: samplePaperReducer,
+  students: studentReducer,
 };
