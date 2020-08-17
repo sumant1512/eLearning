@@ -14,7 +14,7 @@ export class StudentService {
 
   // service for Student studentRegistration api call
   studentRegistration(Student) {
-    return this.http.post<any>(HOST + " studentRegistration", Student, {
+    return this.http.post<any>(HOST + "studentRegistration", Student, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -24,7 +24,7 @@ export class StudentService {
 
   // service for View of all registered Students  api call
   studentFromSchool(): Observable<any[]> {
-    return this.http.get<any[]>(HOST + " studentFromSchool", {
+    return this.http.get<any[]>(HOST + "studentFromSchool", {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -33,7 +33,16 @@ export class StudentService {
   }
 
   startSession() {
-    return this.http.get(HOST + " startSession", {
+    return this.http.get(HOST + "startSession", {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+  }
+
+  removeStudent(id: number) {
+    return this.http.delete<any>(HOST + `removeStudent/${id}`, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),

@@ -1,10 +1,14 @@
 
-    @media only screen and (max-width: 890px) {
+    @media only screen and (max-width: 700px) {
+      .w-75{
+        width: 96% !important;
+      }
      
       .wrapper{
         width: 100%;
+        height: 750px !important;
        overflow-x: scroll; 
-       overflow-y:hidden;
+       overflow-y:  scroll;
      }
  
        .scrollx {
@@ -13,8 +17,24 @@
        overflow: auto;
      }
 
+     .scrolly {
+      height:200px; 
+   overflow-y: auto;
+ }
+  
+
      }
 
+     .wrapper{
+       width: 100%;
+      height: 450px;
+     overflow-y:  scroll;
+   }
+   
+   .scrolly {
+     height:200px; 
+  overflow-y: auto;
+}
 
 
 

@@ -57,7 +57,7 @@ export class CommonViewComponent implements OnInit {
     this.selectedSubjectId = subjectId;
   }
 
-  // function to assign subject, ******* in future it will be moved to store
+  // function to assign subject
   assignSubject(): void {
     let assignDetails = {
       subjectId: this.selectedSubjectId,
@@ -72,5 +72,10 @@ export class CommonViewComponent implements OnInit {
       updatedName: this.editForm.value.newitemName,
       id: this.previousId,
     });
+    this.makeEditFormPristine();
+  }
+
+  makeEditFormPristine() {
+    this.editForm.markAsPristine();
   }
 }
