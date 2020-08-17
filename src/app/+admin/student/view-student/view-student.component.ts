@@ -10,7 +10,7 @@ import * as StudentActions from "src/app/store/students/student.actions";
   styleUrls: ["./view-student.component.css"],
 })
 export class ViewStudentComponent implements OnInit {
-  students=[];
+  students = [];
   studentName: string;
   constructor(
     private AdminprofileService: AdminProfileService,
@@ -26,6 +26,12 @@ export class ViewStudentComponent implements OnInit {
     this.store.select("students").subscribe((response) => {
       this.students = response;
     });
+  }
+
+  removeStudent(student_id): void {
+    if (confirm("Are You Sure You want to Delete the Student?")) {
+      this.store.dispatch(new StudentActions.DeleteStudent(student_id));
+    }
   }
 
   startSession() {

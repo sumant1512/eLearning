@@ -69,17 +69,31 @@ export class AddStudentComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.displayNone();
+  }
   get f() {
     return this.studentRegistrationForm.controls;
   }
 
-  showHideStudents() {
-    this.buttonName === "Show Students"
-      ? (this.buttonName = "Add Student")
-      : (this.buttonName = "Show Students");
-    this.changeClass = !this.changeClass;
+  displayNone() {
+    setTimeout(function(){ document.getElementById("myP1").style.display = "none"; }, 1000);
   }
+  
+  displayDom() {
+    document.getElementById("myP1").style.display = "";
+  }
+  
+    showHideStudents() {
+      this.buttonName === "Show Students"
+        ? (this.buttonName = "Add Student")
+        : (this.buttonName = "Show Students");
+      this.changeClass = !this.changeClass;
+  
+      this.buttonName === "Show Students"
+        ? (this.displayNone())
+        : (this.displayDom());
+    }
 
   registerStudent() {
     const studentRegistrationDetails = this.studentRegistrationForm.value;

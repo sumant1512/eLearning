@@ -24,7 +24,8 @@
               <i
                 data-toggle="modal"
                 data-target="#editModelId"
-                class="fa fa-pencil mx-3"
+                class="fa fa-pencil mr-3"
+                (click)="makeEditFormPristine()"
                 (click)="
                   selectedItem(
                     item.class_name || item.subject_name || item.topic_name,
@@ -36,10 +37,9 @@
                 [hidden]="checkStatus()"
                 (click)="selectSubject(item.subject_id)"
                 data-toggle="modal"
-                data-target="#modelId"
-                class="fa fa-user-plus mx-3"
+                data-target="#assignModelId"
+                class="fa fa-user-plus mr-3"
               ></i>
-
               <i
                 (click)="
                   remove(item.class_id || item.subject_id || item.topic_id)
@@ -86,6 +86,7 @@
               class="form-control"
               formControlName="newitemName"
               type="text"
+              value="{{ oldName }}"
             />
           </div>
         </form>
@@ -94,7 +95,13 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button type="button" (click)="editItem()" class="btn btn-primary">
+        <button
+          type="button"
+          [disabled]="editForm.invalid || !editForm.dirty"
+          (click)="editItem()"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
           Save
         </button>
       </div>
@@ -106,7 +113,7 @@
 
 <div
   class="modal fade"
-  id="modelId"
+  id="assignModelId"
   tabindex="-1"
   role="dialog"
   aria-labelledby="modelTitleId"
@@ -115,7 +122,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Select Class</h5>
+        <h5 class="modal-title">Assign Class</h5>
         <button
           type="button"
           class="close"
@@ -127,7 +134,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="assignSubjectForm">
-          <div class="group-gap">
+          <div class="form-group">
             <div class="d-block my-3">
               <div class="mb-3">
                 <select
@@ -150,7 +157,12 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">
           Close
         </button>
-        <button (click)="assignSubject()" type="button" class="btn btn-primary">
+        <button
+          (click)="assignSubject()"
+          type="button"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
           Save
         </button>
       </div>

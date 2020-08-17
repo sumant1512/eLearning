@@ -67,4 +67,13 @@ export class SubjectService {
       }
     );
   }
+
+  unAssignSubjectToClass(details) {
+    return this.http.post<any>(HOST + "unassignSubjectToClass", details, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+  }
 }

@@ -4,8 +4,8 @@
   </div>
   <div class="card-body">
     <form [formGroup]="addForm">
-      <div class="form-group">
-        <div [hidden]="reviewStatus()">
+      <div [hidden]="reviewStatus()">
+        <div class="form-group">
           <i class="charcoal">Select Class</i>
           <select
             (change)="selectedClass($event.target.value)"
@@ -17,11 +17,14 @@
               >{{ class.class_name }}</option
             >
           </select>
+        </div>
+        <div class="form-group">
           <i class="charcoal">Select Subject</i>
           <select
             (change)="selectedSubject($event.target.value)"
             class="form-control"
           >
+            <option disabled>Choose your subject</option>
             <option
               *ngFor="let subject of subjectList"
               value="{{ subject.subject_id }}"
@@ -29,6 +32,8 @@
             >
           </select>
         </div>
+      </div>
+      <div class="form-group">
         <i class="charcoal">{{ name }} Name</i>
         <input class="form-control" formControlName="itemName" type="text" />
       </div>
@@ -38,6 +43,7 @@
           class="br-10 mx-auto add-btn b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
           type="button"
           (click)="add()"
+          [disabled]="addForm.invalid"
         >
           <span *ngIf="loader; else button">
             <div class="loading pt-1">
@@ -47,7 +53,7 @@
             </div>
           </span>
           <ng-template #button>
-            <span>Add</span>
+            <span>Add {{ name }}</span>
           </ng-template>
         </button>
       </div>

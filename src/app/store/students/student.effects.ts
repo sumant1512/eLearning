@@ -32,6 +32,21 @@ export class StudentEffects {
   );
 
   @Effect()
+  deleteStudent$ = this.action$.pipe(
+    ofType(StudentActions.DELETE_STUDENT),
+    map((action) => {
+      return this.studentService.removeStudent(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchStudent();
+        })
+      );
+    })
+  );
+
+  @Effect()
   fetchStudent$ = this.action$.pipe(
     ofType(StudentActions.FETCH_STUDENT),
     map((action) => {

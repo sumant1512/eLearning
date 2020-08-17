@@ -2,7 +2,7 @@
 <button class="btn-md btn btn-primary mt-4 ml-5 mb-4"  (click)="showHideStudents()">{{buttonName}}</button>
 </div>
 
-
+<div class="box">
 <div class="container-fluid  w-75 shadow formSlideLeft float-left clearfix " style="background-color:white;  "
 [ngClass]="{'formSlideLeft': !changeClass,  'formSlideLeftReturn': changeClass}">
     <div class=" row ">
@@ -151,9 +151,11 @@
     </div>
 </div>
 
-<div class="container-fluid .w-75 clearfix "
+
+<div  id="myP1" class="container-fluid .w-75 clearfix "
  style="float: none;"
  [ngClass]="{'formSlideRight': changeClass,  'formSlideRightReturn': !changeClass}"
  >
 <app-view-student  ></app-view-student>
+</div>
 </div>
