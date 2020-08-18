@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
 import { Store } from "@ngrx/store";
@@ -17,11 +24,42 @@ export class CommonAddComponent implements OnInit {
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
   @Output() subjectsOfClassChildEvent = new EventEmitter();
+  @Output() touchEvent = new EventEmitter();
   addForm: FormGroup;
   loader = false;
   selectedClassId: number;
   selectedSubjectId: number;
   subjectList: any;
+
+  defaultTouch = { x: 0, y: 0, time: 0 };
+
+  @HostListener("touchstart", ["$event"])
+  @HostListener("touchend", ["$event"])
+  @HostListener("touchcancel", ["$event"])
+  handleTouch(event) {
+    let touch = event.touches[0] || event.changedTouches[0];
+
+    // check the events
+    if (event.type === "touchstart") {
+      this.defaultTouch.y = touch.pageY;
+      this.defaultTouch.time = event.timeStamp;
+    } else if (event.type === "touchend") {
+      let deltaY = touch.pageY - this.defaultTouch.y;
+      let deltaTime = event.timeStamp - this.defaultTouch.time;
+
+      // simulte a swipe -> less than 500 ms and more than 60 px
+      if (deltaTime < 500) {
+        if (Math.abs(deltaY) > 60) {
+          // delta y is at least 60 pixels
+          if (deltaY > 0) {
+            this.touchEvent.emit("close");
+          } else {
+            this.touchEvent.emit("open");
+          }
+        }
+      }
+    }
+  }
 
   constructor(
     private store: Store<AppState>,
