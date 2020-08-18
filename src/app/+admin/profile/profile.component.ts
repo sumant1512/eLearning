@@ -7,6 +7,7 @@ import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import { ProfileType } from "src/app/store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
+import { AuthService } from "src/app/store/auth/api/auth.service";
 
 @Component({
   selector: "app-profile",
@@ -16,14 +17,18 @@ import * as AuthActions from "../../store/auth/auth.actions";
 export class ProfileComponent implements OnInit {
   schoolImageForm: FormGroup;
   adminProfile: ProfileType;
-  coverImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+  schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     CONSTANTS.School_Building
   );
-  studentImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+  adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     CONSTANTS.USER_IMAGE
   );
 
-  constructor(private store: Store<AppState>, private sanitizer: DomSanitizer) {
+  constructor(
+    private store: Store<AppState>,
+    private authService: AuthService,
+    private sanitizer: DomSanitizer
+  ) {
     this.schoolImageForm = schoolImageForm();
   }
 
@@ -54,11 +59,11 @@ export class ProfileComponent implements OnInit {
       var reader = new FileReader();
       reader.onload = (event: any) => {
         switch (name) {
-          case "school":
-            this.studentImageUrl = event.target.result;
+          case "admin":
+            this.adminImageUrl = event.target.result;
             break;
-          case "cover_image":
-            this.coverImageUrl = event.target.result;
+          case "school_image":
+            this.schoolImageUrl = event.target.result;
             break;
         }
       };
@@ -66,29 +71,21 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  saveSchoolImage(): void {
-    this.schoolImageForm.value.schoolImage = this.studentImageUrl;
-    // this.adminProfileService
-    //   .saveSchoolImage(this.schoolImageForm.value)
-    //   .subscribe((response) => {
-    //     if (response["status"]) {
-    //       alert("Image saved");
-    //     } else {
-    //       alert("Error");
-    //     }
-    //   });
+  saveAdminImage(): void {
+    this.schoolImageForm.value.schoolImage = this.adminImageUrl;
+    this.authService
+      .saveAdminImage(this.schoolImageForm.value.adminImage)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
-  saveCoverImage() {
-    this.schoolImageForm.value.schoolImage = this.coverImageUrl;
-    // this.adminProfileService
-    //   .saveCoverImage(this.schoolImageForm.value)
-    //   .subscribe((response) => {
-    //     if (response["status"]) {
-    //       alert("Image saved");
-    //     } else {
-    //       alert("Error");
-    //     }
-    //   });
+  saveSchoolImage() {
+    this.schoolImageForm.value.schoolImage = this.schoolImageUrl;
+    this.authService
+      .saveAdminImage(this.schoolImageForm.value.schoolImage)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 }
