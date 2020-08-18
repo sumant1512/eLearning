@@ -1,168 +1,177 @@
 <div class="container-fluid">
- 
-   <div [hidden]="getStatus()" class="text-md-right">
-  <button
-    class="m-2 add-btn br-10 btn text-light font-weight-bold inline p-2"
-    type="button"
-    (click)="openSamplePaperForm()"
-  >
-    Add Sample Paper
-  </button>
-</div> 
+  <div [hidden]="getStatus()" class="text-md-right">
+    <button
+      class="m-2 add-btn br-10 btn text-light font-weight-bold inline p-2"
+      type="button"
+      (click)="openSamplePaperForm()"
+    >
+      Add Sample Paper
+    </button>
+  </div>
 
- 
- <div class="row">
- 
-  <div [hidden]="getStatus()" *ngIf="isAddSamplePaperFormOpen" class="form-slide col-lg-4">
-    <div class="formSlide card">
-      <div class="font-weight-bold text-light card-header">
-        Add Sample Paper
-      </div>
-      <div class="card-body">
-        <form [formGroup]="addForm">
-          <div class="form-group">
-            <i class="charcoal">Select Class</i>
-            <select
-              (change)="selectedClass($event.target.value)"
-          
-              class="form-control"
-            >
-              <option
-              
-                *ngFor="let class of classList"
-                value="{{ class.class_id }}"
-                >{{ class.class_name }}</option
+  <div class="row">
+    <div
+      [hidden]="getStatus()"
+      *ngIf="isAddSamplePaperFormOpen"
+      class="form-slide col-lg-4"
+    >
+      <div class="formSlide card">
+        <div class="font-weight-bold text-light card-header">
+          Add Sample Paper
+        </div>
+        <div class="card-body">
+          <form [formGroup]="addForm">
+            <div class="form-group">
+              <i class="charcoal">Select Class</i>
+              <select
+                (change)="selectedClass($event.target.value)"
+                class="form-control"
               >
-            </select>
-            <i class="charcoal">Select Subject</i>
-            <select
-              (change)="selectedSubject($event.target.value)"
-              class="form-control"
-            >
-            <option  disabled>Choose your subject</option>
-              <option
-                *ngFor="let subject of subjectList"
-                value="{{ subject.subject_id }}"
-                >{{ subject.subject_name }}</option
+                <option
+                  *ngFor="let class of classList"
+                  value="{{ class.class_id }}"
+                  >{{ class.class_name }}</option
+                >
+              </select>
+              <i class="charcoal">Select Subject</i>
+              <select
+                (change)="selectedSubject($event.target.value)"
+                class="form-control"
               >
-            </select>
-            <i class="charcoal">Sample Paper Name</i>
-          <input class="form-control" formControlName="itemName" type="text" />
-              
-        
-            <i class="charcoal">Sample Paper Url</i>
-            <input class="form-control" formControlName="itemUrl" type="text" />
-          </div>
-          <div>
-            <button
-              [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
-              class="br-10 mx-auto add-btn b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
-              type="button"
-              (click)="add()"
-            >
-              <span *ngIf="loader; else button">
-                <span
-                  class="mx-1 core-orange spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                <span
-                  class="mx-1 core-orange spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                <span
-                  class="mx-1 core-orange spinner-grow spinner-grow-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              </span>
-              <ng-template #button>
-                <span>Add</span>
-              </ng-template>
-            </button>
-          </div>
-        </form>
+                <option disabled>Choose your subject</option>
+                <option
+                  *ngFor="let subject of subjectList"
+                  value="{{ subject.subject_id }}"
+                  >{{ subject.subject_name }}</option
+                >
+              </select>
+              <i class="charcoal">Sample Paper Name</i>
+              <input
+                class="form-control"
+                formControlName="itemName"
+                type="text"
+              />
+
+              <i class="charcoal">Sample Paper Url</i>
+              <input
+                class="form-control"
+                formControlName="itemUrl"
+                type="text"
+              />
+            </div>
+            <div>
+              <button
+                [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
+                class="br-10 mx-auto add-btn b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
+                type="button"
+                (click)="add()"
+              >
+                <span *ngIf="loader; else button">
+                  <span
+                    class="mx-1 core-orange spinner-grow spinner-grow-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="mx-1 core-orange spinner-grow spinner-grow-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span
+                    class="mx-1 core-orange spinner-grow spinner-grow-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                </span>
+                <ng-template #button>
+                  <span>Add</span>
+                </ng-template>
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-  
 
-    <div [ngClass]="isAddSamplePaperFormOpen ? 'col-lg-8  ' : 'col-lg-12 m-0 p-0 '">
+    <div
+      [ngClass]="isAddSamplePaperFormOpen ? 'col-lg-8  ' : 'col-lg-12 m-0 p-0 '"
+    >
       <div class="background">
- 
-   
-      <h2 class="heading text-white p-3 text-center">View {{ name }}</h2>
-      <div class="container-fluid"> 
-         <div class="row">
-          <div class="col-sm-3">
-            <div class="card shadow-lg mb-2 bg-white">
-              <div class="card-body">
-                <ul
-                  class="text-center nav nav-pills flex-column"
-                  role="tablist"
-                >
-                  <li
-                    class="nav-item"
-                    *ngFor="
-                      let class of classList;
-                      let i = index;
-                      let isFirst = first
-                    "
-                    (click)="selectClass(class.class_id,class.class_name)"
+        <h2 class="heading text-white p-3 text-center">View {{ name }}</h2>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="card shadow-lg mb-2 bg-white">
+                <div class="card-body">
+                  <ul
+                    class="text-center nav nav-pills flex-column"
+                    role="tablist"
                   >
-                    <a
-                      class="nav-link m-1"
-                      [class.active]="isFirst"
-                      data-toggle="pill"
-                      href="#class1"
+                    <li
+                      class="nav-item"
+                      *ngFor="
+                        let class of classList;
+                        let i = index;
+                        let isFirst = first
+                      "
+                      (click)="selectClass(class.class_id, class.class_name)"
                     >
-                      <h5>
-                        {{ class.class_name | uppercase }}
-                      </h5></a
-                    >
-                  </li>
-                </ul>
+                      <a
+                        class="nav-link m-1"
+                        [class.active]="isFirst"
+                        data-toggle="pill"
+                        href="#class1"
+                      >
+                        <h5>
+                          {{ class.class_name | uppercase }}
+                        </h5></a
+                      >
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-sm-9">
-            <div
-              class="card shadow p-2 mb-2 bg-white"
-              *ngIf="selectedSubjects && selectedSubjects.length > 0"
-            >
-              <div class="tab-content">
-                <div id="class1" class="container tab-pane active">
-                  <div class="card-body">
-                    <h3 class="text-center">
-                      {{ classnamewithid[0].class_name | titlecase }}{{ name }}
-                    </h3>
-                    <div id="accordion">
-                      <div
-                        class="card mb-2"
-                        *ngFor="
-                          let subject of selectedSubjects;
-                          let index = index
-                        "
-                      >
-                        <a
-                          class="inside card-link collapsed text-white"
-                          data-toggle="collapse"
-                          href="#collapse{{ index }}"
-                        >
-                          <div class="card-header border-bottom-0 border-left">
-                            {{ subject.subject_name | titlecase }}
-                          </div>
-                        </a>
+            <div class="col-sm-9">
+              <div
+                class="card shadow p-2 mb-2 bg-white"
+                *ngIf="selectedSubjects && selectedSubjects.length > 0"
+              >
+                <div class="tab-content">
+                  <div id="class1" class="container tab-pane active">
+                    <div class="card-body">
+                      <h3 class="text-center">
+                        {{ classnamewithid[0].class_name | titlecase
+                        }}{{ name }}
+                      </h3>
+                      <div id="accordion">
                         <div
-                          id="collapse{{ index }}"
-                          class="collapse"
-                          data-parent="#accordion"
+                          class="card mb-2"
+                          *ngFor="
+                            let subject of selectedSubjects;
+                            let index = index
+                          "
                         >
-                          <div class="card-body">
-                            <ul *ngFor="let topic of subject.topics">
-                              <li>{{ topic }}</li>
-                            </ul>
+                          <a
+                            class="inside card-link collapsed text-white"
+                            data-toggle="collapse"
+                            href="#collapse{{ index }}"
+                          >
+                            <div
+                              class="card-header border-bottom-0 border-left"
+                            >
+                              {{ subject.subject_name | titlecase }}
+                            </div>
+                          </a>
+                          <div
+                            id="collapse{{ index }}"
+                            class="collapse"
+                            data-parent="#accordion"
+                          >
+                            <div class="card-body">
+                              <ul *ngFor="let topic of subject.topics">
+                                <li>{{ topic }}</li>
+                              </ul>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -172,9 +181,9 @@
               </div>
             </div>
           </div>
-         </div> 
-       </div> 
+        </div>
+      </div>
     </div>
+    <!-- </div> -->
   </div>
-<!-- </div> -->
 </div>
