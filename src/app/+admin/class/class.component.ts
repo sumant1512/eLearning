@@ -79,7 +79,9 @@ export class ClassComponent implements OnInit {
   }
 
   sliderOpen() {
-    this.slider.nativeElement.classList.toggle("show");
+    if (this.isMobile || this.isTablet) {
+      this.slider.nativeElement.classList.toggle("show");
+    }
   }
 
   formToggle(action) {
