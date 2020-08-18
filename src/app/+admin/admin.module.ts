@@ -20,7 +20,7 @@ import { ClassComponent } from "./class/class.component";
 import { TopicComponent } from "./topic/topic.component";
 import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 import { SubjectComponent } from "./subject/subject.component";
-import { ViewSaplePaperComponent } from "./view-saple-paper/view-saple-paper.component";
+import { ViewSamplePaperComponent } from "./view-sample-paper/view-sample-paper.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
 
@@ -41,7 +41,7 @@ import { ConferencingComponent } from "./conferencing/conferencing.component";
     TopicComponent,
     SamplePaperComponent,
     SubjectComponent,
-    ViewSaplePaperComponent,
+    ViewSamplePaperComponent,
     SettingsComponent,
     ConferencingComponent,
   ],

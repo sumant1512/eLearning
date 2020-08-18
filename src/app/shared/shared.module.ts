@@ -8,6 +8,7 @@ import { CommonAddMobileComponent } from "./common-add-mobile/common-add-mobile.
 import { CommonViewComponent } from "./common-view/common-view.component";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
+import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
 
 @NgModule({
   declarations: [
@@ -16,8 +17,14 @@ import { ReactiveFormsModule } from "@angular/forms";
     CommonAddComponent,
     CommonAddMobileComponent,
     CommonViewComponent,
+    CommonSampleSyllabusComponent,
   ],
-  imports: [CommonModule,FormsModule,ReactiveFormsModule],
-  exports: [CommonAddComponent, CommonAddMobileComponent, CommonViewComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  exports: [
+    CommonAddComponent,
+    CommonAddMobileComponent,
+    CommonViewComponent,
+    CommonSampleSyllabusComponent,
+  ],
 })
 export class SharedModule {}

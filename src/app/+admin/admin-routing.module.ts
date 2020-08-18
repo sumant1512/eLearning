@@ -13,7 +13,7 @@ import { PrivacyPolicyComponent } from "../shared/privacy-policy/privacy-policy.
 import { ClassComponent } from "./class/class.component";
 import { SamplePaperComponent } from "./sample-paper/sample-paper.component";
 import { SubjectComponent } from "./subject/subject.component";
-import { ViewSaplePaperComponent } from "./view-saple-paper/view-saple-paper.component";
+import { ViewSamplePaperComponent } from "./view-sample-paper/view-sample-paper.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
 const routes: Routes = [
@@ -35,7 +35,7 @@ const routes: Routes = [
       },
       {
         path: ProfileRoutesEnum.VIEW_SAMPLE_PAPER,
-        component: ViewSaplePaperComponent,
+        component: ViewSamplePaperComponent,
       },
       {
         path: ProfileRoutesEnum.SETTINGS,
