@@ -24,17 +24,23 @@ const routes: Routes = [
       ),
   },
   {
+    path: RoutesEnum.RESET_PASSWORD,
+    loadChildren: () =>
+      import("./+reset-password/reset-password.module").then(
+        (m) => m.ResetPasswordModule
+      ),
+  },
+  {
     path: RoutesEnum.ADMIN,
     loadChildren: () =>
       import("./+admin/admin.module").then((m) => m.AdminModule),
     canActivate: [AuthService],
   },
   {
-    path: RoutesEnum.RESET_PASSWORD,
+    path: RoutesEnum.STUDENT,
     loadChildren: () =>
-      import("./+reset-password/reset-password.module").then(
-        (m) => m.ResetPasswordModule
-      ),
+      import("./+student/student.module").then((m) => m.StudentModule),
+    canActivate: [AuthService],
   },
   { path: "**", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
 ];
