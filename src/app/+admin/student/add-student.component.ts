@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Validators, FormBuilder, FormGroup } from "@angular/forms";
-import { AdminProfileService } from "../../store/services/admin-profile.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
@@ -30,11 +29,7 @@ export class AddStudentComponent implements OnInit {
     { value: "XII", label: "XII" },
   ];
 
-  constructor(
-    private fb: FormBuilder,
-    private AdminProfileService: AdminProfileService,
-    private store: Store<AppState>
-  ) {
+  constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.studentRegistrationForm = this.fb.group({
       firstName: ["", Validators.required],
       lastName: ["", Validators.required],
@@ -77,23 +72,25 @@ export class AddStudentComponent implements OnInit {
   }
 
   displayNone() {
-    setTimeout(function(){ document.getElementById("myP1").style.display = "none"; }, 1000);
+    setTimeout(function () {
+      document.getElementById("myP1").style.display = "none";
+    }, 1000);
   }
-  
+
   displayDom() {
     document.getElementById("myP1").style.display = "";
   }
-  
-    showHideStudents() {
-      this.buttonName === "Show Students"
-        ? (this.buttonName = "Add Student")
-        : (this.buttonName = "Show Students");
-      this.changeClass = !this.changeClass;
-  
-      this.buttonName === "Show Students"
-        ? (this.displayNone())
-        : (this.displayDom());
-    }
+
+  showHideStudents() {
+    this.buttonName === "Show Students"
+      ? (this.buttonName = "Add Student")
+      : (this.buttonName = "Show Students");
+    this.changeClass = !this.changeClass;
+
+    this.buttonName === "Show Students"
+      ? this.displayNone()
+      : this.displayDom();
+  }
 
   registerStudent() {
     const studentRegistrationDetails = this.studentRegistrationForm.value;
