@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { AdminProfileService } from "../../../store/services/admin-profile.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
@@ -12,10 +11,7 @@ import * as StudentActions from "src/app/store/students/student.actions";
 export class ViewStudentComponent implements OnInit {
   students = [];
   studentName: string;
-  constructor(
-    private AdminprofileService: AdminProfileService,
-    private store: Store<AppState>
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.fetchStudents();
@@ -35,12 +31,12 @@ export class ViewStudentComponent implements OnInit {
   }
 
   startSession() {
-    this.AdminprofileService.startSession().subscribe((response) => {
-      if (response.status === 200) {
-        alert("success");
-      } else {
-        alert("fail");
-      }
-    });
+    // this.AdminprofileService.startSession().subscribe((response) => {
+    //   if (response.status === 200) {
+    //     alert("success");
+    //   } else {
+    //     alert("fail");
+    //   }
+    // });
   }
 }
