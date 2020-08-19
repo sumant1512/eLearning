@@ -17,8 +17,9 @@ import { AuthService } from "src/app/store/auth/api/auth.service";
 export class ProfileComponent implements OnInit {
   schoolImageForm: FormGroup;
   adminProfile: ProfileType;
+  selectedImageDetails: Object;
   schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-    CONSTANTS.School_Building
+    CONSTANTS.SCHOOL_IMAGE
   );
   adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
     CONSTANTS.USER_IMAGE
@@ -61,9 +62,17 @@ export class ProfileComponent implements OnInit {
         switch (name) {
           case "admin":
             this.adminImageUrl = event.target.result;
+            this.selectedImageDetails = {
+              image: this.adminImageUrl,
+              imageType: name,
+            };
             break;
           case "school_image":
             this.schoolImageUrl = event.target.result;
+            this.selectedImageDetails = {
+              image: this.schoolImageUrl,
+              imageType: name,
+            };
             break;
         }
       };
@@ -71,21 +80,13 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  saveAdminImage(): void {
-    this.schoolImageForm.value.schoolImage = this.adminImageUrl;
-    this.authService
-      .saveAdminImage(this.schoolImageForm.value.adminImage)
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
-
-  saveSchoolImage() {
-    this.schoolImageForm.value.schoolImage = this.schoolImageUrl;
-    this.authService
-      .saveAdminImage(this.schoolImageForm.value.schoolImage)
-      .subscribe((response) => {
-        console.log(response);
-      });
+  saveImage(): void {
+    // this.schoolImageForm.value.adminImage = this.adminImageUrl;
+    console.log(this.selectedImageDetails);
+    // this.authService
+    //   .saveAdminImage(this.schoolImageForm.value)
+    //   .subscribe((response) => {
+    //     console.log(response);
+    //   });
   }
 }

@@ -31,13 +31,11 @@ export class AuthService {
   }
 
   saveAdminImage(image) {
-    var reqHeader = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-    });
-    return this.http.post<ProfileType[]>(HOST + "saveAdminImage", image, {
-      headers: reqHeader,
-    });
+    // var reqHeader = new HttpHeaders({
+    //   "Content-Type": "application/json",
+    //   Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+    // });
+    return this.http.post<any>("http://localhost:8080/saveAdminImage", image);
   }
 
   //Logout call
