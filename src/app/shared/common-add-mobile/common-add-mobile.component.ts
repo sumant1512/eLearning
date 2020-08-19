@@ -71,6 +71,7 @@ export class CommonAddMobileComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getStatus();
     this.fetchClassList();
     this.reviewStatus();
   }
@@ -94,9 +95,14 @@ export class CommonAddMobileComponent implements OnInit {
   }
 
   reviewStatus(): boolean {
-    if ("Topic" === this.name) return false;
-    return true;
-  }
+    if ((this.name === "Topic") || (this.name === "Sample Paper"))
+    return false;
+  return true;
+}
+  
+ getStatus(): boolean {
+    return this.name === "Sample Paper" ? false : true;
+}
 
   add() {
     this.loader = true;
@@ -106,7 +112,16 @@ export class CommonAddMobileComponent implements OnInit {
         classId: this.selectedClassId,
         subjectId: this.selectedSubjectId,
       });
-    else this.childEvent.emit(this.addForm.value.itemName);
+    else if ("Sample Paper" === this.name) {
+      this.childEvent.emit({
+      samplePaperName: this.addForm.value.itemName,
+      samplePaperUrl: (<HTMLInputElement>document.getElementById("itemUrl")).value,
+      classId: this.selectedClassId,
+      subjectId: this.selectedSubjectId,
+    }); 
+    }
+    else
+      this.childEvent.emit(this.addForm.value.itemName);
   }
 
   selectedClass(id) {

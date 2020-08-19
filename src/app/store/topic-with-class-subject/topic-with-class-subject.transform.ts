@@ -1,5 +1,28 @@
-export function topicWithClassSubjectTransform(data: any) {
-  return data;
+export function transformForSyllabus(payload) {
+  const classList = payload.classList;
+  const classWithSubjectList = payload.classWithSubjectList;
+  const topicWithClassSubjectList = payload.topicWithClassSubjectList;
+  let resultForSyllabus = classList.map(
+    ({ class_id: class_id, class_name: class_name }) => ({
+      class_id,
+      class_name,
+      subjects: classWithSubjectList
+        .filter((q) => q.class_id === class_id)
+        .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
+          subject_id,
+          subject_name,
+          topics: topicWithClassSubjectList
+            .filter(
+              (q) => q.class_id === class_id && q.subject_id === subject_id
+            )
+            .map(({ topic_name: topic_name }) => ({
+              topic_name,
+            })),
+        })),
+    })
+  );
+  console.log(resultForSyllabus);
+  return resultForSyllabus;
 }
 
 [

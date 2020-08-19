@@ -1,1 +1,158 @@
-<p>settings works!</p>
+
+    <div class="container shadow mt-4">
+      <div class="row">
+          <div class="card-body">
+              <h5 class="card-title text-center"><b>Edit Details</b></h5>
+        
+            <form [formGroup]="schoolEditForm">
+              <div class="row form-label-group">
+                <div class="mb-3 mb-md-0 col-12 col-md-6">
+                  <input type="text" formControlName="schoolName" class="form-control" [ngClass]="{
+                      'is-invalid':
+                        (f.schoolName.touched || f.schoolName.dirty) &&
+                        f.schoolName.errors
+                    }" placeholder="School Name." class="form-control " />
+                  <div *ngIf="
+                      (f.schoolName.touched || f.schoolName.dirty) &&
+                      f.schoolName.errors
+                    " class="invalid-feedback">
+                    <div *ngIf="f.schoolName.errors.required">
+                      School Name is required*
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <input type="text" class="form-control" placeholder="Admin Name"
+                    formControlName="adminName" [ngClass]="{
+                      'is-invalid':
+                        (f.adminName.touched || f.adminName.dirty) &&
+                        f.adminName.errors
+                    }" />
+                  <div *ngIf="
+                      (f.adminName.touched || f.adminName.dirty) &&
+                      f.adminName.errors
+                    " class="invalid-feedback">
+                    <div *ngIf="f.adminName.errors.required">
+                      Admin Name is required*
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+             
+                  <div class="row form-label-group">
+                    <div class="mb-3 mb-md-0 col-12 col-md-6">
+                  <input type="text" class="form-control" formControlName="schoolRegistrationNo"
+                    placeholder="School Registration No." [ngClass]="{
+                      'is-invalid':
+                        (f.schoolRegistrationNo.touched ||
+                          f.schoolRegistrationNo.dirty) &&
+                        f.schoolRegistrationNo.errors
+                    }" />
+                  <div *ngIf="
+                      (f.schoolRegistrationNo.touched ||
+                        f.schoolRegistrationNo.dirty) &&
+                      f.schoolRegistrationNo.errors
+                    " class="invalid-feedback">
+                    <div *ngIf="f.schoolRegistrationNo.errors.required">
+                      School Registration No is required*
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <input type="text" class="form-control" placeholder="Admin Aadhar"
+                    formControlName="adminAdhar" [ngClass]="{
+                      'is-invalid':
+                        (f.adminAdhar.touched || f.adminAdhar.dirty) &&
+                        f.adminAdhar.errors
+                    }" />
+                  <div *ngIf="
+                      (f.adminAdhar.touched || f.adminAdhar.dirty) &&
+                      f.adminAdhar.errors
+                    " class="invalid-feedback">
+                    <div *ngIf="f.adminAdhar.errors.required">
+                      Aadhar number is required*
+                    </div>
+                    <div *ngIf="f.adminAdhar.errors.pattern">
+                      Enter a valid Aadhar number
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+             
+                  <div class="row form-label-group">
+                    <div class="mb-3 mb-md-0 col-12 col-md-6">
+                  <input type="text" formControlName="schoolContactNo" placeholder="School mobile No."
+                    class="form-control" [ngClass]="{
+                      'is-invalid':
+                        (f.schoolContactNo.touched || f.schoolContactNo.dirty) &&
+                        f.schoolContactNo.errors &&
+                        f.schoolContactNo.invalid
+                    }" />
+                  <div *ngIf="
+                      (f.schoolContactNo.touched || f.schoolContactNo.dirty) &&
+                      f.schoolContactNo.errors
+                    " class="invalid-feedback">
+                    <div *ngIf="f.schoolContactNo.errors.required">
+                      School Contact number is required*
+                    </div>
+                    <div *ngIf="f.schoolContactNo.errors.pattern">
+                      Enter a valid Number
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <input type="text" formControlName="adminContactNo" placeholder="Admin Mobile No."
+                    class="form-control" [ngClass]="{
+                      'is-invalid':
+                        (f.adminContactNo.touched || f.adminContactNo.dirty) &&
+                        f.adminContactNo.errors
+                    }" />
+                  <div *ngIf="
+                      (f.adminContactNo.touched || f.adminContactNo.dirty) &&
+                      f.adminContactNo.errors
+                    " class="invalid-feedback">
+                    <div *ngIf="f.adminContactNo.errors.required">
+                      Admin Contact number is required*
+                    </div>
+                    <div *ngIf="f.adminContactNo.errors.pattern">
+                      Enter a valid Number
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+      
+                  <div class="row form-label-group">
+                  <div class="col-12 col-md-12">
+                    <input type="text" formControlName="address" placeholder="Address"
+                      class="form-control" [ngClass]="{
+                        'is-invalid':
+                          (f.address.touched || f.address.dirty) &&
+                          f.address.errors
+                      }" />
+                    <div *ngIf="
+                        (f.address.touched || f.address.dirty)  &&
+                        f.address.errors
+                      " class="invalid-feedback">
+                      <div *ngIf="f.address.errors.required">
+                        Address is required*
+                      </div>  
+                    </div>
+                  </div>
+                  </div>
+
+  <br>
+              <div class="form-group">
+                <div class="text-center">
+                <button (click)="updateSchool()" [disabled]="schoolEditForm.invalid || !schoolEditForm.dirty"
+                 class="btn btn-primary btn-block">Update</button>
+                  </div>
+              </div>
+            </form>
+          
+        </div>
+      </div>
+    </div>
+ 

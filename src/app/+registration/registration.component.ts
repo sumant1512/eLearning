@@ -65,14 +65,14 @@ export class RegistrationComponent implements OnInit {
       .schoolRegistration(schoolRegistrationDetails)
       .subscribe((response) => {
         if (response["status"]) {
-          this.router.navigate(["/verification"], {
-            queryParams: { email: this.schoolRegisterForm.value.email },
-          });
+          this.router.navigate([
+            "/verification",
+            this.schoolRegisterForm.value.email,
+          ]);
         } else {
           this.error = true;
           this.errorMessage = response["message"];
           alert(this.errorMessage);
-          // Swal.fire("Error!", response["message"], "error");
         }
       });
   }

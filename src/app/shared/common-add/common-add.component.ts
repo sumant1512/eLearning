@@ -69,7 +69,8 @@ export class CommonAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.reviewStatus();
+   this.reviewStatus();
+   this.getStatus();
     this.fetchClassList();
   }
 
@@ -92,9 +93,13 @@ export class CommonAddComponent implements OnInit {
   }
 
   reviewStatus(): boolean {
-    if ("Topic" === this.name) return false;
+    if ((this.name === "Topic") || (this.name === "Sample Paper"))
+      return false;
     return true;
   }
+  getStatus(): boolean {
+    return this.name === "Sample Paper" ? false : true;
+}
 
   add() {
     this.loader = true;
@@ -104,7 +109,16 @@ export class CommonAddComponent implements OnInit {
         classId: this.selectedClassId,
         subjectId: this.selectedSubjectId,
       });
-    else this.childEvent.emit(this.addForm.value.itemName);
+    else if ("Sample Paper" === this.name) {
+      this.childEvent.emit({
+      samplePaperName: this.addForm.value.itemName,
+      samplePaperUrl: (<HTMLInputElement>document.getElementById("itemUrl")).value,
+      classId: this.selectedClassId,
+      subjectId: this.selectedSubjectId,
+    }); 
+    }
+    else
+      this.childEvent.emit(this.addForm.value.itemName);
   }
 
   selectedClass(id) {

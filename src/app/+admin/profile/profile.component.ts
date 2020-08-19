@@ -81,12 +81,13 @@ export class ProfileComponent implements OnInit {
   }
 
   saveImage(): void {
-    // this.schoolImageForm.value.adminImage = this.adminImageUrl;
+    //this.schoolImageForm.value.adminImage = this.adminImageUrl;
     console.log(this.selectedImageDetails);
-    // this.authService
-    //   .saveAdminImage(this.schoolImageForm.value)
-    //   .subscribe((response) => {
-    //     console.log(response);
-    //   });
+    this.authService
+      .saveAdminImage(this.selectedImageDetails)
+      .subscribe((response) => {
+        if (response["status"]) alert(response["message"]);
+        else alert(response["message"]);
+      });
   }
 }

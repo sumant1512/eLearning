@@ -1,0 +1,8 @@
+.form-label-group {
+    margin-bottom: 1rem;
+}
+
+.invalid-feedback{
+    text-align: left;
+    font-weight: bold;
+}

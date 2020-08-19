@@ -26,4 +26,24 @@ export class SamplePaperService {
       }),
     });
   }
+ 
+   editSamplePaperName(Details) {
+    return this.http.post<any>(HOST + "editSamplePaperName", Details, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+   }
+  
+  removeSamplePaper(id: number) {
+    return this.http
+      .delete<any>(HOST + `removeSamplePaper/${id}`, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+        }),
+      });
+  }
+   
 }

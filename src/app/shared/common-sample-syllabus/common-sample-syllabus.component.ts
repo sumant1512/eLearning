@@ -12,6 +12,11 @@ import { TopicWithClassSubjectListType } from "src/app/store/topic-with-class-su
 import * as SamplePaperActions from "../../store/sample-paper/sample-paper.actions";
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
 
+import * as TopicActions from "../../store/topic/topic.actions";
+import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
+import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
+import { SubjectService } from "../../store/subject/api/subject.service";
+
 @Component({
   selector: "app-common-sample-syllabus",
   templateUrl: "./common-sample-syllabus.component.html",
@@ -26,21 +31,27 @@ export class CommonSampleSyllabusComponent implements OnInit {
   samplePaperList: SamplePaperListType[];
   classList: ClassListType[];
   selectedClassDetails;
-  selectedClassName;
+  selectedClassName: string;
+  selectedClassId: number;
   resultForSyllabus;
   resultForSamperPaper;
 
   isAddSamplePaperFormOpen = false;
-  constructor(private store: Store<AppState>) {
+  constructor(
+    private store: Store<AppState>,
+    private subjectService: SubjectService
+  ) {
     this.addForm = addForm();
   }
 
   ngOnInit(): void {
     this.getStatus();
-    this.fetchClassList();
-    this.fetchClassWithSubject();
-    this.fetchSamplePaper();
-    this.fetchTopicWithClassSubject();
+    // this.fetchClassList();
+    // this.fetchClassWithSubject();
+    // this.fetchSamplePaper();
+    // this.fetchTopicWithClassSubject();
+    this.fetchSyllabusTransform();
+    this.fetchSamplePaperTransform();
   }
 
   openSamplePaperForm() {
@@ -53,6 +64,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
 
   selectClass(classId, className) {
     this.selectedClassName = className;
+    this.selectedClassId = classId;
     if (this.getStatus() && this.resultForSyllabus !== undefined)
       this.selectedClassDetails = this.resultForSyllabus.filter(
         (data) => data.class_id === classId
@@ -63,94 +75,132 @@ export class CommonSampleSyllabusComponent implements OnInit {
       );
   }
 
-  transformForSyllabus() {
-    this.resultForSyllabus = this.classList.map(
-      ({ class_id: class_id, class_name: class_name }) => ({
-        class_id,
-        class_name,
-        subjects: this.classWithSubjectList
-          .filter((q) => q.class_id === class_id)
-          .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
-            subject_id,
-            subject_name,
-            topics: this.topicWithClassSubjectList
-              .filter(
-                (q) => q.class_id === class_id && q.subject_id === subject_id
-              )
-              .map(({ topic_name: topic_name }) => ({
-                topic_name,
-              })),
-          })),
-      })
-    );
-  }
+  // transformForSyllabus() {
+  //   this.resultForSyllabus = this.classList.map(
+  //     ({ class_id: class_id, class_name: class_name }) => ({
+  //       class_id,
+  //       class_name,
+  //       subjects: this.classWithSubjectList
+  //         .filter((q) => q.class_id === class_id)
+  //         .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
+  //           subject_id,
+  //           subject_name,
+  //           topics: this.topicWithClassSubjectList
+  //             .filter(
+  //               (q) => q.class_id === class_id && q.subject_id === subject_id
+  //             )
+  //             .map(({ topic_name: topic_name }) => ({
+  //               topic_name,
+  //             })),
+  //         })),
+  //     })
+  //   );
+  // }
 
-  transformForSamplePaper() {
-    this.resultForSamperPaper = this.classList.map(
-      ({ class_id: class_id, class_name: class_name }) => ({
-        class_id,
-        class_name,
-        subjects: this.classWithSubjectList
-          .filter((q) => q.class_id === class_id)
-          .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
-            subject_id,
-            subject_name,
-            samplePapers: this.samplePaperList
-              .filter(
-                (q) => q.class_id === class_id && q.subject_id === subject_id
-              )
-              .map(({ sample_paper_name, sample_paper_url }) => ({
-                sample_paper_name,
-                sample_paper_url,
-              })),
-          })),
-      })
-    );
-  }
+  // transformForSamplePaper() {
+  //   this.resultForSamperPaper = this.classList.map(
+  //     ({ class_id: class_id, class_name: class_name }) => ({
+  //       class_id,
+  //       class_name,
+  //       subjects: this.classWithSubjectList
+  //         .filter((q) => q.class_id === class_id)
+  //         .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
+  //           subject_id,
+  //           subject_name,
+  //           samplePapers: this.samplePaperList
+  //             .filter(
+  //               (q) => q.class_id === class_id && q.subject_id === subject_id
+  //             )
+  //             .map(({ sample_paper_name, sample_paper_url }) => ({
+  //               sample_paper_name,
+  //               sample_paper_url,
+  //             })),
+  //         })),
+  //     })
+  //   );
+  // }
 
-  fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
+  // fetchClassList(): void {
+  //   this.store.select("classList").subscribe((response) => {
+  //     if (Object.keys(response).length) {
+  //       this.classList = response;
+  //     } else {
+  //       this.store.dispatch(new ClassActions.FetchClass());
+  //     }
+  //   });
+  // }
+
+  // fetchClassWithSubject(): void {
+  //   this.store.select("classWithSubjectList").subscribe((response) => {
+  //     if (Object.keys(response).length) {
+  //       this.classWithSubjectList = response;
+  //     } else {
+  //       this.store.dispatch(
+  //         new ClassWithSubjectActions.FetchClassWithSubject()
+  //       );
+  //     }
+  //   });
+  // }
+
+  // fetchSamplePaper(): void {
+  //   this.store.select("samplePaperList").subscribe((response) => {
+  //     if (Object.keys(response).length) {
+  //       this.samplePaperList = response;
+  //       this.transformForSamplePaper();
+  //     } else {
+  //       this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
+  //     }
+  //   });
+  // }
+
+  // fetchTopicWithClassSubject(): void {
+  //   this.store.select("topicWithClassSubjectList").subscribe((response) => {
+  //     if (Object.keys(response).length) {
+  //       this.topicWithClassSubjectList = response;
+  //       this.transformForSyllabus();
+  //     } else {
+  //       this.store.dispatch(
+  //         new TopicWithClassSubjectActions.FetchTopicWithClassSubject()
+  //       );
+  //     }
+  //   });
+  // }
+  fetchSyllabusTransform(): void {
+    this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
-        this.classList = response;
+        this.resultForSyllabus = response;
       } else {
-        this.store.dispatch(new ClassActions.FetchClass());
+        this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
     });
   }
-
-  fetchClassWithSubject(): void {
-    this.store.select("classWithSubjectList").subscribe((response) => {
+  fetchSamplePaperTransform(): void {
+    this.store.select("samplePaperTransformList").subscribe((response) => {
       if (Object.keys(response).length) {
-        this.classWithSubjectList = response;
+        this.resultForSamperPaper = response;
       } else {
         this.store.dispatch(
-          new ClassWithSubjectActions.FetchClassWithSubject()
+          new SamplePaperTransformActions.FetchTransformSamplePaper()
         );
       }
     });
   }
-
-  fetchSamplePaper(): void {
-    this.store.select("samplePaperList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.samplePaperList = response;
-        this.transformForSamplePaper();
-      } else {
-        this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
-      }
-    });
+  unassignSubject(subjectId) {
+    console.log(subjectId, this.selectedClassId);
+    this.subjectService
+      .unAssignSubjectToClass({ subjectId, classId: this.selectedClassId })
+      .subscribe((response) => {
+        if (response["status"]) {
+          alert(response["message"]);
+        } else {
+          alert(response["message"]);
+        }
+      });
   }
-
-  fetchTopicWithClassSubject(): void {
-    this.store.select("topicWithClassSubjectList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.topicWithClassSubjectList = response;
-        this.transformForSyllabus();
-      } else {
-        this.store.dispatch(
-          new TopicWithClassSubjectActions.FetchTopicWithClassSubject()
-        );
-      }
-    });
+  removeTopic(topic_id) {
+    console.log(topic_id);
+    if (confirm("Are You Sure You want to Delete the Topic?")) {
+      this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
+    }
   }
 }
