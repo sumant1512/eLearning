@@ -1,0 +1,20 @@
+.slider {
+  height: 25px;
+  width: 25%;
+  float: right;
+  transition: width 1s;
+  transition-timing-function: ease;
+  background-color: red;
+}
+
+.show {
+  transition: width 1s;
+  transition-timing-function: ease;
+  z-index: 1090;
+  width: 100%;
+}
+
+.height-test {
+  transition: height 1s;
+  height: 500px;
+}

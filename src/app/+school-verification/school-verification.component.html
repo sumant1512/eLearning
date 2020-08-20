@@ -1,92 +1,78 @@
 <app-home-header></app-home-header>
+<div class="wrapper">
 <div class="container-fluid">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-heading">
-        <h2 class="text-center p-3">OTP VERIFICATION</h2>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="otpForm">
-          <div class="form-group">
-            <div class="input-group">
-              <input
-                type="text"
-                formControlName="email"
-                placeholder="School Email"
-                class="form-control"
-                [ngClass]="{
-                  'is-invalid': f.email.touched && f.email.invalid
-                }"
-              />
-              <div
-                *ngIf="(f.email.touched || f.email.dirty) && f.email.errors"
-                class="invalid-feedback"
-              >
-                <div
-                  class=""
-                  style="font-weight: bold;"
-                  *ngIf="f.email.errors.required"
-                >
-                  School Email is required*
-                </div>
-                <div
-                  class=""
-                  style="font-weight: bold;"
-                  *ngIf="f.email.errors.pattern && f.email.touched"
-                >
-                  School Email must be a valid email address
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                formControlName="otp"
-                placeholder="Enter OTP"
-                maxlength="6"
-                [ngClass]="{
-                  'is-invalid': (f.otp.touched || f.otp.dirty) && f.otp.errors
-                }"
-              />
-              <div
-                *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
-                class="invalid-feedback"
-              >
-                <div
-                  class=""
-                  style="font-weight: bold;"
-                  *ngIf="f.otp.errors.required"
-                >
-                  OTP is required*
-                </div>
-                <div
-                  class=""
-                  style="font-weight: bold;"
-                  *ngIf="f.otp.errors.pattern"
-                >
-                  Enter 6 digits
+  <div class="row">
+    <div class="col-sm-5 d-none d-sm-block left-side">
+     <div class="d-flex align-items-center justify-content-center my-50">  <p class=" verify text-white display-4"><i class="text-center mx-auto fa fa-check-circle" aria-hidden="true"></i>  Verify Yourself </p>
+  </div>
+    </div>
+    <div class="col-sm-7 right-side mx-auto text-center">
+      <div class="container">
+        <div class="row h-100 justify-content-center align-items-center">
+          <form [formGroup]="otpForm" class="justify-content-center">
+            <div class="text-center">
+              <i
+                class="p-4 m-4 fa fa-commenting-o fa-lg justify-content-center align-items-center fa-5x"
+                aria-hidden="true"
+              ></i>
+
+          
+              <h4 class="m-2 p-3">Enter the OTP associated with <b> {{email}} </b></h4>
+
+              <div  class="form-group">
+                <div class=" m-3 p-3 input-group w-50 mx-auto align-item-center">
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="otp"
+                    placeholder="Enter OTP"
+                    maxlength="6"
+                    [ngClass]="{
+                      'is-invalid':
+                        (f.otp.touched || f.otp.dirty) && f.otp.errors
+                    }"
+                  />
+                  <div
+                    *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
+                    class="invalid-feedback"
+                  >
+                    <div
+                      class=""
+                      style="font-weight: bold;"
+                      *ngIf="f.otp.errors.required"
+                    >
+                      OTP is required*
+                    </div>
+                    <div
+                      class=""
+                      style="font-weight: bold;"
+                      *ngIf="f.otp.errors.pattern"
+                    >
+                      Enter 6 digits
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="form-group text-center">
+                <button
+                  type="button"
+                  class="btn btn-success btn-lg"
+                  name="verifyotp"
+                  (click)="verifiyOtp()"
+                  [disabled]="!this.otpForm.valid"
+                >
+                  Verify
+                </button>
+                <a href="#" class="btn btn-link">Resend OTP</a>
+              </div>
             </div>
-          </div>
-          <div class="form-group text-center">
-            <button
-              type="button"
-              class="btn btn-success btn-lg"
-              name="verifyotp"
-              (click)="verifiyOtp()"
-              [disabled]="!this.otpForm.valid"
-            >
-              Verify
-            </button>
-            <a href="#" class="btn btn-link">Resend OTP</a>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<app-home-footer></app-home-footer>
+    </div>
+    
+</div></div>
+    <app-home-footer></app-home-footer>
+
+

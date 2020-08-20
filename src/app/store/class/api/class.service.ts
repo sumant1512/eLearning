@@ -1,7 +1,12 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse,
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
 import { HOST } from "config.constants";
+import { catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -37,11 +42,17 @@ export class ClassService {
   }
 
   removeClass(id: number) {
-    return this.http.delete<any>(HOST + `removeClass/${id}`, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-      }),
-    });
+    return this.http
+      .delete<any>(HOST + `removeClass/${id}`, {
+        headers: new HttpHeaders({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+        }),
+      })
+      .pipe(catchError(this.handleError));
+  }
+  private handleError(error: HttpErrorResponse) {
+    alert(error.error.message);
+    return throwError(error.error.message);
   }
 }

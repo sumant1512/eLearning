@@ -1,12 +1,24 @@
-.modal-content{
-  background-color: #12186b;
-  border-radius: 40px;;
 
+.row {
+  height: 100%;
 }
-.btn-link{
-  color:white;
+.left-side {
+  /* height: 80vh;border-right:10px solid white; */
+  background-color: #3994eb;
+  /* border-top-right-radius: 555px;
+  border-bottom-right-radius: 555px; */
 }
-.modal-heading h2{
-  color:#ffffff;
-}
+.right-side {
+  height: 80vh;
 
+  background-image: linear-gradient(to bottom right, #1e86ff, #ecec63);
+}
+.fa-check-circle {
+  color: #35922e;
+}
+.verify {
+  margin-top: 30%;
+}
+.wrapper {
+  min-height: calc(100vh-75px);
+}

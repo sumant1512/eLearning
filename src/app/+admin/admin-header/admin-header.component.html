@@ -49,37 +49,44 @@
             >View-Sample-papers</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item dropdown">
           <a
-            class="nav-link"
-            routerLink="class"
-            (click)="sideNavStatus = !sideNavStatus"
-            >Class</a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
           >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="subject"
-            (click)="sideNavStatus = !sideNavStatus"
-            >Subject</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="topic"
-            (click)="sideNavStatus = !sideNavStatus"
-            >Topic</a
-          >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="sample-paper"
-            (click)="sideNavStatus = !sideNavStatus"
-            >Sample-Paper</a
-          >
+            Add
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a
+              class="core-blue nav-link"
+              routerLink="class"
+              (click)="sideNavStatus = !sideNavStatus"
+              >Class</a
+            >
+            <a
+              class="core-blue nav-link"
+              routerLink="subject"
+              (click)="sideNavStatus = !sideNavStatus"
+              >Subject</a
+            >
+            <a
+              class="core-blue nav-link"
+              routerLink="topic"
+              (click)="sideNavStatus = !sideNavStatus"
+              >Topic</a
+            >
+            <a
+              class="core-blue nav-link"
+              routerLink="sample-paper"
+              (click)="sideNavStatus = !sideNavStatus"
+              >Sample-Paper</a
+            >
+          </div>
         </li>
         <li class="nav-item">
           <a

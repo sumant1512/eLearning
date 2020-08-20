@@ -1,15 +1,15 @@
-@media only screen and (max-width: 767px) {
+/* @media only screen and (max-width: 767px) {
   .carousel {
     display: none;
     margin-top: 0%;
   }
-}
+} */
 
-@media only screen and (min-width: 1366px) {
+/* @media only screen and (min-width: 1366px) {
   .image {
     height: 90vh;
   }
-}
+} */
 
 .carousel-caption {
   right: initial;
