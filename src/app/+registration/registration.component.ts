@@ -65,7 +65,9 @@ export class RegistrationComponent implements OnInit {
       .schoolRegistration(schoolRegistrationDetails)
       .subscribe((response) => {
         if (response["status"]) {
-          this.router.navigate(["verification"]);
+          this.router.navigate(["/verification"], {
+            queryParams: { email: this.schoolRegisterForm.value.email },
+          });
         } else {
           this.error = true;
           this.errorMessage = response["message"];

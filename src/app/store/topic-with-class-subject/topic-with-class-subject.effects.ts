@@ -27,16 +27,7 @@ export class TopicWithClassSubjectEffects {
     mergeMap((response) => {
       return response.pipe(
         map((res) => {
-          const classList = this.store
-            .select("classList")
-            .subscribe((classList) => {
-              return classList;
-            });
-          const mappingObject = {
-            classList: classList,
-            topicWithClassSubject: res,
-          };
-          return new FetchedTopicWithClassSubject(mappingObject);
+          return new FetchedTopicWithClassSubject(res);
         })
       );
     })

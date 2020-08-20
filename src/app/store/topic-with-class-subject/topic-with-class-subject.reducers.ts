@@ -13,7 +13,7 @@ export function topicWithClassSubjectReducer(
 ): TopicWithClassSubjectListType[] {
   switch (action.type) {
     case TopicWithClassSubjectActions.FETCHED_TOPIC_WITH_CLASS_SUBJECT:
-      return topicWithClassSubjectTransform(action.payload);
+      return action.payload;
     default:
       return state;
   }

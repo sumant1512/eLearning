@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { otpVerificationForm } from "./school--verification.utils";
 import { VerificationService } from "../store/services/verification.service";
 
@@ -12,19 +12,21 @@ import { VerificationService } from "../store/services/verification.service";
 export class SchoolVerificationComponent implements OnInit {
   otpForm: FormGroup;
   submitted = false;
-
+email;
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private verificationService: VerificationService
   ) {
     this.otpForm = otpVerificationForm();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.email = this.route.snapshot.queryParamMap.get('email');
+  }
   get f() {
     return this.otpForm.controls;
   }
-
   verifiyOtp() {
     const verificationDetails = this.otpForm.value;
     this.verificationService
@@ -39,3 +41,6 @@ export class SchoolVerificationComponent implements OnInit {
       });
   }
 }
+
+
+

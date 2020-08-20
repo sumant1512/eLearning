@@ -9,10 +9,9 @@ import { AppState } from "src/app/store/app.state";
 import { ClassWithSubjectListType } from "src/app/store/class-with-subject/types/class-with-subject.type";
 import { ClassListType } from "src/app/store/class/types/class.type";
 import { TopicWithClassSubjectListType } from "src/app/store/topic-with-class-subject/types/topic-with-class-subject.type";
-import { TopicService } from "src/app/store/topic/api/topic.service";
 import * as SamplePaperActions from "../../store/sample-paper/sample-paper.actions";
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
-import { SamplePaperService } from "src/app/store/sample-paper/api/sample-paper.service";
+
 @Component({
   selector: "app-common-sample-syllabus",
   templateUrl: "./common-sample-syllabus.component.html",
@@ -21,66 +20,91 @@ import { SamplePaperService } from "src/app/store/sample-paper/api/sample-paper.
 export class CommonSampleSyllabusComponent implements OnInit {
   addForm: FormGroup;
   @Input() name: string;
-  @Output() samplePaperChildEvent = new EventEmitter();
   @Output() subjectsOfClassChildEvent = new EventEmitter();
   classWithSubjectList: ClassWithSubjectListType[];
   topicWithClassSubjectList: TopicWithClassSubjectListType[];
   samplePaperList: SamplePaperListType[];
-  selectedClassId: number;
-  selectedSubjectId: number;
   classList: ClassListType[];
-  subjectList: any;
-  subjectsOfClass: any;
-  selectedSubjects;
+  selectedClassDetails;
   selectedClassName;
-  classnamewithid;
-  loader = false;
+  resultForSyllabus;
+  resultForSamperPaper;
+
   isAddSamplePaperFormOpen = false;
-  constructor(
-    private store: Store<AppState>,
-    private topicService: TopicService,
-    private samplePaperService: SamplePaperService
-  ) {
+  constructor(private store: Store<AppState>) {
     this.addForm = addForm();
   }
+
   ngOnInit(): void {
     this.getStatus();
     this.fetchClassList();
+    this.fetchClassWithSubject();
     this.fetchSamplePaper();
-  }
-
-  fetchSamplePaper(): void {
-    this.store.select("samplePaperList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.samplePaperList = response;
-      } else {
-        this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
-      }
-    });
+    this.fetchTopicWithClassSubject();
   }
 
   openSamplePaperForm() {
     this.isAddSamplePaperFormOpen = !this.isAddSamplePaperFormOpen;
   }
+
   getStatus(): boolean {
-    if ("Sample Paper" === this.name) return false;
-    return true;
+    return this.name === "Sample Paper" ? false : true;
   }
 
-  add() {
-    this.loader = true;
+  selectClass(classId, className) {
+    this.selectedClassName = className;
+    if (this.getStatus() && this.resultForSyllabus !== undefined)
+      this.selectedClassDetails = this.resultForSyllabus.filter(
+        (data) => data.class_id === classId
+      );
+    else if (this.resultForSamperPaper !== undefined)
+      this.selectedClassDetails = this.resultForSamperPaper.filter(
+        (data) => data.class_id === classId
+      );
+  }
 
-    this.samplePaperChildEvent.emit({
-      samplePaperName: this.addForm.value.itemName,
-      samplePaperUrl: this.addForm.value.itemUrl,
-      classId: this.selectedClassId,
-      subjectId: this.selectedSubjectId,
-    });
-    console.log(
-      this.addForm.value.itemName,
-      this.addForm.value.itemUrl,
-      this.selectedClassId,
-      this.selectedSubjectId
+  transformForSyllabus() {
+    this.resultForSyllabus = this.classList.map(
+      ({ class_id: class_id, class_name: class_name }) => ({
+        class_id,
+        class_name,
+        subjects: this.classWithSubjectList
+          .filter((q) => q.class_id === class_id)
+          .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
+            subject_id,
+            subject_name,
+            topics: this.topicWithClassSubjectList
+              .filter(
+                (q) => q.class_id === class_id && q.subject_id === subject_id
+              )
+              .map(({ topic_name: topic_name }) => ({
+                topic_name,
+              })),
+          })),
+      })
+    );
+  }
+
+  transformForSamplePaper() {
+    this.resultForSamperPaper = this.classList.map(
+      ({ class_id: class_id, class_name: class_name }) => ({
+        class_id,
+        class_name,
+        subjects: this.classWithSubjectList
+          .filter((q) => q.class_id === class_id)
+          .map(({ subject_id: subject_id, subject_name: subject_name }) => ({
+            subject_id,
+            subject_name,
+            samplePapers: this.samplePaperList
+              .filter(
+                (q) => q.class_id === class_id && q.subject_id === subject_id
+              )
+              .map(({ sample_paper_name, sample_paper_url }) => ({
+                sample_paper_name,
+                sample_paper_url,
+              })),
+          })),
+      })
     );
   }
 
@@ -90,69 +114,43 @@ export class CommonSampleSyllabusComponent implements OnInit {
         this.classList = response;
       } else {
         this.store.dispatch(new ClassActions.FetchClass());
-        this.fetchClassWithSubject();
       }
     });
   }
 
-  fetchClassWithSubject() {
+  fetchClassWithSubject(): void {
     this.store.select("classWithSubjectList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.classWithSubjectList = response;
-        this.fetchTopicWithClassSubject();
       } else {
         this.store.dispatch(
           new ClassWithSubjectActions.FetchClassWithSubject()
         );
-        this.fetchTopicWithClassSubject();
       }
     });
   }
 
-  fetchTopicWithClassSubject() {
+  fetchSamplePaper(): void {
+    this.store.select("samplePaperList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.samplePaperList = response;
+        this.transformForSamplePaper();
+      } else {
+        this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
+      }
+    });
+  }
+
+  fetchTopicWithClassSubject(): void {
     this.store.select("topicWithClassSubjectList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.topicWithClassSubjectList = response;
+        this.transformForSyllabus();
       } else {
         this.store.dispatch(
           new TopicWithClassSubjectActions.FetchTopicWithClassSubject()
         );
       }
     });
-  }
-
-  selectClass(classId, className) {
-    this.selectedClassName = className;
-    this.selectedSubjects = this.classWithSubjectList.filter(
-      (subjectList) => subjectList.class_id === classId
-    );
-
-    const groups = this.selectedSubjects.reduce((acc, cur) => {
-      (acc[cur.subject_name] = acc[cur.subject_name] || []).push(
-        cur.topic_name
-      );
-      return acc;
-    }, {}); // to group the array according to subject
-
-    this.selectedSubjects = Object.keys(groups).map((key) => ({
-      subject_name: key,
-      topics: groups[key],
-    }));
-  }
-
-  getClassForSubject(classId) {
-    this.topicService.getSubjectsOfClass({ classId }).subscribe((response) => {
-      if (response.length) {
-        this.subjectList = response;
-      }
-    });
-  }
-  selectedClass(id) {
-    this.selectedClassId = id;
-    this.subjectsOfClassChildEvent.emit(id);
-    this.getClassForSubject(id);
-  }
-  selectedSubject(id) {
-    this.selectedSubjectId = id;
   }
 }
