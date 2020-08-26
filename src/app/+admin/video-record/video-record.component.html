@@ -1,0 +1,15 @@
+<div>
+  <div class="col-md-12 px-3 mt-3">
+    <video #video class="video" controls="" style="
+    width: -webkit-fill-available;
+    height: auto;"></video>
+  </div>
+</div>
+<div>
+  <div class="px-3 m-1">
+    <button md-raised-button [disabled]="toggle" class="btn btn-primary m-2"  (click)="startRecording()"> Record </button>
+    <button md-raised-button [disabled]="!toggle" class="btn btn-danger m-2" (click) ="stopRecording()"> Stop</button>
+    <button md-raised-button [disabled]="toggleDownload" class="btn btn-success m-2"  (click)="download()"> Download</button>
+  </div>
+  
+</div>

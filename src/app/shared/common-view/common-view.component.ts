@@ -5,7 +5,7 @@ import { editForm, assignSubjectForm } from "../common.utils";
 import { ClassListType } from "src/app/store/class/types/class.type";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
 import { TopicListType } from "src/app/store/topic/types/topic.type";
-
+import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
 @Component({
   selector: "app-common-view",
   templateUrl: "./common-view.component.html",
@@ -14,7 +14,7 @@ import { TopicListType } from "src/app/store/topic/types/topic.type";
 export class CommonViewComponent implements OnInit {
   editForm: FormGroup;
   assignSubjectForm: FormGroup;
-  @Input() viewList: ClassListType[] | SubjectListType[] | TopicListType[];
+  @Input() viewList: ClassListType[] | SubjectListType[] | TopicListType[] | SamplePaperListType[];
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
   @Output() editChildEvent = new EventEmitter();
@@ -22,7 +22,7 @@ export class CommonViewComponent implements OnInit {
   unassignedClassList: ClassListType[];
   previousId: number;
   selectedSubjectId: number;
-  constructor(private subejctService: SubjectService) {
+  constructor(private subjectService: SubjectService) {
     this.editForm = editForm();
     this.assignSubjectForm = assignSubjectForm();
   }
@@ -31,7 +31,7 @@ export class CommonViewComponent implements OnInit {
     this.checkStatus();
   }
 
-  // finctuin to show/hide assign icon
+  // function to show/hide assign icon
   checkStatus(): boolean {
     return this.name === "Subject" ? false : true;
   }
@@ -49,7 +49,7 @@ export class CommonViewComponent implements OnInit {
 
   // function to emit details for assigning class
   selectSubject(subjectId): void {
-    this.subejctService
+    this.subjectService
       .getClassesOfUnassignedSubjects({ subjectId })
       .subscribe((response) => {
         this.unassignedClassList = response;

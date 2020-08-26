@@ -10,7 +10,7 @@
                 <li
                   class="nav-item"
                   *ngFor="
-                    let class of classList;
+                    let class of resultForSyllabus;
                     let i = index;
                     let isFirst = first
                   "
@@ -69,7 +69,16 @@
                             [hidden]="!getStatus()"
                             *ngFor="let topic of subject.topics"
                           >
-                            <li>{{ topic.topic_name }}</li>
+                            <li>
+                              {{ topic.topic_name }}
+                              <span>
+                                <i
+                                  (click)="removeTopic(topic.topic_id)"
+                                  class="ml-2 fa fa-minus-circle"
+                                >
+                                </i
+                              ></span>
+                            </li>
                           </ul>
                           <ul
                             [hidden]="getStatus()"
@@ -88,6 +97,18 @@
                           </ul>
                         </div>
                       </div>
+                      <button
+                        class="btn btn-light"
+                        [disabled]="
+                          (subject.topics || subject.samplePapers).length >= 1
+                        "
+                      >
+                        <i
+                          (click)="unassignSubject(subject.subject_id)"
+                          class="fa fa-minus-circle"
+                        >
+                        </i>
+                      </button>
                     </div>
                   </div>
                 </div>

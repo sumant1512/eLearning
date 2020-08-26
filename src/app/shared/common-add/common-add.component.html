@@ -39,6 +39,12 @@
         <i class="charcoal">{{ name }} Name</i>
         <input class="form-control" formControlName="itemName" type="text" />
       </div>
+      <div [hidden]="getStatus()">
+        <div  class="form-group">
+           <i   class="charcoal">Sample Paper Url</i>
+             <input class="form-control" id="itemUrl" name="itemUrl" type="text" />
+         </div>
+       </div>
       <div>
         <button
           [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"

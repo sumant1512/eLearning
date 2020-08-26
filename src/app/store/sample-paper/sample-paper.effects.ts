@@ -15,7 +15,7 @@ export class SamplePaperEffects {
     private action$: Actions<SamplePaperActionsUnion>,
     private samplePaperService: SamplePaperService
   ) {}
-
+ 
   @Effect()
   addSamplePaper$ = this.action$.pipe(
     ofType(SamplePaperActions.ADD_SAMPLE_PAPER),
@@ -30,6 +30,36 @@ export class SamplePaperEffects {
       );
     })
   );
+
+  @Effect()
+  editSamplePaper$ = this.action$.pipe(
+    ofType(SamplePaperActions.EDIT_SAMPLE_PAPER),
+    map((action) => {
+      return this.samplePaperService.editSamplePaperName(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchSamplePaper();
+        })
+      );
+    })
+  );
+
+   @Effect()
+  deleteSamplePaper$ = this.action$.pipe(
+    ofType(SamplePaperActions.DELETE_SAMPLE_PAPER),
+    map((action) => {
+      return this.samplePaperService.removeSamplePaper(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchSamplePaper();
+        })
+      );
+    })
+  ); 
 
   @Effect()
   fetchSamplePapers$ = this.action$.pipe(

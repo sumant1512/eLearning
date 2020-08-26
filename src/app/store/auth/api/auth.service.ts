@@ -29,13 +29,23 @@ export class AuthService {
       headers: reqHeader,
     });
   }
-
+  updateCurrentSchool(school) {
+    var reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+    });
+    return this.http.post<any>(HOST + "updateSchoolDetails", school, {
+      headers: reqHeader,
+    });
+  }
   saveAdminImage(image) {
-    // var reqHeader = new HttpHeaders({
-    //   "Content-Type": "application/json",
-    //   Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-    // });
-    return this.http.post<any>("http://localhost:8080/saveAdminImage", image);
+    var reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+    });
+    return this.http.post<any>(HOST + "saveAdminImage", image, {
+      headers: reqHeader,
+    });
   }
 
   //Logout call

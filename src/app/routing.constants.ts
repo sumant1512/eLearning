@@ -2,7 +2,7 @@ export enum RoutesEnum {
   HOME = "home",
   REGISTRATION = "registration",
   PROFILE = "profile",
-  VERIFICATION = "verification",
+  VERIFICATION = "verification/:email",
   PRIVACY_POLICY = "privacy-policy",
   RESET_PASSWORD = "reset-password",
   ADMIN = "admin",

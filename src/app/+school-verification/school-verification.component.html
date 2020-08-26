@@ -1,78 +1,91 @@
 <app-home-header></app-home-header>
 <div class="wrapper">
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-5 d-none d-sm-block left-side">
-     <div class="d-flex align-items-center justify-content-center my-50">  <p class=" verify text-white display-4"><i class="text-center mx-auto fa fa-check-circle" aria-hidden="true"></i>  Verify Yourself </p>
-  </div>
-    </div>
-    <div class="col-sm-7 right-side mx-auto text-center">
-      <div class="container">
-        <div class="row h-100 justify-content-center align-items-center">
-          <form [formGroup]="otpForm" class="justify-content-center">
-            <div class="text-center">
-              <i
-                class="p-4 m-4 fa fa-commenting-o fa-lg justify-content-center align-items-center fa-5x"
-                aria-hidden="true"
-              ></i>
+  <div class="container-fluid">
+    <div class="row h-100">
+      <div class="col-sm-5 d-none d-sm-block left-side">
+        <div class="verify text-center mx-2 justify-content-center">
+          <p>
+            <i
+              class="text-center mx-auto fa fa-check-circle"
+              aria-hidden="true"
+            ></i>
+            Verify Yourself
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-7 right-side mx-auto text-center">
+        <div class="container">
+          <div class="row h-100 justify-content-center align-items-center">
+            <form [formGroup]="otpForm" class="justify-content-center">
+              <div class="text-center">
+                <i
+                  class="text-white p-4 m-4 fa fa-commenting-o fa-lg justify-content-center align-items-center fa-5x"
+                  aria-hidden="true"
+                ></i>
 
-          
-              <h4 class="m-2 p-3">Enter the OTP associated with <b> {{email}} </b></h4>
+                <h4 class="text-white m-2 p-3">
+                  Enter the OTP associated with <b> {{ email }} </b>
+                </h4>
 
-              <div  class="form-group">
-                <div class=" m-3 p-3 input-group w-50 mx-auto align-item-center">
-                  <input
-                    type="text"
-                    class="form-control"
-                    formControlName="otp"
-                    placeholder="Enter OTP"
-                    maxlength="6"
-                    [ngClass]="{
-                      'is-invalid':
-                        (f.otp.touched || f.otp.dirty) && f.otp.errors
-                    }"
-                  />
+                <div class="form-group">
                   <div
-                    *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
-                    class="invalid-feedback"
+                    class="m-3 p-3 input-group w-50 mx-auto align-item-center"
                   >
+                    <input
+                      type="text"
+                      class="d-none form-control text-center otp-input"
+                      formControlName="email"
+                      [(ngModel)]="email"
+                    />
+                    <input
+                      type="text"
+                      class="form-control text-center otp-input"
+                      formControlName="otp"
+                      placeholder="Enter OTP"
+                      maxlength="6"
+                      [ngClass]="{
+                        'is-invalid':
+                          (f.otp.touched || f.otp.dirty) && f.otp.errors
+                      }"
+                    />
                     <div
-                      class=""
-                      style="font-weight: bold;"
-                      *ngIf="f.otp.errors.required"
+                      *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
+                      class="invalid-feedback"
                     >
-                      OTP is required*
-                    </div>
-                    <div
-                      class=""
-                      style="font-weight: bold;"
-                      *ngIf="f.otp.errors.pattern"
-                    >
-                      Enter 6 digits
+                      <div
+                        class=""
+                        style="font-weight: bold;"
+                        *ngIf="f.otp.errors.required"
+                      >
+                        OTP is required*
+                      </div>
+                      <div
+                        class=""
+                        style="font-weight: bold;"
+                        *ngIf="f.otp.errors.pattern"
+                      >
+                        Enter 6 digits
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div class="form-group text-center">
+                  <button
+                    type="button"
+                    class="btn text-white text-center w-25 verify-btn bg-core-orange btn-lg"
+                    name="verifyotp"
+                    (click)="verifiyOtp()"
+                    [disabled]="!this.otpForm.valid"
+                  >
+                    Verify
+                  </button>
+                </div>
               </div>
-              <div class="form-group text-center">
-                <button
-                  type="button"
-                  class="btn btn-success btn-lg"
-                  name="verifyotp"
-                  (click)="verifiyOtp()"
-                  [disabled]="!this.otpForm.valid"
-                >
-                  Verify
-                </button>
-                <a href="#" class="btn btn-link">Resend OTP</a>
-              </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-    
-</div></div>
-    <app-home-footer></app-home-footer>
-
-
+  </div>
+  <app-home-footer></app-home-footer>
+</div>
