@@ -33,21 +33,35 @@
       <ul
         class="navbar-nav align-self-stretch text-center text-sm-center text-md-left"
       >
-        <li class="nav-item">
+        <li class="nav-item dropdown">
           <a
-            class="nav-link"
-            routerLink="syllabus"
-            (click)="sideNavStatus = !sideNavStatus"
-            >View-Syllabus</a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
           >
-        </li>
-        <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="view-sample-paper"
-            (click)="sideNavStatus = !sideNavStatus"
-            >View-Sample-papers</a
+            View
+          </a>
+          <div
+            class="dropdown-menu w-50 p-3 rounded-0 shadow-sm fade-in"
+            aria-labelledby="navbarDropdown"
           >
+            <a
+              class="core-blue nav-link"
+              routerLink="syllabus"
+              (click)="sideNavStatus = !sideNavStatus"
+              >View-Syllabus</a
+            >
+            <a
+              class="core-blue nav-link"
+              routerLink="view-sample-paper"
+              (click)="sideNavStatus = !sideNavStatus"
+              >View-Sample-papers</a
+            >
+          </div>
         </li>
         <li class="nav-item dropdown">
           <a
