@@ -10,10 +10,9 @@ import { AppState } from "src/app/store/app.state";
 import * as SamplePaperActions from "../../store/sample-paper/sample-paper.actions";
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
 import * as ClassActions from "../../store/class/class.actions";
-import * as ClassWithSubjectActions from "../../store/class-with-subject/class-with-subject.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
-import { ClassWithSubjectListType } from "src/app/store/class-with-subject/types/class-with-subject.type";
+
 @Component({
   selector: "app-sample-paper",
   templateUrl: "./sample-paper.component.html",
@@ -25,7 +24,6 @@ export class SamplePaperComponent implements OnInit {
   isAddClassFormOpen = false;
   classList: ClassListType[];
   subjectList: SubjectListType[];
-  classWithSubjectList: ClassWithSubjectListType[];
   samplePaperList: SamplePaperListType[];
 
   constructor(private store: Store<AppState>) {}
@@ -65,18 +63,6 @@ export class SamplePaperComponent implements OnInit {
         this.classList = response;
       } else {
         this.store.dispatch(new ClassActions.FetchClass());
-      }
-    });
-  }
-
-  fetchClassWithSubject() {
-    this.store.select("classWithSubjectList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.classWithSubjectList = response;
-      } else {
-        this.store.dispatch(
-          new ClassWithSubjectActions.FetchClassWithSubject()
-        );
       }
     });
   }

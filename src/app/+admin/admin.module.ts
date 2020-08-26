@@ -24,6 +24,7 @@ import { ViewSamplePaperComponent } from "./view-sample-paper/view-sample-paper.
 import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
 import { VideoRecordComponent } from './video-record/video-record.component';
+import { NotesComponent } from './notes/notes.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { VideoRecordComponent } from './video-record/video-record.component';
     SettingsComponent,
     ConferencingComponent,
     VideoRecordComponent,
+    NotesComponent,
   ],
   imports: [
     CommonModule,
