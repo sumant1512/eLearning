@@ -11,5 +11,6 @@ export enum ProfileRoutesEnum {
   SETTINGS = "settings",
   PRIVACY_POLICY = "privacy-policy",
   CONFERENCING = "conference",
-  VIDEORECODER ="video-recoder"
+  VIDEORECODER = "video-recoder",
+  NOTES = "notes",
 }

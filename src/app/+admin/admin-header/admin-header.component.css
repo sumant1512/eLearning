@@ -1,5 +1,40 @@
 /* This is for header design and color */
 
+.dropdown:hover > .dropdown-menu {
+  display: block;
+}
+.dropdown > .dropdown-toggle:active {
+  pointer-events: none;
+}
+
+.dropdown-toggle::after {
+  transition: transform 0.2s linear;
+}
+.show.dropdown .dropdown-toggle::after {
+  transform: translateY(3px);
+}
+.dropdown-menu {
+  opacity: 1;
+  margin-top: 0;
+}
+a:hover {
+  color: #ff8200 !important;
+}
+.fade-in {
+  animation: fadeIn ease-in 0.9s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 a {
   color: #fff;
   font-family: Muli, sans-serif;

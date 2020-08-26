@@ -16,7 +16,8 @@ import { SubjectComponent } from "./subject/subject.component";
 import { ViewSamplePaperComponent } from "./view-sample-paper/view-sample-paper.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
-import { VideoRecordComponent } from './video-record/video-record.component';
+import { VideoRecordComponent } from "./video-record/video-record.component";
+import { NotesComponent } from "./notes/notes.component";
 const routes: Routes = [
   {
     path: "",
@@ -54,6 +55,10 @@ const routes: Routes = [
       {
         path: ProfileRoutesEnum.VIDEORECODER,
         component: VideoRecordComponent,
+      },
+      {
+        path: ProfileRoutesEnum.NOTES,
+        component: NotesComponent,
       },
     ],
   },

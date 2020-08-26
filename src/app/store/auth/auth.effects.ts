@@ -16,7 +16,7 @@ export class AuthEffects {
     private action$: Actions<AuthActionsUnion>,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   @Effect()
   userLogin$ = this.action$.pipe(
@@ -36,6 +36,8 @@ export class AuthEffects {
           const userType = localStorage.getItem("user_type");
           if (userType === "Admin") {
             this.router.navigate(["admin"]);
+          } else if (userType === "Student") {
+            this.router.navigate(["student"]);
           }
         })
       );
@@ -63,7 +65,8 @@ export class AuthEffects {
     tap(() => {
       return this.authService.logout();
     }),
-    map(() => { return { type: 'NO_ACTION' }; })
+    map(() => {
+      return { type: "NO_ACTION" };
+    })
   );
- 
 }
