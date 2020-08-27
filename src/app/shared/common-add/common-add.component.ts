@@ -20,10 +20,8 @@ import { ClassListType } from "src/app/store/class/types/class.type";
 })
 export class CommonAddComponent implements OnInit {
   classList: ClassListType[];
-  @Input() subjectsOfClass: any;
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
-  @Output() subjectsOfClassChildEvent = new EventEmitter();
   @Output() touchEvent = new EventEmitter();
   addForm: FormGroup;
   loader = false;
@@ -69,9 +67,10 @@ export class CommonAddComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.reviewStatus();
-   this.getStatus();
-    this.fetchClassList();
+    this.getStatus();
+    if (!this.reviewStatus()) {
+      this.fetchClassList();
+    }
   }
 
   fetchClassList(): void {
@@ -93,15 +92,14 @@ export class CommonAddComponent implements OnInit {
   }
 
   reviewStatus(): boolean {
-    if ((this.name === "Topic") || (this.name === "Sample Paper"))
-      return false;
+    if (this.name === "Topic" || this.name === "Sample Paper") return false;
     return true;
   }
   getStatus(): boolean {
     return this.name === "Sample Paper" ? false : true;
-}
+  }
 
-  add() {
+  add(): void {
     this.loader = true;
     if ("Topic" === this.name)
       this.childEvent.emit({
@@ -111,19 +109,17 @@ export class CommonAddComponent implements OnInit {
       });
     else if ("Sample Paper" === this.name) {
       this.childEvent.emit({
-      samplePaperName: this.addForm.value.itemName,
-      samplePaperUrl: (<HTMLInputElement>document.getElementById("itemUrl")).value,
-      classId: this.selectedClassId,
-      subjectId: this.selectedSubjectId,
-    }); 
-    }
-    else
-      this.childEvent.emit(this.addForm.value.itemName);
+        samplePaperName: this.addForm.value.itemName,
+        samplePaperUrl: (<HTMLInputElement>document.getElementById("itemUrl"))
+          .value,
+        classId: this.selectedClassId,
+        subjectId: this.selectedSubjectId,
+      });
+    } else this.childEvent.emit(this.addForm.value.itemName);
   }
 
   selectedClass(id) {
     this.selectedClassId = id;
-    this.subjectsOfClassChildEvent.emit(id);
     this.getClassForSubject(id);
   }
 

@@ -15,12 +15,15 @@ export class ViewStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchStudents();
-    this.store.dispatch(new StudentActions.FetchStudent());
   }
 
-  fetchStudents() {
+  fetchStudents(): void {
     this.store.select("students").subscribe((response) => {
-      this.students = response;
+      if (Object.keys(response).length) {
+        this.students = response;
+      } else {
+        this.store.dispatch(new StudentActions.FetchStudent());
+      }
     });
   }
 

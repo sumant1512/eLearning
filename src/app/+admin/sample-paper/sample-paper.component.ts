@@ -9,7 +9,6 @@ import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as SamplePaperActions from "../../store/sample-paper/sample-paper.actions";
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
-import * as ClassActions from "../../store/class/class.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
 
@@ -40,8 +39,6 @@ export class SamplePaperComponent implements OnInit {
   ngOnInit() {
     this.isMobile = window.innerWidth < 991 ? true : false;
     this.fetchsamplePaperList();
-    this.fetchClassList();
-    //this.fetchClassWithSubject();
   }
   openAddClassForm() {
     this.isAddClassFormOpen = true;
@@ -53,16 +50,6 @@ export class SamplePaperComponent implements OnInit {
         this.samplePaperList = response;
       } else {
         this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
-      }
-    });
-  }
-
-  fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.classList = response;
-      } else {
-        this.store.dispatch(new ClassActions.FetchClass());
       }
     });
   }
@@ -89,7 +76,6 @@ export class SamplePaperComponent implements OnInit {
       );
     }
   }
-  getSubjects(classId): void {}
 
   sliderOpen() {
     this.slider.nativeElement.classList.toggle("show");

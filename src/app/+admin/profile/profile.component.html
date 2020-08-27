@@ -4,7 +4,7 @@
       <img
         [src]="schoolImageUrl"
         class="w-100 img-fluid"
-        style="height: 360px;"
+        style="height: 360px"
       />
     </div>
 
@@ -12,14 +12,14 @@
       <div>
         <i
           (click)="fileInput1.click()"
-          style="font-size: 25px; color: black;"
+          style="font-size: 25px; color: black"
           class="fa fa-pencil-square-o"
         ></i>
       </div>
 
       <div>
         <input
-          style="display: none;"
+          style="display: none"
           class="cursor-pointer choose-image-input pb-5 mb-3 mb-lg-0"
           type="file"
           (change)="onImageSelect($event, 'school_image')"
@@ -40,19 +40,19 @@
             <img
               class="image rounded-circle"
               [src]="adminImageUrl"
-              style="width: 180px; height: 180px; border: 2px solid white;"
+              style="width: 180px; height: 180px; border: 2px solid white"
             />
           </div>
           <div>
             <i
               (click)="fileInput.click()"
-              style="font-size: 25px; color: black;"
+              style="font-size: 25px; color: black"
               class="camera-icon fa fa-camera camera"
             ></i>
           </div>
           <div>
             <input
-              style="display: none;"
+              style="display: none"
               class="cursor-pointer choose-image-input pb-5 mb-3 mb-lg-0"
               type="file"
               (change)="onImageSelect($event, 'admin')"
@@ -65,9 +65,7 @@
           </button>
         </div>
         <br />
-        <h3 class="text-center">
-          Welcome
-        </h3>
+        <h3 class="text-center">Welcome</h3>
         <h3 class="text-center">
           {{ adminProfile.userDetails.admin_name }}
         </h3>
@@ -97,7 +95,9 @@
           </div>
           <div class="section">
             <div class="text-center"><h3>Statistics</h3></div>
-            <p><span class="badge">0</span> Students Registered</p>
+            <p>
+              <span class="badge">{{ studentCount }}</span> Students Registered
+            </p>
             <p><span class="badge">124</span> Teachers Registered</p>
             <p><span class="badge">620 hrs</span> Videos Available</p>
           </div>

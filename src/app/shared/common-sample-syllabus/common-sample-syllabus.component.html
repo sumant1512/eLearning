@@ -10,7 +10,7 @@
                 <li
                   class="nav-item"
                   *ngFor="
-                    let class of resultForSyllabus;
+                    let class of resultForSyllabus || resultForSamperPaper;
                     let i = index;
                     let isFirst = first
                   "
@@ -42,6 +42,11 @@
                   <h3 class="text-center">
                     {{ selectedClassName }} {{ name }}
                   </h3>
+                  <div [hidden]="selectedClassDetails[0].subjects.length >= 1">
+                    <p class="text-center">Subjects not available.</p>
+                    <p></p>
+                  </div>
+
                   <div id="accordion">
                     <div
                       class="card mb-2"
@@ -65,6 +70,16 @@
                         data-parent="#accordion"
                       >
                         <div class="card-body">
+                          <div
+                            [hidden]="
+                              (subject.topics || subject.samplePapers).length >=
+                              1
+                            "
+                          >
+                            <p class="text-center">{{ name }} not available.</p>
+                            <p></p>
+                          </div>
+
                           <ul
                             [hidden]="!getStatus()"
                             *ngFor="let topic of subject.topics"

@@ -3,8 +3,6 @@ import { Store } from "@ngrx/store";
 import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
 import { AppState } from "src/app/store/app.state";
-import { ClassListType } from "src/app/store/class/types/class.type";
-import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
 
 import * as TopicActions from "../../store/topic/topic.actions";
 import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
@@ -20,8 +18,6 @@ export class CommonSampleSyllabusComponent implements OnInit {
   addForm: FormGroup;
   @Input() name: string;
   @Output() subjectsOfClassChildEvent = new EventEmitter();
-  samplePaperList: SamplePaperListType[];
-  classList: ClassListType[];
   selectedClassDetails;
   selectedClassName: string;
   selectedClassId: number;
@@ -37,9 +33,11 @@ export class CommonSampleSyllabusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getStatus();
-    this.fetchSyllabusTransform();
-    this.fetchSamplePaperTransform();
+    if (!this.getStatus()) {
+      this.fetchSamplePaperTransform();
+    } else {
+      this.fetchSyllabusTransform();
+    }
   }
 
   openSamplePaperForm() {

@@ -35,7 +35,7 @@ export class AuthEffects {
         tap(() => {
           const userType = localStorage.getItem("user_type");
           if (userType === "Admin") {
-            this.router.navigate(["admin"]);
+            this.router.navigate(["admin/profile"]);
           } else if (userType === "Student") {
             this.router.navigate(["student"]);
           }

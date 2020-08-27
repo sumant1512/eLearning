@@ -23,7 +23,6 @@
             <app-common-add-mobile
               name="Sample Paper"
               (childEvent)="addSamplePaper($event)"
-              (subjectsOfClassChildEvent)="getSubjects($event)"
               (touchEvent)="formToggle($event)"
             ></app-common-add-mobile>
           </div>
@@ -34,8 +33,6 @@
       <div *ngIf="isAddClassFormOpen" class="form-slide col-lg-4">
         <app-common-add
           name="Sample Paper"
-          [subjectsOfClass]="subjectList"
-          (subjectsOfClassChildEvent)="getSubjects($event)"
           (childEvent)="addSamplePaper($event)"
         ></app-common-add>
       </div>

@@ -22,10 +22,8 @@ import { ClassListType } from "src/app/store/class/types/class.type";
 })
 export class CommonAddMobileComponent implements OnInit {
   classList: ClassListType[];
-  @Input() subjectsOfClass: any;
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
-  @Output() subjectsOfClassChildEvent = new EventEmitter();
   @Output() touchEvent = new EventEmitter();
   addForm: FormGroup;
   loader = false;
@@ -72,8 +70,9 @@ export class CommonAddMobileComponent implements OnInit {
 
   ngOnInit() {
     this.getStatus();
-    this.fetchClassList();
-    this.reviewStatus();
+    if (!this.reviewStatus()) {
+      this.fetchClassList();
+    }
   }
 
   fetchClassList(): void {
@@ -95,16 +94,15 @@ export class CommonAddMobileComponent implements OnInit {
   }
 
   reviewStatus(): boolean {
-    if ((this.name === "Topic") || (this.name === "Sample Paper"))
-    return false;
-  return true;
-}
-  
- getStatus(): boolean {
-    return this.name === "Sample Paper" ? false : true;
-}
+    if (this.name === "Topic" || this.name === "Sample Paper") return false;
+    return true;
+  }
 
-  add() {
+  getStatus(): boolean {
+    return this.name === "Sample Paper" ? false : true;
+  }
+
+  add(): void {
     this.loader = true;
     if ("Topic" === this.name)
       this.childEvent.emit({
@@ -114,19 +112,17 @@ export class CommonAddMobileComponent implements OnInit {
       });
     else if ("Sample Paper" === this.name) {
       this.childEvent.emit({
-      samplePaperName: this.addForm.value.itemName,
-      samplePaperUrl: (<HTMLInputElement>document.getElementById("itemUrl")).value,
-      classId: this.selectedClassId,
-      subjectId: this.selectedSubjectId,
-    }); 
-    }
-    else
-      this.childEvent.emit(this.addForm.value.itemName);
+        samplePaperName: this.addForm.value.itemName,
+        samplePaperUrl: (<HTMLInputElement>document.getElementById("itemUrl"))
+          .value,
+        classId: this.selectedClassId,
+        subjectId: this.selectedSubjectId,
+      });
+    } else this.childEvent.emit(this.addForm.value.itemName);
   }
 
   selectedClass(id) {
     this.selectedClassId = id;
-    this.subjectsOfClassChildEvent.emit(id);
     this.getClassForSubject(id);
   }
 
