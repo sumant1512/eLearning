@@ -24,7 +24,7 @@ export class TopicComponent implements OnInit {
   addTopicForm: FormGroup;
   topicList: TopicListType[];
   classList: ClassListType[];
-  subjectList: SubjectListType[];
+
   isMobile = false;
   isAddClassFormOpen = false;
 
@@ -42,7 +42,6 @@ export class TopicComponent implements OnInit {
   ngOnInit() {
     this.isMobile = window.innerWidth < 991 ? true : false;
     this.fetchTopics();
-    this.fetchClassList();
   }
 
   openAddClassForm() {
@@ -55,16 +54,6 @@ export class TopicComponent implements OnInit {
         this.topicList = response;
       } else {
         this.store.dispatch(new TopicActions.FetchTopic());
-      }
-    });
-  }
-
-  fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.classList = response;
-      } else {
-        this.store.dispatch(new ClassActions.FetchClass());
       }
     });
   }
@@ -87,7 +76,6 @@ export class TopicComponent implements OnInit {
       this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
     }
   }
-  getSubjects(classId): void {}
 
   sliderOpen() {
     this.slider.nativeElement.classList.toggle("show");
