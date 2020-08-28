@@ -59,7 +59,7 @@
                         <select formControlName="class" class="form-control"
                             [ngClass]="{'is-invalid': (f.class.touched || f.class.dirty) && f.class.errors }">
                             <option value="" disabled selected>Select Class</option>
-                            <option *ngFor="let class of classList" value="{{ class.value }}">{{ class.label }}
+                            <option *ngFor="let class of classList" value="{{ class.class_name }}">{{ class.class_name }}
                             </option>
                         </select>
                         <div *ngIf="(f.class.touched || f.class.dirty) && f.class.errors" class="invalid-feedback">

@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit {
   schoolImageUrl: SafeUrl;
   adminImageUrl: SafeUrl;
 
-  studentCount: number;
+  studentCount: number; 
+  loaded: boolean = false;
 
   constructor(
     private store: Store<AppState>,
@@ -47,23 +48,27 @@ export class ProfileComponent implements OnInit {
   }
   getUserProfile(): void {
     this.store.select("profile").subscribe((response) => {
-      if (response.userDetails.user_id !== null) {
-        this.adminProfile = response;
-        this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.setCoverImage()
-        );
-        this.adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.setProfileImage()
-        );
-      } else {
-        this.fetchUserProfile();
-      }
+         if (response.userDetails.user_id!==null) {  
+              this.adminProfile = response;
+              this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+                this.setCoverImage() 
+              );
+              this.adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+                this.setProfileImage()
+           ); 
+           
+           this.loaded = true; 
+           
+         } else { 
+           this.fetchUserProfile();
+          }
     });
   }
   fetchUserProfile(): void {
-    const authToken = localStorage.getItem("AUTH_TOKEN");
+    const authToken = localStorage.getItem("AUTH_TOKEN"); 
     this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
+  
   onImageSelect(event: any, name) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -101,7 +106,7 @@ export class ProfileComponent implements OnInit {
   }
   fetchStudents(): void {
     this.store.select("students").subscribe((response) => {
-      if (Object.keys(response).length) {
+      if (Object.keys(response).length!==0) {
         this.studentCount = response.length;
       } else {
         this.store.dispatch(new StudentActions.FetchStudent());

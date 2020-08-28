@@ -10,10 +10,7 @@ import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
-import * as ClassActions from "../../store/class/class.actions";
-import { TopicService } from "src/app/store/topic/api/topic.service";
-import { SubjectListType } from "src/app/store/subject/types/subject.type";
-import { ClassListType } from "src/app/store/class/types/class.type";
+import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
 
 @Component({
   selector: "app-common-add-mobile",
@@ -21,7 +18,6 @@ import { ClassListType } from "src/app/store/class/types/class.type";
   styleUrls: ["./common-add-mobile.component.css"],
 })
 export class CommonAddMobileComponent implements OnInit {
-  classList: ClassListType[];
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
   @Output() touchEvent = new EventEmitter();
@@ -29,12 +25,10 @@ export class CommonAddMobileComponent implements OnInit {
   loader = false;
   selectedClassId: number;
   selectedSubjectId: number;
-  subjectList: SubjectListType[];
-
-  constructor(
-    private store: Store<AppState>,
-    private topicService: TopicService
-  ) {
+  subjectList: any;
+  resultForSyllabus: any;
+  
+  constructor(private store: Store<AppState>) {
     this.addForm = addForm();
   }
 
@@ -71,27 +65,23 @@ export class CommonAddMobileComponent implements OnInit {
   ngOnInit() {
     this.getStatus();
     if (!this.reviewStatus()) {
-      this.fetchClassList();
+      this.fetchSyllabusTransform();
     }
   }
 
-  fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
+    fetchSyllabusTransform(): void {
+    this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
-        this.classList = response;
+        this.resultForSyllabus = response; 
       } else {
-        this.store.dispatch(new ClassActions.FetchClass());
+        this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
     });
   }
 
   getClassForSubject(classId) {
-    this.topicService.getSubjectsOfClass({ classId }).subscribe((response) => {
-      if (response.length) {
-        this.subjectList = response;
-      }
-    });
-  }
+    this.subjectList = this.resultForSyllabus.filter((data) => data.class_id == classId)[0].subjects; 
+  } 
 
   reviewStatus(): boolean {
     if (this.name === "Topic" || this.name === "Sample Paper") return false;

@@ -11,8 +11,9 @@
             (change)="selectedClass($event.target.value)"
             class="form-control"
           >
+           <option disabled>Choose your class</option>
             <option
-              *ngFor="let class of classList"
+              *ngFor="let class of resultForSyllabus"
               value="{{ class.class_id }}"
               >{{ class.class_name }}</option
             >
@@ -25,6 +26,7 @@
             class="form-control"
           >
             <option disabled>Choose your subject</option>
+            <option *ngIf="subjectList !== undefined && subjectList.length===0" disabled>Subjects not available</option>
             <option
               *ngFor="let subject of subjectList"
               value="{{ subject.subject_id }}"

@@ -21,6 +21,7 @@ export class SamplePaperComponent implements OnInit {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   isMobile = false;
   isAddClassFormOpen = false;
+  isSliderOpen = false;
   classList: ClassListType[];
   subjectList: SubjectListType[];
   samplePaperList: SamplePaperListType[];
@@ -78,7 +79,18 @@ export class SamplePaperComponent implements OnInit {
   }
 
   sliderOpen() {
-    this.slider.nativeElement.classList.toggle("show");
+    this.isSliderOpen = true;
+    var element = this.slider.nativeElement.classList.toggle("show");
+
+    var icon = document.getElementById("favIcon");
+    if (icon.classList.contains("fa-angle-double-up")) {
+      icon.classList.remove("fa-angle-double-up");
+      icon.classList.add("fa-angle-double-down");
+    } else {
+      icon.classList.remove("fa-angle-double-down");
+      icon.classList.add("fa-angle-double-up");
+    }
+
   }
 
   formToggle(action) {

@@ -10,16 +10,14 @@ import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
-import * as ClassActions from "../../store/class/class.actions";
-import { TopicService } from "src/app/store/topic/api/topic.service";
-import { ClassListType } from "src/app/store/class/types/class.type";
+import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
+
 @Component({
   selector: "app-common-add",
   templateUrl: "./common-add.component.html",
   styleUrls: ["./common-add.component.css"],
 })
 export class CommonAddComponent implements OnInit {
-  classList: ClassListType[];
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
   @Output() touchEvent = new EventEmitter();
@@ -28,6 +26,7 @@ export class CommonAddComponent implements OnInit {
   selectedClassId: number;
   selectedSubjectId: number;
   subjectList: any;
+  resultForSyllabus: any;
 
   defaultTouch = { x: 0, y: 0, time: 0 };
 
@@ -59,37 +58,30 @@ export class CommonAddComponent implements OnInit {
     }
   }
 
-  constructor(
-    private store: Store<AppState>,
-    private topicService: TopicService
-  ) {
+  constructor(private store: Store<AppState>) {
     this.addForm = addForm();
   }
 
   ngOnInit() {
+    this.displayStatus();
     this.getStatus();
     if (!this.reviewStatus()) {
-      this.fetchClassList();
+      this.fetchSyllabusTransform();
     }
   }
-
-  fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
+    fetchSyllabusTransform(): void {
+    this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
-        this.classList = response;
+        this.resultForSyllabus = response; 
       } else {
-        this.store.dispatch(new ClassActions.FetchClass());
+        this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
     });
   }
 
   getClassForSubject(classId) {
-    this.topicService.getSubjectsOfClass({ classId }).subscribe((response) => {
-      if (response.length) {
-        this.subjectList = response;
-      }
-    });
-  }
+    this.subjectList = this.resultForSyllabus.filter((data) => data.class_id == classId)[0].subjects; 
+  } 
 
   reviewStatus(): boolean {
     if (this.name === "Topic" || this.name === "Sample Paper") return false;
@@ -97,6 +89,15 @@ export class CommonAddComponent implements OnInit {
   }
   getStatus(): boolean {
     return this.name === "Sample Paper" ? false : true;
+  }
+  displayStatus(): boolean {
+    if ("Sample Paper" === this.name) {
+      var element = document.getElementById("myDIV");
+      element.classList.toggle("show");
+     
+    }
+     return false; 
+    return true;
   }
 
   add(): void {
