@@ -20,6 +20,7 @@ export class SubjectComponent implements OnInit {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   subjectList: SubjectListType[];
   isMobile = false;
+  isSliderOpen = false;
   isAddClassFormOpen = false;
 
   constructor(
@@ -92,7 +93,18 @@ export class SubjectComponent implements OnInit {
   }
 
   sliderOpen() {
-    this.slider.nativeElement.classList.toggle("show");
+    this.isSliderOpen = true;
+    var element = this.slider.nativeElement.classList.toggle("show");
+
+    var icon = document.getElementById("favIcon");
+    if (icon.classList.contains("fa-angle-double-up")) {
+      icon.classList.remove("fa-angle-double-up");
+      icon.classList.add("fa-angle-double-down");
+    } else {
+      icon.classList.remove("fa-angle-double-down");
+      icon.classList.add("fa-angle-double-up");
+    }
+
   }
 
   formToggle(action) {

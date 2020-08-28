@@ -1,1 +1,9 @@
+<div *ngIf="!isMobile">
 <app-common-sample-syllabus name="Syllabus"></app-common-sample-syllabus>
+<button type="button" routerLink="/admin/notes" class="btn btn-primary">Add Notes</button>
+</div>
+<div *ngIf="isMobile" class="col-12  my-3">
+  <app-common-sample-syllabus-mobile
+    name="Syllabus"
+  ></app-common-sample-syllabus-mobile>
+</div>

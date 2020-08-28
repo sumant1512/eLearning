@@ -13,8 +13,9 @@
             (change)="selectedClass($event.target.value)"
             class="form-control"
           >
+            <option disabled>Choose your class</option>
             <option
-              *ngFor="let class of classList"
+              *ngFor="let class of resultForSyllabus"
               value="{{ class.class_id }}"
               >{{ class.class_name }}</option
             >
@@ -27,10 +28,11 @@
             class="form-control"
           >
             <option disabled>Choose your subject</option>
+            <option *ngIf="subjectList !== undefined && subjectList.length===0" disabled>Subjects not available</option>
             <option
-              *ngFor="let subject of subjectList"
+              *ngFor="let subject of subjectList" 
               value="{{ subject.subject_id }}"
-              >{{ subject.subject_name }}</option
+              >{{subject.subject_name}}</option 
             >
           </select>
         </div>
@@ -46,7 +48,7 @@
          </div>
        </div>
       <div>
-        <button
+        <button [hidden]="displayStatus()" id="myDIV"
           [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
           class="br-10 mx-auto add-btn b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
           type="button"

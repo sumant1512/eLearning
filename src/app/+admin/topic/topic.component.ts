@@ -24,7 +24,7 @@ export class TopicComponent implements OnInit {
   addTopicForm: FormGroup;
   topicList: TopicListType[];
   classList: ClassListType[];
-
+  isSliderOpen = false;
   isMobile = false;
   isAddClassFormOpen = false;
 
@@ -77,10 +77,21 @@ export class TopicComponent implements OnInit {
     }
   }
 
-  sliderOpen() {
-    this.slider.nativeElement.classList.toggle("show");
-  }
 
+  sliderOpen() {
+    this.isSliderOpen = true;
+    var element = this.slider.nativeElement.classList.toggle("show");
+
+    var icon = document.getElementById("favIcon");
+    if (icon.classList.contains("fa-angle-double-up")) {
+      icon.classList.remove("fa-angle-double-up");
+      icon.classList.add("fa-angle-double-down");
+    } else {
+      icon.classList.remove("fa-angle-double-down");
+      icon.classList.add("fa-angle-double-up");
+    }
+
+  }
   formToggle(action) {
     if (action === "open") {
       this.slider.nativeElement.classList.add("show");

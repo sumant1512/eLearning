@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 
 @Component({
   selector: "app-view-syllabus",
@@ -6,7 +6,18 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./view-syllabus.component.css"],
 })
 export class ViewSyllabusComponent implements OnInit {
-  constructor() {}
+  isMobile = false;
+  constructor() { }
+
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    if (event.target.innerWidth < 991) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+  }
   ngOnInit(): void {
+    this.isMobile = window.innerWidth < 991 ? true : false;
   }
 }

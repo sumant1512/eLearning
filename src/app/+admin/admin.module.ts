@@ -25,6 +25,8 @@ import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
 import { VideoRecordComponent } from './video-record/video-record.component';
 import { NotesComponent } from './notes/notes.component';
+import { AddNotesComponent } from './notes/add-notes/add-notes.component';
+import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { NotesComponent } from './notes/notes.component';
     ConferencingComponent,
     VideoRecordComponent,
     NotesComponent,
+    AddNotesComponent,
+    ViewNotesComponent,
   ],
   imports: [
     CommonModule,

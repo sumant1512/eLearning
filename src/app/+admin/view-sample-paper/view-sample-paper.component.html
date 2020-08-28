@@ -1,1 +1,8 @@
-<app-common-sample-syllabus name="Sample Paper"></app-common-sample-syllabus>
+<div *ngIf="!isMobile">
+  <app-common-sample-syllabus name="Sample Paper"></app-common-sample-syllabus>
+</div>
+<div *ngIf="isMobile" class="col-12  my-3">
+  <app-common-sample-syllabus-mobile
+    name="Sample Paper"
+  ></app-common-sample-syllabus-mobile>
+</div>

@@ -9,6 +9,9 @@ import { CommonViewComponent } from "./common-view/common-view.component";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
+import { ProfileSkeletonComponent } from './profile-skeleton/profile-skeleton.component';
+import { CommonProfileComponent } from './common-profile/common-profile.component';
+import { CommonSampleSyllabusMobileComponent } from './common-sample-syllabus-mobile/common-sample-syllabus-mobile.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-s
     CommonAddMobileComponent,
     CommonViewComponent,
     CommonSampleSyllabusComponent,
+    ProfileSkeletonComponent,
+    CommonProfileComponent,
+    CommonSampleSyllabusMobileComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -25,6 +31,9 @@ import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-s
     CommonAddMobileComponent,
     CommonViewComponent,
     CommonSampleSyllabusComponent,
+    CommonProfileComponent,
+    CommonSampleSyllabusMobileComponent,
+    ProfileSkeletonComponent,
   ],
 })
 export class SharedModule {}

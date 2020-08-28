@@ -45,21 +45,5 @@ export class TopicService {
     });
   }
 
-  getSubjectsOfClass(classDetail) {
-    return this.http.post<any>(HOST + "getSubjectsOfClass", classDetail, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-      }),
-    });
-  }
-
-  getTopicsOfSubject(topicDetail): Observable<any[]> {
-    return this.http.post<any>(HOST + "getTopicsOfSubject", topicDetail, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-      }),
-    });
-  }
+ 
 }

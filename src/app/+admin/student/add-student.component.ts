@@ -3,6 +3,8 @@ import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
+import * as ClassActions from "../../store/class/class.actions";
+import { ClassListType } from "src/app/store/class/types/class.type";
 
 @Component({
   selector: "app-add-student",
@@ -14,20 +16,7 @@ export class AddStudentComponent implements OnInit {
   changeClass = false;
 
   studentRegistrationForm: FormGroup;
-  classList = [
-    { value: "I", label: "I" },
-    { value: "II", label: "II" },
-    { value: "III", label: "III" },
-    { value: "IV", label: "IV" },
-    { value: "V", label: "V" },
-    { value: "VI", label: "VI" },
-    { value: "VII", label: "VII" },
-    { value: "VIII", label: "VIII" },
-    { value: "IX", label: "IX" },
-    { value: "X", label: "X" },
-    { value: "XI", label: "XI" },
-    { value: "XII", label: "XII" },
-  ];
+  classList: ClassListType[];
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) {
     this.studentRegistrationForm = this.fb.group({
@@ -66,6 +55,7 @@ export class AddStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayNone();
+    this.fetchClassList();
   }
   get f() {
     return this.studentRegistrationForm.controls;
@@ -98,5 +88,14 @@ export class AddStudentComponent implements OnInit {
       new StudentActions.AddStudent(studentRegistrationDetails)
     );
     this.studentRegistrationForm.reset();
+  }
+   fetchClassList(): void {
+    this.store.select("classList").subscribe((response) => {
+      if (Object.keys(response).length) {
+       this.classList = response;
+      } else {
+        this.store.dispatch(new ClassActions.FetchClass());
+      }
+    });
   }
 }
