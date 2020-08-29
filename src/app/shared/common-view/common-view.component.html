@@ -14,10 +14,22 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="!viewList">
+          <tr *ngFor="let i of [].constructor(10)">
+            <td class="p-2" *ngFor="let i of [].constructor(3)">
+              <app-profile-skeleton Cheight="31"></app-profile-skeleton>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="viewList">
           <tr *ngFor="let item of viewList">
             <td>
-              {{ item.class_name || item.subject_name || item.topic_name|| item.sample_paper_name }}
+              {{
+                item.class_name ||
+                  item.subject_name ||
+                  item.topic_name ||
+                  item.sample_paper_name
+              }}
             </td>
             <td>{{ item.created_on | date: "mediumDate" }}</td>
             <td>
@@ -28,8 +40,17 @@
                 (click)="makeEditFormPristine()"
                 (click)="
                   selectedItem(
-                    item.class_name || item.subject_name || item.topic_name || item.sample_paper_name,
-                    item.class_id || item.subject_id || item.topic_id || item.sample_paper_id )"></i>
+                    item.class_name ||
+                      item.subject_name ||
+                      item.topic_name ||
+                      item.sample_paper_name,
+                    item.class_id ||
+                      item.subject_id ||
+                      item.topic_id ||
+                      item.sample_paper_id
+                  )
+                "
+              ></i>
               <i
                 [hidden]="checkStatus()"
                 (click)="selectSubject(item.subject_id)"
@@ -39,8 +60,13 @@
               ></i>
               <i
                 (click)="
-                  remove(item.class_id || item.subject_id || item.topic_id || item.sample_paper_id)"
-                
+                  remove(
+                    item.class_id ||
+                      item.subject_id ||
+                      item.topic_id ||
+                      item.sample_paper_id
+                  )
+                "
                 class="fa fa-trash"
                 aria-hidden="true"
               ></i>
@@ -141,8 +167,9 @@
                   <option
                     *ngFor="let class of unassignedClassList"
                     [value]="class.class_id"
-                    >{{ class.class_name }}</option
                   >
+                    {{ class.class_name }}
+                  </option>
                 </select>
               </div>
             </div>

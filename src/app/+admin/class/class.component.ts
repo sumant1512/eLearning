@@ -91,7 +91,6 @@ export class ClassComponent implements OnInit {
       icon.classList.remove("fa-angle-double-down");
       icon.classList.add("fa-angle-double-up");
     }
-
   }
 
   formToggle(action) {
