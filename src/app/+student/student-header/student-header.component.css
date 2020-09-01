@@ -1,7 +1,109 @@
-.navbar {
-  border-bottom: 5px solid #06193e;
-  /* background-color: #f14a65; */
+/* This is for header design and color */
+
+.dropdown:hover > .dropdown-menu {
+  display: block;
 }
-.navbar-brand img {
-  width: 30%;
+.dropdown > .dropdown-toggle:active {
+  pointer-events: none;
+}
+
+.dropdown-toggle::after {
+  transition: transform 0.2s linear;
+}
+.show.dropdown .dropdown-toggle::after {
+  transform: translateY(3px);
+}
+.dropdown-menu {
+  opacity: 1;
+  margin-top: 0;
+}
+a:hover {
+  color: #ff8200 !important;
+}
+.fade-in {
+  animation: fadeIn ease-in 0.9s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+a {
+  color: #fff;
+  font-family: Muli, sans-serif;
+  font-size: 11px;
+  line-height: 23px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-style: normal;
+}
+
+.logout-icon {
+  font-size: 16px;
+}
+
+/* This is for header animation for slide to down when page is scrolled */
+
+header.sticky {
+  z-index: 1080;
+  animation: slide-down 0.7s;
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+/* Animation end */
+
+/* This is for I-pad view to open header as side nav */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transform: translateX(-100%);
+    transition: all ease 0.7s;
+  }
+  .open {
+    width: 30%;
+    z-index: 1080;
+    transform: translateX(0);
+  }
+}
+
+/* This is for Mobile view to open header as side nav */
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    transform: translateX(-100%);
+    transition: all ease 0.7s;
+  }
+  .open {
+    width: 100%;
+    z-index: 1080;
+    transform: translateX(0);
+  }
 }
