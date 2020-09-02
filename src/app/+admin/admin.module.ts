@@ -23,10 +23,11 @@ import { SubjectComponent } from "./subject/subject.component";
 import { ViewSamplePaperComponent } from "./view-sample-paper/view-sample-paper.component";
 import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
-import { VideoRecordComponent } from './video-record/video-record.component';
-import { NotesComponent } from './notes/notes.component';
-import { AddNotesComponent } from './notes/add-notes/add-notes.component';
-import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
+import { VideoRecordComponent } from "./video-record/video-record.component";
+import { NotesComponent } from "./notes/notes.component";
+import { AddNotesComponent } from "./notes/add-notes/add-notes.component";
+import { ViewNotesComponent } from "./notes/view-notes/view-notes.component";
+import { SearchPipe } from "../shared/pipe/search.pipe";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ViewNotesComponent } from './notes/view-notes/view-notes.component';
     NotesComponent,
     AddNotesComponent,
     ViewNotesComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,

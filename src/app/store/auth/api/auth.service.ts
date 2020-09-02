@@ -65,6 +65,9 @@ export class AuthService {
     return localStorage.getItem("AUTH_TOKEN");
   }
 
+  getUserType(): string {
+    return localStorage.getItem("user_type");
+  }
   // to check if token is available
   public isLoggedIn(): boolean {
     const authToken = this.getToken();
@@ -74,7 +77,7 @@ export class AuthService {
 
   // to navigate to home is user is not logged in
   canActivate(): boolean {
-    if (!this.isLoggedIn()) {
+    if (!this.isLoggedIn() || this.getUserType() !== "Admin") {
       this.router.navigate(["home"]);
       return false;
     }

@@ -1,18 +1,26 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  ElementRef,
+  Output,
+  EventEmitter,
+} from "@angular/core";
+
 import { Store } from "@ngrx/store";
 import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
 import { AppState } from "src/app/store/app.state";
-
 import * as TopicActions from "../../store/topic/topic.actions";
 import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 
 @Component({
-  selector: 'app-common-sample-syllabus-mobile',
-  templateUrl: './common-sample-syllabus-mobile.component.html',
-  styleUrls: ['./common-sample-syllabus-mobile.component.css']
+  selector: "app-common-sample-syllabus-mobile",
+  templateUrl: "./common-sample-syllabus-mobile.component.html",
+  styleUrls: ["./common-sample-syllabus-mobile.component.css"],
 })
 export class CommonSampleSyllabusMobileComponent implements OnInit {
   @ViewChild("slider", { static: false }) slider: ElementRef;
@@ -39,8 +47,20 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   ngOnInit(): void {
     if (!this.getStatus()) {
       this.fetchSamplePaperTransform();
+      setTimeout(() => {
+        this.selectClass(
+          this.resultForSamperPaper[0].class_id,
+          this.resultForSamperPaper[0].class_name
+        );
+      }, 2000);
     } else {
       this.fetchSyllabusTransform();
+      setTimeout(() => {
+        this.selectClass(
+          this.resultForSyllabus[0].class_id,
+          this.resultForSyllabus[0].class_name
+        );
+      }, 2000);
     }
   }
 
@@ -107,7 +127,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     setTimeout(() => {
       this.slider.nativeElement.classList.remove("show");
     }, 1000);
-   
+
     this.ttt.nativeElement.classList.remove("ttgt");
     setTimeout(() => {
       this.test = !this.test;
@@ -128,5 +148,4 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
       }, 1000);
     }
   }
-
 }

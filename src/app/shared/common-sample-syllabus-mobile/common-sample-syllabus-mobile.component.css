@@ -1,16 +1,16 @@
 .slider {
-  height: 64px;
+  height: 36px;
   position: relative;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
-  width: 35%;
-
+  width: 50%;
   float: right;
   transition: width 1s;
   transition-timing-function: ease;
-  background-color: crimson;
-  margin-bottom: 5px !important;
+  background-image:linear-gradient(to right, #000428 0%, #004e92 51%, #000428 100%);
+  margin-bottom:5px !important;
 }
+.slider:hover { background-position: right center; }
 
 .show {
   transition: width 1s;
@@ -33,14 +33,14 @@
 }
 .ttt {
   display: flex;
-  background-color: teal;
+  background-color: #1F618D;
   height: 0;
   transition: height 1s;
   transition-timing-function: ease;
   clear: both;
   width: 100%;
   border-top-left-radius: 25px !important;
-  color: white;
+  color: black;
   overflow: hidden;
 }
 
@@ -53,6 +53,10 @@
 
 .clbtn {
   border-radius: 20px;
+  border-color: #34495E ;
+  border-width: 5px;
+   background-color:whitesmoke;  
+  
 }
 
 .background {
@@ -65,7 +69,7 @@
 }
 .card-header,
 .add-btn {
-  background-color: #009688;
+  background-color:#2874A6;
 }
 .inside div:after {
   content: "\f077";
@@ -87,6 +91,10 @@
 .form-slide {
   bottom: -700px;
   animation: formSlide 1s forwards;
+}
+.nav-link {
+  display: block;
+  padding: .25rem 1rem;
 }
 
 @keyframes formSlide {
@@ -132,3 +140,4 @@
 .right {
   float: left;
 }
+
