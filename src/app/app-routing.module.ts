@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { RoutesEnum } from "./routing.constants";
 import { AuthService } from "./store/auth/api/auth.service";
+import { StudentGuard } from "./shared/student-guard";
 
 const routes: Routes = [
   { path: "", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
@@ -40,7 +41,7 @@ const routes: Routes = [
     path: RoutesEnum.STUDENT,
     loadChildren: () =>
       import("./+student/student.module").then((m) => m.StudentModule),
-    canActivate: [AuthService],
+    canActivate: [StudentGuard],
   },
   { path: "**", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
 ];

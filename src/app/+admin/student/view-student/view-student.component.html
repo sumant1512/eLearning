@@ -4,7 +4,18 @@
       Start Session
     </button>
   </div>
-
+  <div
+    class="form-inline md-form justify-content-right form-sm mt-0 searchForm active-cyan-2"
+  >
+    <input
+      class="form-control form-control-sm w-25"
+      type="text"
+      [(ngModel)]="studentName"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <i class="fa fa-search ml-3" aria-hidden="true"></i>
+  </div>
   <div class="wrapper">
     <table class="table table-hover scrollx scrolly">
       <thead>
@@ -16,7 +27,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let student of students; let i = index">
+        <tr
+          *ngFor="
+            let student of students | StudentFilter: studentName;
+            let i = index
+          "
+        >
           <td>{{ student.student_id }}</td>
           <td>{{ student.first_name + " " + student.last_name }}</td>
           <td>{{ student.email }}</td>
