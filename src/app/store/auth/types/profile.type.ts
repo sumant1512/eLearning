@@ -6,7 +6,10 @@ export interface ProfileType {
 export interface UserDetailsType {
   user_id: number;
   school_name: string;
-  admin_name: string;
+  admin_name?: string;
+  first_name?: string;
+  last_name?: string;
+  class?: string;
   aadhar_number: string;
   school_registration_no: string;
   admin_contact_no: string;
