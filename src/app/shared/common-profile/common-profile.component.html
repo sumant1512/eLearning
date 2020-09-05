@@ -5,17 +5,31 @@
         <div class="col-md-3 p-4 m-auto">
           <img
             class="rounded-circle bg-white p-1 mw-100"
-            src="../../../assets/gallery_08.jpg"
+            src="../../../assets/gallery/gallery_08.jpg"
             alt="user-image"
           />
         </div>
         <div class="col-md-9 p-4 pl-3 m-auto">
-          <h2 class="text-white">Angelina Smith / Web Designer</h2>
-          <p class="text-white mt-4">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type
+          <app-profile-skeleton
+            *ngIf="!loaded"
+            Cwidth="300"
+            Cheight="50"
+          ></app-profile-skeleton>
+          <h2 *ngIf="loaded" class="text-white">
+            {{
+              studentProfile.userDetails.first_name +
+                " " +
+                studentProfile.userDetails.last_name
+            }}
+            / Class {{ studentProfile.userDetails.class }}
+          </h2>
+          <app-profile-skeleton
+            *ngIf="!loaded"
+            Cwidth="400"
+            Cheight="50"
+          ></app-profile-skeleton>
+          <p *ngIf="loaded" class="text-white mt-4">
+            {{ studentProfile.userDetails.school_name }}
           </p>
         </div>
       </div>
