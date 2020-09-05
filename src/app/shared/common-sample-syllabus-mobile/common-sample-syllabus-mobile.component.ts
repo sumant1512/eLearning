@@ -7,7 +7,6 @@ import {
   Output,
   EventEmitter,
 } from "@angular/core";
-
 import { Store } from "@ngrx/store";
 import { FormGroup } from "@angular/forms";
 import { addForm } from "../common.utils";
@@ -24,9 +23,10 @@ import { SubjectService } from "../../store/subject/api/subject.service";
 })
 export class CommonSampleSyllabusMobileComponent implements OnInit {
   @ViewChild("slider", { static: false }) slider: ElementRef;
-  @ViewChild("ttt", { static: false }) ttt: ElementRef;
+  @ViewChild("display", { static: false }) display: ElementRef;
   @ViewChild("ic", { static: false }) ic: ElementRef;
   test: boolean;
+  public hide: boolean = false;
   addForm: FormGroup;
   @Input() name: string;
   @Output() subjectsOfClassChildEvent = new EventEmitter();
@@ -47,20 +47,8 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   ngOnInit(): void {
     if (!this.getStatus()) {
       this.fetchSamplePaperTransform();
-      setTimeout(() => {
-        this.selectClass(
-          this.resultForSamperPaper[0].class_id,
-          this.resultForSamperPaper[0].class_name
-        );
-      }, 2000);
     } else {
       this.fetchSyllabusTransform();
-      setTimeout(() => {
-        this.selectClass(
-          this.resultForSyllabus[0].class_id,
-          this.resultForSyllabus[0].class_name
-        );
-      }, 2000);
     }
   }
 
@@ -73,6 +61,9 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   }
 
   selectClass(classId, className) {
+    setTimeout(() => {
+      this.hide = true;
+    }, 1000);
     this.selectedClassName = className;
     this.selectedClassId = classId;
     if (this.getStatus() && this.resultForSyllabus !== undefined)
@@ -89,6 +80,10 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForSyllabus = response;
+        this.selectClass(
+          this.resultForSyllabus[0].class_id,
+          this.resultForSyllabus[0].class_name
+        );
       } else {
         this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
@@ -98,6 +93,10 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     this.store.select("samplePaperTransformList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForSamperPaper = response;
+        this.selectClass(
+          this.resultForSamperPaper[0].class_id,
+          this.resultForSamperPaper[0].class_name
+        );
       } else {
         this.store.dispatch(
           new SamplePaperTransformActions.FetchTransformSamplePaper()
@@ -125,20 +124,24 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   }
   close() {
     setTimeout(() => {
+      this.hide = true;
       this.slider.nativeElement.classList.remove("show");
     }, 1000);
 
-    this.ttt.nativeElement.classList.remove("ttgt");
+    this.display.nativeElement.classList.remove("ttgt");
     setTimeout(() => {
       this.test = !this.test;
     }, 1000);
     this.ic.nativeElement.classList.remove("showbtn");
   }
   slide() {
+    setTimeout(() => {
+      this.hide = !this.hide;
+    }, 1000);
     this.ic.nativeElement.classList.remove("showbtn");
     this.slider.nativeElement.classList.toggle("show");
     setTimeout(() => {
-      this.ttt.nativeElement.classList.toggle("ttgt");
+      this.display.nativeElement.classList.toggle("ttgt");
       this.test = !this.test;
     }, 1000);
 

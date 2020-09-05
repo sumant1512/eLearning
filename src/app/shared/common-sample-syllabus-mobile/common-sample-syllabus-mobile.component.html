@@ -1,5 +1,5 @@
 <div class="row no-gutters">
-  <div class="col-12 mr-0">
+  <div class="col-12">
     <div class="text-center mt-3">
       <button
         (click)="slide()"
@@ -16,34 +16,36 @@
         aria-hidden="true"
       ></i>
     </div>
-    <div class="mt-sm-0 ttt" #ttt>
-      <ul class="inside-list mr-5 w-100" *ngIf="test">
-        <button
-          (click)="close(); selectClass(c.class_id, c.class_name)"
-          class="mx-auto my-xs-0 mt-2 btn btn-block text-center p-xs-0 clbtn"
-          *ngFor="let c of resultForSyllabus || resultForSamperPaper"
-        >
-          <a
-            class="nav-link text-dark font-weight-bold"
-            style="font-size: 16px"
-            data-toggle="pill"
-            href="#class1"
+    <div class="container-fluid display" #display>
+      <div class="mt-sm-0 other">
+        <ul class="inside-list mr-5 w-100" *ngIf="test">
+          <button
+            (click)="close(); selectClass(c.class_id, c.class_name)"
+            class="mx-auto my-xs-0 mt-2 btn btn-block text-center p-xs-0 clbtn"
+            *ngFor="let c of resultForSyllabus || resultForSamperPaper"
           >
-            <h5 class="mb-0">
-              <strong>
-                {{ c.class_name }}
-              </strong>
-            </h5></a
-          >
-        </button>
-      </ul>
+            <a
+              class="nav-link text-dark font-weight-bold"
+              style="font-size: 16px"
+              data-toggle="pill"
+              href="#class1"
+            >
+              <h5 class="mb-0">
+                <strong>
+                  {{ c.class_name }}
+                </strong>
+              </h5></a
+            >
+          </button>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
 
-<div class="col-sm-12 mt-3" id="data">
+<div class="col-sm-12 mt-3" id="data" *ngIf="hide">
   <div
-    class="card-shadow mb-2 bg-white"
+    class="card-shadow formSlide mb-2 bg-white"
     *ngIf="selectedClassDetails && selectedClassDetails.length > 0"
   >
     <div class="tab-content">
@@ -55,8 +57,7 @@
             {{ selectedClassName }} {{ name }}
           </div>
           <div [hidden]="selectedClassDetails[0].subjects.length >= 1">
-            <p class="text-center">Subjects not available.</p>
-            <p></p>
+            <p class="text-center mt-2">Subjects not available.</p>
           </div>
 
           <div id="accordion">
@@ -87,7 +88,7 @@
                       (subject.topics || subject.samplePapers).length >= 1
                     "
                   >
-                    <p class="text-center">{{ name }} not available.</p>
+                    <p class="text-center mt-2">{{ name }} not available.</p>
                     <p></p>
                   </div>
 
@@ -95,7 +96,7 @@
                     [hidden]="!getStatus()"
                     *ngFor="let topic of subject.topics"
                   >
-                    <li>
+                    <li class="mt-2">
                       {{ topic.topic_name }}
                       <span>
                         <i
@@ -110,7 +111,7 @@
                     [hidden]="getStatus()"
                     *ngFor="let paper of subject.samplePapers"
                   >
-                    <li>
+                    <li class="mt-2">
                       {{ paper.sample_paper_name }}
                       <a
                         class="btn btn-secondary ml-2"

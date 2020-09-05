@@ -65,15 +65,24 @@ export class CommonSampleSyllabusComponent implements OnInit {
     this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForSyllabus = response;
+        this.selectClass(
+          this.resultForSyllabus[0].class_id,
+          this.resultForSyllabus[0].class_name
+        );
       } else {
         this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
     });
   }
+
   fetchSamplePaperTransform(): void {
     this.store.select("samplePaperTransformList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForSamperPaper = response;
+        this.selectClass(
+          this.resultForSamperPaper[0].class_id,
+          this.resultForSamperPaper[0].class_name
+        );
       } else {
         this.store.dispatch(
           new SamplePaperTransformActions.FetchTransformSamplePaper()
@@ -81,6 +90,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
       }
     });
   }
+
   unassignSubject(subjectId) {
     console.log(subjectId, this.selectedClassId);
     this.subjectService
@@ -93,6 +103,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
         }
       });
   }
+
   removeTopic(topic_id) {
     console.log(topic_id);
     if (confirm("Are You Sure You want to Delete the Topic?")) {

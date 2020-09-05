@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-//import { RegistrationService } from '../Services/registration.service';
 import {
   FormGroup,
   Validators,
@@ -10,7 +9,6 @@ import {
 import { Router } from "@angular/router";
 import { schoolRegisterForm } from "./registration.utils";
 import { RegistrationService } from "../store/services/registration.service";
-//import Swal from 'sweetalert2';
 
 @Component({
   selector: "app-registration",
