@@ -3,6 +3,7 @@ import { SubjectListType } from "./subject/types/subject.type";
 import { ClassListType } from "./class/types/class.type";
 import { TopicListType } from "./topic/types/topic.type";
 import { SamplePaperListType } from "./sample-paper/types/sample-paper.type";
+import { NotesListType } from "./notes/types/notes.type";
 
 export type AppState = Partial<{
   profile: ProfileType;
@@ -12,5 +13,6 @@ export type AppState = Partial<{
   samplePaperList: SamplePaperListType[];
   students: any;
   syllabusList: any;
+  notesList: NotesListType[];
   samplePaperTransformList: any;
 }>;

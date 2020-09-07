@@ -6,6 +6,7 @@ import { TopicActionsUnion } from "./topic/topic.actions";
 import { SamplePaperActionsUnion } from "./sample-paper/sample-paper.actions";
 import { SyllabusActionsUnion } from "./syllabus-tranform/syllabus.actions";
 import { SamplePaperTransformActionsUnion } from "./sample-paper-transform/sample-paper-transform.actions";
+import { NotesActionsUnion } from "./notes/notes.actions";
 
 export type AppActionsUnion =
   | AuthActionsUnion
@@ -15,4 +16,5 @@ export type AppActionsUnion =
   | SamplePaperActionsUnion
   | StudentActionsUnion
   | SyllabusActionsUnion
+  | NotesActionsUnion
   | SamplePaperTransformActionsUnion;

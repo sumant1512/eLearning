@@ -10,8 +10,6 @@ import { HOST } from "../../../../../config.constants";
 export class StudentService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  //token = this.authService.getToken()
-
   // service for Student studentRegistration api call
   studentRegistration(Student) {
     return this.http.post<any>(HOST + "studentRegistration", Student, {
@@ -43,6 +41,15 @@ export class StudentService {
 
   removeStudent(id: number) {
     return this.http.delete<any>(HOST + `removeStudent/${id}`, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+  }
+
+  updateClassofStudent(details) {
+    return this.http.post<any>(HOST + "updateClassofStudent", details, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),

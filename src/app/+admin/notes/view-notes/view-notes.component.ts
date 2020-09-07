@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import * as NotesActions from "../../../store/notes/notes.actions";
 
 @Component({
-  selector: 'app-view-notes',
-  templateUrl: './view-notes.component.html',
-  styleUrls: ['./view-notes.component.css']
+  selector: "app-view-notes",
+  templateUrl: "./view-notes.component.html",
+  styleUrls: ["./view-notes.component.css"],
 })
 export class ViewNotesComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

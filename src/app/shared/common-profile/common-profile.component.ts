@@ -21,7 +21,6 @@ export class CommonProfileComponent implements OnInit {
   getUserProfile(): void {
     this.store.select("profile").subscribe((response) => {
       if (response.userDetails.user_id !== null) {
-        console.log(response);
         this.studentProfile = response;
         this.loaded = true;
       } else {
