@@ -36,7 +36,19 @@
           <td>{{ student.student_id }}</td>
           <td>{{ student.first_name + " " + student.last_name }}</td>
           <td>{{ student.email }}</td>
-          <td>{{ student.class }}</td>
+          <td>
+            <select
+              (change)="changeClass($event.target.value, student.student_id)"
+            >
+              <option
+                *ngFor="let class of classList"
+                value="{{ class.class_id }}"
+                [selected]="student.class_id == class.class_id"
+              >
+                {{ class.class_name }}
+              </option>
+            </select>
+          </td>
           <td>
             <i
               (click)="removeStudent(student.student_id)"

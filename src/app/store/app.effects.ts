@@ -6,6 +6,7 @@ import { TopicEffects } from "./topic/topic.effects";
 import { SamplePaperEffects } from "./sample-paper/sample-paper.effects";
 import { SyllabusEffects } from "./syllabus-tranform/syllabus.effects";
 import { SamplePaperTransformEffects } from "./sample-paper-transform/sample-paper-transform.effects";
+import { NotesEffects } from "./notes/notes.effects";
 
 export const AppEffects = [
   AuthEffects,
@@ -15,5 +16,6 @@ export const AppEffects = [
   SamplePaperEffects,
   StudentEffects,
   SyllabusEffects,
+  NotesEffects,
   SamplePaperTransformEffects,
 ];

@@ -16,7 +16,6 @@ export class ProfileSkeletonComponent implements OnInit {
   ngOnInit() {}
 
   getMyStyles() {
-    console.log(this.outline);
     const myStyles = {
       "width.px": this.Cwidth ? this.Cwidth : "",
       "height.px": this.Cheight ? this.Cheight : "",

@@ -1,7 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
+import { StudentService } from "../../../store/students/api/student.service";
 import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
+import * as ClassActions from "../../../store/class/class.actions";
+import { ClassListType } from "../../../store/class/types/class.type";
 
 @Component({
   selector: "app-view-student",
@@ -11,10 +14,15 @@ import * as StudentActions from "src/app/store/students/student.actions";
 export class ViewStudentComponent implements OnInit {
   students = [];
   studentName: string;
-  constructor(private store: Store<AppState>) {}
+  classList: ClassListType[];
+  constructor(
+    private store: Store<AppState>,
+    private studentService: StudentService
+  ) {}
 
   ngOnInit(): void {
     this.fetchStudents();
+    this.fetchClassList();
   }
 
   fetchStudents(): void {
@@ -33,13 +41,35 @@ export class ViewStudentComponent implements OnInit {
     }
   }
 
-  startSession() {
-    // this.AdminprofileService.startSession().subscribe((response) => {
-    //   if (response.status === 200) {
-    //     alert("success");
-    //   } else {
-    //     alert("fail");
-    //   }
-    // });
+  startSession(): void {
+    this.studentService.startSession().subscribe((response) => {
+      if (response["status"]) {
+        alert(response["message"]);
+      } else {
+        alert(response["message"]);
+      }
+    });
+  }
+
+  fetchClassList(): void {
+    this.store.select("classList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.classList = response;
+      } else {
+        this.store.dispatch(new ClassActions.FetchClass());
+      }
+    });
+  }
+
+  changeClass(classId, studentId): void {
+    this.studentService
+      .updateClassofStudent({ studentId, classId })
+      .subscribe((response) => {
+        if (response["status"]) {
+          alert(response["message"]);
+        } else {
+          alert(response["message"]);
+        }
+      });
   }
 }

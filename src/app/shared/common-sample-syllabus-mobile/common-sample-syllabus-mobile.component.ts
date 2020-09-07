@@ -15,6 +15,7 @@ import * as TopicActions from "../../store/topic/topic.actions";
 import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-common-sample-syllabus-mobile",
@@ -39,7 +40,8 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   isAddSamplePaperFormOpen = false;
   constructor(
     private store: Store<AppState>,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router
   ) {
     this.addForm = addForm();
   }
@@ -89,6 +91,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
       }
     });
   }
+
   fetchSamplePaperTransform(): void {
     this.store.select("samplePaperTransformList").subscribe((response) => {
       if (Object.keys(response).length) {
@@ -104,8 +107,8 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
       }
     });
   }
+
   unassignSubject(subjectId) {
-    console.log(subjectId, this.selectedClassId);
     this.subjectService
       .unAssignSubjectToClass({ subjectId, classId: this.selectedClassId })
       .subscribe((response) => {
@@ -116,8 +119,8 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
         }
       });
   }
+
   removeTopic(topic_id) {
-    console.log(topic_id);
     if (confirm("Are You Sure You want to Delete the Topic?")) {
       this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
     }
@@ -134,6 +137,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     }, 1000);
     this.ic.nativeElement.classList.remove("showbtn");
   }
+
   slide() {
     setTimeout(() => {
       this.hide = !this.hide;
@@ -150,5 +154,18 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
         this.ic.nativeElement.classList.add("showbtn");
       }, 1000);
     }
+  }
+
+  addnotesmobile(subject_id, subject_name, topic_id, topic_name) {
+    this.router.navigate(["admin/notes"], {
+      queryParams: {
+        classId: this.selectedClassId,
+        className: this.selectedClassName,
+        subjectId: subject_id,
+        subjectName: subject_name,
+        topicId: topic_id,
+        topicName: topic_name,
+      },
+    });
   }
 }
