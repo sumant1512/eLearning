@@ -10,7 +10,7 @@ export interface UserDetailsType {
   admin_name: string;
   first_name?: string;
   last_name?: string;
-  class?: string;
+  class_name?: string;
   aadhar_number: string;
   school_registration_no: string;
   admin_contact_no: string;
