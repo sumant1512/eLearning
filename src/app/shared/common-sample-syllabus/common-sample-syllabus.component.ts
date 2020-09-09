@@ -23,6 +23,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
   selectedClassDetails;
   selectedClassName: string;
   selectedClassId: number;
+  resultForNotes: any;
   resultForSyllabus;
   resultForSamperPaper;
 
@@ -53,7 +54,13 @@ export class CommonSampleSyllabusComponent implements OnInit {
   }
 
   fetchNotesList() {
-    this.store.dispatch(new NotesActions.FetchNotes());
+    this.store.select("notesList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.resultForNotes = response;
+      } else {
+        this.store.dispatch(new NotesActions.FetchNotes());
+      }
+    });
   }
 
   selectClass(classId, className) {
@@ -117,7 +124,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
     }
   }
 
-  addnotesmobile(subject_id, subject_name, topic_id, topic_name) {
+  addNotes(subject_id, subject_name, topic_id, topic_name) {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
@@ -126,6 +133,18 @@ export class CommonSampleSyllabusComponent implements OnInit {
         subjectName: subject_name,
         topicId: topic_id,
         topicName: topic_name,
+        view: false,
+      },
+    });
+  }
+
+  viewNotes(subject_id, topic_id) {
+    this.router.navigate(["admin/notes"], {
+      queryParams: {
+        classId: this.selectedClassId,
+        subjectId: subject_id,
+        topicId: topic_id,
+        view: true,
       },
     });
   }

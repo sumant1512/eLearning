@@ -24,6 +24,7 @@
           <th scope="col">Name</th>
           <th scope="col">Email</th>
           <th scope="col">Class</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -59,5 +60,11 @@
         </tr>
       </tbody>
     </table>
+    <h3
+      *ngIf="(students | StudentFilter: studentName).length === 0"
+      class="text-center mt-5"
+    >
+      No results found
+    </h3>
   </div>
 </div>

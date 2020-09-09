@@ -138,14 +138,20 @@
                 </li>
               </ul>
 
-              <div class="p-2">
-                <h4 class="my-4">Referencess</h4>
-                <p><b>Jonney Smith</b> CEO Casinocarol</p>
-                <p>Phone : +00 890 1232 8767</p>
+              <div *ngIf="loaded" class="p-2">
+                <h4 class="my-4">School Details</h4>
+                <p>
+                  <b>{{ studentProfile.userDetails.admin_name }}</b> Principal
+                </p>
+                <p>
+                  Phone : +91 {{ studentProfile.userDetails.admin_contact_no }}
+                </p>
               </div>
-              <div class="p-2">
-                <p><b>Simon Shanu</b> System Administrator</p>
-                <p>Phone : +00 890 1232 8767</p>
+              <div *ngIf="loaded" class="p-2">
+                <p><b>School number</b> Mobile</p>
+                <p>
+                  Phone : +91 {{ studentProfile.userDetails.school_contact_no }}
+                </p>
               </div>
             </div>
             <div class="col-md-8 p-4 p-sm-3">
@@ -229,15 +235,20 @@
                       <tbody>
                         <tr class="border-left-1">
                           <th class="text-muted">Position</th>
-                          <td>Freelance</td>
+                          <td>Student</td>
                         </tr>
                         <tr>
                           <th class="text-muted">Nationality</th>
-                          <td>American</td>
+                          <td>Indian</td>
                         </tr>
                         <tr>
                           <th class="text-muted">Date of birth</th>
-                          <td>09-06-1989</td>
+                          <td *ngIf="loaded">
+                            {{
+                              studentProfile.userDetails.dob
+                                | date: "mediumDate"
+                            }}
+                          </td>
                         </tr>
                       </tbody>
                     </table>

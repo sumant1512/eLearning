@@ -125,6 +125,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
       this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
     }
   }
+
   close() {
     setTimeout(() => {
       this.hide = true;
@@ -156,7 +157,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     }
   }
 
-  addnotesmobile(subject_id, subject_name, topic_id, topic_name) {
+  addNotes(subject_id, subject_name, topic_id, topic_name) {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
@@ -165,6 +166,17 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
         subjectName: subject_name,
         topicId: topic_id,
         topicName: topic_name,
+      },
+    });
+  }
+
+  viewNotes(subject_id, topic_id) {
+    this.router.navigate(["admin/notes"], {
+      queryParams: {
+        classId: this.selectedClassId,
+        subjectId: subject_id,
+        topicId: topic_id,
+        view: true,
       },
     });
   }

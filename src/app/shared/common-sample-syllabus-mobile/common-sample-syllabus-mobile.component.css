@@ -13,7 +13,7 @@
     #004e92 51%,
     #000428 100%
   );
-  margin-bottom: 5px !important;
+  /* margin-bottom: 0px !important; */
   margin-right: -15px;
 }
 
@@ -42,8 +42,14 @@
 }
 .other {
   display: flex;
-  background-color: #1f618d;
-  border-top-left-radius: 25px !important;
+  background-image: linear-gradient(
+    to right,
+    #000428 0%,
+    #004e92 51%,
+    #000428 100%
+  );
+  border-bottom-right-radius: 25px !important;
+  border-bottom-left-radius: 25px !important;
 }
 
 .container-fluid {
@@ -62,7 +68,7 @@
 
 .clbtn {
   border-radius: 20px;
-  border-color: #34495e;
+  border-color: #455a64;
   border-width: 5px;
   background-color: whitesmoke;
 }
@@ -100,12 +106,42 @@
   display: block;
   padding: 0.25rem 1rem;
 }
-.card-shadow {
+.formSlide {
   opacity: 0;
-  animation: formSlide 1s forwards;
+  animation: formSlide 2s forwards;
 }
 
 @keyframes formSlide {
+  100% {
+    bottom: 0;
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
   100% {
     opacity: 1;
   }

@@ -5,6 +5,7 @@ import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
 import * as ClassActions from "../../store/class/class.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
+import * as $ from "jquery";
 
 @Component({
   selector: "app-add-student",
@@ -24,7 +25,7 @@ export class AddStudentComponent implements OnInit {
       lastName: ["", Validators.required],
       fatherName: ["", Validators.required],
       class: ["", Validators.required],
-      section: ["", Validators.required],
+      dob: ["", Validators.required],
       email: [
         "",
         [
@@ -42,18 +43,24 @@ export class AddStudentComponent implements OnInit {
         ],
       ],
       gender: ["", Validators.required],
-      //  address: this.fb.group({
       city: ["", Validators.required],
       state: ["", Validators.required],
       postalCode: [
         "",
         [Validators.required, Validators.pattern("^[0-9]{6,6}$")],
       ],
-      //  }),
     });
   }
 
   ngOnInit(): void {
+    // $(function() {
+    //   $("#date").datepicker({
+    //     showOn: "both",
+    //     buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+    //     buttonText: "<i class='fa fa-calendar'></i>",
+    //     buttonImageOnly: true
+    //   });
+    // });
     this.displayNone();
     this.fetchClassList();
   }
@@ -82,17 +89,17 @@ export class AddStudentComponent implements OnInit {
       : this.displayDom();
   }
 
-  registerStudent() {
+  registerStudent(): void {
     const studentRegistrationDetails = this.studentRegistrationForm.value;
     this.store.dispatch(
       new StudentActions.AddStudent(studentRegistrationDetails)
     );
     this.studentRegistrationForm.reset();
   }
-   fetchClassList(): void {
+  fetchClassList(): void {
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
-       this.classList = response;
+        this.classList = response;
       } else {
         this.store.dispatch(new ClassActions.FetchClass());
       }

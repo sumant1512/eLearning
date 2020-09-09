@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
-  selector: 'app-notes',
-  templateUrl: './notes.component.html',
-  styleUrls: ['./notes.component.css']
+  selector: "app-notes",
+  templateUrl: "./notes.component.html",
+  styleUrls: ["./notes.component.css"],
 })
 export class NotesComponent implements OnInit {
-  
-  constructor(private router: Router,
-    private route: ActivatedRoute) { }
+  view: boolean;
+  constructor(private router: Router, private Activatedroute: ActivatedRoute) {}
 
-    ngOnInit(){
-      
-    }
-
+  ngOnInit() {
+    this.Activatedroute.queryParams.subscribe((params) => {
+      this.view = params["view"];
+    });
+  }
 }
