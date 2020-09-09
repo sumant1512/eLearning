@@ -1,5 +1,8 @@
-.min-vh {
+.carousel-height {
   height: calc(100vh - 72.5px);
+}
+.animated {
+  animation-duration: 1.5s;
 }
 @media (min-width: 769px) {
   .wide {
@@ -11,25 +14,23 @@
     left: 50px;
     font-size: 1.5em;
   }
+  .caption-animation {
+    animation-name: fadeInBottom;
+  }
+}
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 500px, 0);
+  }
 
-  @keyframes fadeInBottom {
-    from {
-      opacity: 0;
-      transform: translate3d(0, 500px, 0);
-    }
-
-    to {
-      opacity: 1;
-      transform: none;
-    }
+  100% {
+    opacity: 1;
+    transform: none;
   }
 }
 
-.animated {
-  animation-duration: 1.5s;
-}
-
-@keyframes fadeInBottom {
+@keyframes fadeInRight {
   from {
     opacity: 0;
     transform: translate3d(500px, 0, 0);
@@ -40,9 +41,10 @@
     transform: none;
   }
 }
-
-.fadeInBottom {
-  animation-name: fadeInBottom;
+@media (max-width: 769px) {
+  .caption-animation {
+    animation-name: fadeInRight;
+  }
 }
 
 .carousel-item:after {

@@ -15,3 +15,8 @@
   text-indent: 25px;
   font-size: 1rem;
 }
+.togButton {
+  background: #F39C12;
+  box-shadow: 0 3px 0 0 #E67E22;
+}
+
