@@ -1,3 +1,2 @@
-<app-add-notes></app-add-notes>
-<app-view-notes></app-view-notes>
-<router-outlet></router-outlet>
+<app-add-notes *ngIf="!view"></app-add-notes>
+<app-view-notes *ngIf="view"></app-view-notes>

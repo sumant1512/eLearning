@@ -148,26 +148,21 @@
               </div>
             </div>
             <div class="col-12 col-md-6">
-              <select
-                formControlName="section"
+              <input
+                id="date"
+                type="date"
+                formControlName="dob"
                 class="form-control"
+                placeholder="DOB"
                 [ngClass]="{
-                  'is-invalid':
-                    (f.section.touched || f.section.dirty) && f.section.errors
+                  'is-invalid': (f.dob.touched || f.dob.dirty) && f.dob.errors
                 }"
-              >
-                <option value="" disabled selected>Select Section</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-              </select>
+              />
               <div
-                *ngIf="
-                  (f.section.touched || f.section.dirty) && f.section.errors
-                "
+                *ngIf="(f.dob.touched || f.dob.dirty) && f.dob.errors"
                 class="invalid-feedback"
               >
-                <div *ngIf="f.section.errors.required">Select Section</div>
+                <div *ngIf="f.dob.errors.required">Select Date</div>
               </div>
             </div>
           </div>

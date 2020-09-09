@@ -1,16 +1,15 @@
 <div class="shade">
   <div class="blackboard">
     <div class="mt-4 outer">
-     <div class="board">
+      <div class="board">
         <p>
-        <label>Title: Vector 3D </label>
-      </p>
-      <p>
-        <label>Description : </label> 
-      </p>
-       <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint facere aliquid maiores a dolores molestiae voluptatibus reiciendis velit nesciunt culpa assumenda, facilis obcaecati quaerat optio.</p>
-       </div>
+          <label *ngIf="loaded">Title: {{ arr[0].note_heading }}</label>
+        </p>
+        <p>
+          <label>Description : </label>
+        </p>
+        <p class="text-white" *ngIf="loaded">{{ arr[0].note_desc }}</p>
+      </div>
     </div>
   </div>
 </div>
-

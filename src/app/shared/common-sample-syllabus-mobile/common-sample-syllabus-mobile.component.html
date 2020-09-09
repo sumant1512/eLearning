@@ -3,7 +3,7 @@
     <div class="text-center mt-3">
       <button
         (click)="slide()"
-        class="text-white btn btn-outline-light mt-2 slider mr-0"
+        class="text-white btn mt-2 slider mr-0"
         style="font-size: 16px"
         #slider
       >
@@ -17,8 +17,8 @@
       ></i>
     </div>
     <div class="container-fluid display" #display>
-      <div class="mt-sm-0 other">
-        <ul class="inside-list mr-5 w-100" *ngIf="test">
+      <div class="other">
+        <ul class="inside-list mt-2 mr-5 w-100" *ngIf="test">
           <button
             (click)="close(); selectClass(c.class_id, c.class_name)"
             class="mx-auto my-xs-0 mt-2 btn btn-block text-center p-xs-0 clbtn"
@@ -43,9 +43,9 @@
   </div>
 </div>
 
-<div class="col-sm-12 mt-3" id="data" *ngIf="hide">
+<div class="col-sm-12 mt-3 formSlide" id="data" *ngIf="hide">
   <div
-    class="card-shadow formSlide mb-2 bg-white"
+    class="card-shadow mb-2 bg-white"
     *ngIf="selectedClassDetails && selectedClassDetails.length > 0"
   >
     <div class="tab-content">
@@ -89,21 +89,7 @@
                     "
                   >
                     <p class="text-center mt-2">{{ name }} not available.</p>
-                    <p></p>
                   </div>
-                  <!-- <button
-                    class="btn btn-primary"
-                    (click)="
-                      addnotesmobile(
-                        subject.subject_id,
-                        subject.subject_name,
-                        topic.topic_id,
-                        topic.topic_name
-                      )
-                    "
-                  >
-                    Add notes
-                  </button> -->
                   <ul
                     [hidden]="!getStatus()"
                     *ngFor="let topic of subject.topics"
@@ -117,6 +103,25 @@
                         >
                         </i
                       ></span>
+                      <button
+                        class="btn btn-primary"
+                        (click)="
+                          addNotes(
+                            subject.subject_id,
+                            subject.subject_name,
+                            topic.topic_id,
+                            topic.topic_name
+                          )
+                        "
+                      >
+                        Add notes
+                      </button>
+                      <button
+                        class="btn btn-secondary ml-2 p-1"
+                        (click)="viewNotes(subject.subject_id, topic.topic_id)"
+                      >
+                        View notes
+                      </button>
                     </li>
                   </ul>
                   <ul

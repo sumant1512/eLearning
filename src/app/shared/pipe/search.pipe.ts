@@ -10,10 +10,12 @@ export class SearchPipe implements PipeTransform {
     if (!input) return value;
 
     value.forEach((element) => {
-      if (element.first_name.toUpperCase().includes(input.toUpperCase())) {
+      let fullName: string = element.first_name.concat(" ", element.last_name);
+      if (fullName.toUpperCase().includes(input.toUpperCase())) {
         filteredValue.push(element);
       }
     });
+
     return filteredValue;
   }
 }

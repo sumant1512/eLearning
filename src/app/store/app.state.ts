@@ -7,6 +7,7 @@ import { NotesListType } from "./notes/types/notes.type";
 
 export type AppState = Partial<{
   profile: ProfileType;
+  studentTransformList: any;
   classList: ClassListType[];
   subjectList: SubjectListType[];
   topicList: TopicListType[];
