@@ -11,6 +11,9 @@ import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-s
 import { ProfileSkeletonComponent } from "./profile-skeleton/profile-skeleton.component";
 import { CommonProfileComponent } from "./common-profile/common-profile.component";
 import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mobile/common-sample-syllabus-mobile.component";
+import { StudentSamplePaperViewComponent } from "./student-sample-paper-view/student-sample-paper-view.component";
+import { StudentSyllabusViewComponent } from "./student-syllabus-view/student-syllabus-view.component";
+import { StudentSampleSyllabusViewComponent } from "./student-sample-syllabus-view/student-sample-syllabus-view.component";
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mo
     ProfileSkeletonComponent,
     CommonProfileComponent,
     CommonSampleSyllabusMobileComponent,
+    StudentSamplePaperViewComponent,
+    StudentSyllabusViewComponent,
+    StudentSampleSyllabusViewComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [

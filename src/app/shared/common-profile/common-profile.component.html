@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="container-fluid p-0 m-0 text-muted">
-    <ul class="nav nav-tabs bg-white nav-fill" id="myTab" role="tablist">
+    <ul class="my-3 nav nav-tabs bg-white nav-fill" id="myTab" role="tablist">
       <li class="nav-item">
         <a
           class="nav-link active p-2 text-dark"
@@ -82,7 +82,7 @@
           role="tab"
           aria-controls="profile"
           aria-selected="false"
-          >Portfolio</a
+          >Syllabus & Sample-Paper</a
         >
       </li>
       <li class="nav-item">
@@ -401,69 +401,33 @@
           role="tabpanel"
           aria-labelledby="contact-tab"
         >
-          <div class="row no-gutters gallery">
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_01.jpg"
-                alt=""
-              />
+          <div class="row">
+            <div class="col-12">
+              <button
+                class="btn togButton mt-3 mr-4 float-right"
+                data_but="btn-xs"
+                (click)="toggleButton()"
+              >
+                <i id="fav" class="fa fa-file-text"></i>&nbsp;{{ btnLabel }}
+              </button>
             </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_02.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_03.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_04.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_05.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_06.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_08.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_09.jpg"
-                alt=""
-              />
-            </div>
-            <div class="col-sm-4 d-flex justify-content-center p-3">
-              <img
-                class="mt-5 mw-100"
-                src="../../../assets/gallery/gallery_10.jpg"
-                alt=""
-              />
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <app-student-syllabus-view
+                *ngIf="toggle"
+                [resultForSyllabusAndSamplePaper]="
+                  resultForSyllabusAndSamplePaper
+                "
+                [selectedSubjectDetails]="selectedSubjectDetails"
+              ></app-student-syllabus-view>
+              <app-student-sample-paper-view
+                *ngIf="!toggle"
+                [resultForSyllabusAndSamplePaper]="
+                  resultForSyllabusAndSamplePaper
+                "
+                [selectedSubjectDetails]="selectedSubjectDetails"
+              ></app-student-sample-paper-view>
             </div>
           </div>
         </div>

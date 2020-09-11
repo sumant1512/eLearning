@@ -92,27 +92,32 @@
                                 </i
                               ></span>
 
-                              <button
-                                class="btn btn-primary"
-                                (click)="
-                                  addNotes(
-                                    subject.subject_id,
-                                    subject.subject_name,
-                                    topic.topic_id,
-                                    topic.topic_name
-                                  )
-                                "
-                              >
-                                Add notes
+                              <button class="btn float-right">
+                                <i
+                                  (click)="
+                                    addNotes(
+                                      subject.subject_id,
+                                      subject.subject_name,
+                                      topic.topic_id,
+                                      topic.topic_name
+                                    )
+                                  "
+                                  class="fa fa-plus ml-1"
+                                >
+                                </i>
                               </button>
-                              <button
-                                class="btn btn-secondary ml-2 p-1"
-                                (click)="
-                                  viewNotes(subject.subject_id, topic.topic_id)
-                                "
-                              >
-                                View notes
-                              </button>
+                              <!-- <button class="btn float-right">
+                                <i
+                                  (click)="
+                                    viewNotes(
+                                      subject.subject_id,
+                                      topic.topic_id,
+                                    )
+                                  "
+                                  class="fa fa-eye"
+                                >
+                                </i>
+                              </button> -->
                             </li>
                           </ul>
                           <ul

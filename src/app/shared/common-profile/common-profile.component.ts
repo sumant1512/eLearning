@@ -13,7 +13,12 @@ import * as StudentTransformActions from "../../store/student-transform/student-
 export class CommonProfileComponent implements OnInit {
   studentProfile: ProfileType;
   loaded: boolean = false;
-  tranformData: any[];
+  toggle: boolean = true;
+  btnLabel: string = "Sample Paper";
+  resultForSyllabusAndSamplePaper: any;
+  selectedSubjectDetails;
+  selectedSubjectId: number;
+
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
@@ -40,7 +45,8 @@ export class CommonProfileComponent implements OnInit {
   fetchTransformData(res): void {
     this.store.select("studentTransformList").subscribe((response) => {
       if (Object.keys(response).length) {
-        console.log(response);
+        this.resultForSyllabusAndSamplePaper = response;
+        this.selectSubject(response[0].subject_id);
       } else {
         this.store.dispatch(
           new StudentTransformActions.FetchTransformStudent({
@@ -50,5 +56,18 @@ export class CommonProfileComponent implements OnInit {
         );
       }
     });
+  }
+
+  selectSubject(subjectId): void {
+    this.selectedSubjectId = subjectId;
+    this.selectedSubjectDetails = this.resultForSyllabusAndSamplePaper.filter(
+      (data) => data.subject_id == subjectId
+    );
+  }
+
+  toggleButton(): void {
+    this.toggle = !this.toggle;
+    if (this.toggle) this.btnLabel = "Sample Paper";
+    else this.btnLabel = " Syllabus";
   }
 }
