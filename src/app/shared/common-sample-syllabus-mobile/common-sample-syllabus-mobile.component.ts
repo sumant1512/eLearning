@@ -13,9 +13,14 @@ import { addForm } from "../common.utils";
 import { AppState } from "src/app/store/app.state";
 import * as TopicActions from "../../store/topic/topic.actions";
 import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
+import * as NotesActions from "../../store/notes/notes.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 import { Router } from "@angular/router";
+import { NotesListType } from '../../store/notes/types/notes.type';
+import { SyllabusListType } from '../../store/syllabus-tranform/types/syllabus.type';
+import { SamplePaperListType } from '../../store/sample-paper/types/sample-paper.type';
+
 
 @Component({
   selector: "app-common-sample-syllabus-mobile",
@@ -34,10 +39,16 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   selectedClassDetails;
   selectedClassName: string;
   selectedClassId: number;
-  resultForSyllabus;
-  resultForSamperPaper;
-
+  resultForNotes: NotesListType[];  
+  resultForSyllabus:SyllabusListType[];
+  resultForSamperPaper:SamplePaperListType[];
+  
   isAddSamplePaperFormOpen = false;
+  
+  viewValue: boolean = true;
+  noteArray:NotesListType[];
+  hasNote: boolean;  
+
   constructor(
     private store: Store<AppState>,
     private subjectService: SubjectService,
@@ -52,6 +63,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     } else {
       this.fetchSyllabusTransform();
     }
+    this.fetchNotesList();
   }
 
   openSamplePaperForm() {
@@ -132,7 +144,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
       this.slider.nativeElement.classList.remove("show");
     }, 1000);
 
-    this.display.nativeElement.classList.remove("ttgt");
+    this.display.nativeElement.classList.remove("animate");
     setTimeout(() => {
       this.test = !this.test;
     }, 1000);
@@ -146,7 +158,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     this.ic.nativeElement.classList.remove("showbtn");
     this.slider.nativeElement.classList.toggle("show");
     setTimeout(() => {
-      this.display.nativeElement.classList.toggle("ttgt");
+      this.display.nativeElement.classList.toggle("animate");
       this.test = !this.test;
     }, 1000);
 
@@ -155,6 +167,16 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
         this.ic.nativeElement.classList.add("showbtn");
       }, 1000);
     }
+  }
+
+   fetchNotesList() {
+    this.store.select("notesList").subscribe((response) => {
+      if (Object.keys(response).length) {
+        this.resultForNotes = response;
+      } else {
+        this.store.dispatch(new NotesActions.FetchNotes());
+      }
+    });
   }
 
   addNotes(subject_id, subject_name, topic_id, topic_name) {
@@ -166,18 +188,29 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
         subjectName: subject_name,
         topicId: topic_id,
         topicName: topic_name,
+        view: !this.viewValue,
       },
     });
   }
 
-  viewNotes(subject_id, topic_id) {
+  viewNotes(subject_name, topic_id, topic_name) {
     this.router.navigate(["admin/notes"], {
       queryParams: {
-        classId: this.selectedClassId,
-        subjectId: subject_id,
+        className: this.selectedClassName,
+        subjectName: subject_name,
         topicId: topic_id,
-        view: true,
+        topicName: topic_name,
+        view: this.viewValue,
       },
     });
+  }
+
+  sortNotesByTopic( topicId): void {
+    this.noteArray = this.resultForNotes.filter((data) => data.topic_id == topicId);
+    if (this.noteArray.length < 1) 
+      this.hasNote = false;
+     else 
+      this.hasNote = true;
+    
   }
 }

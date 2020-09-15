@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 import * as NotesActions from "../../../store/notes/notes.actions";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
-import { NotesListType } from "src/app/store/notes/types/notes.type";
 
 @Component({
   selector: "app-add-notes",
@@ -14,14 +13,13 @@ import { NotesListType } from "src/app/store/notes/types/notes.type";
 })
 export class AddNotesComponent implements OnInit {
   addNotesForm: FormGroup;
-  submitted: false;
-  notesList: NotesListType[];
-  classId;
-  className;
-  subjectId;
-  subjectName;
-  topicId;
-  topicName;
+  classId:number;
+  className:string;
+  subjectId:number;
+  subjectName:string;
+  topicId:number;
+  topicName: string;
+  
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
@@ -44,7 +42,9 @@ export class AddNotesComponent implements OnInit {
       this.topicName = params["topicName"];
     });
   }
-
+  get f() {
+    return this.addNotesForm.controls;
+  }
   addNotes(): void {
     const notes = this.addNotesForm.value;
     this.store.dispatch(
@@ -56,5 +56,17 @@ export class AddNotesComponent implements OnInit {
         topicId: this.topicId,
       })
     );
+  }
+
+  goToViewNote() {
+    this.router.navigate(["admin/notes"], {
+      queryParams: {
+        className: this.className,
+        subjectName: this.subjectName,
+        topicId: this.topicId,
+        topicName: this.topicName,
+        view: true,
+      },
+    });
   }
 }

@@ -1,12 +1,13 @@
+import { SamplePaperListType } from '../sample-paper/types/sample-paper.type';
 import { SamplePaperTransformActions, SamplePaperTransformActionsUnion } from "./sample-paper-transform.actions";
-// import { ClassListType } from "./types/class.type";
 
-const samplePaperTransformList:any[] = [];
+
+const samplePaperTransformList:SamplePaperListType[] = [];
 
 export function samplePaperTransformReducer(
   state = samplePaperTransformList,
   action: SamplePaperTransformActionsUnion
-): any[] {
+): SamplePaperListType[] {
   switch (action.type) {
     case SamplePaperTransformActions.FETCHED_TRANSFORMED_SAMPLEPAPER:
       return action.payload;

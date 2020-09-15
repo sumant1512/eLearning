@@ -1,88 +1,118 @@
 .background {
-    background: linear-gradient(180deg, #455a64 0%, #67818d 100%);
- }
- .nav-link {
-   color: black;
-   border: none;
-   border-radius: 0.3em;
-   box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
-   
- }
- .nav-link:not(.active):hover {
-   color: white;
-   background-color: #97a6ad;
- }
+  background: linear-gradient(180deg, #455a64 0%, #67818d 100%);
+}
+.nav-link {
+ color: black;
+ border: none;
+ border-radius: 0.3em;
+ box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
  
- .nav-link.active {
-   color: #fff;
-   background-color: #455a64;
- }
- .card-link {
-   color: Black;
-   font-weight: 300;
- }
- .card-header, .add-btn {
-   background-color: #009688;
- }
- .inside div:after {
-   content: "\f077";
-   position: absolute;
-   font-family: "FontAwesome";
-   right: 0.5em;
-   top: 0.5em;
-   font-size: 1.3em;
-   transform: rotate(0deg);
-   transition: all 0.5s;
- }
- .inside.collapsed div:after {
-   transform: rotate(180deg);
-   transition: all 0.5s;
- }
- 
- .form-slide {
-    bottom: -700px;
-    animation: formSlide 1s forwards;
-  }
-  
-  @keyframes formSlide {
-    100% {
-      bottom: 0;
-    }
-    0% {
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.1;
-    }
-    15% {
-      opacity: 0.15;
-    }
-    25% {
-      opacity: 0.25;
-    }
-    35% {
-      opacity: 0.35;
-    }
-    50% {
-      opacity: 0.5;
-    }
-    60% {
-      opacity: 0.6;
-    }
-    75% {
-      opacity: 0.75;
-    }
-    85% {
-      opacity: 0.85;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
- .add-btn{
-   width: 20%;;
- }
+}
+.nav-link:not(.active):hover {
+ color: white;
+ background-color: #97a6ad;
+}
 
- .left , .right{
-   float: left;
- }
+.nav-link.active {
+ color: #fff;
+ background-color: #455a64;
+}
+.card-link {
+ color: Black;
+ font-weight: 300;
+}
+.card-header, .add-btn {
+ background-color: #009688;
+}
+.inside div:after {
+ content: "\f077";
+ position: absolute;
+ font-family: "FontAwesome";
+ right: 0.5em;
+ top: 0.5em;
+ font-size: 1.3em;
+ transform: rotate(0deg);
+ transition: all 0.5s;
+}
+.inside.collapsed div:after {
+ transform: rotate(180deg);
+ transition: all 0.5s;
+}
+
+.form-slide {
+  bottom: -700px;
+  animation: formSlide 1s forwards;
+}
+
+@keyframes formSlide {
+  100% {
+    bottom: 0;
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.add-btn{
+ width: 20%;;
+}
+
+.left , .right{
+ float: left;
+}
+
+
+
+.dropdown {
+position: relative;
+display: inline-block;
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: #f9f9f9;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+z-index: 1;
+}
+
+.dropdown-content a {
+color: black;
+padding: 6px 8px;
+text-decoration: none;
+display: block;
+}
+
+.dropdown-content a:hover {background-color:#93ddeb}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+

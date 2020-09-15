@@ -21,7 +21,7 @@
         <ul class="inside-list mt-2 mr-5 w-100" *ngIf="test">
           <button
             (click)="close(); selectClass(c.class_id, c.class_name)"
-            class="mx-auto my-xs-0 mt-2 btn btn-block text-center p-xs-0 clbtn"
+            class="mx-auto my-xs-0 mt-2 btn btn-block text-center p-xs-0 btnwider"
             *ngFor="let c of resultForSyllabus || resultForSamperPaper"
           >
             <a
@@ -103,25 +103,47 @@
                         >
                         </i
                       ></span>
-                      <button
-                        class="btn btn-primary"
-                        (click)="
-                          addNotes(
-                            subject.subject_id,
-                            subject.subject_name,
-                            topic.topic_id,
-                            topic.topic_name
-                          )
-                        "
-                      >
-                        Add notes
-                      </button>
-                      <button
-                        class="btn btn-secondary ml-2 p-1"
-                        (click)="viewNotes(subject.subject_id, topic.topic_id)"
-                      >
-                        View notes
-                      </button>
+
+                      <div class="dropdown float-right">
+                        <button
+                          class="dropbtn btn btnNotes text-white"
+                          (mouseover)="
+                            sortNotesByTopic(topic.topic_id)
+                          "
+                        >
+                          Notes
+                          <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                        </button>
+                        <div class="dropdown-content p-2">
+                          <button
+                            class="btn btnAdd btn-block text-white"
+                            [disabled]="hasNote"
+                            (click)="
+                              addNotes(
+                                subject.subject_id,
+                                subject.subject_name,
+                                topic.topic_id,
+                                topic.topic_name
+                              )
+                            "
+                          >
+                            Add Notes<i class="fa fa-plus ml-2"> </i>
+                          </button>
+                          <button
+                            class="btn btnView btn-block text-white"
+                            [disabled]="!hasNote"
+                            (click)="
+                              viewNotes(
+                                subject.subject_name,
+                                topic.topic_id,
+                                topic.topic_name
+                              )
+                            "
+                          >
+                            View Notes<i class="fa fa-eye ml-2"> </i>
+                          </button>
+                        </div>
+                      </div>
                     </li>
                   </ul>
                   <ul

@@ -1,15 +1,16 @@
-import {StudentActions, StudentActionsUnion } from "./student.actions";
+import { StudentActions, StudentActionsUnion } from "./student.actions";
+import { StudentType } from './types/student.types';
 
-const studentList=[];
+const studentList:StudentType[]=[];
 
 export function studentReducer(
   state = studentList,
   action: StudentActionsUnion
-): any {
+): StudentType[] {
   switch (action.type) {
     case StudentActions.FETCHED_STUDENT:
       return action.payload;
-    default:
+    default: 
       return state;
   }
 }

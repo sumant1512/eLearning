@@ -6,7 +6,7 @@ import { HOST } from "config.constants";
 @Injectable({
   providedIn: 'root'
 })
-export class StudentTransformService {
+export class StudentSamplePaperSyllabusService {
 constructor(private http: HttpClient) {}
 
   getTransformedDataForStudent(studentDetails): Observable<any[]> {
