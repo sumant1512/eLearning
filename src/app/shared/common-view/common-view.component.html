@@ -10,6 +10,7 @@
         <thead>
           <tr>
             <th>{{ name }} Name</th>
+            <th *ngIf="name === 'Sample Paper'">Url</th>
             <th>Created on</th>
             <th>Action</th>
           </tr>
@@ -30,6 +31,11 @@
                   item.topic_name ||
                   item.sample_paper_name
               }}
+            </td>
+            <td *ngIf="name === 'Sample Paper'">
+              <a href="{{ item.sample_paper_url }}" target="_blank">
+                Open here
+              </a>
             </td>
             <td>{{ item.created_on | date: "mediumDate" }}</td>
             <td>
