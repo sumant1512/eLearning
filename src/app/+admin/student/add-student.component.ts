@@ -53,17 +53,10 @@ export class AddStudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // $(function() {
-    //   $("#date").datepicker({
-    //     showOn: "both",
-    //     buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-    //     buttonText: "<i class='fa fa-calendar'></i>",
-    //     buttonImageOnly: true
-    //   });
-    // });
     this.displayNone();
     this.fetchClassList();
   }
+
   get f() {
     return this.studentRegistrationForm.controls;
   }
@@ -96,6 +89,7 @@ export class AddStudentComponent implements OnInit {
     );
     this.studentRegistrationForm.reset();
   }
+  
   fetchClassList(): void {
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
