@@ -87,14 +87,31 @@
                               <span>
                                 <i
                                   (click)="removeTopic(topic.topic_id)"
-                                  class="ml-2 fa fa-minus-circle"
+                                  class="ml-2 fa fa-trash"
+                                  title="Delete Topic"
                                 >
                                 </i
                               ></span>
-
-                              <button class="btn float-right">
-                                <i
-                                  (click)="
+                              <div class="dropdown float-right">
+                                <button
+                                  class="dropbtn btn btn-primary"
+                                  (mouseover)="
+                                    sortNotesByTopic(
+                                      topic.topic_id
+                                    )
+                                  "
+                                >
+                                  Notes
+                                  <i
+                                    class="fa fa-sticky-note"
+                                    aria-hidden="true"
+                                  ></i>
+                                </button>
+                                <div class="dropdown-content p-2">
+                                  <button
+                                    class="btn btn-danger btn-block"
+                                    [disabled]="hasNote"
+                                    (click)="
                                     addNotes(
                                       subject.subject_id,
                                       subject.subject_name,
@@ -102,22 +119,24 @@
                                       topic.topic_name
                                     )
                                   "
-                                  class="fa fa-plus ml-1"
-                                >
-                                </i>
-                              </button>
-                              <button class="btn float-right">
-                                <i
-                                  (click)="
+                                  >
+                                    Add Notes<i class="fa fa-plus ml-2"> </i>
+                                  </button>
+                                  <button class="btn btn-danger btn-block"
+                                    [disabled]="!hasNote" 
+                                    (click)="
                                     viewNotes(
-                                      subject.subject_id,
-                                      topic.topic_id
+                                      subject.subject_name,
+                                      topic.topic_id,
+                                      topic.topic_name
                                     )
-                                  "
-                                  class="fa fa-eye"
-                                >
-                                </i>
-                              </button>
+                                  ">
+                                    View Notes<i class="fa fa-eye ml-2"> </i>
+                                  </button>
+                                  
+                                </div>
+                              </div>
+
                             </li>
                           </ul>
                           <ul

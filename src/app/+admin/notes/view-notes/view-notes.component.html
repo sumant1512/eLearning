@@ -1,14 +1,136 @@
 <div class="shade">
+  <button
+    class="btn btn-danger btn-lg m-2"
+    (click)="deleteNotes()"
+  >
+    Delete
+  </button>
+  <button
+    type="submit"
+    class="btn btn-primary btn-lg mr-1 my-2"
+    data-toggle="modal"
+    data-target="#modalUpdateData"
+  >
+    Update
+  </button>
+
   <div class="blackboard">
-    <div class="mt-4 outer">
-      <div class="board">
-        <p>
-          <label *ngIf="loaded">Title: {{ arr[0].note_heading }}</label>
-        </p>
-        <p>
-          <label>Description : </label>
-        </p>
-        <p class="text-white" *ngIf="loaded">{{ arr[0].note_desc }}</p>
+    <div *ngIf="!loaded" class="d-flex align-items-center text-white m-2">
+      <strong>Loading...</strong>
+      <div class="spinner-border ml-auto"></div>
+    </div>
+    <div *ngIf="loaded" class="mt-1 outer">
+      
+       
+
+        <div class="board">
+          <h4 class="d-flex text-center text-white p-2 mt-0" aria-hidden="true">
+            <b>
+              View Your Notes Here For Class {{ className }} in
+              {{ subjectName }} and topic {{ topicName }} !
+            </b>
+          </h4>
+          <p>
+            <label *ngIf="loaded">Title: {{ noteArray[0].note_heading }}</label>
+          </p>
+          <p>  
+            <label>Description : </label>
+          </p>
+          <p class="text-white" *ngIf="loaded">{{ noteArray[0].note_desc }}</p>
+        </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="modalUpdateData"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div
+      class="modal-dialog modal-md modal-notify modal-danger"
+      role="document"
+    >
+      <div
+        class="modal-content text-left rounded border border-primary bg-light text-dark"
+      >
+        <div class="modal-header d-flex justify-content-center">
+          <p class="heading"><b>Are you sure you want to update?</b></p>
+        </div>
+
+        <div class="modal-body">
+          <form [formGroup]="editNotesForm">
+            <div class="form-group">
+              <div class="form-group">
+                <label
+                  ><b><i>Heading</i></b></label
+                >
+                <input
+                  type="text"
+                  formControlName="noteHeading"
+                  class="form-control"
+                  [(ngModel)]="heading"
+                  [ngClass]="{
+                    'is-invalid': f.noteHeading.touched && f.noteHeading.errors
+                  }"
+                />
+              </div>
+              <div
+                *ngIf="f.noteHeading.touched && f.noteHeading.errors"
+                class="invalid-feedback"
+              >
+                <div class="ml-1" *ngIf="f.noteHeading.errors.required">
+                  Add Heading to the Note*
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label
+                  ><b><i>Description</i></b></label
+                >
+                <textarea
+                  formControlName="noteDesc"
+                  class="form-control"
+                  rows="5"
+                  style="height: 100%"
+                  [(ngModel)]="description"
+                  [ngClass]="{
+                    'is-invalid': f.noteDesc.touched && f.noteDesc.errors
+                  }"
+                ></textarea>
+                <div
+                  *ngIf="f.noteDesc.touched && f.noteDesc.errors"
+                  class="invalid-feedback"
+                >
+                  <div class="ml-1" *ngIf="f.noteDesc.errors.required">
+                    Add Description to Submit!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer flex-center">
+          <button
+            (click)="updateNotes()"
+            type="submit"
+            class="btn btn-primary btn-lg "
+            data-toggle="modal"
+            data-target="#modalUpdateData"
+            [disabled]="!this.editNotesForm.valid"
+          >
+            Save
+          </button>
+          <button
+            type="submit"
+            class="btn btn-danger btn-lg waves-effect "
+            data-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -7,12 +7,18 @@ import { Router, ActivatedRoute } from "@angular/router";
   styleUrls: ["./notes.component.css"],
 })
 export class NotesComponent implements OnInit {
-  view: boolean;
+  view: any;
+
   constructor(private router: Router, private Activatedroute: ActivatedRoute) {}
 
   ngOnInit() {
     this.Activatedroute.queryParams.subscribe((params) => {
-      this.view = params["view"];
+      const temp = params["view"];
+      if (temp === "true") {
+        this.view = true;
+      } else if (temp === "false") {
+        this.view = false;
+      }
     });
   }
 }

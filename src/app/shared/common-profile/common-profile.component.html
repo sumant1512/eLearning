@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container px-1">
   <div class="cover w-100">
     <div class="cover-content w-100 h-100 p-4 d-flex text-center p-sm-2">
       <div class="row no-gutters">
@@ -404,30 +404,23 @@
           <div class="row">
             <div class="col-12">
               <button
-                class="btn togButton mt-3 mr-4 float-right"
+                class="btn togButton mt-3 mb-2 mr-4 float-right"
                 data_but="btn-xs"
-                (click)="toggleButton()"
+                (click)="toggleButton(); toggleIcon()"
               >
-                <i id="fav" class="fa fa-file-text"></i>&nbsp;{{ btnLabel }}
+                <i id="icon" class="fa fa-file-text"></i>&nbsp;{{ btnLabel }}
               </button>
             </div>
           </div>
           <div class="row">
             <div class="col-12">
-              <app-student-syllabus-view
-                *ngIf="toggle"
+              <app-student-sample-syllabus-view
                 [resultForSyllabusAndSamplePaper]="
                   resultForSyllabusAndSamplePaper
                 "
                 [selectedSubjectDetails]="selectedSubjectDetails"
-              ></app-student-syllabus-view>
-              <app-student-sample-paper-view
-                *ngIf="!toggle"
-                [resultForSyllabusAndSamplePaper]="
-                  resultForSyllabusAndSamplePaper
-                "
-                [selectedSubjectDetails]="selectedSubjectDetails"
-              ></app-student-sample-paper-view>
+                [btnLabel]="btnLabel"
+              ></app-student-sample-syllabus-view>
             </div>
           </div>
         </div>

@@ -13,7 +13,7 @@
     #004e92 51%,
     #000428 100%
   );
-  /* margin-bottom: 0px !important; */
+
   margin-right: -15px;
 }
 
@@ -59,14 +59,14 @@
   overflow: hidden;
 }
 
-.ttgt {
+.animate {
   transition: height 1s;
   transition-timing-function: ease;
   z-index: 1090;
   height: 95%;
 }
 
-.clbtn {
+.btnwider {
   border-radius: 20px;
   border-color: #455a64;
   border-width: 5px;
@@ -154,4 +154,41 @@
 .left,
 .right {
   float: left;
+}
+.btnAdd,
+.btnView {
+  background-color: #148f77;
+}
+.btnNotes {
+  background-color: #21618c;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  top: -10px;
+  right: 105%;
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 6px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #93ddeb;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }

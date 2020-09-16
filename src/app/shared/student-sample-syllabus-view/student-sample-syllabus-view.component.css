@@ -1,0 +1,115 @@
+.nav-link {
+  color: black;
+  border: none;
+  border-radius: 0.5em;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.nav-link:not(.active):hover {
+  color: white;
+  background-color: #97a6ad;
+}
+
+.nav-link.active {
+  color: #fff;
+  background-color: #4d5656;
+}
+
+.btnNotes {
+  background-color: #4d5656;
+}
+
+.card-header {
+  background-color: #34495e;
+}
+.card-outer {
+  background-color: #97a6ad;
+  border-radius: 1em;
+}
+.card-inner {
+  background-color: #f4ecf7;
+}
+.card-second {
+  background-color: #566573;
+  border-radius: 1em;
+}
+
+.navSlide {
+  animation: navSlide 1s forwards;
+}
+
+@keyframes navSlide {
+  100% {
+    bottom: 0;
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.formSlide {
+  animation: formSlide 1s forwards;
+}
+
+@keyframes formSlide {
+  100% {
+    bottom: 0;
+  }
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  15% {
+    opacity: 0.15;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  35% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}

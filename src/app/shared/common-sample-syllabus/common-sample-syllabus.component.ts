@@ -10,6 +10,9 @@ import * as NotesActions from "../../store/notes/notes.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 import { Router } from "@angular/router";
+import { NotesListType } from 'src/app/store/notes/types/notes.type';
+import { SyllabusListType } from 'src/app/store/syllabus-tranform/types/syllabus.type';
+import { SamplePaperListType } from 'src/app/store/sample-paper/types/sample-paper.type';
 
 @Component({
   selector: "app-common-sample-syllabus",
@@ -23,11 +26,16 @@ export class CommonSampleSyllabusComponent implements OnInit {
   selectedClassDetails;
   selectedClassName: string;
   selectedClassId: number;
-  resultForNotes: any;
-  resultForSyllabus;
-  resultForSamperPaper;
+  resultForNotes: NotesListType[];  
+  resultForSyllabus:SyllabusListType[];
+  resultForSamperPaper:SamplePaperListType[]; 
 
   isAddSamplePaperFormOpen = false;
+
+  viewValue: boolean = true;
+  noteArray: NotesListType[];
+  hasNote: boolean;
+  
   constructor(
     private store: Store<AppState>,
     private subjectService: SubjectService,
@@ -41,18 +49,9 @@ export class CommonSampleSyllabusComponent implements OnInit {
       this.fetchSamplePaperTransform();
     } else {
       this.fetchSyllabusTransform();
-      this.fetchNotesList();
     }
+    this.fetchNotesList();
   }
-
-  openSamplePaperForm() {
-    this.isAddSamplePaperFormOpen = !this.isAddSamplePaperFormOpen;
-  }
-
-  getStatus(): boolean {
-    return this.name === "Sample Paper" ? false : true;
-  }
-
   fetchNotesList() {
     this.store.select("notesList").subscribe((response) => {
       if (Object.keys(response).length) {
@@ -63,14 +62,26 @@ export class CommonSampleSyllabusComponent implements OnInit {
     });
   }
 
-  selectClass(classId, className) {
+  openSamplePaperForm() {
+    this.isAddSamplePaperFormOpen = !this.isAddSamplePaperFormOpen;
+  }
+
+  getStatus(): boolean {
+    return this.name === "Sample Paper" ? false : true;
+  }
+
+  getStatusNotes(): boolean {
+    return this.name === "Notes" ? false : true;
+  }
+
+  selectClass(classId, className):void {
     this.selectedClassName = className;
     this.selectedClassId = classId;
-    if (this.getStatus() && this.resultForSyllabus !== undefined)
+    if (this.getStatus() && this.resultForSyllabus !== undefined) {
       this.selectedClassDetails = this.resultForSyllabus.filter(
         (data) => data.class_id === classId
       );
-    else if (this.resultForSamperPaper !== undefined)
+    } else if (this.resultForSamperPaper !== undefined)
       this.selectedClassDetails = this.resultForSamperPaper.filter(
         (data) => data.class_id === classId
       );
@@ -106,7 +117,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
     });
   }
 
-  unassignSubject(subjectId) {
+  unassignSubject(subjectId):void {
     this.subjectService
       .unAssignSubjectToClass({ subjectId, classId: this.selectedClassId })
       .subscribe((response) => {
@@ -118,13 +129,13 @@ export class CommonSampleSyllabusComponent implements OnInit {
       });
   }
 
-  removeTopic(topic_id) {
+  removeTopic(topic_id):void {
     if (confirm("Are You Sure You want to Delete the Topic?")) {
       this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
     }
   }
 
-  addNotes(subject_id, subject_name, topic_id, topic_name) {
+  addNotes(subject_id, subject_name, topic_id, topic_name):void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
@@ -133,19 +144,32 @@ export class CommonSampleSyllabusComponent implements OnInit {
         subjectName: subject_name,
         topicId: topic_id,
         topicName: topic_name,
-        view: false,
+        view: !this.viewValue,
       },
     });
   }
 
-  viewNotes(subject_id, topic_id) {
+  viewNotes(subject_name, topic_id, topic_name):void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
-        subjectId: subject_id,
+        className: this.selectedClassName,
+        subjectName: subject_name,
         topicId: topic_id,
-        view: true,
+        topicName: topic_name,
+        view: this.viewValue,
       },
     });
+  }
+ 
+  sortNotesByTopic(topicId): void {
+   this.noteArray = this.resultForNotes.filter(
+     (data) => data.topic_id == topicId
+   );
+   if(this.noteArray.length<1)
+     this.hasNote=false;
+   else
+     this.hasNote=true;
+   
   }
 }

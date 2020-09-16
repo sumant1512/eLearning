@@ -1,59 +1,112 @@
-<div class="shade">
-  <div class="blackboard">
-    <h4 class="card-title text-center p-2" aria-hidden="true">
-      <b
-        ><i style="font-size: 28px; color: whitesmoke" class="fa fa-pencil"></i
-        >Add Your Notes Here For Class {{ className }} in {{ subjectName }} and
-        topic {{ topicName }} !
-      </b>
-    </h4>
-    <div class="mt-4 outer">
-      <!-- <div class="container-fluid">
-        <div class="row mb-4 text-white p-2">
-          <div class="col">
+<div class="wrapper">
+  <div>
+   
+   
+      <div class="shade">
+        <div class="blackboard">
+          <h4 class="card-title text-center p-2" aria-hidden="true">
             <b
-              ><i>Topic Name: {{ topicName }}</i></b
-            >
+              ><i
+                style="font-size: 28px; color: whitesmoke"
+                class="fa fa-pencil"
+              ></i
+              >Add Your Notes Here For Class {{ className }} in
+              {{ subjectName }} and topic {{ topicName }} !
+            </b>
+          </h4>
+          <div class="mt-4 outer">
+            <div class="board">
+              <form [formGroup]="addNotesForm">
+                <div class="form-group">
+                  <div class="form-group">
+                    <label
+                      ><b><i>Heading</i></b></label
+                    >
+                    <input
+                      type="text"
+                      formControlName="noteHeading"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.noteHeading.touched && f.noteHeading.errors
+                      }"
+                    />
+                  </div>
+                  <div
+                    *ngIf="f.noteHeading.touched && f.noteHeading.errors"
+                    class="invalid-feedback"
+                  >
+                    <div class="ml-1" *ngIf="f.noteHeading.errors.required">
+                      Add Heading to the Note*
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label
+                      ><b><i>Description</i></b></label
+                    >
+                    <textarea
+                      formControlName="noteDesc"
+                      class="form-control"
+                      rows="5"
+                      style="height: 100%"
+                      [ngClass]="{
+                        'is-invalid': f.noteDesc.touched && f.noteDesc.errors
+                      }"
+                    ></textarea>
+                    <div
+                      *ngIf="f.noteDesc.touched && f.noteDesc.errors"
+                      class="invalid-feedback"
+                    >
+                      <div class="ml-1" *ngIf="f.noteDesc.errors.required">
+                        Add Description to Submit!
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="text-center">
+              <button
+                (click)="addNotes()"
+                type="submit"
+                class="btn btn-primary btn-lg"
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+                [disabled]="!this.addNotesForm.valid"
+              >
+                Add
+              </button>
+            </div>
           </div>
         </div>
-      </div> -->
-      <div class="board">
-        <form [formGroup]="addNotesForm">
-          <div class="form-group">
-            <div class="form-group">
-              <label
-                ><b><i>Heading</i></b></label
-              >
-              <input
-                type="text"
-                formControlName="noteHeading"
-                class="form-control"
-              />
-            </div>
 
-            <div class="form-group">
-              <label
-                ><b><i>Description</i></b></label
-              >
-              <textarea
-                formControlName="noteDesc"
-                class="form-control"
-                rows="5"
-                style="height: 100%"
-              ></textarea>
+        <div id="exampleModalCenter" class="modal fade">
+          <div class="modal-dialog modal-confirm mt-5 pt-3 mx-auto text-muted">
+            <div class="modal-content p-4 border-0 rounded">
+              <div class="modal-header border-0 position-relative">
+                <div
+                  class="icon-box rounded-circle p-3 text-center text-white position-absolute mt-0 mx-auto"
+                >
+                  <i
+                    class="fa fa-check position-relative"
+                    aria-hidden="true"
+                  ></i>
+                </div>
+                <h3 class="modal-title w-100 text-center mt-5">Fantastic!</h3>
+              </div>
+              <div class="modal-body">
+                <p class="text-center">Your Notes are Added Successfully.</p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-success btn-block" data-dismiss="modal" (click)="goToViewNote()">
+                  OK
+                </button>
+              </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
-      <div class="text-center">
-        <button
-          (click)="addNotes()"
-          type="submit"
-          class="btn btn-primary btn-lg"
-        >
-          Add
-        </button>
-      </div>
-    </div>
+    
   </div>
 </div>

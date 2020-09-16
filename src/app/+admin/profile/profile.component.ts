@@ -106,7 +106,7 @@ export class ProfileComponent implements OnInit {
   }
   fetchStudents(): void {
     this.store.select("students").subscribe((response) => {
-      if (Object.keys(response).length!==0) {
+      if (Object.keys(response).length !== 0) {
         this.studentCount = response.length;
       } else {
         this.store.dispatch(new StudentActions.FetchStudent());

@@ -1,2 +1,4 @@
-<app-add-notes *ngIf="!view"></app-add-notes>
-<app-view-notes *ngIf="view"></app-view-notes>
+<div *ngIf="view; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock> <app-view-notes></app-view-notes></ng-template>
+<ng-template #elseBlock> <app-add-notes></app-add-notes></ng-template>
+

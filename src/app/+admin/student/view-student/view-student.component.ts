@@ -5,6 +5,7 @@ import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
 import * as ClassActions from "../../../store/class/class.actions";
 import { ClassListType } from "../../../store/class/types/class.type";
+import { StudentType } from '../../../store/students/types/student.types';
 
 @Component({
   selector: "app-view-student",
@@ -12,7 +13,7 @@ import { ClassListType } from "../../../store/class/types/class.type";
   styleUrls: ["./view-student.component.css"],
 })
 export class ViewStudentComponent implements OnInit {
-  students = [];
+  students:StudentType[]; 
   studentName: string;
   classList: ClassListType[];
   constructor(

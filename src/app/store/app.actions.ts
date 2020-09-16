@@ -7,11 +7,11 @@ import { SamplePaperActionsUnion } from "./sample-paper/sample-paper.actions";
 import { SyllabusActionsUnion } from "./syllabus-tranform/syllabus.actions";
 import { SamplePaperTransformActionsUnion } from "./sample-paper-transform/sample-paper-transform.actions";
 import { NotesActionsUnion } from "./notes/notes.actions";
-import { StudentTransformActionsUnion } from "./student-transform/student-transform.actions";
+import { StudentSamplePaperSyllabusActionsUnion } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 
 export type AppActionsUnion =
   | AuthActionsUnion
-  | StudentTransformActionsUnion
+  | StudentSamplePaperSyllabusActionsUnion
   | ClassActionsUnion
   | SubjectActionsUnion
   | TopicActionsUnion

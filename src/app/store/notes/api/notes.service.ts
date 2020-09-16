@@ -33,7 +33,7 @@ export class NotesService {
   }
 
   editNotesName(noteDetails) {
-    return this.http.post<any>(HOST + "editNotesName", noteDetails, {
+    return this.http.post<any>(HOST + "editNotes", noteDetails, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -43,7 +43,7 @@ export class NotesService {
 
   removeNotes(id: number) {
     return this.http
-      .delete<any>(HOST + `removeClass/${id}`, {
+      .delete<any>(HOST + `removeNotes/${id}`, {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),

@@ -3,7 +3,8 @@ import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import { ProfileType } from "../../store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
-import * as StudentTransformActions from "../../store/student-transform/student-transform.actions";
+import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
+import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
 
 @Component({
   selector: "app-common-profile",
@@ -15,11 +16,11 @@ export class CommonProfileComponent implements OnInit {
   loaded: boolean = false;
   toggle: boolean = true;
   btnLabel: string = "Sample Paper";
-  resultForSyllabusAndSamplePaper: any;
-  selectedSubjectDetails;
+  resultForSyllabusAndSamplePaper: SubjectWithTopicAndSamplePaperType[];
+  selectedSubjectDetails:SubjectWithTopicAndSamplePaperType[]; 
   selectedSubjectId: number;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {} 
 
   ngOnInit() {
     this.getUserProfile();
@@ -43,13 +44,13 @@ export class CommonProfileComponent implements OnInit {
   }
 
   fetchTransformData(res): void {
-    this.store.select("studentTransformList").subscribe((response) => {
+    this.store.select("studentSamplePaperSyllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForSyllabusAndSamplePaper = response;
         this.selectSubject(response[0].subject_id);
       } else {
         this.store.dispatch(
-          new StudentTransformActions.FetchTransformStudent({
+          new StudentSamplePaperSyllabusActions.FetchStudentSamplePaperSyllabus({
             schoolId: res.user_id,
             classId: res.class_id,
           })
@@ -69,5 +70,17 @@ export class CommonProfileComponent implements OnInit {
     this.toggle = !this.toggle;
     if (this.toggle) this.btnLabel = "Sample Paper";
     else this.btnLabel = " Syllabus";
+  }
+
+  toggleIcon(): void {
+    var icon = document.getElementById("icon");
+
+    if (icon.classList.contains("fa-file-text")) {
+      icon.classList.remove("fa-file-text");
+      icon.classList.add("fa-book");
+    } else {
+      icon.classList.remove("fa-book");
+      icon.classList.add("fa-file-text");
+    }
   }
 }

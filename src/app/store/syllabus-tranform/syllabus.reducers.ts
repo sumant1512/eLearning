@@ -1,12 +1,13 @@
 import { SyllabusActions, SyllabusActionsUnion } from "./syllabus.actions";
+import { SyllabusListType } from './types/syllabus.type';
 
 
-const syllabusList: any[] = [];
+const syllabusList: SyllabusListType[] = [];
 
 export function syllabusReducer(
   state = syllabusList,
   action: SyllabusActionsUnion
-): any[] {
+): SyllabusListType[] { 
   switch (action.type) {
     case SyllabusActions.FETCHED_SYLLABUS:
       return action.payload;
