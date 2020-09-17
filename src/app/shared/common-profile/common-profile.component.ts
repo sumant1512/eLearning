@@ -3,8 +3,11 @@ import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import { ProfileType } from "../../store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
+import { AuthService } from "src/app/store/auth/api/auth.service";
 import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
+import { CONSTANTS } from "src/app/+admin/profile/profile.constants";
 
 @Component({
   selector: "app-common-profile",
@@ -17,20 +20,61 @@ export class CommonProfileComponent implements OnInit {
   toggle: boolean = true;
   btnLabel: string = "Sample Paper";
   resultForSyllabusAndSamplePaper: SubjectWithTopicAndSamplePaperType[];
-  selectedSubjectDetails:SubjectWithTopicAndSamplePaperType[]; 
+  selectedSubjectDetails: SubjectWithTopicAndSamplePaperType[];
   selectedSubjectId: number;
+  selectedImageDetails: Object;
+  studentImageUrl: SafeUrl;
+  backgroundCoverImageUrl: SafeUrl;
 
-  constructor(private store: Store<AppState>) {} 
+  constructor(
+    private store: Store<AppState>,
+    private authService: AuthService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit() {
     this.getUserProfile();
+  }
+
+  setProfileImage(): string {
+    return this.studentProfile.userDetails.student_profile_picture !== null
+      ? "data:image/png;base64," +
+          this.studentProfile.userDetails.student_profile_picture
+      : CONSTANTS.USER_IMAGE;
+  }
+  onImageSelect(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.studentImageUrl = event.target.result;
+        this.selectedImageDetails = {
+          image: this.studentImageUrl,
+          imageType: "student",
+        };
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  saveImage(): void {
+    this.authService
+      .saveAdminImage(this.selectedImageDetails)
+      .subscribe((response) => {
+        if (response["status"]) {
+          this.fetchUserProfile();
+          alert(response["message"]);
+        } else alert(response["message"]);
+      });
   }
 
   getUserProfile(): void {
     this.store.select("profile").subscribe((response) => {
       if (response.userDetails.user_id !== null) {
         this.studentProfile = response;
-        this.fetchTransformData(response["userDetails"]);
+        this.fetchStudentSamplePaperSyllabusData(response["userDetails"]);
+        this.studentImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          this.setProfileImage()
+        );
         this.loaded = true;
       } else {
         this.fetchUserProfile();
@@ -43,20 +87,24 @@ export class CommonProfileComponent implements OnInit {
     this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
 
-  fetchTransformData(res): void {
-    this.store.select("studentSamplePaperSyllabusList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.resultForSyllabusAndSamplePaper = response;
-        this.selectSubject(response[0].subject_id);
-      } else {
-        this.store.dispatch(
-          new StudentSamplePaperSyllabusActions.FetchStudentSamplePaperSyllabus({
-            schoolId: res.user_id,
-            classId: res.class_id,
-          })
-        );
-      }
-    });
+  fetchStudentSamplePaperSyllabusData(res): void {
+    this.store
+      .select("studentSamplePaperSyllabusList")
+      .subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.resultForSyllabusAndSamplePaper = response;
+          this.selectSubject(response[0].subject_id);
+        } else {
+          this.store.dispatch(
+            new StudentSamplePaperSyllabusActions.FetchStudentSamplePaperSyllabus(
+              {
+                schoolId: res.user_id,
+                classId: res.class_id,
+              }
+            )
+          );
+        }
+      });
   }
 
   selectSubject(subjectId): void {
@@ -66,21 +114,17 @@ export class CommonProfileComponent implements OnInit {
     );
   }
 
-  toggleButton(): void {
+  toggleLabelAndIconOnButton(): void {
     this.toggle = !this.toggle;
-    if (this.toggle) this.btnLabel = "Sample Paper";
-    else this.btnLabel = " Syllabus";
-  }
-
-  toggleIcon(): void {
-    var icon = document.getElementById("icon");
-
-    if (icon.classList.contains("fa-file-text")) {
-      icon.classList.remove("fa-file-text");
-      icon.classList.add("fa-book");
-    } else {
+    let icon = document.getElementById("icon");
+    if (this.toggle) {
+      this.btnLabel = "Sample Paper";
       icon.classList.remove("fa-book");
       icon.classList.add("fa-file-text");
+    } else {
+      this.btnLabel = " Syllabus";
+      icon.classList.remove("fa-file-text");
+      icon.classList.add("fa-book");
     }
   }
 }

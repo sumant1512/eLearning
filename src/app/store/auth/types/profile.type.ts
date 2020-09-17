@@ -20,4 +20,5 @@ export interface UserDetailsType {
   created_on: string;
   last_updated_on: string;
   address: string;
+  student_profile_picture?: string;
 }

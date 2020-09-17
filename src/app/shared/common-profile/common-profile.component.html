@@ -3,34 +3,73 @@
     <div class="cover-content w-100 h-100 p-4 d-flex text-center p-sm-2">
       <div class="row no-gutters">
         <div class="col-md-3 p-4 m-auto">
+          <app-profile-skeleton
+            *ngIf="!loaded"
+            Cwidth="200"
+            Cheight="200"
+            circle="true"
+          ></app-profile-skeleton>
           <img
+            *ngIf="loaded"
             class="rounded-circle bg-white p-1 mw-100"
-            src="../../../assets/gallery/gallery_08.jpg"
-            alt="user-image"
+            [src]="studentImageUrl"
+            alt="student-image"
           />
+          <div>
+            <i
+              (click)="fileInput.click()"
+              style="font-size: 25px; color: black"
+              class="camera-icon fa fa-camera camera"
+            ></i>
+          </div>
+          <div>
+            <input
+              style="display: none"
+              class="cursor-pointer choose-image-input pb-5 mb-3 mb-lg-0"
+              type="file"
+              (change)="onImageSelect($event)"
+              #fileInput
+            />
+          </div>
+
+          <button
+            class="btn btn-primary p-1"
+            type="submit"
+            (click)="saveImage()"
+          >
+            Upload
+          </button>
         </div>
-        <div class="col-md-9 p-4 pl-3 m-auto">
-          <app-profile-skeleton
-            *ngIf="!loaded"
-            Cwidth="300"
-            Cheight="50"
-          ></app-profile-skeleton>
-          <h2 *ngIf="loaded" class="text-white">
-            {{
-              studentProfile.userDetails.first_name +
-                " " +
-                studentProfile.userDetails.last_name
-            }}
-            / Class {{ studentProfile.userDetails.class_name }}
-          </h2>
-          <app-profile-skeleton
-            *ngIf="!loaded"
-            Cwidth="400"
-            Cheight="50"
-          ></app-profile-skeleton>
-          <p *ngIf="loaded" class="text-white mt-4">
-            {{ studentProfile.userDetails.school_name }}
-          </p>
+
+        <div class="col-md-9 m-auto">
+          <div class="row no-gutters">
+            <app-profile-skeleton
+              *ngIf="!loaded"
+              class="ml-5 pl-3"
+              Cwidth="400"
+              Cheight="50"
+            ></app-profile-skeleton>
+
+            <h2 *ngIf="loaded" class="text-white">
+              {{
+                studentProfile.userDetails.first_name +
+                  " " +
+                  studentProfile.userDetails.last_name
+              }}
+              / Class {{ studentProfile.userDetails.class_name }}
+            </h2>
+          </div>
+          <div class="row no-gutters">
+            <app-profile-skeleton
+              *ngIf="!loaded"
+              class="ml-5 pt-2 pl-3"
+              Cwidth="300"
+              Cheight="50"
+            ></app-profile-skeleton>
+            <p *ngIf="loaded" class="text-white mr-3">
+              {{ studentProfile.userDetails.school_name }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -406,7 +445,7 @@
               <button
                 class="btn togButton mt-3 mb-2 mr-4 float-right"
                 data_but="btn-xs"
-                (click)="toggleButton(); toggleIcon()"
+                (click)="toggleLabelAndIconOnButton()"
               >
                 <i id="icon" class="fa fa-file-text"></i>&nbsp;{{ btnLabel }}
               </button>
@@ -433,7 +472,7 @@
           <div class="row no-gutters">
             <div class="col-md-6">
               <iframe
-                class="w-100 mt-5"
+                class="iframe w-100 mt-5"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176144.0450019627!2d-107.79423426090409!3d38.97644533805396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x874014749b1856b7%3A0xc75483314990a7ff!2sColorado%2C+USA!5e0!3m2!1sen!2sin!4v1547222354537"
                 frameborder="0"
                 style="border: 0; height: 400px"

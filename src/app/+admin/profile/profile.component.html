@@ -1,11 +1,15 @@
 <form>
   <div class="user-profile">
     <div>
-      <app-profile-skeleton *ngIf="!loaded" Cwidth="1330" Cheight="360" ></app-profile-skeleton>
+      <app-profile-skeleton
+        *ngIf="!loaded"
+        Cwidth="1330"
+        Cheight="360"
+      ></app-profile-skeleton>
       <img
-         *ngIf="loaded"
+        *ngIf="loaded"
         [src]="schoolImageUrl"
-        class="w-100 img-fluid" 
+        class="w-100 img-fluid"
         style="height: 360px"
       />
     </div>
@@ -39,7 +43,12 @@
       <div class="profile-info-left">
         <div class="text-center">
           <div>
-            <app-profile-skeleton *ngIf="!loaded" Cwidth="180" Cheight="180" circle="true"></app-profile-skeleton>
+            <app-profile-skeleton
+              *ngIf="!loaded"
+              Cwidth="180"
+              Cheight="180"
+              circle="true"
+            ></app-profile-skeleton>
             <img
               *ngIf="loaded"
               class="image rounded-circle"
@@ -70,7 +79,11 @@
         </div>
         <br />
         <h3 class="text-center">Welcome</h3>
-         <app-profile-skeleton *ngIf="!loaded" Cwidth="250" Cheight="50" ></app-profile-skeleton>
+        <app-profile-skeleton
+          *ngIf="!loaded"
+          Cwidth="250"
+          Cheight="50"
+        ></app-profile-skeleton>
         <h3 *ngIf="loaded" class="text-center">
           {{ adminProfile.userDetails.admin_name }}
         </h3>
@@ -110,18 +123,6 @@
       </div>
     </div>
     <div class="col-md-8 right-side">
-      <div class="text-center">
-        <button
-          data-backdrop="none"
-          type="button"
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target=".bd-example-modal-xl"
-        >
-          Video Call
-        </button>
-      </div>
-
       <div
         class="modal fade bd-example-modal-xl"
         id="myModal4"

@@ -29,6 +29,7 @@ export class AuthService {
       headers: reqHeader,
     });
   }
+
   updateCurrentSchool(school) {
     var reqHeader = new HttpHeaders({
       "Content-Type": "application/json",
@@ -38,12 +39,13 @@ export class AuthService {
       headers: reqHeader,
     });
   }
+
   saveAdminImage(image) {
     var reqHeader = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
     });
-    return this.http.post<any>(HOST + "saveAdminImage", image, {
+    return this.http.post<any>(HOST + "saveImage", image, {
       headers: reqHeader,
     });
   }

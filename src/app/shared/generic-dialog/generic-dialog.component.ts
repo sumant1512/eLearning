@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
+import { HttpErrorInterceptor } from "src/app/http-error.interceptor";
 
 @Component({
   selector: "app-generic-dialog",
@@ -7,6 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 })
 export class GenericDialogComponent implements OnInit {
   @ViewChild("modalDisplay", { static: false }) modalDisplay: ElementRef;
+  view: boolean;
 
   constructor() {}
 

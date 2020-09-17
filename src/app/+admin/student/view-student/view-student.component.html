@@ -61,7 +61,10 @@
       </tbody>
     </table>
     <h3
-      *ngIf="(students | StudentFilter: studentName).length === 0"
+      *ngIf="
+        students !== undefined &&
+        (students | StudentFilter: studentName).length === 0
+      "
       class="text-center mt-5"
     >
       No results found
