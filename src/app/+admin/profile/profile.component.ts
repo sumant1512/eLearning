@@ -22,6 +22,8 @@ export class ProfileComponent implements OnInit {
 
   studentCount: number; 
   loaded: boolean = false;
+  uploadBtnControl: boolean = true;
+  saveBtnControl: boolean = true;
 
   constructor(
     private store: Store<AppState>,
@@ -75,6 +77,7 @@ export class ProfileComponent implements OnInit {
       reader.onload = (event: any) => {
         switch (name) {
           case "admin":
+            this.uploadBtnControl = false;
             this.adminImageUrl = event.target.result;
             this.selectedImageDetails = {
               image: this.adminImageUrl,
@@ -82,6 +85,7 @@ export class ProfileComponent implements OnInit {
             };
             break;
           case "school_image":
+            this.saveBtnControl = false;
             this.schoolImageUrl = event.target.result;
             this.selectedImageDetails = {
               image: this.schoolImageUrl,
@@ -103,6 +107,8 @@ export class ProfileComponent implements OnInit {
           alert(response["message"]);
         } else alert(response["message"]);
       });
+    this.uploadBtnControl = true;
+    this.saveBtnControl = true;
   }
   fetchStudents(): void {
     this.store.select("students").subscribe((response) => {

@@ -17,7 +17,7 @@
         </thead>
         <tbody *ngIf="!viewList">
           <tr *ngFor="let i of [].constructor(10)">
-            <td class="p-2" *ngFor="let i of [].constructor(3)">
+            <td class="p-2" *ngFor="let i of [].constructor(name === 'Sample Paper'?4:3)">
               <app-profile-skeleton Cheight="31"></app-profile-skeleton>
             </td>
           </tr>
@@ -198,3 +198,5 @@
     </div>
   </div>
 </div>
+
+<app-generic-dialog></app-generic-dialog>

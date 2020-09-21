@@ -27,6 +27,11 @@
                     </h5></a
                   >
                 </li>
+                 <div *ngIf="!(resultForSyllabus || resultForSamperPaper)">
+                    <li class="p-2 nav-link" *ngFor="let i of [].constructor(8)">
+                      <app-profile-skeleton  Cheight="40"></app-profile-skeleton>
+                    </li>
+                </div>
               </ul>
             </div>
           </div>
