@@ -27,6 +27,13 @@
           <th scope="col">Action</th>
         </tr>
       </thead>
+      <tbody *ngIf="!students">
+          <tr *ngFor="let i of [].constructor(8)">
+            <td class="p-2" *ngFor="let i of [].constructor(5)">
+              <app-profile-skeleton Cheight="31"></app-profile-skeleton>
+            </td>
+          </tr>
+      </tbody>
       <tbody>
         <tr
           *ngFor="

@@ -18,13 +18,14 @@ export class CommonProfileComponent implements OnInit {
   studentProfile: ProfileType;
   loaded: boolean = false;
   toggle: boolean = true;
+  uploadBtnControl: boolean = true;
   btnLabel: string = "Sample Paper";
   resultForSyllabusAndSamplePaper: SubjectWithTopicAndSamplePaperType[];
   selectedSubjectDetails: SubjectWithTopicAndSamplePaperType[];
   selectedSubjectId: number;
   selectedImageDetails: Object;
   studentImageUrl: SafeUrl;
-  backgroundCoverImageUrl: SafeUrl;
+  schoolImageUrl: SafeUrl;
 
   constructor(
     private store: Store<AppState>,
@@ -42,8 +43,17 @@ export class CommonProfileComponent implements OnInit {
           this.studentProfile.userDetails.student_profile_picture
       : CONSTANTS.USER_IMAGE;
   }
+
+  setCoverImage(): string {
+    return (
+      "data:image/png;base64," +
+      this.studentProfile.userDetails.school_cover_image
+    );
+  }
+
   onImageSelect(event: any) {
     if (event.target.files && event.target.files[0]) {
+      this.uploadBtnControl = false;
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.studentImageUrl = event.target.result;
@@ -65,6 +75,7 @@ export class CommonProfileComponent implements OnInit {
           alert(response["message"]);
         } else alert(response["message"]);
       });
+    this.uploadBtnControl = true;
   }
 
   getUserProfile(): void {
@@ -74,6 +85,9 @@ export class CommonProfileComponent implements OnInit {
         this.fetchStudentSamplePaperSyllabusData(response["userDetails"]);
         this.studentImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
           this.setProfileImage()
+        );
+        this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          this.setCoverImage()
         );
         this.loaded = true;
       } else {

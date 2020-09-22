@@ -1,29 +1,47 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef } from "@angular/core";
+import { Router } from "@angular/router";
+import { NotesService } from "src/app/store/notes/api/notes.service";
 import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
 
 @Component({
-  selector: 'app-student-sample-syllabus-view',
-  templateUrl: './student-sample-syllabus-view.component.html',
-  styleUrls: ['./student-sample-syllabus-view.component.css']
+  selector: "app-student-sample-syllabus-view",
+  templateUrl: "./student-sample-syllabus-view.component.html",
+  styleUrls: ["./student-sample-syllabus-view.component.css"],
 })
 export class StudentSampleSyllabusViewComponent implements OnInit {
-  @Input() selectedSubjectDetails: SubjectWithTopicAndSamplePaperType[];
-  @Input() resultForSyllabusAndSamplePaper: SubjectWithTopicAndSamplePaperType[]; 
-  @Input() btnLabel: string; 
+  noteHeading: string;
+  noteDescription: string;
+  @ViewChild("overlay", { static: false }) overlay: ElementRef;
+  @Input() selectedSubjectDetails: any[];
+  @Input()
+  resultForSyllabusAndSamplePaper: SubjectWithTopicAndSamplePaperType[];
+  @Input() btnLabel: string;
   selectedSubjectId: number;
-  constructor() {}
+  showoverlay: boolean;
+  selectedSubjectName: String;
+  constructor(private router: Router, private noteService: NotesService) {}
 
   ngOnInit(): void {
     this.getStatus();
   }
-  getStatus(): boolean {
-      return this.btnLabel === "Sample Paper" ? false : true; 
+
+  showNotes(notes) {
+    this.noteHeading = notes.note_heading;
+    this.noteDescription = notes.note_desc;
+    this.showoverlay = true;
   }
-  selectSubject(subjectId): void {
+  getStatus(): boolean {
+    return this.btnLabel === "Sample Paper" ? false : true;
+  }
+  selectSubject(subjectId, subjectName): void {
+    this.selectedSubjectName = subjectName;
     this.selectedSubjectId = subjectId;
     this.selectedSubjectDetails = this.resultForSyllabusAndSamplePaper.filter(
       (data) => data.subject_id == subjectId
     );
   }
-  
+
+  close(): void {
+    this.showoverlay = false;
+  }
 }

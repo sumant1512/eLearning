@@ -20,7 +20,7 @@ export class StudentHeaderComponent {
       document.documentElement.scrollTop ||
       document.body.scrollTop ||
       0;
-    if (number > 300) {
+    if (number > 350) {
       this.scrollStatus = true;
       this.header.nativeElement.classList.add("sticky");
     } else {
