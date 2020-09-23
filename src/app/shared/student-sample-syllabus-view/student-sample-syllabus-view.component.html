@@ -1,22 +1,10 @@
 <div class="container-fluid p-0 m-0 wr">
   <div class="background">
     <div class="overlay mt-n2 pt-1" *ngIf="showoverlay" #overlay>
-      <div class="blackboard">
-        <div class="mt-1 outer">
-          <div class="board">
-            <p class="text-center">
-              <label class="text-white"> {{ noteHeading }}</label>
-            </p>
-            <p>
-              <label>Description : </label>
-            </p>
-            <p class="text-white">{{ noteDescription }}</p>
-            <button class="d-flex btn btn-danger mt-4" (click)="close()">
-              Close
-            </button>
-          </div>
-        </div>
-      </div>
+      <app-notes-board
+        [noteHeading]="noteHeading"
+        [noteDescription]="noteDescription"
+      ></app-notes-board>
     </div>
 
     <div class="row mt-2 no-gutters" *ngIf="!showoverlay">
