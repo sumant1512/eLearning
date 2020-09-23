@@ -40,12 +40,22 @@ export class AuthService {
     });
   }
 
-  saveAdminImage(image) {
+  saveImage(image) {
     var reqHeader = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
     });
     return this.http.post<any>(HOST + "saveImage", image, {
+      headers: reqHeader,
+    });
+  }
+
+  saveVideo(video) {
+    var reqHeader = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+    });
+    return this.http.post<any>(HOST + "saveVideo", video, {
       headers: reqHeader,
     });
   }

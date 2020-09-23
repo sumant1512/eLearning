@@ -1,5 +1,6 @@
 import { Component, ViewChild, AfterViewInit, ElementRef } from "@angular/core";
 import * as RecordRTC from "recordrtc";
+import { AuthService } from "src/app/store/auth/api/auth.service";
 
 @Component({
   selector: "app-video-record",
@@ -12,7 +13,7 @@ export class VideoRecordComponent implements AfterViewInit {
   private recordRTC: any;
   toggle: boolean = false;
   toggleDownload: boolean = true;
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngAfterViewInit() {
     // set the initial state of the video
@@ -77,5 +78,18 @@ export class VideoRecordComponent implements AfterViewInit {
 
   download() {
     this.recordRTC.save("video.mp4");
+  }
+  saveVideo() {
+    this.recordRTC.getDataURL((dataUrl) => {
+      let data = {
+        media: dataUrl,
+      };
+      this.authService.saveVideo(data).subscribe((response) => {
+        if (response["status"]) {
+          console.log(response["path"]);
+          alert(response["message"]);
+        } else alert(response["message"]);
+      });
+    });
   }
 }

@@ -10,9 +10,9 @@ import * as NotesActions from "../../store/notes/notes.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 import { Router } from "@angular/router";
-import { NotesListType } from 'src/app/store/notes/types/notes.type';
-import { SyllabusListType } from 'src/app/store/syllabus-tranform/types/syllabus.type';
-import { SamplePaperListType } from 'src/app/store/sample-paper/types/sample-paper.type';
+import { NotesListType } from "src/app/store/notes/types/notes.type";
+import { SyllabusListType } from "src/app/store/syllabus-tranform/types/syllabus.type";
+import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
 
 @Component({
   selector: "app-common-sample-syllabus",
@@ -26,16 +26,16 @@ export class CommonSampleSyllabusComponent implements OnInit {
   selectedClassDetails;
   selectedClassName: string;
   selectedClassId: number;
-  resultForNotes: NotesListType[];  
-  resultForSyllabus:SyllabusListType[];
-  resultForSamperPaper:SamplePaperListType[]; 
+  resultForNotes: NotesListType[];
+  resultForSyllabus: SyllabusListType[];
+  resultForSamperPaper: SamplePaperListType[];
 
   isAddSamplePaperFormOpen = false;
 
   viewValue: boolean = true;
   noteArray: NotesListType[];
   hasNote: boolean;
-  
+
   constructor(
     private store: Store<AppState>,
     private subjectService: SubjectService,
@@ -74,7 +74,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
     return this.name === "Notes" ? false : true;
   }
 
-  selectClass(classId, className):void {
+  selectClass(classId, className): void {
     this.selectedClassName = className;
     this.selectedClassId = classId;
     if (this.getStatus() && this.resultForSyllabus !== undefined) {
@@ -117,7 +117,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
     });
   }
 
-  unassignSubject(subjectId):void {
+  unassignSubject(subjectId): void {
     this.subjectService
       .unAssignSubjectToClass({ subjectId, classId: this.selectedClassId })
       .subscribe((response) => {
@@ -129,13 +129,13 @@ export class CommonSampleSyllabusComponent implements OnInit {
       });
   }
 
-  removeTopic(topic_id):void {
+  removeTopic(topic_id): void {
     if (confirm("Are You Sure You want to Delete the Topic?")) {
       this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
     }
   }
 
-  addNotes(subject_id, subject_name, topic_id, topic_name):void {
+  addNotes(subject_id, subject_name, topic_id, topic_name): void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
@@ -149,7 +149,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
     });
   }
 
-  viewNotes(subject_name, topic_id, topic_name):void {
+  viewNotes(subject_name, topic_id, topic_name): void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
@@ -161,15 +161,16 @@ export class CommonSampleSyllabusComponent implements OnInit {
       },
     });
   }
- 
+
   sortNotesByTopic(topicId): void {
-   this.noteArray = this.resultForNotes.filter(
-     (data) => data.topic_id == topicId
-   );
-   if(this.noteArray.length<1)
-     this.hasNote=false;
-   else
-     this.hasNote=true;
-   
+    this.noteArray = this.resultForNotes.filter(
+      (data) => data.topic_id == topicId
+    );
+    if (this.noteArray.length < 1) this.hasNote = false;
+    else this.hasNote = true;
+  }
+
+  navigateToVideoRecorder(): void {
+    this.router.navigate(["/admin/video-recoder"]);
   }
 }

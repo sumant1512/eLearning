@@ -100,7 +100,7 @@ export class ProfileComponent implements OnInit {
 
   saveImage(): void {
     this.authService
-      .saveAdminImage(this.selectedImageDetails)
+      .saveImage(this.selectedImageDetails)
       .subscribe((response) => {
         if (response["status"]) {
           this.fetchUserProfile();

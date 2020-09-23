@@ -13,6 +13,7 @@ import { CommonProfileComponent } from "./common-profile/common-profile.componen
 import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mobile/common-sample-syllabus-mobile.component";
 import { StudentSampleSyllabusViewComponent } from "./student-sample-syllabus-view/student-sample-syllabus-view.component";
 import { GenericDialogComponent } from "./generic-dialog/generic-dialog.component";
+import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-syllabus-mobile-view/student-sample-syllabus-mobile-view.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { GenericDialogComponent } from "./generic-dialog/generic-dialog.componen
     CommonSampleSyllabusMobileComponent,
     StudentSampleSyllabusViewComponent,
     GenericDialogComponent,
+    StudentSampleSyllabusMobileViewComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
