@@ -1,13 +1,16 @@
 .btnNotes {
   background-color: #4d5656;
 }
+
 .card-header {
   background-color: #204971;
 }
+
 .card-outer {
   background-color: #97a6ad;
   border-radius: 1em;
 }
+
 @keyframes navSlide {
   100% {
     bottom: 0;
@@ -43,9 +46,11 @@
     opacity: 1;
   }
 }
+
 .formSlide {
   animation: formSlide 1s forwards;
 }
+
 @keyframes formSlide {
   100% {
     bottom: 0;
@@ -81,6 +86,7 @@
     opacity: 1;
   }
 }
+
 .overlay {
   border: 10px solid #fff;
   top: 0;
@@ -91,6 +97,7 @@
   opacity: 1;
   transition: 0.5s ease;
 }
+
 .text {
   color: #fff;
   font-size: 20px;
@@ -102,82 +109,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
-.blackboard {
-  position: relative;
-  margin: 1%;
-  border: tan solid 12px;
-  border-top: #bda27e solid 12px;
-  border-left: #b19876 solid 12px;
-  border-bottom: #c9ad86 solid 12px;
-  box-shadow: 0 0 6px 5px rgba(58, 18, 13, 0), 0 0 0 2px #c2a782,
-    0 0 0 4px #a58e6f, 3px 4px 8px 5px rgba(0, 0, 0, 0.5);
-  background-image: radial-gradient(
-      circle at left 30%,
-      rgba(34, 34, 34, 0.3),
-      rgba(34, 34, 34, 0.3) 80px,
-      rgba(34, 34, 34, 0.5) 100px,
-      rgba(51, 51, 51, 0.5) 160px,
-      rgba(51, 51, 51, 0.5)
-    ),
-    linear-gradient(
-      215deg,
-      transparent,
-      transparent 100px,
-      #222 260px,
-      #222 320px,
-      transparent
-    ),
-    radial-gradient(circle at right, #111, rgba(51, 51, 51, 1));
-  background-color: #333;
-}
-.blackboard:before {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(
-      175deg,
-      transparent,
-      transparent 40px,
-      rgba(120, 120, 120, 0.1) 100px,
-      rgba(120, 120, 120, 0.1) 110px,
-      transparent 220px,
-      transparent
-    ),
-    linear-gradient(200deg, transparent 80%, rgba(50, 50, 50, 0.3)),
-    radial-gradient(
-      ellipse at right bottom,
-      transparent,
-      transparent 200px,
-      rgba(80, 80, 80, 0.1) 260px,
-      rgba(80, 80, 80, 0.1) 320px,
-      transparent 400px,
-      transparent
-    );
-  border: #2c2c2c solid 2px;
-  font-family: "Permanent Marker", cursive;
-  font-size: 2.2em;
-  color: rgba(238, 238, 238, 0.7);
-  text-align: center;
-}
-.outer {
-  padding: 30px 20px 70px;
-  min-height: 50px;
-}
-.board p {
-  position: relative;
-  margin-bottom: 1em;
-}
-.board label {
-  vertical-align: middle;
-  font-family: "Permanent Marker", cursive;
-  font-size: 1.6em;
-  color: rgba(238, 238, 238, 0.7);
-}
-.btn {
-  float: right;
-}
+
 .inside div:after {
   content: "\f077";
   position: absolute;
@@ -188,6 +120,7 @@
   transform: rotate(0deg);
   transition: all 0.5s;
 }
+
 .inside.collapsed div:after {
   transform: rotate(180deg);
   transition: all 0.5s;

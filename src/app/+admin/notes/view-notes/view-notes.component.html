@@ -11,7 +11,15 @@
     Update
   </button>
 
-  <div class="blackboard container mt-5">
+  <app-notes-board
+    [className]="className"
+    [subjectName]="subjectName"
+    [topicName]="topicName"
+    [noteHeading]="noteArray[0].note_heading"
+    [noteDescription]="noteArray[0].note_desc"
+  ></app-notes-board>
+
+  <!-- <div class="blackboard container mt-5">
     <div *ngIf="!loaded" class="d-flex align-items-center text-white m-2">
       <strong>Loading...</strong>
       <div class="spinner-border ml-auto"></div>
@@ -33,7 +41,7 @@
         <p class="text-white" *ngIf="loaded">{{ noteArray[0].note_desc }}</p>
       </div>
     </div>
-  </div>
+  </div> -->
   <div
     class="modal fade"
     id="modalUpdateData"

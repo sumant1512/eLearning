@@ -14,6 +14,7 @@ import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mo
 import { StudentSampleSyllabusViewComponent } from "./student-sample-syllabus-view/student-sample-syllabus-view.component";
 import { GenericDialogComponent } from "./generic-dialog/generic-dialog.component";
 import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-syllabus-mobile-view/student-sample-syllabus-mobile-view.component";
+import { NotesBoardComponent } from "./notes-board/notes-board.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-sylla
     StudentSampleSyllabusViewComponent,
     GenericDialogComponent,
     StudentSampleSyllabusMobileViewComponent,
+    NotesBoardComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -38,6 +40,7 @@ import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-sylla
     CommonSampleSyllabusMobileComponent,
     ProfileSkeletonComponent,
     GenericDialogComponent,
+    NotesBoardComponent,
   ],
 })
 export class SharedModule {}
