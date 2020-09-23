@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, HostListener, OnInit } from "@angular/core";
 import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import { ProfileType } from "../../store/auth/types/profile.type";
@@ -26,14 +26,23 @@ export class CommonProfileComponent implements OnInit {
   selectedImageDetails: Object;
   studentImageUrl: SafeUrl;
   schoolImageUrl: SafeUrl;
-
+  isMobile: boolean = false;
   constructor(
     private store: Store<AppState>,
     private authService: AuthService,
     private sanitizer: DomSanitizer
   ) {}
+  @HostListener("window:resize", ["$event"])
+  onResize(event) {
+    if (event.target.innerWidth < 991) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+  }
 
   ngOnInit() {
+    this.isMobile = window.innerWidth < 991 ? true : false;
     this.getUserProfile();
   }
 
@@ -68,7 +77,7 @@ export class CommonProfileComponent implements OnInit {
 
   saveImage(): void {
     this.authService
-      .saveAdminImage(this.selectedImageDetails)
+      .saveImage(this.selectedImageDetails)
       .subscribe((response) => {
         if (response["status"]) {
           this.fetchUserProfile();

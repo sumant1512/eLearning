@@ -481,7 +481,7 @@
                 <p class="lead">
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                  ncididunt ut labore et.
+                  ncididunt ut labore et. 
                 </p>
               </div>
             </div>
@@ -503,15 +503,22 @@
                 </button>
               </div>
             </div>
-            <div class="row">
+            <div class="row no-gutters">
               <div class="col-12">
-                <app-student-sample-syllabus-view
+                <app-student-sample-syllabus-view *ngIf="!isMobile"
                   [resultForSyllabusAndSamplePaper]="
                     resultForSyllabusAndSamplePaper
                   "
                   [selectedSubjectDetails]="selectedSubjectDetails"
                   [btnLabel]="btnLabel"
                 ></app-student-sample-syllabus-view>
+                <app-student-sample-syllabus-mobile-view  *ngIf="isMobile"
+                  [resultForSyllabusAndSamplePaper]="
+                    resultForSyllabusAndSamplePaper
+                  "
+                  [selectedSubjectDetails]="selectedSubjectDetails"
+                  [btnLabel]="btnLabel"
+                ></app-student-sample-syllabus-mobile-view>
               </div>
             </div>
           </div>
