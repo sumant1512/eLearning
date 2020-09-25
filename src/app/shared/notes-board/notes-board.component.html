@@ -4,7 +4,10 @@
       <strong>Loading...</strong>
       <div class="spinner-border ml-auto"></div>
     </div>
-    <div class="text-white px-2 px-md-3 py-4 py-md-5" *ngIf="!loaded">
+    <div
+      class="text-white px-2 px-md-3 pt-4 pt-md-4 pb-2 pb-md-3"
+      *ngIf="!loaded"
+    >
       <div>
         <div class="row text-center">
           <div *ngIf="className" class="col-12 col-md-6">
@@ -13,17 +16,17 @@
             >
           </div>
           <div *ngIf="subjectName" class="col-12 col-md-6">
-            <label class="heading mr-lg-5 float-lg-right"
+            <label class="heading mb-0 mr-lg-5 float-lg-right"
               ><h2>{{ subjectName }}</h2></label
             >
           </div>
         </div>
       </div>
       <div class="text-center text-lg-left">
-        <p *ngIf="topicName" class="text-center">
+        <p *ngIf="topicName" class="mb-0 text-center">
           <label
             ><h3 class="heading mb-0">
-              <p>
+              <p class="mb-1">
                 <u>{{ topicName }}</u>
               </p>
             </h3></label
@@ -37,6 +40,9 @@
           <label><h3 class="heading mb-0">Description:</h3></label>
           <span class="description ml-2">{{ noteDescription }}</span>
         </p>
+      </div>
+      <div *ngIf="!className" class="text-right">
+        <button type="button" class="btn btn-danger">Close</button>
       </div>
     </div>
   </div>
