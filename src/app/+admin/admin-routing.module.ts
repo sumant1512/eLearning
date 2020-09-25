@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
-import { AddStudentComponent } from "./student/add-student.component";
 import { AddTeacherComponent } from "./teacher/add-teacher.component";
 import { TopicComponent } from "./topic/topic.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
@@ -18,6 +17,7 @@ import { SettingsComponent } from "./settings/settings.component";
 import { ConferencingComponent } from "./conferencing/conferencing.component";
 import { NotesComponent } from "./notes/notes.component";
 import { VideoComponent } from "./video/video.component";
+import { StudentListComponent } from "./student-list/student-list.component";
 const routes: Routes = [
   {
     path: "",
@@ -25,7 +25,7 @@ const routes: Routes = [
     children: [
       { path: "", component: AdminLandingPageComponent },
       { path: ProfileRoutesEnum.PROFILE, component: ProfileComponent },
-      { path: ProfileRoutesEnum.STUDENT, component: AddStudentComponent },
+      { path: ProfileRoutesEnum.STUDENT, component: StudentListComponent },
       { path: ProfileRoutesEnum.TEACHER, component: AddTeacherComponent },
       { path: ProfileRoutesEnum.CLASS, component: ClassComponent },
       { path: ProfileRoutesEnum.SUBJECT, component: SubjectComponent },

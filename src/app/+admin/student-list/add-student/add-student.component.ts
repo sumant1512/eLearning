@@ -3,9 +3,8 @@ import { Validators, FormBuilder, FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
-import * as ClassActions from "../../store/class/class.actions";
+import * as ClassActions from "../../../store/class/class.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
-import * as $ from "jquery";
 
 @Component({
   selector: "app-add-student",
@@ -14,7 +13,7 @@ import * as $ from "jquery";
 })
 export class AddStudentComponent implements OnInit {
   buttonName = "Show Students";
-  changeClass = false;
+  isStudentVisibile: boolean;
 
   studentRegistrationForm: FormGroup;
   classList: ClassListType[];
@@ -53,40 +52,17 @@ export class AddStudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // $(function() {
-    //   $("#date").datepicker({
-    //     showOn: "both",
-    //     buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-    //     buttonText: "<i class='fa fa-calendar'></i>",
-    //     buttonImageOnly: true
-    //   });
-    // });
-    this.displayNone();
     this.fetchClassList();
   }
+
   get f() {
     return this.studentRegistrationForm.controls;
   }
 
-  displayNone() {
-    setTimeout(function () {
-      document.getElementById("myP1").style.display = "none";
-    }, 1000);
-  }
-
-  displayDom() {
-    document.getElementById("myP1").style.display = "";
-  }
-
   showHideStudents() {
-    this.buttonName === "Show Students"
-      ? (this.buttonName = "Add Student")
-      : (this.buttonName = "Show Students");
-    this.changeClass = !this.changeClass;
-
-    this.buttonName === "Show Students"
-      ? this.displayNone()
-      : this.displayDom();
+    this.buttonName =
+      this.buttonName === "Show Students" ? "Add Students" : "Show Students";
+    this.isStudentVisibile = !this.isStudentVisibile;
   }
 
   registerStudent(): void {
@@ -94,8 +70,8 @@ export class AddStudentComponent implements OnInit {
     this.store.dispatch(
       new StudentActions.AddStudent(studentRegistrationDetails)
     );
-    this.studentRegistrationForm.reset();
   }
+
   fetchClassList(): void {
     this.store.select("classList").subscribe((response) => {
       if (Object.keys(response).length) {
