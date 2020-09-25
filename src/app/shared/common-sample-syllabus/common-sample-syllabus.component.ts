@@ -8,6 +8,7 @@ import * as TopicActions from "../../store/topic/topic.actions";
 import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
 import * as NotesActions from "../../store/notes/notes.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
+import * as VideoActions from "../../store/video/video.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 import { Router } from "@angular/router";
 import { NotesListType } from "src/app/store/notes/types/notes.type";
@@ -35,6 +36,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
   viewValue: boolean = true;
   noteArray: NotesListType[];
   hasNote: boolean;
+  httpClient: any;
 
   constructor(
     private store: Store<AppState>,
@@ -162,7 +164,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
     });
   }
 
-  sortNotesByTopic(topicId): void {
+  sortByTopic(topicId): void {
     this.noteArray = this.resultForNotes.filter(
       (data) => data.topic_id == topicId
     );
@@ -170,7 +172,26 @@ export class CommonSampleSyllabusComponent implements OnInit {
     else this.hasNote = true;
   }
 
-  navigateToVideoRecorder(): void {
-    this.router.navigate(["/admin/video-recoder"]);
+  navigateToVideoRecorder(topicId): void {
+    this.router.navigate(["/admin/video"],{
+      queryParams: {
+        classId:this.selectedClassId,
+        topicId,
+        view: !this.viewValue,
+
+      },
+    });
   }
+
+  navigateToViewVideo(topicId):void{
+      this.router.navigate(["/admin/video"],{
+      queryParams: {
+        topicId,
+        view: this.viewValue,
+       
+      },
+    });
+   
+  }
+
 }

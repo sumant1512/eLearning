@@ -1,27 +1,48 @@
-import { Component, ViewChild, AfterViewInit, ElementRef } from "@angular/core";
+import { Component, ViewChild, AfterViewInit, ElementRef, OnInit } from "@angular/core";
 import * as RecordRTC from "recordrtc";
-import { AuthService } from "src/app/store/auth/api/auth.service";
+import { ActivatedRoute } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { AppState } from "src/app/store/app.state";
+import * as VideoActions from "../../../store/video/video.actions";
+
 
 @Component({
   selector: "app-video-record",
   templateUrl: "./video-record.component.html",
   styleUrls: ["./video-record.component.css"],
 })
-export class VideoRecordComponent implements AfterViewInit {
+export class VideoRecordComponent implements AfterViewInit,OnInit {
   @ViewChild("video", { static: false }) video: ElementRef;
   private stream = new MediaStream();
   private recordRTC: any;
   toggle: boolean = false;
   toggleDownload: boolean = true;
-  constructor(private authService: AuthService) {}
+  classId:number;
+  topicId:number;
+  constructor(private store: Store<AppState>,
+    private Activatedroute: ActivatedRoute,) { }
 
-  ngAfterViewInit() {
+  ngOnInit():void{
+    
+    this.readQueryParams();
+  }
+
+  readQueryParams():void{
+    this.Activatedroute.queryParams.subscribe((params) => {
+      this.classId = params["classId"];
+      this.topicId = params["topicId"];
+     
+    });
+  }
+  ngAfterViewInit():void {
     // set the initial state of the video
     let video: HTMLVideoElement = this.video.nativeElement;
     video.muted = false;
     video.controls = true;
     video.autoplay = false;
   }
+
+ 
 
   toggleControls() {
     let video: HTMLVideoElement = this.video.nativeElement;
@@ -76,20 +97,18 @@ export class VideoRecordComponent implements AfterViewInit {
     stream.getVideoTracks().forEach((track) => track.stop());
   }
 
-  download() {
+  download():void {
     this.recordRTC.save("video.mp4");
   }
-  saveVideo() {
-    this.recordRTC.getDataURL((dataUrl) => {
+  saveVideo():void{
+      this.recordRTC.getDataURL((dataUrl) => {
       let data = {
-        media: dataUrl,
+       classId: this.classId,
+       topicId: this.topicId,
+       media: dataUrl,
       };
-      this.authService.saveVideo(data).subscribe((response) => {
-        if (response["status"]) {
-          console.log(response["path"]);
-          alert(response["message"]);
-        } else alert(response["message"]);
-      });
-    });
-  }
+      this.store.dispatch(new VideoActions.AddVideo(data));
+    }); 
+  } 
 }
+

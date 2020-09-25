@@ -7,6 +7,7 @@ import { NotesListType } from "./notes/types/notes.type";
 import { SubjectWithTopicAndSamplePaperType } from "./student-sample_paper-syllabus/types/student-sample_paper-syllabus.types"; 
 import { StudentType } from './students/types/student.types';
 import { SyllabusListType } from './syllabus-tranform/types/syllabus.type';
+import { VideoListType } from "./video/types/video.type";
 
 export type AppState = Partial<{
   profile: ProfileType;
@@ -17,6 +18,7 @@ export type AppState = Partial<{
   samplePaperList: SamplePaperListType[]; 
   students: StudentType[];
   syllabusList: SyllabusListType[];  
-  notesList: NotesListType[];
+  notesList: NotesListType[];   
   samplePaperTransformList: any;
+  videoList: VideoListType[];
 }>;
