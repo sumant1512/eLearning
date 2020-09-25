@@ -10,6 +10,7 @@ import { syllabusReducer } from "./syllabus-tranform/syllabus.reducers";
 import { samplePaperTransformReducer } from "./sample-paper-transform/sample-paper-transform.reducers";
 import { notesReducer } from "./notes/notes.reducers";
 import { studentSamplePaperSyllabusReducer } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.reducers";
+import { videoReducer } from "./video/video.reducers";
 
 export const appReducers: ActionReducerMap<AppState> = {
   profile: profileReducer,
@@ -22,4 +23,5 @@ export const appReducers: ActionReducerMap<AppState> = {
   syllabusList: syllabusReducer,
   notesList: notesReducer,
   samplePaperTransformList: samplePaperTransformReducer,
+  videoList: videoReducer,
 };

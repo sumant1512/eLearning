@@ -1,0 +1,3 @@
+<div *ngIf="view; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock> <app-view-video></app-view-video></ng-template>
+<ng-template #elseBlock> <app-video-record></app-video-record></ng-template>

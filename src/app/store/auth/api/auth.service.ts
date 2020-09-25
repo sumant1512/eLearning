@@ -50,16 +50,6 @@ export class AuthService {
     });
   }
 
-  saveVideo(video) {
-    var reqHeader = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-    });
-    return this.http.post<any>(HOST + "saveVideo", video, {
-      headers: reqHeader,
-    });
-  }
-
   //Logout call
   public logout(): void {
     this.logoutUser();

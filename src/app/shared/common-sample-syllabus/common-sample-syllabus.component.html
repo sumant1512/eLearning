@@ -101,7 +101,7 @@
                                 <button
                                   class="dropbtn btn btn-primary"
                                   (mouseover)="
-                                    sortNotesByTopic(
+                                    sortByTopic(
                                       topic.topic_id
                                     )
                                   "
@@ -139,16 +139,16 @@
                                     View Notes<i class="fa fa-eye ml-2"> </i>
                                   </button>
                                   <button
-                                    class="btn btn-danger btn-block"
-                                    (click)="navigateToVideoRecorder()"
+                                    class="btn btn-danger btn-block p-1"
+                                    (click)="navigateToVideoRecorder(topic.topic_id)"
                                   >
-                                    Upload Video<i class="fa fa-plus ml-2"> </i>
+                                    Upload Video<i class="fa fa-upload ml-1"> </i>
                                   </button>
                                   <button
                                   class="btn btn-danger btn-block"
-                                  (click)="navigateToVideoRecorder()"
+                                  (click)=" navigateToViewVideo( topic.topic_id)"
                                 >
-                                  View Video<i class="fa fa-eye ml-2"> </i>
+                                  View Video<i class="fa fa-play-circle-o ml-2"> </i>
                                 </button>
                                   
                                 </div>
