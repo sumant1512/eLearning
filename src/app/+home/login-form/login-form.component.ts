@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
+import * as CryptoJS from "crypto-js";
 import { loginForm } from "./login-form.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
@@ -27,8 +28,16 @@ export class LoginFormComponent implements OnInit {
 
   login() {
     this.loader = true;
+    const encryptedPassword = this.encryptCredentials(this.loginForm.value);
     const classDetail = this.loginForm.value;
     this.store.dispatch(new AuthActions.UserLogin(classDetail));
+  }
+
+  encryptCredentials(data: any) {
+    return CryptoJS.AES.encrypt(
+      data.email.trim(),
+      data.password.trim()
+    ).toString();
   }
 
   register() {

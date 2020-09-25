@@ -1,48 +1,58 @@
-import { Component, ViewChild, AfterViewInit, ElementRef, OnInit } from "@angular/core";
+import {
+  Component,
+  ViewChild,
+  AfterViewInit,
+  ElementRef,
+  OnInit,
+} from "@angular/core";
 import * as RecordRTC from "recordrtc";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as VideoActions from "../../../store/video/video.actions";
-
+import { FormGroup } from "@angular/forms";
+import { addVideoForm } from "./add-video,utils";
 
 @Component({
   selector: "app-video-record",
   templateUrl: "./video-record.component.html",
   styleUrls: ["./video-record.component.css"],
 })
-export class VideoRecordComponent implements AfterViewInit,OnInit {
+export class VideoRecordComponent implements AfterViewInit, OnInit {
   @ViewChild("video", { static: false }) video: ElementRef;
+  addVideoForm: FormGroup;
   private stream = new MediaStream();
   private recordRTC: any;
   toggle: boolean = false;
   toggleDownload: boolean = true;
-  classId:number;
-  topicId:number;
-  constructor(private store: Store<AppState>,
-    private Activatedroute: ActivatedRoute,) { }
+  classId: number;
+  topicId: number;
+  encryptedVideo: string;
+  constructor(
+    private store: Store<AppState>,
+    private Activatedroute: ActivatedRoute
+  ) {
+    this.addVideoForm = addVideoForm();
+  }
 
-  ngOnInit():void{
-    
+  ngOnInit(): void {
     this.readQueryParams();
   }
 
-  readQueryParams():void{
+  readQueryParams(): void {
     this.Activatedroute.queryParams.subscribe((params) => {
       this.classId = params["classId"];
       this.topicId = params["topicId"];
-     
     });
   }
-  ngAfterViewInit():void {
+
+  ngAfterViewInit(): void {
     // set the initial state of the video
     let video: HTMLVideoElement = this.video.nativeElement;
     video.muted = false;
     video.controls = true;
     video.autoplay = false;
   }
-
- 
 
   toggleControls() {
     let video: HTMLVideoElement = this.video.nativeElement;
@@ -97,18 +107,41 @@ export class VideoRecordComponent implements AfterViewInit,OnInit {
     stream.getVideoTracks().forEach((track) => track.stop());
   }
 
-  download():void {
+  download(): void {
     this.recordRTC.save("video.mp4");
   }
-  saveVideo():void{
-      this.recordRTC.getDataURL((dataUrl) => {
-      let data = {
-       classId: this.classId,
-       topicId: this.topicId,
-       media: dataUrl,
-      };
-      this.store.dispatch(new VideoActions.AddVideo(data));
-    }); 
-  } 
-}
 
+  saveVideo(videoType: string): void {
+    let data: any;
+    if (videoType === "upload") {
+      data = {
+        classId: this.classId,
+        topicId: this.topicId,
+        media: this.encryptedVideo,
+      };
+    } else {
+      this.recordRTC.getDataURL((dataUrl) => {
+        data = {
+          classId: this.classId,
+          topicId: this.topicId,
+          media: dataUrl,
+        };
+      });
+    }
+    this.store.dispatch(new VideoActions.AddVideo(data));
+  }
+
+  onVideoSelect(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.encryptedVideo = event.target.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  uploadVideo() {
+    this.saveVideo("upload");
+  }
+}

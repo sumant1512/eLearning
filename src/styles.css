@@ -105,6 +105,13 @@ input {
   font-size: 14px;
 }
 
+select {
+  border: 1px solid #d5dae2;
+  padding: 15px;
+  min-height: 45px;
+  font-size: 14px;
+}
+
 .br-10 {
   border-radius: 10px;
 }

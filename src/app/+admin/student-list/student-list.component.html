@@ -1,0 +1,22 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div>
+        <button
+          class="btn-md btn btn-primary mt-4 ml-5 mb-4"
+          (click)="showHideStudents()"
+        >
+          {{ buttonLabel }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div *ngIf="!isStudentVisibile" class="col-12">
+      <app-add-student></app-add-student>
+    </div>
+    <div *ngIf="isStudentVisibile" class="col-12">
+      <app-view-student></app-view-student>
+    </div>
+  </div>
+</div>

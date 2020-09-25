@@ -69,10 +69,11 @@ export class CommonAddComponent implements OnInit {
       this.fetchSyllabusTransform();
     }
   }
-    fetchSyllabusTransform(): void {
+  
+  fetchSyllabusTransform(): void {
     this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
-        this.resultForSyllabus = response; 
+        this.resultForSyllabus = response;
       } else {
         this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
@@ -80,8 +81,10 @@ export class CommonAddComponent implements OnInit {
   }
 
   getClassForSubject(classId) {
-    this.subjectList = this.resultForSyllabus.filter((data) => data.class_id == classId)[0].subjects; 
-  } 
+    this.subjectList = this.resultForSyllabus.filter(
+      (data) => data.class_id == classId
+    )[0].subjects;
+  }
 
   reviewStatus(): boolean {
     if (this.name === "Topic" || this.name === "Sample Paper") return false;
@@ -94,9 +97,8 @@ export class CommonAddComponent implements OnInit {
     if ("Sample Paper" === this.name) {
       var element = document.getElementById("myDIV");
       element.classList.toggle("show");
-     
     }
-     return false; 
+    return false;
     return true;
   }
 
