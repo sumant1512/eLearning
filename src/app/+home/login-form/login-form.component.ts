@@ -28,18 +28,9 @@ export class LoginFormComponent implements OnInit {
 
   login() {
     this.loader = true;
-    const encryptedPassword = this.encryptCredentials(this.loginForm.value);
     const classDetail = this.loginForm.value;
     this.store.dispatch(new AuthActions.UserLogin(classDetail));
   }
-
-  encryptCredentials(data: any) {
-    return CryptoJS.AES.encrypt(
-      data.email.trim(),
-      data.password.trim()
-    ).toString();
-  }
-
   register() {
     this.router.navigateByUrl("/registration");
   }
