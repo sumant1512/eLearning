@@ -38,9 +38,18 @@
       md-raised-button
       [disabled]="toggleDownload"
       class="btn btn-warning m-2"
-      (click)="saveVideo()"
+      (click)="saveVideo('record')"
     >
       Upload
     </button>
+    <form [formGroup]="addVideoForm">
+      <input
+        type="file"
+        accept="video/mp4,image/png,image/jpeg"
+        formControlName="video"
+        (change)="onVideoSelect($event)"
+      />
+      <button type="button" (click) = "uploadVideo()">Save</button>
+    </form>
   </div>
 </div>

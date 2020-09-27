@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   schoolImageUrl: SafeUrl;
   adminImageUrl: SafeUrl;
 
-  studentCount: number; 
+  studentCount: number;
   loaded: boolean = false;
   uploadBtnControl: boolean = true;
   saveBtnControl: boolean = true;
@@ -42,35 +42,37 @@ export class ProfileComponent implements OnInit {
           this.adminProfile.userDetails.school_cover_image
       : CONSTANTS.SCHOOL_IMAGE;
   }
+
   setProfileImage(): string {
     return this.adminProfile.userDetails.admin_profile_picture !== null
       ? "data:image/png;base64," +
           this.adminProfile.userDetails.admin_profile_picture
       : CONSTANTS.USER_IMAGE;
   }
+
   getUserProfile(): void {
     this.store.select("profile").subscribe((response) => {
-         if (response.userDetails.user_id!==null) {  
-              this.adminProfile = response;
-              this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-                this.setCoverImage() 
-              );
-              this.adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-                this.setProfileImage()
-           ); 
-           
-           this.loaded = true; 
-           
-         } else { 
-           this.fetchUserProfile();
-          }
+      if (response.userDetails.user_id !== null) {
+        this.adminProfile = response;
+        this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          this.setCoverImage()
+        );
+        this.adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+          this.setProfileImage()
+        );
+
+        this.loaded = true;
+      } else {
+        this.fetchUserProfile();
+      }
     });
   }
+
   fetchUserProfile(): void {
-    const authToken = localStorage.getItem("AUTH_TOKEN"); 
+    const authToken = localStorage.getItem("AUTH_TOKEN");
     this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
-  
+
   onImageSelect(event: any, name) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -110,6 +112,7 @@ export class ProfileComponent implements OnInit {
     this.uploadBtnControl = true;
     this.saveBtnControl = true;
   }
+
   fetchStudents(): void {
     this.store.select("students").subscribe((response) => {
       if (Object.keys(response).length !== 0) {
