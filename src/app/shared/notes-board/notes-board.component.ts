@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-notes-board",
@@ -12,8 +13,23 @@ export class NotesBoardComponent implements OnInit {
   @Input() subjectName: string;
   @Input() topicName: string;
   loaded: boolean;
+  isStudent: boolean = true;
+  @Output() public childEvent = new EventEmitter();
+  constructor(private router: Router) {}
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkUser();
+  }
+  checkUser(): void {
+    const userType = localStorage.getItem("user_type");
+    if (userType === "Admin") {
+      this.isStudent = false;
+    }
+  }
+  close(): void {
+    this.childEvent.emit(false);
+  }
+  goBack(): void {
+    this.router.navigateByUrl("admin/syllabus");
+  }
 }

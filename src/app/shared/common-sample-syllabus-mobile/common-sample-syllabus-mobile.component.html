@@ -107,9 +107,7 @@
                       <div class="dropdown float-right">
                         <button
                           class="dropbtn btn btnNotes text-white"
-                          (mouseover)="
-                            sortNotesByTopic(topic.topic_id)
-                          "
+                          (mouseover)="sortNotesByTopic(topic.topic_id)"
                         >
                           Notes
                           <i class="fa fa-sticky-note" aria-hidden="true"></i>
@@ -141,6 +139,18 @@
                             "
                           >
                             View Notes<i class="fa fa-eye ml-2"> </i>
+                          </button>
+                          <button
+                            class="btn btnAdd btn-block p-1"
+                            (click)="navigateToVideoRecorder(topic.topic_id)"
+                          >
+                            Upload Video<i class="fa fa-upload ml-1"> </i>
+                          </button>
+                          <button
+                            class="btn btn-block btnAdd"
+                            (click)="navigateToViewVideo(topic.topic_id)"
+                          >
+                            View Video<i class="fa fa-play-circle-o ml-2"> </i>
                           </button>
                         </div>
                       </div>
