@@ -1,6 +1,7 @@
 <div class="col-sm-12 mt-3 formSlide" id="data">
   <div class="overlay mt-n2 pt-1" *ngIf="showoverlay" #overlay>
     <app-notes-board
+      (childEvent)="showoverlay = $event"
       [noteHeading]="noteHeading"
       [noteDescription]="noteDescription"
     ></app-notes-board>

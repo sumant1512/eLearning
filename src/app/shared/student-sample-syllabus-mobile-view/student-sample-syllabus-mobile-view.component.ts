@@ -43,7 +43,6 @@ export class StudentSampleSyllabusMobileViewComponent implements OnInit {
     this.noteHeading = notes.note_heading;
     this.noteDescription = notes.note_desc;
     this.showoverlay = true;
-    console.log(notes);
   }
   close(): void {
     this.showoverlay = false;

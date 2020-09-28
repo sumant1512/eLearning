@@ -17,10 +17,9 @@ import * as NotesActions from "../../store/notes/notes.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 import { Router } from "@angular/router";
-import { NotesListType } from '../../store/notes/types/notes.type';
-import { SyllabusListType } from '../../store/syllabus-tranform/types/syllabus.type';
-import { SamplePaperListType } from '../../store/sample-paper/types/sample-paper.type';
-
+import { NotesListType } from "../../store/notes/types/notes.type";
+import { SyllabusListType } from "../../store/syllabus-tranform/types/syllabus.type";
+import { SamplePaperListType } from "../../store/sample-paper/types/sample-paper.type";
 
 @Component({
   selector: "app-common-sample-syllabus-mobile",
@@ -39,15 +38,15 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   selectedClassDetails;
   selectedClassName: string;
   selectedClassId: number;
-  resultForNotes: NotesListType[];  
-  resultForSyllabus:SyllabusListType[];
-  resultForSamperPaper:SamplePaperListType[];
-  
+  resultForNotes: NotesListType[];
+  resultForSyllabus: SyllabusListType[];
+  resultForSamperPaper: SamplePaperListType[];
+
   isAddSamplePaperFormOpen = false;
-  
+
   viewValue: boolean = true;
-  noteArray:NotesListType[];
-  hasNote: boolean;  
+  noteArray: NotesListType[];
+  hasNote: boolean;
 
   constructor(
     private store: Store<AppState>,
@@ -169,7 +168,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     }
   }
 
-   fetchNotesList() {
+  fetchNotesList() {
     this.store.select("notesList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForNotes = response;
@@ -205,12 +204,29 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     });
   }
 
-  sortNotesByTopic( topicId): void {
-    this.noteArray = this.resultForNotes.filter((data) => data.topic_id == topicId);
-    if (this.noteArray.length < 1) 
-      this.hasNote = false;
-     else 
-      this.hasNote = true;
-    
+  sortNotesByTopic(topicId): void {
+    this.noteArray = this.resultForNotes.filter(
+      (data) => data.topic_id == topicId
+    );
+    if (this.noteArray.length < 1) this.hasNote = false;
+    else this.hasNote = true;
+  }
+  navigateToVideoRecorder(topicId): void {
+    this.router.navigate(["/admin/video"], {
+      queryParams: {
+        classId: this.selectedClassId,
+        topicId,
+        view: !this.viewValue,
+      },
+    });
+  }
+
+  navigateToViewVideo(topicId): void {
+    this.router.navigate(["/admin/video"], {
+      queryParams: {
+        topicId,
+        view: this.viewValue,
+      },
+    });
   }
 }

@@ -26,14 +26,15 @@ export class StudentSampleSyllabusViewComponent implements OnInit {
   }
 
   showNotes(notes) {
-    console.log(notes);
     this.noteHeading = notes.note_heading;
     this.noteDescription = notes.note_desc;
     this.showoverlay = true;
   }
+
   getStatus(): boolean {
     return this.btnLabel === "Sample Paper" ? false : true;
   }
+
   selectSubject(subjectId, subjectName): void {
     this.selectedSubjectName = subjectName;
     this.selectedSubjectId = subjectId;

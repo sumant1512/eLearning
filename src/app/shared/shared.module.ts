@@ -15,6 +15,7 @@ import { StudentSampleSyllabusViewComponent } from "./student-sample-syllabus-vi
 import { GenericDialogComponent } from "./generic-dialog/generic-dialog.component";
 import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-syllabus-mobile-view/student-sample-syllabus-mobile-view.component";
 import { NotesBoardComponent } from "./notes-board/notes-board.component";
+import { VideosPanelComponent } from "./videos-panel/videos-panel.component";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NotesBoardComponent } from "./notes-board/notes-board.component";
     GenericDialogComponent,
     StudentSampleSyllabusMobileViewComponent,
     NotesBoardComponent,
+    VideosPanelComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -41,6 +43,7 @@ import { NotesBoardComponent } from "./notes-board/notes-board.component";
     ProfileSkeletonComponent,
     GenericDialogComponent,
     NotesBoardComponent,
+    VideosPanelComponent,
   ],
 })
 export class SharedModule {}
