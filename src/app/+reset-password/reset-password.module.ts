@@ -5,6 +5,7 @@ import { ResetPasswordRoutingModule } from "./reset-password-routing.module";
 import { ResetPasswordComponent } from "./reset-password.component";
 import { HomeModule } from "../+home/home.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [ResetPasswordComponent],
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     HomeModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class ResetPasswordModule {}

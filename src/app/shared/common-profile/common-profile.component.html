@@ -12,21 +12,26 @@
       style="height: 360px; position: relative"
     />
   </div>
-  <div class="profile-info-left float-left">
+  <div class="position-absolute profile-info-left">
     <div class="row ml-0 mr-0 ml-lg-5 px-0">
       <div class="col-md-4 d-flex justify-content-center">
         <div class="text-center">
           <div>
-            <app-profile-skeleton
-              *ngIf="!loaded"
-              Cwidth="180"
-              Cheight="180"
-              circle="true"
-            ></app-profile-skeleton>
+            <div
+            *ngIf="!loaded"
+              class="rounded-circle"
+              style="width: 190px; height: 190px; border: 5px solid white"
+            >
+              <app-profile-skeleton
+                Cwidth="180"
+                Cheight="180"
+                circle="true"
+              ></app-profile-skeleton>
+            </div>
             <img
               *ngIf="loaded"
               class="image rounded-circle"
-              [src]="studentImageUrl"
+              [src]="userImageUrl"
               style="width: 180px; height: 180px; border: 5px solid white"
             />
           </div>
@@ -42,7 +47,7 @@
               style="display: none"
               class="cursor-pointer choose-image-input pb-5 mb-3 mb-lg-0"
               type="file"
-              (change)="onImageSelect($event)"
+              (change)="selectImage($event, 'admin')"
               #fileInput
             />
           </div>
@@ -64,25 +69,39 @@
             *ngIf="!loaded"
             class="ml-5 pl-3"
             Cwidth="400"
-            Cheight="50"
+            Cheight="32"
           ></app-profile-skeleton>
 
           <h2 *ngIf="loaded" class="text-white font-weight-bold">
             {{
-              studentProfile.userDetails.first_name +
-                " " +
-                studentProfile.userDetails.last_name
+              userProfile.userDetails.admin_name
+                ? userProfile.userDetails.admin_name
+                : userProfile.userDetails.first_name +
+                  " " +
+                  userProfile.userDetails.last_name +
+                  "/ Class " +
+                  userProfile.userDetails.class_name
             }}
-            / Class {{ studentProfile.userDetails.class_name }}
           </h2>
-
+          <!-- <app-profile-skeleton
+            *ngIf="!loaded"
+            Cwidth="50"
+            Cheight="16"
+          ></app-profile-skeleton>
+          <p *ngIf="loaded" class="text-white font-weight-bold mr-3 mt-2">
+            {{
+              userProfile.userDetails.designation
+                ? userProfile.userDetails.designation
+                : ""
+            }}
+          </p> -->
           <app-profile-skeleton
             *ngIf="!loaded"
             Cwidth="300"
-            Cheight="50"
+            Cheight="16"
           ></app-profile-skeleton>
           <p *ngIf="loaded" class="text-white font-weight-bold mr-3 mt-2">
-            {{ studentProfile.userDetails.school_name }}
+            {{ userProfile.userDetails.school_name }}
           </p>
         </div>
       </div>
@@ -139,7 +158,10 @@
             >Resume</a
           >
         </li>
-        <li class="nav-item">
+        <li
+          *ngIf="loaded && !userProfile.userDetails.admin_name"
+          class="nav-item"
+        >
           <div *ngIf="!loaded" class="py-2 px-4">
             <app-profile-skeleton Cheight="24"></app-profile-skeleton>
           </div>
@@ -220,18 +242,18 @@
                 <div *ngIf="loaded" class="p-2">
                   <h4 class="my-4">School Details</h4>
                   <p>
-                    <b>{{ studentProfile.userDetails.admin_name }}</b> Principal
+                    <b>{{ userProfile.userDetails.admin_name }}</b> Principal
                   </p>
                   <p>
                     Phone : +91
-                    {{ studentProfile.userDetails.admin_contact_no }}
+                    {{ userProfile.userDetails.admin_contact_no }}
                   </p>
                 </div>
                 <div *ngIf="loaded" class="p-2">
                   <p><b>School number</b> Mobile</p>
                   <p>
                     Phone : +91
-                    {{ studentProfile.userDetails.school_contact_no }}
+                    {{ userProfile.userDetails.school_contact_no }}
                   </p>
                 </div>
               </div>
@@ -331,8 +353,7 @@
                             <th class="text-muted">Date of birth</th>
                             <td *ngIf="loaded">
                               {{
-                                studentProfile.userDetails.dob
-                                  | date: "mediumDate"
+                                userProfile.userDetails.dob | date: "mediumDate"
                               }}
                             </td>
                           </tr>
@@ -497,16 +518,19 @@
                     <input type="radio" name="options" (click)="toggleLabelAndIconOnButton()" autocomplete="off"> Syllabus
                   </label>
                 </div> -->
-                <button
+                <!-- <button
                   class="btn togButton mt-3 mb-2 mr-4 float-right"
                   data_but="btn-xs"
                   (click)="toggleLabelAndIconOnButton()"
                 >
                   <i id="icon" class="fa fa-file-text"></i>&nbsp;{{ btnLabel }}
-                </button>
+                </button> -->
               </div>
             </div>
-            <div class="row no-gutters">
+            <div
+              *ngIf="loaded && !userProfile.userDetails.admin_name"
+              class="row no-gutters"
+            >
               <div class="col-12">
                 <app-student-sample-syllabus-view
                   *ngIf="!isMobile"

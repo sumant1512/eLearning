@@ -1,34 +1,31 @@
-
 .profile-info-left {
-  position: absolute;
-top:150px;
-
+  top: 150px;
 }
 @media (max-width: 760px) {
-.img-fluid {
-  height: 500px !important;
-}
+  .img-fluid {
+    height: 500px !important;
+  }
 }
 
 .cover-content {
-background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.icons{
- right:500px;
+.icons {
+  right: 500px;
 }
 
 .nav-tabs .active {
-border-bottom: 3px solid #0062cc !important;
+  border-bottom: 3px solid #0062cc !important;
 }
 .hobby li {
-width: 33.33%;
+  width: 33.33%;
 }
 .exp-row p {
-text-indent: 25px;
-font-size: 1rem;
+  text-indent: 25px;
+  font-size: 1rem;
 }
 .togButton {
-background: #f39c12;
-box-shadow: 0 3px 0 0 #e67e22;
+  background: #f39c12;
+  box-shadow: 0 3px 0 0 #e67e22;
 }
