@@ -1,4 +1,4 @@
-export enum ProfileRoutesEnum {
+export enum StudentRoutesEnum {
   PROFILE = "profile",
   VIEW_SAMPLE_PAPER = "view-sample-paper",
   SYLLABUS = "syllabus",

@@ -7,6 +7,7 @@ import { ProfileType } from "src/app/store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
 import { AuthService } from "src/app/store/auth/api/auth.service";
 import * as StudentActions from "src/app/store/students/student.actions";
+import { ImageType } from "src/app/shared/common-profile/types/common-profile.type";
 
 @Component({
   selector: "app-profile",
@@ -33,35 +34,27 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserProfile();
-    this.fetchStudents();
+    // this.fetchStudents();
   }
 
-  setCoverImage(): string {
-    return this.adminProfile.userDetails.school_cover_image !== null
-      ? "data:image/png;base64," +
-          this.adminProfile.userDetails.school_cover_image
-      : CONSTANTS.SCHOOL_IMAGE;
-  }
+  // setCoverImage(): string {
+  //   return this.adminProfile.userDetails.school_cover_image !== null
+  //     ? "data:image/png;base64," +
+  //         this.adminProfile.userDetails.school_cover_image
+  //     : CONSTANTS.SCHOOL_IMAGE;
+  // }
 
-  setProfileImage(): string {
-    return this.adminProfile.userDetails.admin_profile_picture !== null
-      ? "data:image/png;base64," +
-          this.adminProfile.userDetails.admin_profile_picture
-      : CONSTANTS.USER_IMAGE;
-  }
+  // setProfileImage(): string {
+  //   return this.adminProfile.userDetails.admin_profile_picture !== null
+  //     ? "data:image/png;base64," +
+  //         this.adminProfile.userDetails.admin_profile_picture
+  //     : CONSTANTS.USER_IMAGE;
+  // }
 
   getUserProfile(): void {
     this.store.select("profile").subscribe((response) => {
       if (response.userDetails.user_id !== null) {
         this.adminProfile = response;
-        this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.setCoverImage()
-        );
-        this.adminImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.setProfileImage()
-        );
-
-        this.loaded = true;
       } else {
         this.fetchUserProfile();
       }
@@ -73,44 +66,45 @@ export class ProfileComponent implements OnInit {
     this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
 
-  onImageSelect(event: any, name) {
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        switch (name) {
-          case "admin":
-            this.uploadBtnControl = false;
-            this.adminImageUrl = event.target.result;
-            this.selectedImageDetails = {
-              image: this.adminImageUrl,
-              imageType: name,
-            };
-            break;
-          case "school_image":
-            this.saveBtnControl = false;
-            this.schoolImageUrl = event.target.result;
-            this.selectedImageDetails = {
-              image: this.schoolImageUrl,
-              imageType: name,
-            };
-            break;
-        }
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    }
+  onImageSelect(event: ImageType) {
+    this.selectedImageDetails = event;
+    // if (event.target.files && event.target.files[0]) {
+    //   var reader = new FileReader();
+    //   reader.onload = (event: any) => {
+    //     switch (name) {
+    //       case "user_image":
+    //         this.uploadBtnControl = false;
+    //         this.adminImageUrl = event.target.result;
+    //         this.selectedImageDetails = {
+    //           image: this.adminImageUrl,
+    //           imageType: name,
+    //         };
+    //         break;
+    //       case "school_image":
+    //         this.saveBtnControl = false;
+    //         this.schoolImageUrl = event.target.result;
+    //         this.selectedImageDetails = {
+    //           image: this.schoolImageUrl,
+    //           imageType: name,
+    //         };
+    //         break;
+    //     }
+    //   };
+    //   reader.readAsDataURL(event.target.files[0]);
+    // }
   }
 
-  saveImage(): void {
-    this.authService
-      .saveImage(this.selectedImageDetails)
-      .subscribe((response) => {
-        if (response["status"]) {
-          this.fetchUserProfile();
-          alert(response["message"]);
-        } else alert(response["message"]);
-      });
-    this.uploadBtnControl = true;
-    this.saveBtnControl = true;
+  saveImage(event: string): void {
+    if (event === "save") {
+      this.authService
+        .saveImage(this.selectedImageDetails)
+        .subscribe((response) => {
+          if (response["status"]) {
+            this.fetchUserProfile();
+            alert(response["message"]);
+          } else alert(response["message"]);
+        });
+    }
   }
 
   fetchStudents(): void {

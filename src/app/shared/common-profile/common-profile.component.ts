@@ -1,4 +1,11 @@
-import { Component, HostListener, OnInit } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from "@angular/core";
 import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import { ProfileType } from "../../store/auth/types/profile.type";
@@ -8,6 +15,7 @@ import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_p
 import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { CONSTANTS } from "src/app/+admin/profile/profile.constants";
+import { ImageType } from "./types/common-profile.type";
 
 @Component({
   selector: "app-common-profile",
@@ -15,8 +23,22 @@ import { CONSTANTS } from "src/app/+admin/profile/profile.constants";
   styleUrls: ["./common-profile.component.css"],
 })
 export class CommonProfileComponent implements OnInit {
-  studentProfile: ProfileType;
-  loaded: boolean = false;
+  userProfile: ProfileType;
+  @Input("userProfile") set setUserProfile(data: ProfileType) {
+    if (data) {
+      this.loaded = true;
+      this.userProfile = data;
+      this.userImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.setProfileImage()
+      );
+      this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.setCoverImage()
+      );
+    }
+  }
+  @Output() onImageSelect = new EventEmitter<ImageType>();
+  @Output() onSaveImage = new EventEmitter<string>();
+  loaded: boolean;
   toggle: boolean = true;
   uploadBtnControl: boolean = true;
   btnLabel: string = "Sample Paper";
@@ -24,7 +46,7 @@ export class CommonProfileComponent implements OnInit {
   selectedSubjectDetails: SubjectWithTopicAndSamplePaperType[];
   selectedSubjectId: number;
   selectedImageDetails: Object;
-  studentImageUrl: SafeUrl;
+  userImageUrl: SafeUrl;
   schoolImageUrl: SafeUrl;
   isMobile: boolean = false;
   constructor(
@@ -41,113 +63,105 @@ export class CommonProfileComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.isMobile = window.innerWidth < 991 ? true : false;
-    this.getUserProfile();
   }
 
   setProfileImage(): string {
-    return this.studentProfile.userDetails.student_profile_picture !== null
-      ? "data:image/png;base64," +
-          this.studentProfile.userDetails.student_profile_picture
-      : CONSTANTS.USER_IMAGE;
+    let userImage = CONSTANTS.USER_IMAGE;
+    if (this.userProfile.userDetails.student_profile_picture) {
+      userImage =
+        "data:image/png;base64," +
+        this.userProfile.userDetails.student_profile_picture;
+    } else if (this.userProfile.userDetails.admin_profile_picture) {
+      userImage =
+        "data:image/png;base64," +
+        this.userProfile.userDetails.admin_profile_picture;
+    } else {
+      userImage = CONSTANTS.USER_IMAGE;
+    }
+    return userImage;
   }
 
   setCoverImage(): string {
     return (
-      "data:image/png;base64," +
-      this.studentProfile.userDetails.school_cover_image
+      "data:image/png;base64," + this.userProfile.userDetails.school_cover_image
     );
   }
 
-  onImageSelect(event: any) {
+  selectImage(event: any, userType: string): void {
+    let imageData: ImageType;
     if (event.target.files && event.target.files[0]) {
-      this.uploadBtnControl = false;
       var reader = new FileReader();
       reader.onload = (event: any) => {
-        this.studentImageUrl = event.target.result;
-        this.selectedImageDetails = {
-          image: this.studentImageUrl,
-          imageType: "student",
-        };
+        switch (userType) {
+          case "admin":
+            this.userImageUrl = event.target.result;
+            imageData = {
+              userType: userType,
+              image: event.target.result,
+            };
+            this.uploadBtnControl = false;
+            this.onImageSelect.emit(imageData);
+            break;
+          case "school_image":
+            this.schoolImageUrl = event.target.result;
+            imageData = {
+              userType: userType,
+              image: event.target.result,
+            };
+            this.uploadBtnControl = false;
+            this.onImageSelect.emit(imageData);
+            break;
+        }
       };
       reader.readAsDataURL(event.target.files[0]);
     }
   }
 
   saveImage(): void {
-    this.authService
-      .saveImage(this.selectedImageDetails)
-      .subscribe((response) => {
-        if (response["status"]) {
-          this.fetchUserProfile();
-          alert(response["message"]);
-        } else alert(response["message"]);
-      });
+    this.onSaveImage.emit("save");
     this.uploadBtnControl = true;
   }
 
-  getUserProfile(): void {
-    this.store.select("profile").subscribe((response) => {
-      if (response.userDetails.user_id !== null) {
-        this.studentProfile = response;
-        this.fetchStudentSamplePaperSyllabusData(response["userDetails"]);
-        this.studentImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.setProfileImage()
-        );
-        this.schoolImageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.setCoverImage()
-        );
-        this.loaded = true;
-      } else {
-        this.fetchUserProfile();
-      }
-    });
-  }
+  // fetchStudentSamplePaperSyllabusData(res): void {
+  //   this.store
+  //     .select("studentSamplePaperSyllabusList")
+  //     .subscribe((response) => {
+  //       if (Object.keys(response).length) {
+  //         this.resultForSyllabusAndSamplePaper = response;
+  //         this.selectSubject(response[0].subject_id);
+  //       } else {
+  //         this.store.dispatch(
+  //           new StudentSamplePaperSyllabusActions.FetchStudentSamplePaperSyllabus(
+  //             {
+  //               schoolId: res.user_id,
+  //               classId: res.class_id,
+  //             }
+  //           )
+  //         );
+  //       }
+  //     });
+  // }
 
-  fetchUserProfile(): void {
-    const authToken = localStorage.getItem("AUTH_TOKEN");
-    this.store.dispatch(new AuthActions.FetchProfile(authToken));
-  }
+  // selectSubject(subjectId): void {
+  //   this.selectedSubjectId = subjectId;
+  //   this.selectedSubjectDetails = this.resultForSyllabusAndSamplePaper.filter(
+  //     (data) => data.subject_id == subjectId
+  //   );
+  // }
 
-  fetchStudentSamplePaperSyllabusData(res): void {
-    this.store
-      .select("studentSamplePaperSyllabusList")
-      .subscribe((response) => {
-        if (Object.keys(response).length) {
-          this.resultForSyllabusAndSamplePaper = response;
-          this.selectSubject(response[0].subject_id);
-        } else {
-          this.store.dispatch(
-            new StudentSamplePaperSyllabusActions.FetchStudentSamplePaperSyllabus(
-              {
-                schoolId: res.user_id,
-                classId: res.class_id,
-              }
-            )
-          );
-        }
-      });
-  }
-
-  selectSubject(subjectId): void {
-    this.selectedSubjectId = subjectId;
-    this.selectedSubjectDetails = this.resultForSyllabusAndSamplePaper.filter(
-      (data) => data.subject_id == subjectId
-    );
-  }
-
-  toggleLabelAndIconOnButton(): void {
-    this.toggle = !this.toggle;
-    let icon = document.getElementById("icon");
-    if (this.toggle) {
-      this.btnLabel = "Sample Paper";
-      icon.classList.remove("fa-book");
-      icon.classList.add("fa-file-text");
-    } else {
-      this.btnLabel = " Syllabus";
-      icon.classList.remove("fa-file-text");
-      icon.classList.add("fa-book");
-    }
-  }
+  // toggleLabelAndIconOnButton(): void {
+  //   this.toggle = !this.toggle;
+  //   let icon = document.getElementById("icon");
+  //   if (this.toggle) {
+  //     this.btnLabel = "Sample Paper";
+  //     icon.classList.remove("fa-book");
+  //     icon.classList.add("fa-file-text");
+  //   } else {
+  //     this.btnLabel = " Syllabus";
+  //     icon.classList.remove("fa-file-text");
+  //     icon.classList.add("fa-book");
+  //   }
+  // }
 }

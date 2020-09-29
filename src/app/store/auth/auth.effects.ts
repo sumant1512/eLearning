@@ -37,7 +37,7 @@ export class AuthEffects {
           if (userType === "Admin") {
             this.router.navigate(["admin/profile"]);
           } else if (userType === "Student") {
-            this.router.navigate(["student"]); 
+            this.router.navigate(["student/profile"]);
           }
         })
       );
