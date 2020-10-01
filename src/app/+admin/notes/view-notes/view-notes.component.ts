@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AppState } from "src/app/store/app.state";
 import * as NotesActions from "../../../store/notes/notes.actions";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
-import { NotesListType } from 'src/app/store/notes/types/notes.type';
+import { NotesListType } from "src/app/store/notes/types/notes.type";
 
 @Component({
   selector: "app-view-notes",
@@ -13,22 +14,22 @@ import { NotesListType } from 'src/app/store/notes/types/notes.type';
 })
 export class ViewNotesComponent implements OnInit {
   editNotesForm: FormGroup;
-  classId:number;
-  topicId:number;
-  noteArray:NotesListType[];
-  resultForNotes:NotesListType[]; 
+  classId: number;
+  topicId: number;
+  noteArray: NotesListType[];
+  resultForNotes: NotesListType[];
   loaded: boolean = false;
   className: string;
   subjectName: string;
   topicName: string;
-  heading:string;
-  description:string;
-  hasNoNote: boolean = true; 
+  heading: string;
+  description: string;
+  hasNoNote: boolean = true;
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
     private Activatedroute: ActivatedRoute,
-    private router: Router
+    private _location: Location
   ) {
     this.editNotesForm = this.fb.group({
       noteHeading: ["", Validators.required],
@@ -36,7 +37,7 @@ export class ViewNotesComponent implements OnInit {
     });
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.Activatedroute.queryParams.subscribe((params) => {
       this.className = params["className"];
       this.subjectName = params["subjectName"];
@@ -50,7 +51,7 @@ export class ViewNotesComponent implements OnInit {
     return this.editNotesForm.controls;
   }
 
-  fetchNotesList():void {
+  fetchNotesList(): void {
     this.store.select("notesList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForNotes = response;
@@ -61,7 +62,7 @@ export class ViewNotesComponent implements OnInit {
     });
   }
 
-  fetchNotes():void {
+  fetchNotes(): void {
     this.noteArray = this.resultForNotes.filter(
       (data) => data.topic_id == this.topicId
     );
@@ -82,15 +83,17 @@ export class ViewNotesComponent implements OnInit {
       })
     );
   }
+
   deleteNotes(): void {
     if (confirm("Are You Sure You want to Delete the note?")) {
       this.store.dispatch(
         new NotesActions.DeleteNotes(this.noteArray[0].note_id)
       );
-      // this.loaded = false;
-      // this.router.navigate(["admin/syllabus"])
+      this.navigateToBack(true);
     }
   }
-  
- 
+
+  navigateToBack(event: boolean): void {
+    this._location.back();
+  }
 }

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="blackboard pb-3">
+  <div class="blackboard mt-3 mt-md-4 pb-3">
     <div *ngIf="loaded" class="d-flex align-items-center text-white m-2">
       <strong>Loading...</strong>
       <div class="spinner-border ml-auto"></div>
@@ -38,16 +38,6 @@
           <span class="description ml-2">{{ noteDescription }}</span>
         </p>
       </div>
-      <div *ngIf="isStudent; else adminButton">
-        <button class="d-flex btn btn-danger float-right" (click)="close()">
-          Close
-        </button>
-      </div>
-      <ng-template #adminButton
-        ><button class="d-flex btn btn-danger float-right" (click)="goBack()">
-          Close
-        </button></ng-template
-      >
     </div>
   </div>
 </div>
