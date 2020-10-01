@@ -6,6 +6,7 @@ import {
   AuthActions,
   FetchProfile,
   FetchedProfile,
+  ClearProfile,
 } from "./auth.actions";
 import { mergeMap, map, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
@@ -66,7 +67,7 @@ export class AuthEffects {
       return this.authService.logout();
     }),
     map(() => {
-      return { type: "NO_ACTION" };
+      return new ClearProfile();
     })
   );
 }
