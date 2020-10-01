@@ -56,7 +56,7 @@ export class ViewNotesComponent implements OnInit {
     });
   }
 
-  back(event) {
+  navigateToBack(event: boolean): void {
     this._location.back();
   }
 }

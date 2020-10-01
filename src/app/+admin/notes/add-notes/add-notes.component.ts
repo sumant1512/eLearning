@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -13,18 +14,19 @@ import { AppState } from "src/app/store/app.state";
 })
 export class AddNotesComponent implements OnInit {
   addNotesForm: FormGroup;
-  classId:number;
-  className:string;
-  subjectId:number;
-  subjectName:string;
-  topicId:number;
+  classId: number;
+  className: string;
+  subjectId: number;
+  subjectName: string;
+  topicId: number;
   topicName: string;
-  
+
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
     private Activatedroute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private _location: Location
   ) {
     this.addNotesForm = this.fb.group({
       noteHeading: ["", Validators.required],
@@ -42,9 +44,11 @@ export class AddNotesComponent implements OnInit {
       this.topicName = params["topicName"];
     });
   }
+
   get f() {
     return this.addNotesForm.controls;
   }
+
   addNotes(): void {
     const notes = this.addNotesForm.value;
     this.store.dispatch(
@@ -68,5 +72,9 @@ export class AddNotesComponent implements OnInit {
         view: true,
       },
     });
+  }
+
+  navigateToBack(event: boolean): void {
+    this._location.back();
   }
 }
