@@ -25,7 +25,6 @@ export function profileReducer(state = profile, action: AuthActionsUnion): any {
     case AuthActions.FETCHED_PROFILE:
       return {
         userDetails: action.payload.profile,
-        email: action.payload.email,
       };
     default:
       return state;

@@ -13,7 +13,7 @@ import { Router } from "@angular/router";
 import { NotesListType } from "src/app/store/notes/types/notes.type";
 import { SyllabusListType } from "src/app/store/syllabus-tranform/types/syllabus.type";
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
-import { SelectedClassDetailsType } from "../types/accordion.type";
+import { SelectedClassDetailsType } from "../accordion/types/accordion.type";
 
 @Component({
   selector: "app-common-sample-syllabus",
@@ -25,7 +25,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
   @Input() name: string;
   @Input() user: string;
   @Output() subjectsOfClassChildEvent = new EventEmitter();
-  selectedClassDetails;
+  selectedClassDetails: SelectedClassDetailsType[];
   selectedClassName: string;
   selectedClassId: number;
   resultForNotes: NotesListType[];

@@ -3,7 +3,10 @@ import { Routes, RouterModule } from "@angular/router";
 import { StudentComponent } from "./student.component";
 import { StudentLandingPageComponent } from "./student-landing-page/student-landing-page.component";
 import { StudentRoutesEnum } from "./student-routes.constants";
+import { StudentSyllabusComponent } from "./student-syllabus/student-syllabus.component";
+import { StudentSamplePaperComponent } from "./student-sample-paper/student-sample-paper.component";
 import { StudentProfileComponent } from "./student-profile/student-profile.component";
+import { ViewNotesComponent } from "../+student/view-notes/view-notes.component";
 
 const routes: Routes = [
   {
@@ -14,6 +17,15 @@ const routes: Routes = [
       {
         path: StudentRoutesEnum.PROFILE,
         component: StudentProfileComponent,
+      },
+      { path: StudentRoutesEnum.SYLLABUS, component: StudentSyllabusComponent },
+      {
+        path: StudentRoutesEnum.VIEW_SAMPLE_PAPER,
+        component: StudentSamplePaperComponent,
+      },
+      {
+        path: StudentRoutesEnum.NOTES,
+        component: ViewNotesComponent,
       },
     ],
   },

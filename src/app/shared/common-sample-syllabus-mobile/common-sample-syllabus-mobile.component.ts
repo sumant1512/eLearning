@@ -20,6 +20,7 @@ import { Router } from "@angular/router";
 import { NotesListType } from "../../store/notes/types/notes.type";
 import { SyllabusListType } from "../../store/syllabus-tranform/types/syllabus.type";
 import { SamplePaperListType } from "../../store/sample-paper/types/sample-paper.type";
+import { SelectedClassDetailsType } from "../accordion/types/accordion.type";
 
 @Component({
   selector: "app-common-sample-syllabus-mobile",
@@ -36,7 +37,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   @Input() name: string;
   @Input() user: string;
   @Output() subjectsOfClassChildEvent = new EventEmitter();
-  selectedClassDetails;
+  selectedClassDetails: SelectedClassDetailsType[];
   selectedClassName: string;
   selectedClassId: number;
   resultForNotes: NotesListType[];

@@ -20,15 +20,18 @@ export class NotesBoardComponent implements OnInit {
   ngOnInit(): void {
     this.checkUser();
   }
+
   checkUser(): void {
     const userType = localStorage.getItem("user_type");
     if (userType === "Admin") {
       this.isStudent = false;
     }
   }
+
   close(): void {
     this.childEvent.emit(false);
   }
+
   goBack(): void {
     this.router.navigateByUrl("admin/syllabus");
   }

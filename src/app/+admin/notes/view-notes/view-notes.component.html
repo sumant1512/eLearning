@@ -19,29 +19,6 @@
     [noteDescription]="noteArray[0].note_desc"
   ></app-notes-board>
 
-  <!-- <div class="blackboard container mt-5">
-    <div *ngIf="!loaded" class="d-flex align-items-center text-white m-2">
-      <strong>Loading...</strong>
-      <div class="spinner-border ml-auto"></div>
-    </div>
-    <div *ngIf="loaded" class="mt-1 outer">
-      <div class="board">
-        <h4 class="d-flex text-center text-white p-2 mt-0" aria-hidden="true">
-          <b>
-            View Your Notes Here For Class {{ className }} in
-            {{ subjectName }} and topic {{ topicName }} !
-          </b>
-        </h4>
-        <p>
-          <label *ngIf="loaded">Title: {{ noteArray[0].note_heading }}</label>
-        </p>
-        <p>
-          <label>Description : </label>
-        </p>
-        <p class="text-white" *ngIf="loaded">{{ noteArray[0].note_desc }}</p>
-      </div>
-    </div>
-  </div> -->
   <div
     class="modal fade"
     id="modalUpdateData"

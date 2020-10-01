@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { SelectedClassDetailsType } from "./types/accordion.type";
 
 @Component({
   selector: "app-accordion",
@@ -6,7 +7,15 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
   styleUrls: ["./accordion.component.css"],
 })
 export class AccordionComponent implements OnInit {
-  @Input() selectedClassDetails;
+  selectedClassDetails: SelectedClassDetailsType;
+  loaded: boolean;
+  @Input("selectedClassDetails") set setSelectedClassDetails(data: any) {
+    if (data) {
+      this.loaded = true;
+      this.selectedClassDetails = data;
+      console.log(data);
+    }
+  }
   @Input() name: string;
   @Input() hasNote: boolean;
   @Output() removeChildEvent = new EventEmitter<number>();
@@ -45,6 +54,7 @@ export class AccordionComponent implements OnInit {
       topicId: topicid,
       topicName: topicname,
     };
+    console.log(viewNotesDetails);
     this.viewNotesChildEvent.emit(viewNotesDetails);
   }
   sortByTopicChild(topicId) {
