@@ -3,17 +3,20 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   Output,
 } from "@angular/core";
+import { Subscription } from "rxjs";
+import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { AppState } from "src/app/store/app.state";
-import { Store } from "@ngrx/store";
+import { select, Store } from "@ngrx/store";
+import { AuthService } from "src/app/store/auth/api/auth.service";
+import { userType } from "src/app/store/auth/auth.selectors";
 import { ProfileType } from "../../store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
-import { AuthService } from "src/app/store/auth/api/auth.service";
 import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
-import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { CONSTANTS } from "src/app/+admin/profile/profile.constants";
 import { ImageType } from "./types/common-profile.type";
 
@@ -22,7 +25,7 @@ import { ImageType } from "./types/common-profile.type";
   templateUrl: "./common-profile.component.html",
   styleUrls: ["./common-profile.component.css"],
 })
-export class CommonProfileComponent implements OnInit {
+export class CommonProfileComponent implements OnInit, OnDestroy {
   userProfile: ProfileType;
   @Input("userProfile") set setUserProfile(data: ProfileType) {
     if (data) {
@@ -38,7 +41,10 @@ export class CommonProfileComponent implements OnInit {
   }
   @Output() onImageSelect = new EventEmitter<ImageType>();
   @Output() onSaveImage = new EventEmitter<string>();
+  subscription: Subscription = new Subscription();
   loaded: boolean;
+  isAdmin: boolean;
+  isStudent: boolean;
   toggle: boolean = true;
   uploadBtnControl: boolean = true;
   btnLabel: string = "Sample Paper";
@@ -51,7 +57,6 @@ export class CommonProfileComponent implements OnInit {
   isMobile: boolean = false;
   constructor(
     private store: Store<AppState>,
-    private authService: AuthService,
     private sanitizer: DomSanitizer
   ) {}
   @HostListener("window:resize", ["$event"])
@@ -65,6 +70,7 @@ export class CommonProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.isMobile = window.innerWidth < 991 ? true : false;
+    this.getUserType();
   }
 
   setProfileImage(): string {
@@ -124,6 +130,20 @@ export class CommonProfileComponent implements OnInit {
     this.uploadBtnControl = true;
   }
 
+  getUserType(): void {
+    this.subscription.add(
+      this.store.pipe(select(userType)).subscribe((response) => {
+        if (response === "Admin") {
+          this.isAdmin = true;
+          this.isStudent = false;
+        } else if (response === "Student") {
+          this.isStudent = true;
+          this.isAdmin = false;
+        }
+      })
+    );
+  }
+
   // fetchStudentSamplePaperSyllabusData(res): void {
   //   this.store
   //     .select("studentSamplePaperSyllabusList")
@@ -164,4 +184,8 @@ export class CommonProfileComponent implements OnInit {
   //     icon.classList.add("fa-book");
   //   }
   // }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

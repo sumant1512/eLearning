@@ -24,8 +24,24 @@ export class VideoService {
   getVideo(): Observable<any[]> {
     let videoResponse;
     this.store.select("profile").subscribe((response) => {
-      if (response.userDetails.user_id !== null) {
-        if (response.userDetails.user_type === "Admin") {
+      if (response.userDetails.user_type === "Student") {
+        const studentDetails = {
+          schoolId: response.userDetails.user_id,
+          classId: response.userDetails.class_id,
+        };
+        var reqHeader = new HttpHeaders({
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+        });
+        videoResponse = this.http.post<any>(
+          HOST + "getVideosForStudent",
+          studentDetails,
+          {
+            headers: reqHeader,
+          }
+        );
+      } else {
+        {
           var reqHeader = new HttpHeaders({
             "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -33,22 +49,6 @@ export class VideoService {
           videoResponse = this.http.get<any>(HOST + "getVideos", {
             headers: reqHeader,
           });
-        } else {
-          const studentDetails = {
-            schoolId: response.userDetails.user_id,
-            classId: response.userDetails.class_id,
-          };
-          var reqHeader = new HttpHeaders({
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-          });
-          videoResponse = this.http.post<any>(
-            HOST + "getVideosForStudent",
-            studentDetails,
-            {
-              headers: reqHeader,
-            }
-          );
         }
       }
     });

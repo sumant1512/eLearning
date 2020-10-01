@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { SelectedClassDetailsType } from "src/app/shared/accordion/types/accordion.type";
 import { AppState } from "src/app/store/app.state";
+import * as AuthActions from "../../store/auth/auth.actions";
 import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 
 @Component({
@@ -22,8 +23,15 @@ export class StudentSamplePaperComponent implements OnInit {
     this.store.select("profile").subscribe((response) => {
       if (response.userDetails.user_id !== null) {
         this.fetchStudentSamplePaperSyllabusData(response.userDetails);
+      } else {
+        this.fetchUserProfile();
       }
     });
+  }
+
+  fetchUserProfile(): void {
+    const authToken = localStorage.getItem("AUTH_TOKEN");
+    this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
 
   fetchStudentSamplePaperSyllabusData(res): void {

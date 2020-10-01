@@ -1,9 +1,11 @@
 import { Component, OnInit } from "@angular/core";
+import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import { VideoListType } from "src/app/store/video/types/video.type";
 import * as VideoActions from "../../store/video/video.actions";
+import * as AuthActions from "../../store/auth/auth.actions";
 
 @Component({
   selector: "app-view-videos",
@@ -15,18 +17,34 @@ export class ViewVideosComponent implements OnInit {
   selectedTopic: string;
   constructor(
     private store: Store<AppState>,
-    private Activatedroute: ActivatedRoute
+    private Activatedroute: ActivatedRoute,
+    private _location: Location
   ) {}
 
   ngOnInit() {
     this.getQueryParams();
+    this.getUserProfile();
   }
 
   getQueryParams(): void {
     this.Activatedroute.queryParams.subscribe((params) => {
       this.selectedTopic = params["topicId"];
     });
-    this.fetchVideos();
+  }
+
+  getUserProfile(): void {
+    this.store.select("profile").subscribe((response) => {
+      if (!response.userDetails.user_id) {
+        this.fetchUserProfile();
+      } else {
+        this.fetchVideos();
+      }
+    });
+  }
+
+  fetchUserProfile(): void {
+    const authToken = localStorage.getItem("AUTH_TOKEN");
+    this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
 
   fetchVideos(): void {
@@ -38,5 +56,9 @@ export class ViewVideosComponent implements OnInit {
         );
       }
     });
+  }
+
+  back() {
+    this._location.back();
   }
 }
