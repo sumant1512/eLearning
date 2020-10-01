@@ -203,9 +203,7 @@
                 class="col-md-4 border border-top-0 border-bottom-0 border-left-0 p-3 text-center"
               >
                 <h4 class="mt-3">Hobbies</h4>
-                <app-profile-skeleton
-                  Cheight="180"
-                ></app-profile-skeleton>
+                <app-profile-skeleton Cheight="180"></app-profile-skeleton>
                 <!-- <ul *ngIf="loaded" class="hobby list-unstyled">
                   <li class="float-left p-3 text-center">
                     <i class="fa fa-pencil mb-2" aria-hidden="true"></i> <br />
@@ -521,26 +519,7 @@
             <div
               *ngIf="loaded && !userProfile.userDetails.admin_name"
               class="row no-gutters"
-            >
-              <div class="col-12">
-                <app-student-sample-syllabus-view
-                  *ngIf="!isMobile"
-                  [resultForSyllabusAndSamplePaper]="
-                    resultForSyllabusAndSamplePaper
-                  "
-                  [selectedSubjectDetails]="selectedSubjectDetails"
-                  [btnLabel]="btnLabel"
-                ></app-student-sample-syllabus-view>
-                <app-student-sample-syllabus-mobile-view
-                  *ngIf="isMobile"
-                  [resultForSyllabusAndSamplePaper]="
-                    resultForSyllabusAndSamplePaper
-                  "
-                  [selectedSubjectDetails]="selectedSubjectDetails"
-                  [btnLabel]="btnLabel"
-                ></app-student-sample-syllabus-mobile-view>
-              </div>
-            </div>
+            ></div>
           </div>
           <div
             class="tab-pane fade contact-tab"

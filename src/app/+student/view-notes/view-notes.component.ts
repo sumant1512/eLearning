@@ -16,7 +16,6 @@ export class ViewNotesComponent implements OnInit {
   subjectName;
   topicId;
   topicName;
-  showoverlay: true;
   constructor(
     private Activatedroute: ActivatedRoute,
     private store: Store<AppState>,
@@ -51,8 +50,6 @@ export class ViewNotesComponent implements OnInit {
           if (element1.topic_id == this.topicId) {
             this.noteHeading = element1.notes[0].note_heading;
             this.noteDescription = element1.notes[0].note_desc;
-            console.log(this.noteHeading);
-            console.log(this.noteDescription);
           }
         });
       }

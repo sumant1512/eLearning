@@ -134,7 +134,6 @@ export class CommonSampleSyllabusComponent implements OnInit {
     if (confirm("Are You Sure You want to Delete the Topic?")) {
       this.store.dispatch(new TopicActions.DeleteTopic(topicId));
     }
-    console.log(topicId);
   }
 
   addNotes(addNotesDetails): void {
