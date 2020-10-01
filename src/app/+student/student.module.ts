@@ -11,7 +11,7 @@ import { StudentSyllabusComponent } from "./student-syllabus/student-syllabus.co
 import { StudentSamplePaperComponent } from "./student-sample-paper/student-sample-paper.component";
 import { StudentProfileComponent } from "./student-profile/student-profile.component";
 import { ViewNotesComponent } from "./view-notes/view-notes.component";
-import { ViewVideosComponent } from "./view-videos/view-videos.component";
+// import { ViewVideosComponent } from "../shared/view-videos/view-videos.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { ViewVideosComponent } from "./view-videos/view-videos.component";
     StudentSamplePaperComponent,
     StudentProfileComponent,
     ViewNotesComponent,
-    ViewVideosComponent,
+    // ViewVideosComponent,
   ],
   imports: [CommonModule, StudentRoutingModule, SharedModule],
 })
