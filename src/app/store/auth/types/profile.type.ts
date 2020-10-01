@@ -1,6 +1,5 @@
 export interface ProfileType {
   userDetails: UserDetailsType;
-  email: string;
 }
 
 export interface UserDetailsType {
@@ -21,4 +20,6 @@ export interface UserDetailsType {
   last_updated_on: string;
   address: string;
   student_profile_picture?: string;
+  user_type: string;
+  email: string;
 }
