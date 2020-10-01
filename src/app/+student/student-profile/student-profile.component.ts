@@ -22,7 +22,6 @@ export class StudentProfileComponent implements OnInit {
     this.store.select("profile").subscribe((response) => {
       if (response.userDetails.user_id !== null) {
         this.studentProfile = response;
-        console.log(response);
       }
     });
   }

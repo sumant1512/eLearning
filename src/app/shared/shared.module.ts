@@ -10,13 +10,11 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ProfileSkeletonComponent } from "./profile-skeleton/profile-skeleton.component";
 import { CommonProfileComponent } from "./common-profile/common-profile.component";
 import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mobile/common-sample-syllabus-mobile.component";
-import { StudentSampleSyllabusViewComponent } from "./student-sample-syllabus-view/student-sample-syllabus-view.component";
 import { GenericDialogComponent } from "./generic-dialog/generic-dialog.component";
-import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-syllabus-mobile-view/student-sample-syllabus-mobile-view.component";
 import { NotesBoardComponent } from "./notes-board/notes-board.component";
 import { VideosPanelComponent } from "./videos-panel/videos-panel.component";
 import { AccordionComponent } from "./accordion/accordion.component";
-import { CommonSampleSyllabusComponent } from './common-sample-syllabus/common-sample-syllabus.component';
+import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
 
 @NgModule({
   declarations: [
@@ -27,9 +25,7 @@ import { CommonSampleSyllabusComponent } from './common-sample-syllabus/common-s
     ProfileSkeletonComponent,
     CommonProfileComponent,
     CommonSampleSyllabusMobileComponent,
-    StudentSampleSyllabusViewComponent,
     GenericDialogComponent,
-    StudentSampleSyllabusMobileViewComponent,
     NotesBoardComponent,
     VideosPanelComponent,
     AccordionComponent,

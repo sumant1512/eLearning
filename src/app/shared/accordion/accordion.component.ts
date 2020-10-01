@@ -13,7 +13,6 @@ export class AccordionComponent implements OnInit {
     if (data) {
       this.loaded = true;
       this.selectedClassDetails = data;
-      console.log(data);
     }
   }
   @Input() name: string;
