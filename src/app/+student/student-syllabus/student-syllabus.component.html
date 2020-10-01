@@ -1,6 +1,8 @@
-<app-accordion
-  [name]="name"
-  [selectedClassDetails]="selectedClassDetails"
-  (viewNotesChildEvent)="navigateToNotes($event)"
-  (viewVideoRecorderChildEvent)="navigateToVideos($event)"
-></app-accordion>
+<div class="container mt-3 mt-md-4 mt-lg-5">
+  <app-accordion
+    [name]="name"
+    [selectedClassDetails]="selectedClassDetails"
+    (viewNotesChildEvent)="navigateToNotes($event)"
+    (viewVideoRecorderChildEvent)="navigateToVideos($event)"
+  ></app-accordion>
+</div>
