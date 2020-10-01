@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { VideoListType } from "src/app/store/video/types/video.type";
 
 @Component({
@@ -7,9 +8,18 @@ import { VideoListType } from "src/app/store/video/types/video.type";
   styleUrls: ["./videos-panel.component.css"],
 })
 export class VideosPanelComponent implements OnInit {
-  @Input() videoList: VideoListType[];
+  videoList: VideoListType[];
+  loaded: boolean;
+  @Input("videoList") set setvideoList(data: any) {
+    if (data) {
+      this.loaded = true;
+      this.videoList = data;
+      console.log(data);
+      this.expandvideo(0);
+    }
+  }
   selectedVideo: number;
-  constructor() {}
+  constructor(private Activatedroute: ActivatedRoute) {}
 
   ngOnInit() {}
 
