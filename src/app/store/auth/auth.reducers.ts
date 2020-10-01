@@ -15,8 +15,9 @@ const profile: ProfileType = {
     created_on: "",
     last_updated_on: "",
     address: "",
+    email: "",
+    user_type: "",
   },
-  email: "",
 };
 
 export function profileReducer(state = profile, action: AuthActionsUnion): any {
