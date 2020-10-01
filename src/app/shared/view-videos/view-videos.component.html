@@ -12,4 +12,7 @@
   </div>
 </div>
 
-<app-videos-panel [videoList]="videos"></app-videos-panel>
+<app-videos-panel
+  [videoList]="videos"
+  (removeVideoId)="removeVideo($event)"
+></app-videos-panel>

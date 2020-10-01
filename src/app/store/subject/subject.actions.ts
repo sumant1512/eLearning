@@ -26,6 +26,7 @@ export class DeleteSubject implements Action {
   readonly type = SubjectActions.DELETE_SUBJECT;
   constructor(public payload: any) {}
 }
+
 export class AssignSubject implements Action {
   readonly type = SubjectActions.ASSIGN_SUBJECT;
   constructor(public payload: any) {}

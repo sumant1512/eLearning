@@ -54,4 +54,13 @@ export class VideoService {
     });
     return videoResponse;
   }
+
+  removeVideo(id: number) {
+    return this.http.delete<any>(HOST + `removeVideo/${id}`, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+  }
 }
