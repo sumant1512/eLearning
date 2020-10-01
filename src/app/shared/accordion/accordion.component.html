@@ -1,3 +1,17 @@
+<div class="text-center">
+  <h2>{{ name }}</h2>
+</div>
+
+<div *ngIf="!loaded">
+  <div
+    class="mb-2"
+    style="border: 2px solid white"
+    *ngFor="let i of [].constructor(3)"
+  >
+    <app-profile-skeleton Cheight="86"></app-profile-skeleton>
+  </div>
+</div>
+
 <div id="accordion" *ngIf="loaded">
   <div
     class="card mb-2"
