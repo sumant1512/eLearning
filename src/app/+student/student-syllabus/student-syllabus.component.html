@@ -1,5 +1,6 @@
 <app-accordion
   [name]="name"
   [selectedClassDetails]="selectedClassDetails"
-  (viewNotesChildEvent)="showNotes($event)"
+  (viewNotesChildEvent)="navigateToNotes($event)"
+  (viewVideoRecorderChildEvent)="navigateToVideos($event)"
 ></app-accordion>

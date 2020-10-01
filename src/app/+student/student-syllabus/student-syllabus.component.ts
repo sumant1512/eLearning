@@ -54,12 +54,20 @@ export class StudentSyllabusComponent implements OnInit {
       });
   }
 
-  showNotes(notes) {
+  navigateToNotes(notes) {
     this.router.navigate(["student/notes"], {
       queryParams: {
         subjectName: notes.subjectName,
         topicId: notes.topicId,
         topicName: notes.topicName,
+      },
+    });
+  }
+
+  navigateToVideos(videos) {
+    this.router.navigate(["student/videos"], {
+      queryParams: {
+        topicId: videos,
       },
     });
   }
