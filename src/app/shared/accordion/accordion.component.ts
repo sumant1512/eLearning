@@ -1,4 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
+import { AppState } from "src/app/store/app.state";
+import { userType } from "src/app/store/auth/auth.selectors";
 import { SelectedClassDetailsType } from "./types/accordion.type";
 
 @Component({
@@ -24,13 +28,32 @@ export class AccordionComponent implements OnInit {
   @Output() uploadVideoRecorderChildEvent = new EventEmitter<number>();
   @Output() viewVideoRecorderChildEvent = new EventEmitter<number>();
   @Output() unassignSubjectChildEvent = new EventEmitter<number>();
+  subscription: Subscription = new Subscription();
+  isAdmin: boolean;
+  isStudent: boolean;
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUserType();
+  }
 
   getStatus(): boolean {
     return this.name === "Sample Paper" ? false : true;
+  }
+
+  getUserType(): void {
+    this.subscription.add(
+      this.store.pipe(select(userType)).subscribe((response) => {
+        if (response === "Admin") {
+          this.isAdmin = true;
+          this.isStudent = false;
+        } else if (response === "Student") {
+          this.isStudent = true;
+          this.isAdmin = false;
+        }
+      })
+    );
   }
 
   remove(topicId) {
@@ -56,15 +79,19 @@ export class AccordionComponent implements OnInit {
     console.log(viewNotesDetails);
     this.viewNotesChildEvent.emit(viewNotesDetails);
   }
+
   sortByTopicChild(topicId) {
     this.sortByTopicChildEvent.emit(topicId);
   }
+
   navigateToVideoRecorderChild(topicId) {
     this.uploadVideoRecorderChildEvent.emit(topicId);
   }
+
   navigateToViewVideoChild(topicId) {
     this.viewVideoRecorderChildEvent.emit(topicId);
   }
+
   unassignSubjectChild(subjectId) {
     this.unassignSubjectChildEvent.emit(subjectId);
   }

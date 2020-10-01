@@ -29,6 +29,10 @@
   color: rgba(238, 238, 238, 0.7);
 }
 
+.close-btn{
+  padding-bottom: 2rem;
+}
+
 @media only screen and (min-width: 30px) and (max-width: 767px) {
   .description {
     font-size: 14px;
