@@ -13,8 +13,8 @@ export interface SelectedClassDetailsType {
 export interface SubjectsOfTopicAndSamplePapertype {
   subject_id: number;
   subject_name: string;
-  topics: TopicType[];
-  samplePapers: SamplePapersType[];
+  topics?: TopicType[];
+  samplePapers?: SamplePapersType[];
 }
 
 export interface SamplePapersType {
@@ -25,4 +25,11 @@ export interface SamplePapersType {
 export interface TopicType {
   topic_id: number;
   topic_name: string;
+  notes?: NotesType[];
+}
+
+export interface NotesType {
+  note_desc: string;
+  note_heading: string;
+  note_id: number;
 }

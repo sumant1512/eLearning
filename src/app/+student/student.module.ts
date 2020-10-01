@@ -10,10 +10,11 @@ import { SharedModule } from '../shared/shared.module';
 import { StudentSyllabusComponent } from './student-syllabus/student-syllabus.component';
 import { StudentSamplePaperComponent } from './student-sample-paper/student-sample-paper.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
+import { ViewNotesComponent } from './view-notes/view-notes.component';
 
 
 @NgModule({
-  declarations: [StudentComponent, StudentHeaderComponent, StudentFooterComponent, StudentLandingPageComponent, StudentSyllabusComponent, StudentSamplePaperComponent, StudentProfileComponent],
+  declarations: [StudentComponent, StudentHeaderComponent, StudentFooterComponent, StudentLandingPageComponent, StudentSyllabusComponent, StudentSamplePaperComponent, StudentProfileComponent, ViewNotesComponent],
   imports: [
     CommonModule,
     StudentRoutingModule,

@@ -22,4 +22,6 @@ export interface UserDetailsType {
   student_profile_picture?: string;
   user_type: string;
   email: string;
+  class_id?: number;
+  student_id?: number;
 }
