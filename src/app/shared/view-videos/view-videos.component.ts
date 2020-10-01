@@ -58,6 +58,12 @@ export class ViewVideosComponent implements OnInit {
     });
   }
 
+  removeVideo(id: number): void {
+    if (confirm("Are You Sure You want to Delete the Video?")) {
+      this.store.dispatch(new VideoActions.DeleteVideo(id));
+    }
+  }
+
   back() {
     this._location.back();
   }

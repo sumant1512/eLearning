@@ -76,17 +76,16 @@
             Cwidth="400"
             Cheight="32"
           ></app-profile-skeleton>
-
-          <h2 *ngIf="loaded" class="text-white font-weight-bold">
+          <h2 *ngIf="loaded && isStudent" class="text-white font-weight-bold">
             {{
-              userProfile.userDetails.admin_name
-                ? userProfile.userDetails.admin_name
-                : userProfile.userDetails.first_name +
-                  " " +
-                  userProfile.userDetails.last_name +
-                  "/ Class " +
-                  userProfile.userDetails.class_name
+              userProfile.userDetails.first_name +
+                " " +
+                userProfile.userDetails.last_name
             }}
+            / Class {{ userProfile.userDetails.class_name }}
+          </h2>
+          <h2 *ngIf="loaded && isAdmin" class="text-white font-weight-bold">
+            {{ userProfile.userDetails.admin_name }}
           </h2>
           <app-profile-skeleton
             *ngIf="!loaded"

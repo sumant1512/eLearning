@@ -1,5 +1,9 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { select, Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
+import { AppState } from "src/app/store/app.state";
+import { userType } from "src/app/store/auth/auth.selectors";
 import { VideoListType } from "src/app/store/video/types/video.type";
 
 @Component({
@@ -18,12 +22,36 @@ export class VideosPanelComponent implements OnInit {
       this.expandvideo(0);
     }
   }
+  @Output() removeVideoId = new EventEmitter<number>();
   selectedVideo: number;
-  constructor(private Activatedroute: ActivatedRoute) {}
+  subscription: Subscription = new Subscription();
+  isAdmin: boolean;
+  isStudent: boolean;
+  constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUserType();
+  }
+
+  getUserType(): void {
+    this.subscription.add(
+      this.store.pipe(select(userType)).subscribe((response) => {
+        if (response === "Admin") {
+          this.isAdmin = true;
+          this.isStudent = false;
+        } else if (response === "Student") {
+          this.isStudent = true;
+          this.isAdmin = false;
+        }
+      })
+    );
+  }
 
   expandvideo(index: number) {
     this.selectedVideo = index;
+  }
+
+  removeVideoEmit(id: number) {
+    this.removeVideoId.emit(id);
   }
 }
