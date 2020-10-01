@@ -55,7 +55,6 @@ export class ViewNotesComponent implements OnInit {
       if (Object.keys(response).length) {
         this.resultForNotes = response;
         this.fetchNotes();
-        
       } else {
         this.store.dispatch(new NotesActions.FetchNotes());
       }

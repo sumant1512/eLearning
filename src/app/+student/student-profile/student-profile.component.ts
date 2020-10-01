@@ -18,12 +18,10 @@ export class StudentProfileComponent implements OnInit {
   }
 
   getUserProfile(): void {
+    this.fetchUserProfile();
     this.store.select("profile").subscribe((response) => {
       if (response.userDetails.user_id !== null) {
         this.studentProfile = response;
-        console.log(response);
-      } else {
-        this.fetchUserProfile();
       }
     });
   }

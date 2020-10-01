@@ -9,7 +9,7 @@ export function schoolRegisterForm() {
   return new FormGroup({
     schoolName: new FormControl("", [Validators.required]),
     adminName: new FormControl("", [Validators.required]),
-
+    schoolType: new FormControl("", [Validators.required]),
     adminAdhar: new FormControl("", [
       Validators.required,
       Validators.pattern("^[0-9]{12}$"),
@@ -32,7 +32,7 @@ export function schoolRegisterForm() {
     password: new FormControl("", [
       Validators.required,
       Validators.pattern(
-        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+        "^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$"
       ),
     ]),
     confirmPassword: new FormControl("", [Validators.required]),

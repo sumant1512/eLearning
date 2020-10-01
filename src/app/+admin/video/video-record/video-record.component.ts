@@ -119,6 +119,7 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
         topicId: this.topicId,
         media: this.encryptedVideo,
       };
+      this.store.dispatch(new VideoActions.AddVideo(data));
     } else {
       this.recordRTC.getDataURL((dataUrl) => {
         data = {
@@ -126,9 +127,9 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
           topicId: this.topicId,
           media: dataUrl,
         };
+        this.store.dispatch(new VideoActions.AddVideo(data));
       });
     }
-    this.store.dispatch(new VideoActions.AddVideo(data));
   }
 
   onVideoSelect(event: any) {

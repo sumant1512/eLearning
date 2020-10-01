@@ -27,10 +27,10 @@
                     </h5></a
                   >
                 </li>
-                 <div *ngIf="!(resultForSyllabus || resultForSamperPaper)">
-                    <li class="p-2 nav-link" *ngFor="let i of [].constructor(8)">
-                      <app-profile-skeleton  Cheight="40"></app-profile-skeleton>
-                    </li>
+                <div *ngIf="!(resultForSyllabus || resultForSamperPaper)">
+                  <li class="p-2 nav-link" *ngFor="let i of [].constructor(8)">
+                    <app-profile-skeleton Cheight="40"></app-profile-skeleton>
+                  </li>
                 </div>
               </ul>
             </div>
@@ -51,142 +51,20 @@
                     <p class="text-center">Subjects not available.</p>
                     <p></p>
                   </div>
-
-                  <div id="accordion">
-                    <div
-                      class="card mb-2"
-                      *ngFor="
-                        let subject of selectedClassDetails[0].subjects;
-                        let index = index
-                      "
-                    >
-                      <a
-                        class="inside card-link collapsed text-white"
-                        data-toggle="collapse"
-                        href="#collapse{{ index }}"
-                      >
-                        <div class="card-header border-bottom-0 border-left">
-                          {{ subject.subject_name | titlecase }}
-                        </div>
-                      </a>
-                      <div
-                        id="collapse{{ index }}"
-                        class="collapse"
-                        data-parent="#accordion"
-                      >
-                        <div class="card-body">
-                          <div
-                            [hidden]="
-                              (subject.topics || subject.samplePapers).length >=
-                              1
-                            "
-                          >
-                            <p class="text-center">{{ name }} not available.</p>
-                          </div>
-                          <ul
-                            [hidden]="!getStatus()"
-                            *ngFor="let topic of subject.topics"
-                          >
-                            <li>
-                              {{ topic.topic_name }}
-                              <span>
-                                <i
-                                  (click)="removeTopic(topic.topic_id)"
-                                  class="ml-2 fa fa-trash"
-                                  title="Delete Topic"
-                                >
-                                </i
-                              ></span>
-                              <div class="dropdown float-right">
-                                <button
-                                  class="dropbtn btn btn-primary"
-                                  (mouseover)="
-                                    sortByTopic(
-                                      topic.topic_id
-                                    )
-                                  "
-                                >
-                                  Notes
-                                  <i
-                                    class="fa fa-sticky-note"
-                                    aria-hidden="true"
-                                  ></i>
-                                </button>
-                                <div class="dropdown-content p-2">
-                                  <button
-                                    class="btn btn-danger btn-block"
-                                    [disabled]="hasNote"
-                                    (click)="
-                                    addNotes(
-                                      subject.subject_id,
-                                      subject.subject_name,
-                                      topic.topic_id,
-                                      topic.topic_name
-                                    )
-                                  "
-                                  >
-                                    Add Notes<i class="fa fa-plus ml-2"> </i>
-                                  </button>
-                                  <button class="btn btn-danger btn-block"
-                                    [disabled]="!hasNote" 
-                                    (click)="
-                                    viewNotes(
-                                      subject.subject_name,
-                                      topic.topic_id,
-                                      topic.topic_name
-                                    )
-                                  ">
-                                    View Notes<i class="fa fa-eye ml-2"> </i>
-                                  </button>
-                                  <button
-                                    class="btn btn-danger btn-block p-1"
-                                    (click)="navigateToVideoRecorder(topic.topic_id)"
-                                  >
-                                    Upload Video<i class="fa fa-upload ml-1"> </i>
-                                  </button>
-                                  <button
-                                  class="btn btn-danger btn-block"
-                                  (click)=" navigateToViewVideo( topic.topic_id)"
-                                >
-                                  View Video<i class="fa fa-play-circle-o ml-2"> </i>
-                                </button>
-                                  
-                                </div>
-                              </div>
-
-                            </li>
-                          </ul>
-                          <ul
-                            [hidden]="getStatus()"
-                            *ngFor="let paper of subject.samplePapers"
-                          >
-                            <li>
-                              {{ paper.sample_paper_name }}
-                              <a
-                                class="btn btn-secondary ml-2"
-                                href="{{ paper.sample_paper_url }}"
-                                target="_blank"
-                              >
-                                View
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                      <button
-                        class="btn btn-light"
-                        [disabled]="
-                          (subject.topics || subject.samplePapers).length >= 1
-                        "
-                      >
-                        <i
-                          (click)="unassignSubject(subject.subject_id)"
-                          class="fa fa-minus-circle"
-                        >
-                        </i>
-                      </button>
-                    </div>
-                  </div>
+                  <app-accordion
+                    [selectedClassDetails]="selectedClassDetails"
+                    [name]="name"
+                    [hasNote]="hasNote"
+                    (addNotesChildEvent)="addNotes($event)"
+                    (viewNotesChildEvent)="viewNotes($event)"
+                    (sortByTopicChildEvent)="sortByTopic($event)"
+                    (uploadVideoRecorderChildEvent)="
+                      navigateToVideoRecorder($event)
+                    "
+                    (viewVideoRecorderChildEvent)="navigateToViewVideo($event)"
+                    (removeChildEvent)="removeTopic($event)"
+                    (unassignSubjectChildEvent)="unassignSubject($event)"
+                  ></app-accordion>
                 </div>
               </div>
             </div>

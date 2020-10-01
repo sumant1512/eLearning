@@ -2,13 +2,13 @@
 <div class="container-fluid bg-cover">
   <div class="display d-flex justify-content-center pt-4 pb-4">
     <div
-      class="br-20 formSlide col-md-7 shadow animate__animated animate__bounceInDown"
-      style="background-color: white;"
+      class="br-20 formSlide col-md-7 shadow animate_animated animate_bounceInDown"
+      style="background-color: white"
     >
       <div class="row">
         <div class="card-body">
           <div class="col-sm-3offset-sm-2">
-            <p class="h2 text-center" style="margin-bottom: 15px;">
+            <p class="h2 text-center" style="margin-bottom: 15px">
               Registration
             </p>
             <form [formGroup]="schoolRegisterForm">
@@ -36,34 +36,34 @@
                   </div>
                 </div>
               </div>
-
-              <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                  <span class="input-group-text" id="basic-addon1"
-                    ><i class="fa fa-user" aria-hidden="true"></i
-                  ></span>
-                </div>
-                <input
-                  type="text"
-                  placeholder="Admin Name"
-                  formControlName="adminName"
-                  class="form-control"
-                  [ngClass]="{
-                    'is-invalid': f.adminName.touched && f.adminName.errors
-                  }"
-                />
-                <div
-                  *ngIf="f.adminName.touched && f.adminName.errors"
-                  class="invalid-feedback"
-                >
-                  <div class="ml-5" *ngIf="f.adminName.errors.required">
-                    Admin Name is required*
+              <div class="form-row">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"
+                        ><i class="fa fa-user" aria-hidden="true"></i
+                      ></span>
+                    </div>
+                    <input
+                      type="text"
+                      placeholder="Admin Name"
+                      formControlName="adminName"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': f.adminName.touched && f.adminName.errors
+                      }"
+                    />
+                    <div
+                      *ngIf="f.adminName.touched && f.adminName.errors"
+                      class="invalid-feedback"
+                    >
+                      <div class="ml-5" *ngIf="f.adminName.errors.required">
+                        Admin Name is required*
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">
@@ -94,7 +94,44 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">
+                        <i class="fa fa-book" aria-hidden="true"></i
+                      ></span>
+                    </div>
+
+                    <select
+                      type="text"
+                      placeholder="School Type"
+                      formControlName="schoolType"
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid':
+                          f.schoolType.touched && f.schoolType.errors
+                      }"
+                    >
+                      <option value="" disabled selected>
+                        Select School Type
+                      </option>
+                      <option value="cbse">CBSE</option>
+                      <option value="mp">MP Board</option>
+                      <option value="icse">ICSE</option>
+                    </select>
+                    <div
+                      *ngIf="f.schoolType.touched && f.schoolType.errors"
+                      class="invalid-feedback"
+                    >
+                      <div class="ml-5" *ngIf="f.schoolType.errors.required">
+                        School Type is required*
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">
@@ -159,7 +196,7 @@
               </div>
 
               <div class="form-row">
-                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">
@@ -195,7 +232,7 @@
                   </div>
                 </div>
 
-                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">
@@ -238,7 +275,7 @@
               </div>
 
               <div class="form-row">
-                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">
@@ -270,7 +307,7 @@
                   </div>
                 </div>
 
-                <div class="form-group col-md-6" style="margin-bottom: 1px;">
+                <div class="form-group col-md-6" style="margin-bottom: 1px">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">
@@ -313,7 +350,7 @@
               <button
                 type="submit"
                 class="btn btn-primary btn-lg btn-block"
-                style="background-color: #3664b7; margin-bottom: 8px;"
+                style="background-color: #3664b7; margin-bottom: 8px"
                 value="Register"
                 data-toggle="modal"
                 data-target="#staticBackdrop"

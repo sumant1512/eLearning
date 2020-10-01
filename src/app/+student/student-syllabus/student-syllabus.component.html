@@ -1,1 +1,6 @@
-<p>student-syllabus works!</p>
+<app-accordion
+  [name]="name"
+  [selectedClassDetails]="selectedClassDetails"
+  (viewNotesChildEvent)="navigateToNotes($event)"
+  (viewVideoRecorderChildEvent)="navigateToVideos($event)"
+></app-accordion>

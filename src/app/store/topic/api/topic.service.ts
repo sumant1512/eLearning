@@ -19,7 +19,7 @@ export class TopicService {
   }
 
   getAllTopics(): Observable<any[]> {
-    return this.http.get<any[]>(HOST + "getAllTopics", {
+    return this.http.get<any[]>(HOST + "getTopics", {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
@@ -44,6 +44,4 @@ export class TopicService {
       }),
     });
   }
-
- 
 }

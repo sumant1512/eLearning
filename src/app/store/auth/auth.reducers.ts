@@ -15,8 +15,9 @@ const profile: ProfileType = {
     created_on: "",
     last_updated_on: "",
     address: "",
+    email: "",
+    user_type: "",
   },
-  email: "",
 };
 
 export function profileReducer(state = profile, action: AuthActionsUnion): any {
@@ -24,7 +25,6 @@ export function profileReducer(state = profile, action: AuthActionsUnion): any {
     case AuthActions.FETCHED_PROFILE:
       return {
         userDetails: action.payload.profile,
-        email: action.payload.email,
       };
     default:
       return state;

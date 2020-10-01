@@ -7,15 +7,15 @@ import { CommonAddComponent } from "./common-add/common-add.component";
 import { CommonViewComponent } from "./common-view/common-view.component";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
 import { ProfileSkeletonComponent } from "./profile-skeleton/profile-skeleton.component";
 import { CommonProfileComponent } from "./common-profile/common-profile.component";
 import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mobile/common-sample-syllabus-mobile.component";
-import { StudentSampleSyllabusViewComponent } from "./student-sample-syllabus-view/student-sample-syllabus-view.component";
 import { GenericDialogComponent } from "./generic-dialog/generic-dialog.component";
-import { StudentSampleSyllabusMobileViewComponent } from "./student-sample-syllabus-mobile-view/student-sample-syllabus-mobile-view.component";
 import { NotesBoardComponent } from "./notes-board/notes-board.component";
 import { VideosPanelComponent } from "./videos-panel/videos-panel.component";
+import { AccordionComponent } from "./accordion/accordion.component";
+import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
+import { ViewVideosComponent } from "./view-videos/view-videos.component";
 
 @NgModule({
   declarations: [
@@ -23,27 +23,29 @@ import { VideosPanelComponent } from "./videos-panel/videos-panel.component";
     PrivacyPolicyComponent,
     CommonAddComponent,
     CommonViewComponent,
-    CommonSampleSyllabusComponent,
     ProfileSkeletonComponent,
     CommonProfileComponent,
     CommonSampleSyllabusMobileComponent,
-    StudentSampleSyllabusViewComponent,
     GenericDialogComponent,
-    StudentSampleSyllabusMobileViewComponent,
     NotesBoardComponent,
     VideosPanelComponent,
+    AccordionComponent,
+    CommonSampleSyllabusComponent,
+    ViewVideosComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
     CommonAddComponent,
     CommonViewComponent,
-    CommonSampleSyllabusComponent,
     CommonProfileComponent,
     CommonSampleSyllabusMobileComponent,
+    CommonSampleSyllabusComponent,
     ProfileSkeletonComponent,
     GenericDialogComponent,
     NotesBoardComponent,
     VideosPanelComponent,
+    AccordionComponent,
+    ViewVideosComponent,
   ],
 })
 export class SharedModule {}

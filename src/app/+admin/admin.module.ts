@@ -27,7 +27,6 @@ import { ViewNotesComponent } from "./notes/view-notes/view-notes.component";
 import { SearchPipe } from "../shared/pipe/search.pipe";
 import { VideoComponent } from "./video/video.component";
 import { VideoRecordComponent } from "./video/video-record/video-record.component";
-import { ViewVideoComponent } from "./video/view-video/view-video.component";
 import { StudentListComponent } from "./student-list/student-list.component";
 import { ViewStudentComponent } from "./student-list/view-student/view-student.component";
 import { AddStudentComponent } from "./student-list/add-student/add-student.component";
@@ -58,7 +57,6 @@ import { AddStudentComponent } from "./student-list/add-student/add-student.comp
     ViewNotesComponent,
     SearchPipe,
     VideoComponent,
-    ViewVideoComponent,
     StudentListComponent,
   ],
   imports: [

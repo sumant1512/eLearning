@@ -201,7 +201,30 @@
         </div>
       </div>
       <div class="row">
-        <div class="mb-3 col-12 col-md-6">
+        <div class="mb-3 col-12 col-md-4">
+          <input
+            formControlName="scholarNumber"
+            type="text"
+            class="form-control"
+            placeholder="Scholar Number"
+            [ngClass]="{
+              'is-invalid': f.scholarNumber.touched && f.scholarNumber.invalid
+            }"
+          />
+          <div
+            *ngIf="
+              (f.scholarNumber.touched || f.scholarNumber.dirty) &&
+              f.scholarNumber.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.scholarNumber.errors.required">Enter Scholar Number</div>
+            <div *ngIf="f.scholarNumber.errors.pattern && f.scholarNumber.touched">
+              Enter a valid scholar number
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 col-12 col-md-4">
           <select
             class="form-control"
             formControlName="gender"
@@ -221,7 +244,7 @@
             <div *ngIf="f.gender.errors.required">Select Gender</div>
           </div>
         </div>
-        <div class="mb-3 col-12 col-md-6">
+        <div class="mb-3 col-12 col-md-4">
           <input
             formControlName="mobile"
             type="text"

@@ -1,0 +1,8 @@
+.video-box {
+  height: 155px;
+  object-fit: cover;
+}
+
+video {
+  object-fit: cover;
+}
