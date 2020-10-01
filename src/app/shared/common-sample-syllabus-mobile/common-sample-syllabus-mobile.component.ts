@@ -34,6 +34,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   public hide: boolean = false;
   addForm: FormGroup;
   @Input() name: string;
+  @Input() user: string;
   @Output() subjectsOfClassChildEvent = new EventEmitter();
   selectedClassDetails;
   selectedClassName: string;
@@ -57,7 +58,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.getStatus()) {
+    if (this.name === "Sample Paper") {
       this.fetchSamplePaperTransform();
     } else {
       this.fetchSyllabusTransform();
@@ -69,17 +70,13 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     this.isAddSamplePaperFormOpen = !this.isAddSamplePaperFormOpen;
   }
 
-  getStatus(): boolean {
-    return this.name === "Sample Paper" ? false : true;
-  }
-
   selectClass(classId, className) {
     setTimeout(() => {
       this.hide = true;
     }, 1000);
     this.selectedClassName = className;
     this.selectedClassId = classId;
-    if (this.getStatus() && this.resultForSyllabus !== undefined)
+    if (this.name === "Syllabus" && this.resultForSyllabus !== undefined)
       this.selectedClassDetails = this.resultForSyllabus.filter(
         (data) => data.class_id === classId
       );
@@ -119,7 +116,7 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     });
   }
 
-  unassignSubject(subjectId) {
+  unassignSubject(subjectId): void {
     this.subjectService
       .unAssignSubjectToClass({ subjectId, classId: this.selectedClassId })
       .subscribe((response) => {
@@ -131,9 +128,9 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
       });
   }
 
-  removeTopic(topic_id) {
+  removeTopic(topicId): void {
     if (confirm("Are You Sure You want to Delete the Topic?")) {
-      this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
+      this.store.dispatch(new TopicActions.DeleteTopic(topicId));
     }
   }
 
@@ -178,39 +175,41 @@ export class CommonSampleSyllabusMobileComponent implements OnInit {
     });
   }
 
-  addNotes(subject_id, subject_name, topic_id, topic_name) {
+  addNotes(addNotesDetails): void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
         className: this.selectedClassName,
-        subjectId: subject_id,
-        subjectName: subject_name,
-        topicId: topic_id,
-        topicName: topic_name,
+        subjectId: addNotesDetails.subjectId,
+        subjectName: addNotesDetails.subjectName,
+        topicId: addNotesDetails.topicId,
+        topicName: addNotesDetails.topicName,
         view: !this.viewValue,
       },
     });
   }
 
-  viewNotes(subject_name, topic_id, topic_name) {
+  viewNotes(viewNotesDetails): void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
+        classId: this.selectedClassId,
         className: this.selectedClassName,
-        subjectName: subject_name,
-        topicId: topic_id,
-        topicName: topic_name,
+        subjectName: viewNotesDetails.subjectName,
+        topicId: viewNotesDetails.topicId,
+        topicName: viewNotesDetails.topicName,
         view: this.viewValue,
       },
     });
   }
 
-  sortNotesByTopic(topicId): void {
+  sortByTopic(topicId): void {
     this.noteArray = this.resultForNotes.filter(
       (data) => data.topic_id == topicId
     );
     if (this.noteArray.length < 1) this.hasNote = false;
     else this.hasNote = true;
   }
+
   navigateToVideoRecorder(topicId): void {
     this.router.navigate(["/admin/video"], {
       queryParams: {

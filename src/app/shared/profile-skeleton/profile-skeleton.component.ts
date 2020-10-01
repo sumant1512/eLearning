@@ -8,12 +8,14 @@ import { Component, OnInit, Input } from "@angular/core";
 export class ProfileSkeletonComponent implements OnInit {
   @Input() Cwidth;
   @Input() Cheight;
+  @Input() message: string;
   @Input() circle: boolean;
   @Input() outline: boolean;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   getMyStyles() {
     const myStyles = {

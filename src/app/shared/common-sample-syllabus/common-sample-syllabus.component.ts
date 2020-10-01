@@ -8,12 +8,12 @@ import * as TopicActions from "../../store/topic/topic.actions";
 import * as SyllabusActions from "../../store/syllabus-tranform/syllabus.actions";
 import * as NotesActions from "../../store/notes/notes.actions";
 import * as SamplePaperTransformActions from "../../store/sample-paper-transform/sample-paper-transform.actions";
-import * as VideoActions from "../../store/video/video.actions";
 import { SubjectService } from "../../store/subject/api/subject.service";
 import { Router } from "@angular/router";
 import { NotesListType } from "src/app/store/notes/types/notes.type";
 import { SyllabusListType } from "src/app/store/syllabus-tranform/types/syllabus.type";
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
+import { SelectedClassDetailsType } from "../types/accordion.type";
 
 @Component({
   selector: "app-common-sample-syllabus",
@@ -23,6 +23,7 @@ import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-pap
 export class CommonSampleSyllabusComponent implements OnInit {
   addForm: FormGroup;
   @Input() name: string;
+  @Input() user: string;
   @Output() subjectsOfClassChildEvent = new EventEmitter();
   selectedClassDetails;
   selectedClassName: string;
@@ -37,6 +38,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
   noteArray: NotesListType[];
   hasNote: boolean;
   httpClient: any;
+  toggleState: boolean;
 
   constructor(
     private store: Store<AppState>,
@@ -47,13 +49,14 @@ export class CommonSampleSyllabusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.getStatus()) {
+    if (this.name === "Sample Paper") {
       this.fetchSamplePaperTransform();
     } else {
       this.fetchSyllabusTransform();
     }
     this.fetchNotesList();
   }
+
   fetchNotesList() {
     this.store.select("notesList").subscribe((response) => {
       if (Object.keys(response).length) {
@@ -68,10 +71,6 @@ export class CommonSampleSyllabusComponent implements OnInit {
     this.isAddSamplePaperFormOpen = !this.isAddSamplePaperFormOpen;
   }
 
-  getStatus(): boolean {
-    return this.name === "Sample Paper" ? false : true;
-  }
-
   getStatusNotes(): boolean {
     return this.name === "Notes" ? false : true;
   }
@@ -79,7 +78,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
   selectClass(classId, className): void {
     this.selectedClassName = className;
     this.selectedClassId = classId;
-    if (this.getStatus() && this.resultForSyllabus !== undefined) {
+    if (this.name === "Syllabus" && this.resultForSyllabus !== undefined) {
       this.selectedClassDetails = this.resultForSyllabus.filter(
         (data) => data.class_id === classId
       );
@@ -131,34 +130,35 @@ export class CommonSampleSyllabusComponent implements OnInit {
       });
   }
 
-  removeTopic(topic_id): void {
+  removeTopic(topicId): void {
     if (confirm("Are You Sure You want to Delete the Topic?")) {
-      this.store.dispatch(new TopicActions.DeleteTopic(topic_id));
+      this.store.dispatch(new TopicActions.DeleteTopic(topicId));
     }
+    console.log(topicId);
   }
 
-  addNotes(subject_id, subject_name, topic_id, topic_name): void {
+  addNotes(addNotesDetails): void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
         className: this.selectedClassName,
-        subjectId: subject_id,
-        subjectName: subject_name,
-        topicId: topic_id,
-        topicName: topic_name,
+        subjectId: addNotesDetails.subjectId,
+        subjectName: addNotesDetails.subjectName,
+        topicId: addNotesDetails.topicId,
+        topicName: addNotesDetails.topicName,
         view: !this.viewValue,
       },
     });
   }
 
-  viewNotes(subject_name, topic_id, topic_name): void {
+  viewNotes(viewNotesDetails): void {
     this.router.navigate(["admin/notes"], {
       queryParams: {
         classId: this.selectedClassId,
         className: this.selectedClassName,
-        subjectName: subject_name,
-        topicId: topic_id,
-        topicName: topic_name,
+        subjectName: viewNotesDetails.subjectName,
+        topicId: viewNotesDetails.topicId,
+        topicName: viewNotesDetails.topicName,
         view: this.viewValue,
       },
     });
@@ -173,25 +173,21 @@ export class CommonSampleSyllabusComponent implements OnInit {
   }
 
   navigateToVideoRecorder(topicId): void {
-    this.router.navigate(["/admin/video"],{
+    this.router.navigate(["/admin/video"], {
       queryParams: {
-        classId:this.selectedClassId,
+        classId: this.selectedClassId,
         topicId,
         view: !this.viewValue,
-
       },
     });
   }
 
-  navigateToViewVideo(topicId):void{
-      this.router.navigate(["/admin/video"],{
+  navigateToViewVideo(topicId): void {
+    this.router.navigate(["/admin/video"], {
       queryParams: {
         topicId,
         view: this.viewValue,
-       
       },
     });
-   
   }
-
 }

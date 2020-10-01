@@ -1,1 +1,5 @@
-<div [ngStyle]="getMyStyles()" class="skelt-load loader"></div>
+<div [ngStyle]="getMyStyles()" class="skelt-load loader">
+  <div *ngIf="meesage">
+    {{ message }}
+  </div>
+</div>
