@@ -1,0 +1,36 @@
+#men {
+    top: 0;
+  }
+  #men.cus-nav {
+    position: sticky;
+    -webkit-animation: 0.7s slide-down;
+    animation: 0.7s slide-down;
+    z-index: 2;
+  }
+  
+  @-webkit-keyframes slide-down {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 0.9;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 0.9;
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+  }
+  

@@ -18,7 +18,6 @@ export class VideosPanelComponent implements OnInit {
     if (data) {
       this.loaded = true;
       this.videoList = data;
-      console.log(data);
       this.expandvideo(0);
     }
   }

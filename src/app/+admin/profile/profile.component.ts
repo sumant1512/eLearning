@@ -38,13 +38,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   getUserProfile(): void {
+    this.fetchUserProfile();
     this.subscription.add(
       this.store.select("profile").subscribe((response) => {
         if (response.userDetails.user_id !== null) {
           this.adminProfile = response;
-        } else {
-          this.fetchUserProfile();
-        }
+        } 
       })
     );
   }

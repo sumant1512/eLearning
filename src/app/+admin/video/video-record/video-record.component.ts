@@ -4,6 +4,7 @@ import {
   AfterViewInit,
   ElementRef,
   OnInit,
+  OnDestroy,
 } from "@angular/core";
 import * as RecordRTC from "recordrtc";
 import { ActivatedRoute } from "@angular/router";
@@ -12,13 +13,14 @@ import { AppState } from "src/app/store/app.state";
 import * as VideoActions from "../../../store/video/video.actions";
 import { FormGroup } from "@angular/forms";
 import { addVideoForm } from "./add-video,utils";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-video-record",
   templateUrl: "./video-record.component.html",
   styleUrls: ["./video-record.component.css"],
 })
-export class VideoRecordComponent implements AfterViewInit, OnInit {
+export class VideoRecordComponent implements AfterViewInit, OnInit, OnDestroy {
   @ViewChild("video", { static: false }) video: ElementRef;
   addVideoForm: FormGroup;
   private stream = new MediaStream();
@@ -28,6 +30,7 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
   classId: number;
   topicId: number;
   encryptedVideo: string;
+  subscription: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
     private Activatedroute: ActivatedRoute
@@ -40,10 +43,12 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
   }
 
   readQueryParams(): void {
-    this.Activatedroute.queryParams.subscribe((params) => {
-      this.classId = params["classId"];
-      this.topicId = params["topicId"];
-    });
+    this.subscription.add(
+      this.Activatedroute.queryParams.subscribe((params) => {
+        this.classId = params["classId"];
+        this.topicId = params["topicId"];
+      })
+    );
   }
 
   ngAfterViewInit(): void {
@@ -144,5 +149,9 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
 
   uploadVideo() {
     this.saveVideo("upload");
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

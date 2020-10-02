@@ -76,7 +76,6 @@ export class AccordionComponent implements OnInit {
       topicId: topicid,
       topicName: topicname,
     };
-    console.log(viewNotesDetails);
     this.viewNotesChildEvent.emit(viewNotesDetails);
   }
 

@@ -6,6 +6,7 @@ import * as AuthActions from "../../store/auth/auth.actions";
 import { FormGroup } from "@angular/forms";
 import { schoolEditForm } from "./settings.utils";
 import { AuthService } from "src/app/store/auth/api/auth.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-settings",
@@ -15,6 +16,7 @@ import { AuthService } from "src/app/store/auth/api/auth.service";
 export class SettingsComponent implements OnInit {
   adminProfile: any;
   schoolEditForm: FormGroup;
+  subscription: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
     private authService: AuthService
@@ -25,19 +27,21 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.getUserProfile();
   }
+
   get f() {
     return this.schoolEditForm.controls;
   }
+
   getUserProfile(): void {
-    this.store.select("profile").subscribe((response) => {
-      if (response.userDetails.user_id) {
-        this.adminProfile = response["userDetails"];
-        this.setValues();
-      } else {
-        const authToken = localStorage.getItem("AUTH_TOKEN");
-        this.store.dispatch(new AuthActions.FetchProfile(authToken));
-      }
-    });
+    this.fetchUserProfile();
+    this.subscription.add(
+      this.store.select("profile").subscribe((response) => {
+        if (response.userDetails.user_id) {
+          this.adminProfile = response["userDetails"];
+          this.setValues();
+        }
+      })
+    );
   }
 
   updateSchool() {
@@ -54,11 +58,12 @@ export class SettingsComponent implements OnInit {
       });
     this.schoolEditForm.markAsPristine();
   }
+
   fetchUserProfile() {
     const authToken = localStorage.getItem("AUTH_TOKEN");
     this.store.dispatch(new AuthActions.FetchProfile(authToken));
-    this.setValues();
   }
+
   setValues(): void {
     this.schoolEditForm.patchValue({
       schoolName: this.adminProfile.school_name,

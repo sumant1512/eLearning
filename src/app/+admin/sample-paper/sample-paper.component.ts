@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   HostListener,
+  OnDestroy,
 } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
@@ -11,13 +12,14 @@ import * as SamplePaperActions from "../../store/sample-paper/sample-paper.actio
 import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-paper.type";
 import { ClassListType } from "src/app/store/class/types/class.type";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-sample-paper",
   templateUrl: "./sample-paper.component.html",
   styleUrls: ["./sample-paper.component.css"],
 })
-export class SamplePaperComponent implements OnInit {
+export class SamplePaperComponent implements OnInit, OnDestroy {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   isMobile = false;
   isAddClassFormOpen = false;
@@ -25,6 +27,7 @@ export class SamplePaperComponent implements OnInit {
   classList: ClassListType[];
   subjectList: SubjectListType[];
   samplePaperList: SamplePaperListType[];
+  subscription: Subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {}
 
@@ -41,18 +44,20 @@ export class SamplePaperComponent implements OnInit {
     this.isMobile = window.innerWidth < 991 ? true : false;
     this.fetchsamplePaperList();
   }
+
   openAddClassForm() {
     this.isAddClassFormOpen = true;
   }
 
   fetchsamplePaperList(): void {
-    this.store.select("samplePaperList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.samplePaperList = response;
-      } else {
-        this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
-      }
-    });
+    this.store.dispatch(new SamplePaperActions.FetchSamplePaper());
+    this.subscription.add(
+      this.store.select("samplePaperList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.samplePaperList = response;
+        }
+      })
+    );
   }
 
   addSamplePaper(samplePaperDetails): void {
@@ -90,7 +95,6 @@ export class SamplePaperComponent implements OnInit {
       icon.classList.remove("fa-angle-double-down");
       icon.classList.add("fa-angle-double-up");
     }
-
   }
 
   formToggle(action) {
@@ -99,5 +103,9 @@ export class SamplePaperComponent implements OnInit {
     } else {
       this.slider.nativeElement.classList.remove("show");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
