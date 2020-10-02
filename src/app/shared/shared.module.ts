@@ -16,6 +16,7 @@ import { VideosPanelComponent } from "./videos-panel/videos-panel.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
 import { ViewVideosComponent } from "./view-videos/view-videos.component";
+import { ContentNotFoundComponent } from "./content-not-found/content-not-found.component";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ViewVideosComponent } from "./view-videos/view-videos.component";
     AccordionComponent,
     CommonSampleSyllabusComponent,
     ViewVideosComponent,
+    ContentNotFoundComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -46,6 +48,7 @@ import { ViewVideosComponent } from "./view-videos/view-videos.component";
     VideosPanelComponent,
     AccordionComponent,
     ViewVideosComponent,
+    ContentNotFoundComponent,
   ],
 })
 export class SharedModule {}
