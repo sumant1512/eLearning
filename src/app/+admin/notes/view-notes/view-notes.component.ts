@@ -19,12 +19,10 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
   topicId: number;
   noteArray: NotesListType[];
   resultForNotes: NotesListType[];
-  loaded: boolean = false;
+  loaded: boolean;
   className: string;
   subjectName: string;
   topicName: string;
-  heading: string;
-  description: string;
   hasNoNote: boolean = true;
   subsctiption: Subscription = new Subscription();
   constructor(
@@ -69,9 +67,17 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
     this.noteArray = this.resultForNotes.filter(
       (data) => data.topic_id == this.topicId
     );
-    if (this.noteArray.length == 1) {
-      this.heading = this.noteArray[0].note_heading;
-      this.description = this.noteArray[0].note_desc;
+    if (this.noteArray.length) {
+      this.editNotesForm.patchValue({
+        noteHeading: this.noteArray[0].note_heading,
+        noteDesc: this.noteArray[0].note_desc,
+      });
+      this.loaded = true;
+    } else {
+      this.noteArray.push({
+        note_heading: "Comming Soon",
+        note_desc: "Comming Soon",
+      });
       this.loaded = true;
     }
   }

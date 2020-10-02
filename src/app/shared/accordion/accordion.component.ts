@@ -4,6 +4,7 @@ import { Subscription } from "rxjs";
 import { AppState } from "src/app/store/app.state";
 import { userType } from "src/app/store/auth/auth.selectors";
 import { SelectedClassDetailsType } from "./types/accordion.type";
+import * as AuthActions from "../../store/auth/auth.actions";
 
 @Component({
   selector: "app-accordion",
@@ -20,6 +21,7 @@ export class AccordionComponent implements OnInit {
     }
   }
   @Input() name: string;
+  @Input() selectedClassName: string;
   @Input() hasNote: boolean;
   @Output() removeChildEvent = new EventEmitter<number>();
   @Output() addNotesChildEvent = new EventEmitter();
@@ -35,11 +37,28 @@ export class AccordionComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.getUserType();
+    this.getUserProfile();
   }
 
   getStatus(): boolean {
     return this.name === "Sample Paper" ? false : true;
+  }
+
+  getUserProfile(): void {
+    this.subscription.add(
+      this.store.select("profile").subscribe((response) => {
+        if (!response.userDetails.user_id) {
+          this.fetchUserProfile();
+        } else {
+          this.getUserType();
+        }
+      })
+    );
+  }
+
+  fetchUserProfile(): void {
+    const authToken = localStorage.getItem("AUTH_TOKEN");
+    this.store.dispatch(new AuthActions.FetchProfile(authToken));
   }
 
   getUserType(): void {

@@ -25,6 +25,7 @@
   </div>
 </div>
 <app-notes-board
+  *ngIf="loaded"
   [className]="className"
   [subjectName]="subjectName"
   [topicName]="topicName"
@@ -59,7 +60,6 @@
                 type="text"
                 formControlName="noteHeading"
                 class="form-control"
-                [(ngModel)]="heading"
                 [ngClass]="{
                   'is-invalid': f.noteHeading.touched && f.noteHeading.errors
                 }"
@@ -83,7 +83,6 @@
                 class="form-control"
                 rows="5"
                 style="height: 100%"
-                [(ngModel)]="description"
                 [ngClass]="{
                   'is-invalid': f.noteDesc.touched && f.noteDesc.errors
                 }"
