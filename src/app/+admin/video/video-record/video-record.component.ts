@@ -1,7 +1,6 @@
 import {
   Component,
   ViewChild,
-  AfterViewInit,
   ElementRef,
   OnInit,
   OnDestroy,
@@ -20,12 +19,14 @@ import { Subscription } from "rxjs";
   templateUrl: "./video-record.component.html",
   styleUrls: ["./video-record.component.css"],
 })
-export class VideoRecordComponent implements AfterViewInit, OnInit, OnDestroy {
+export class VideoRecordComponent implements OnInit, OnDestroy {
   @ViewChild("video", { static: false }) video: ElementRef;
   addVideoForm: FormGroup;
   private stream = new MediaStream();
   private recordRTC: any;
   toggle: boolean = false;
+  isRecordAndSave: boolean;
+  isBrowseAndSave: boolean;
   toggleDownload: boolean = true;
   classId: number;
   topicId: number;
@@ -49,14 +50,6 @@ export class VideoRecordComponent implements AfterViewInit, OnInit, OnDestroy {
         this.topicId = params["topicId"];
       })
     );
-  }
-
-  ngAfterViewInit(): void {
-    // set the initial state of the video
-    let video: HTMLVideoElement = this.video.nativeElement;
-    video.muted = false;
-    video.controls = true;
-    video.autoplay = false;
   }
 
   toggleControls() {
@@ -134,6 +127,16 @@ export class VideoRecordComponent implements AfterViewInit, OnInit, OnDestroy {
         };
         this.store.dispatch(new VideoActions.AddVideo(data));
       });
+    }
+  }
+
+  recordAndSave(event): void {
+    if (event === "record") {
+      this.isRecordAndSave = true;
+      this.isBrowseAndSave = false;
+    } else if (event === "browse") {
+      this.isRecordAndSave = false;
+      this.isBrowseAndSave = true;
     }
   }
 
