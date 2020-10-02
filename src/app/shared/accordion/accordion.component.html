@@ -4,12 +4,9 @@
       <div
         class="text-center mb-2 text-lg-left bg-core-blue text-light font-weight-bold card-header"
       >
+        <span *ngIf="selectedClassName">{{ selectedClassName }}</span>
         {{ name }}
       </div>
-
-      <!-- <div class="text-center">
-        <h2>{{ name }}</h2>
-      </div> -->
 
       <div *ngIf="!loaded">
         <div

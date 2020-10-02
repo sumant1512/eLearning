@@ -18,6 +18,7 @@ import { appReducers } from "./store/app.reducers";
 import { AppEffects } from "./store/app.effects";
 import { ResetPasswordModule } from "./+reset-password/reset-password.module";
 import { StudentModule } from "./+student/student.module";
+import { SuperAdminModule } from './+super-admin/super-admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,6 +38,7 @@ import { StudentModule } from "./+student/student.module";
     }),
     ResetPasswordModule,
     StudentModule,
+    SuperAdminModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

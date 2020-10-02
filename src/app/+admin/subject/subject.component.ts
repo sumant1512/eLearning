@@ -4,24 +4,27 @@ import {
   ViewChild,
   ElementRef,
   HostListener,
+  OnDestroy,
 } from "@angular/core";
 import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import * as SubjectActions from "../../store/subject/subject.actions";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
 import { SubjectService } from "src/app/store/subject/api/subject.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-subject",
   templateUrl: "./subject.component.html",
   styleUrls: ["./subject.component.css"],
 })
-export class SubjectComponent implements OnInit {
+export class SubjectComponent implements OnInit, OnDestroy {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   subjectList: SubjectListType[];
   isMobile = false;
   isSliderOpen = false;
   isAddClassFormOpen = false;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private store: Store<AppState>,
@@ -47,13 +50,14 @@ export class SubjectComponent implements OnInit {
   }
 
   fetchSubjects(): void {
-    this.store.select("subjectList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.subjectList = response;
-      } else {
-        this.store.dispatch(new SubjectActions.FetchSubject());
-      }
-    });
+    this.store.dispatch(new SubjectActions.FetchSubject());
+    this.subscription.add(
+      this.store.select("subjectList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.subjectList = response;
+        }
+      })
+    );
   }
 
   addSubject(name): void {
@@ -104,7 +108,6 @@ export class SubjectComponent implements OnInit {
       icon.classList.remove("fa-angle-double-down");
       icon.classList.add("fa-angle-double-up");
     }
-
   }
 
   formToggle(action) {
@@ -113,5 +116,9 @@ export class SubjectComponent implements OnInit {
     } else {
       this.slider.nativeElement.classList.remove("show");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

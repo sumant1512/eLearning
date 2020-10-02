@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -6,25 +6,25 @@ import { AppState } from "src/app/store/app.state";
 import * as NotesActions from "../../../store/notes/notes.actions";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { NotesListType } from "src/app/store/notes/types/notes.type";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-view-notes",
   templateUrl: "./view-notes.component.html",
   styleUrls: ["./view-notes.component.css"],
 })
-export class ViewNotesComponent implements OnInit {
+export class ViewNotesComponent implements OnInit, OnDestroy {
   editNotesForm: FormGroup;
   classId: number;
   topicId: number;
   noteArray: NotesListType[];
   resultForNotes: NotesListType[];
-  loaded: boolean = false;
+  loaded: boolean;
   className: string;
   subjectName: string;
   topicName: string;
-  heading: string;
-  description: string;
   hasNoNote: boolean = true;
+  subsctiption: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
@@ -52,23 +52,32 @@ export class ViewNotesComponent implements OnInit {
   }
 
   fetchNotesList(): void {
-    this.store.select("notesList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.resultForNotes = response;
-        this.fetchNotes();
-      } else {
-        this.store.dispatch(new NotesActions.FetchNotes());
-      }
-    });
+    this.store.dispatch(new NotesActions.FetchNotes());
+    this.subsctiption.add(
+      this.store.select("notesList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.resultForNotes = response;
+          this.fetchNotes();
+        }
+      })
+    );
   }
 
   fetchNotes(): void {
     this.noteArray = this.resultForNotes.filter(
       (data) => data.topic_id == this.topicId
     );
-    if (this.noteArray.length == 1) {
-      this.heading = this.noteArray[0].note_heading;
-      this.description = this.noteArray[0].note_desc;
+    if (this.noteArray.length) {
+      this.editNotesForm.patchValue({
+        noteHeading: this.noteArray[0].note_heading,
+        noteDesc: this.noteArray[0].note_desc,
+      });
+      this.loaded = true;
+    } else {
+      this.noteArray.push({
+        note_heading: "Comming Soon",
+        note_desc: "Comming Soon",
+      });
       this.loaded = true;
     }
   }
@@ -95,5 +104,9 @@ export class ViewNotesComponent implements OnInit {
 
   navigateToBack(event: boolean): void {
     this._location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.subsctiption.unsubscribe();
   }
 }

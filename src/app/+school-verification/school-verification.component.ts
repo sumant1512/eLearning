@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, AbstractControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { otpVerificationForm } from "./school--verification.utils";
+import { otpVerificationForm } from "./school-verification.utils";
 import { VerificationService } from "../store/services/verification.service";
 
 @Component({
