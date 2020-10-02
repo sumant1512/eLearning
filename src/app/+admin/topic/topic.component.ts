@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   HostListener,
+  OnDestroy,
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Store } from "@ngrx/store";
@@ -13,13 +14,14 @@ import * as TopicActions from "../../store/topic/topic.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
 import { TopicListType } from "src/app/store/topic/types/topic.type";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-topic",
   templateUrl: "./topic.component.html",
   styleUrls: ["./topic.component.css"],
 })
-export class TopicComponent implements OnInit {
+export class TopicComponent implements OnInit, OnDestroy {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   addTopicForm: FormGroup;
   topicList: TopicListType[];
@@ -27,6 +29,7 @@ export class TopicComponent implements OnInit {
   isSliderOpen = false;
   isMobile = false;
   isAddClassFormOpen = false;
+  subscription: Subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {}
 
@@ -49,11 +52,10 @@ export class TopicComponent implements OnInit {
   }
 
   fetchTopics(): void {
+    this.store.dispatch(new TopicActions.FetchTopic());
     this.store.select("topicList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.topicList = response;
-      } else {
-        this.store.dispatch(new TopicActions.FetchTopic());
       }
     });
   }
@@ -77,7 +79,6 @@ export class TopicComponent implements OnInit {
     }
   }
 
-
   sliderOpen() {
     this.isSliderOpen = true;
     var element = this.slider.nativeElement.classList.toggle("show");
@@ -90,13 +91,17 @@ export class TopicComponent implements OnInit {
       icon.classList.remove("fa-angle-double-down");
       icon.classList.add("fa-angle-double-up");
     }
-
   }
+
   formToggle(action) {
     if (action === "open") {
       this.slider.nativeElement.classList.add("show");
     } else {
       this.slider.nativeElement.classList.remove("show");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

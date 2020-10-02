@@ -4,30 +4,29 @@ import {
   ViewChild,
   ElementRef,
   HostListener,
+  OnDestroy,
 } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as ClassActions from "../../store/class/class.actions";
 import { ClassListType } from "src/app/store/class/types/class.type";
-import { WindowServiceService } from "src/app/store/services/window-service.service";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-class",
   templateUrl: "./class.component.html",
   styleUrls: ["./class.component.css"],
 })
-export class ClassComponent implements OnInit {
+export class ClassComponent implements OnInit, OnDestroy {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   classList: ClassListType[];
   isMobile = false;
   isTablet;
   isSliderOpen = false;
   isAddClassFormOpen;
+  subsctiption: Subscription = new Subscription();
 
-  constructor(
-    private store: Store<AppState>,
-    private windowService: WindowServiceService
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   @HostListener("window:resize", ["$event"])
   onResize(event) {
@@ -48,13 +47,14 @@ export class ClassComponent implements OnInit {
   }
 
   fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.classList = response;
-      } else {
-        this.store.dispatch(new ClassActions.FetchClass());
-      }
-    });
+    this.store.dispatch(new ClassActions.FetchClass());
+    this.subsctiption.add(
+      this.store.select("classList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.classList = response;
+        }
+      })
+    );
   }
 
   addClass(name): void {
@@ -99,5 +99,9 @@ export class ClassComponent implements OnInit {
     } else {
       this.slider.nativeElement.classList.remove("show");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subsctiption.unsubscribe();
   }
 }

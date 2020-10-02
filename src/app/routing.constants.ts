@@ -7,4 +7,5 @@ export enum RoutesEnum {
   RESET_PASSWORD = "reset-password",
   ADMIN = "admin",
   STUDENT = "student",
+  SUPER_ADMIN = "super-admin",
 }

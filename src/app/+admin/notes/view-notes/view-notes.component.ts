@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { Store } from "@ngrx/store";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -6,13 +6,14 @@ import { AppState } from "src/app/store/app.state";
 import * as NotesActions from "../../../store/notes/notes.actions";
 import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 import { NotesListType } from "src/app/store/notes/types/notes.type";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-view-notes",
   templateUrl: "./view-notes.component.html",
   styleUrls: ["./view-notes.component.css"],
 })
-export class ViewNotesComponent implements OnInit {
+export class ViewNotesComponent implements OnInit, OnDestroy {
   editNotesForm: FormGroup;
   classId: number;
   topicId: number;
@@ -25,6 +26,7 @@ export class ViewNotesComponent implements OnInit {
   heading: string;
   description: string;
   hasNoNote: boolean = true;
+  subsctiption: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
@@ -52,14 +54,15 @@ export class ViewNotesComponent implements OnInit {
   }
 
   fetchNotesList(): void {
-    this.store.select("notesList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.resultForNotes = response;
-        this.fetchNotes();
-      } else {
-        this.store.dispatch(new NotesActions.FetchNotes());
-      }
-    });
+    this.store.dispatch(new NotesActions.FetchNotes());
+    this.subsctiption.add(
+      this.store.select("notesList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.resultForNotes = response;
+          this.fetchNotes();
+        }
+      })
+    );
   }
 
   fetchNotes(): void {
@@ -95,5 +98,9 @@ export class ViewNotesComponent implements OnInit {
 
   navigateToBack(event: boolean): void {
     this._location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.subsctiption.unsubscribe();
   }
 }
