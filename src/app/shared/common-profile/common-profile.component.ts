@@ -75,14 +75,14 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
 
   setProfileImage(): string {
     let userImage = CONSTANTS.USER_IMAGE;
-    if (this.userProfile.userDetails.student_profile_picture) {
-      userImage =
-        "data:image/png;base64," +
-        this.userProfile.userDetails.student_profile_picture;
-    } else if (this.userProfile.userDetails.admin_profile_picture) {
+    if (this.userProfile.userDetails.admin_profile_picture) {
       userImage =
         "data:image/png;base64," +
         this.userProfile.userDetails.admin_profile_picture;
+    } else if (this.userProfile.userDetails.student_profile_picture) {
+      userImage =
+        "data:image/png;base64," +
+        this.userProfile.userDetails.student_profile_picture;
     } else {
       userImage = CONSTANTS.USER_IMAGE;
     }
@@ -101,10 +101,10 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
       var reader = new FileReader();
       reader.onload = (event: any) => {
         switch (userType) {
-          case "admin":
+          case "user":
             this.userImageUrl = event.target.result;
             imageData = {
-              userType: userType,
+              imageType: this.isAdmin ? "admin" : "student",
               image: event.target.result,
             };
             this.uploadBtnControl = false;
@@ -113,7 +113,7 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
           case "school_image":
             this.schoolImageUrl = event.target.result;
             imageData = {
-              userType: userType,
+              imageType: userType,
               image: event.target.result,
             };
             this.uploadBtnControl = false;

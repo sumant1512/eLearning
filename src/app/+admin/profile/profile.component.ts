@@ -16,7 +16,7 @@ import { Subscription } from "rxjs";
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   adminProfile: ProfileType;
-  selectedImageDetails: Object;
+  selectedImageDetails: ImageType;
   subscription: Subscription = new Subscription();
 
   schoolImageUrl: SafeUrl;
@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.store.select("profile").subscribe((response) => {
         if (response.userDetails.user_id !== null) {
           this.adminProfile = response;
-        } 
+        }
       })
     );
   }
