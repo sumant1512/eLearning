@@ -2,31 +2,27 @@ import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ErrorNotificationService } from "src/app/store/services/error-notification.service";
 
 @Component({
-  selector: "app-generic-dialog",
-  templateUrl: "./generic-dialog.component.html",
-  styleUrls: ["./generic-dialog.component.css"],
+  selector: "app-success-notification",
+  templateUrl: "./success-notification.component.html",
+  styleUrls: ["./success-notification.component.css"],
 })
-export class GenericDialogComponent implements OnInit {
+export class SuccessNotificationComponent implements OnInit {
   @ViewChild("modalDisplay", { static: false }) modalDisplay: ElementRef;
   view: boolean = false;
   message: string = "";
 
   constructor(private errorService: ErrorNotificationService) {
-    this.initializeErrors();
   }
 
   ngOnInit() {
-    this.openDialog();
+    this.initializeSuccess();
   }
 
-  openDialog() {
-  }
-
-  private initializeErrors() {
-    this.errorService.getErrors().subscribe((errors) => {
-      if (errors) {
+  private initializeSuccess() {
+    this.errorService.getSuccess().subscribe((success) => {
+      if (success) {
         this.view = true;
-        this.message = errors;
+        this.message = success;
         document.getElementsByTagName("body")[0].classList.add("modal-open");
       }
     });

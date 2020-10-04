@@ -17,8 +17,9 @@
             <option
               *ngFor="let class of resultForSyllabus"
               value="{{ class.class_id }}"
-              >{{ class.class_name }}</option
             >
+              {{ class.class_name }}
+            </option>
           </select>
         </div>
         <div class="form-group">
@@ -28,12 +29,18 @@
             class="form-control"
           >
             <option disabled>Choose your subject</option>
-            <option *ngIf="subjectList !== undefined && subjectList.length===0" disabled>Subjects not available</option>
             <option
-              *ngFor="let subject of subjectList" 
-              value="{{ subject.subject_id }}"
-              >{{subject.subject_name}}</option 
+              *ngIf="subjectList !== undefined && subjectList.length === 0"
+              disabled
             >
+              Subjects not available
+            </option>
+            <option
+              *ngFor="let subject of subjectList"
+              value="{{ subject.subject_id }}"
+            >
+              {{ subject.subject_name }}
+            </option>
           </select>
         </div>
       </div>
@@ -42,13 +49,15 @@
         <input class="form-control" formControlName="itemName" type="text" />
       </div>
       <div [hidden]="getStatus()">
-        <div  class="form-group">
-           <i   class="charcoal">Sample Paper Url</i>
-             <input class="form-control" id="itemUrl" name="itemUrl" type="text" />
-         </div>
-       </div>
+        <div class="form-group">
+          <i class="charcoal">Sample Paper Url</i>
+          <input class="form-control" id="itemUrl" name="itemUrl" type="text" />
+        </div>
+      </div>
       <div>
-        <button [hidden]="displayStatus()" id="myDIV"
+        <button
+          [hidden]="displayStatus()"
+          id="myDIV"
           [ngClass]="loader ? 'bg-light' : 'bg-core-orange'"
           class="br-10 mx-auto add-btn b-core-orange btn btn-block text-light font-weight-bold py-3 mb-3"
           type="button"

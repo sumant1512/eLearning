@@ -4,9 +4,10 @@ import {
   HttpHandler,
   HttpRequest,
   HttpErrorResponse,
+  HttpResponse,
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { retry, catchError } from "rxjs/operators";
+import { retry, catchError, tap } from "rxjs/operators";
 import { ErrorNotificationService } from "./store/services/error-notification.service";
 
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -16,6 +17,14 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
+      tap((data) => {
+        if (data instanceof HttpResponse) {
+          let successMessage: string;
+          successMessage = "Success";
+          this.errorService.addSuccess(successMessage);
+          return throwError(successMessage);
+        }
+      }),
       retry(1),
       catchError((error: HttpErrorResponse) => {
         let errorMessage = "";
