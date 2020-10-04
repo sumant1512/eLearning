@@ -5,6 +5,7 @@ import {
   OnInit,
   OnDestroy,
 } from "@angular/core";
+import { Location } from "@angular/common";
 import * as RecordRTC from "recordrtc";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -34,7 +35,8 @@ export class VideoRecordComponent implements OnInit, OnDestroy {
   subscription: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
-    private Activatedroute: ActivatedRoute
+    private Activatedroute: ActivatedRoute,
+    private _location: Location
   ) {
     this.addVideoForm = addVideoForm();
   }
@@ -152,6 +154,10 @@ export class VideoRecordComponent implements OnInit, OnDestroy {
 
   uploadVideo() {
     this.saveVideo("upload");
+  }
+
+  navigateToBack(event: boolean): void {
+    this._location.back();
   }
 
   ngOnDestroy(): void {
