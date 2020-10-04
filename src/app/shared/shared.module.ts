@@ -10,13 +10,14 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ProfileSkeletonComponent } from "./profile-skeleton/profile-skeleton.component";
 import { CommonProfileComponent } from "./common-profile/common-profile.component";
 import { CommonSampleSyllabusMobileComponent } from "./common-sample-syllabus-mobile/common-sample-syllabus-mobile.component";
-import { GenericDialogComponent } from "./generic-dialog/generic-dialog.component";
+import { ErrorNotificationDialogComponent } from "./error-notification-dialog/error-notification-dialog.component";
 import { NotesBoardComponent } from "./notes-board/notes-board.component";
 import { VideosPanelComponent } from "./videos-panel/videos-panel.component";
 import { AccordionComponent } from "./accordion/accordion.component";
 import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
 import { ViewVideosComponent } from "./view-videos/view-videos.component";
 import { ContentNotFoundComponent } from "./content-not-found/content-not-found.component";
+import { SuccessNotificationComponent } from './success-notification/success-notification.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +28,14 @@ import { ContentNotFoundComponent } from "./content-not-found/content-not-found.
     ProfileSkeletonComponent,
     CommonProfileComponent,
     CommonSampleSyllabusMobileComponent,
-    GenericDialogComponent,
+    ErrorNotificationDialogComponent,
     NotesBoardComponent,
     VideosPanelComponent,
     AccordionComponent,
     CommonSampleSyllabusComponent,
     ViewVideosComponent,
     ContentNotFoundComponent,
+    SuccessNotificationComponent,
   ],
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   exports: [
@@ -43,7 +45,7 @@ import { ContentNotFoundComponent } from "./content-not-found/content-not-found.
     CommonSampleSyllabusMobileComponent,
     CommonSampleSyllabusComponent,
     ProfileSkeletonComponent,
-    GenericDialogComponent,
+    ErrorNotificationDialogComponent,
     NotesBoardComponent,
     VideosPanelComponent,
     AccordionComponent,

@@ -1,0 +1,38 @@
+<div
+  *ngIf="view"
+  [ngClass]="{ show: view }"
+  class="modal z-inxed-popup"
+  style="display: block"
+  tabindex="-1"
+  role="dialog"
+>
+  <div class="modal-dialog" role="document">
+    <div class="text-center modal-content">
+      <div class="bg-danger text-light modal-header">
+        <h5 class="modal-title"><b>Error</b></h5>
+        <button
+          type="button"
+          class="close text-light"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeModal()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ message }}.</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeModal()"
+          data-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
