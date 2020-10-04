@@ -18,7 +18,7 @@
         <div class="d-flex justify-content-center">
           <div class="col-12 p-2">
             <div (click)="sliderOpen()" class="pointer text-center">
-                 <i id="favIcon" class= "charcoal fa-3x fa fa-angle-double-up"  ></i>
+              <i id="favIcon" class="charcoal fa-3x fa fa-angle-double-up"></i>
             </div>
             <app-common-add
               name="Subject"
@@ -43,7 +43,7 @@
         name="Subject"
         (childEvent)="removeSubject($event)"
         (editChildEvent)="editSubject($event)"
-        (assignClassChildEvent)="getClassesofSubject($event)"
+        (assignClassChildEvent)="assignSubjectToClass($event)"
       ></app-common-view>
     </div>
   </div>
