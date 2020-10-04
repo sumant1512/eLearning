@@ -1,1 +1,5 @@
-<app-common-profile [userProfile]="studentProfile"></app-common-profile>
+<app-common-profile
+  [userProfile]="studentProfile"
+  (onImageSelect)="onImageSelect($event)"
+  (onSaveImage)="saveImage($event)"
+></app-common-profile>
