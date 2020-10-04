@@ -12,6 +12,7 @@ import * as SubjectActions from "../../store/subject/subject.actions";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
 import { SubjectService } from "src/app/store/subject/api/subject.service";
 import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-subject",
@@ -28,7 +29,8 @@ export class SubjectComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router
   ) {}
 
   @HostListener("window:resize", ["$event"])
@@ -83,17 +85,12 @@ export class SubjectComponent implements OnInit, OnDestroy {
     );
   }
 
-  // function to get unassign classes for subject, ******* in future it will be moved to store
-  getClassesofSubject(subjectDetails): void {
-    this.subjectService
-      .assignSubjectToClass(subjectDetails)
-      .subscribe((response) => {
-        if (response["status"]) {
-          alert("subject assinged");
-        } else {
-          alert("Error");
-        }
-      });
+  // function to assign subject to class,
+  assignSubjectToClass(subjectDetails): void {
+    this.store.dispatch(new SubjectActions.AssignSubject(subjectDetails));
+    setTimeout(() => {
+      this.router.navigateByUrl("/admin/syllabus");
+    }, 1000);
   }
 
   sliderOpen() {

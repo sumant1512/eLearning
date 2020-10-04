@@ -10,6 +10,7 @@ import {
 } from "./subject.actions";
 import { mergeMap, map } from "rxjs/operators";
 import { SubjectService } from "./api/subject.service";
+import { FetchSyllabus } from "../syllabus-tranform/syllabus.actions";
 
 @Injectable()
 export class SubjectEffects {
@@ -87,7 +88,7 @@ export class SubjectEffects {
     mergeMap((response) => {
       return response.pipe(
         map((action) => {
-          return new FetchUnAssignedClass(action.payload);
+          return new FetchSyllabus();
         })
       );
     })
