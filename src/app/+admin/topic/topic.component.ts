@@ -62,6 +62,9 @@ export class TopicComponent implements OnInit, OnDestroy {
 
   addTopic(topic): void {
     this.store.dispatch(new TopicActions.AddTopic(topic));
+    setTimeout(() => {
+      this.sliderOpen();
+    }, 1000);
   }
 
   editTopic(editDetails): void {
