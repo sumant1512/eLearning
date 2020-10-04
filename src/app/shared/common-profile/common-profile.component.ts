@@ -47,6 +47,7 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
   isStudent: boolean;
   toggle: boolean = true;
   uploadBtnControl: boolean = true;
+  isSchoolImageBtnDisable: boolean;
   btnLabel: string = "Sample Paper";
   resultForSyllabusAndSamplePaper: SubjectWithTopicAndSamplePaperType[];
   selectedSubjectDetails: SubjectWithTopicAndSamplePaperType[];
@@ -116,7 +117,7 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
               imageType: userType,
               image: event.target.result,
             };
-            this.uploadBtnControl = false;
+            this.isSchoolImageBtnDisable = true;
             this.onImageSelect.emit(imageData);
             break;
         }
