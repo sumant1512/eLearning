@@ -24,4 +24,10 @@ export interface UserDetailsType {
   email: string;
   class_id?: number;
   student_id?: number;
+  mobile_number?: string;
+  school_type?: string;
+  pin_code?: string;
+  city?: string;
+  state?: string;
+  student_address?: string;
 }

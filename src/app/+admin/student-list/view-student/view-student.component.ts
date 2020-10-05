@@ -1,21 +1,23 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { StudentService } from "../../../store/students/api/student.service";
 import { AppState } from "src/app/store/app.state";
 import * as StudentActions from "src/app/store/students/student.actions";
 import * as ClassActions from "../../../store/class/class.actions";
 import { ClassListType } from "../../../store/class/types/class.type";
-import { StudentType } from '../../../store/students/types/student.types';
+import { StudentType } from "../../../store/students/types/student.types";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-view-student",
   templateUrl: "./view-student.component.html",
   styleUrls: ["./view-student.component.css"],
 })
-export class ViewStudentComponent implements OnInit {
-  students:StudentType[]; 
+export class ViewStudentComponent implements OnInit, OnDestroy {
+  students: StudentType[];
   studentName: string;
   classList: ClassListType[];
+  subscription: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
     private studentService: StudentService
@@ -27,13 +29,14 @@ export class ViewStudentComponent implements OnInit {
   }
 
   fetchStudents(): void {
-    this.store.select("students").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.students = response;
-      } else {
-        this.store.dispatch(new StudentActions.FetchStudent());
-      }
-    });
+    this.store.dispatch(new StudentActions.FetchStudent());
+    this.subscription.add(
+      this.store.select("students").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.students = response;
+        }
+      })
+    );
   }
 
   removeStudent(student_id): void {
@@ -53,13 +56,14 @@ export class ViewStudentComponent implements OnInit {
   }
 
   fetchClassList(): void {
-    this.store.select("classList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.classList = response;
-      } else {
-        this.store.dispatch(new ClassActions.FetchClass());
-      }
-    });
+    this.store.dispatch(new ClassActions.FetchClass());
+    this.subscription.add(
+      this.store.select("classList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.classList = response;
+        }
+      })
+    );
   }
 
   changeClass(classId, studentId): void {
@@ -72,5 +76,9 @@ export class ViewStudentComponent implements OnInit {
           alert(response["message"]);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

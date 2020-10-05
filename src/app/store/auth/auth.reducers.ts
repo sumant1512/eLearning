@@ -26,6 +26,8 @@ export function profileReducer(state = profile, action: AuthActionsUnion): any {
       return {
         userDetails: action.payload.profile,
       };
+    case AuthActions.CLEAR_PROFILE:
+      return profile;
     default:
       return state;
   }

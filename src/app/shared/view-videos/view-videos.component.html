@@ -1,1 +1,18 @@
-<app-videos-panel [videoList]="videos"></app-videos-panel>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <button
+        type="button"
+        class="bg-dark-blue btn btn-primary"
+        (click)="back()"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-videos-panel
+  [videoList]="videos"
+  (removeVideoId)="removeVideo($event)"
+></app-videos-panel>

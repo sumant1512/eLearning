@@ -4,28 +4,33 @@ import {
   ViewChild,
   ElementRef,
   HostListener,
+  OnDestroy,
 } from "@angular/core";
 import { AppState } from "src/app/store/app.state";
 import { Store } from "@ngrx/store";
 import * as SubjectActions from "../../store/subject/subject.actions";
 import { SubjectListType } from "src/app/store/subject/types/subject.type";
 import { SubjectService } from "src/app/store/subject/api/subject.service";
+import { Subscription } from "rxjs";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-subject",
   templateUrl: "./subject.component.html",
   styleUrls: ["./subject.component.css"],
 })
-export class SubjectComponent implements OnInit {
+export class SubjectComponent implements OnInit, OnDestroy {
   @ViewChild("slider", { static: false }) slider: ElementRef;
   subjectList: SubjectListType[];
   isMobile = false;
   isSliderOpen = false;
   isAddClassFormOpen = false;
+  subscription: Subscription = new Subscription();
 
   constructor(
     private store: Store<AppState>,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    private router: Router
   ) {}
 
   @HostListener("window:resize", ["$event"])
@@ -47,13 +52,14 @@ export class SubjectComponent implements OnInit {
   }
 
   fetchSubjects(): void {
-    this.store.select("subjectList").subscribe((response) => {
-      if (Object.keys(response).length) {
-        this.subjectList = response;
-      } else {
-        this.store.dispatch(new SubjectActions.FetchSubject());
-      }
-    });
+    this.store.dispatch(new SubjectActions.FetchSubject());
+    this.subscription.add(
+      this.store.select("subjectList").subscribe((response) => {
+        if (Object.keys(response).length) {
+          this.subjectList = response;
+        }
+      })
+    );
   }
 
   addSubject(name): void {
@@ -79,17 +85,12 @@ export class SubjectComponent implements OnInit {
     );
   }
 
-  // function to get unassign classes for subject, ******* in future it will be moved to store
-  getClassesofSubject(subjectDetails): void {
-    this.subjectService
-      .assignSubjectToClass(subjectDetails)
-      .subscribe((response) => {
-        if (response["status"]) {
-          alert("subject assinged");
-        } else {
-          alert("Error");
-        }
-      });
+  // function to assign subject to class,
+  assignSubjectToClass(subjectDetails): void {
+    this.store.dispatch(new SubjectActions.AssignSubject(subjectDetails));
+    setTimeout(() => {
+      this.router.navigateByUrl("/admin/syllabus");
+    }, 1000);
   }
 
   sliderOpen() {
@@ -104,7 +105,6 @@ export class SubjectComponent implements OnInit {
       icon.classList.remove("fa-angle-double-down");
       icon.classList.add("fa-angle-double-up");
     }
-
   }
 
   formToggle(action) {
@@ -113,5 +113,9 @@ export class SubjectComponent implements OnInit {
     } else {
       this.slider.nativeElement.classList.remove("show");
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

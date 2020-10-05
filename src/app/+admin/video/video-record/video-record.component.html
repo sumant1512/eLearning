@@ -1,55 +1,118 @@
-<div>
-  <div class="col-md-12 px-3 mt-3">
-    <video
-      #video
-      class="video"
-      controls=""
-      style="width: -webkit-fill-available; height: auto"
-    ></video>
+<div class="container-fluid">
+  <div class="row">
+    <div class="mt-3 text-center text-md-left col-12">
+      <button
+        type="button"
+        class="bg-dark-blue btn btn-primary"
+        (click)="navigateToBack(true)"
+      >
+        Back
+      </button>
+    </div>
   </div>
 </div>
-<div>
-  <div class="px-3 m-1">
-    <button
-      md-raised-button
-      [disabled]="toggle"
-      class="btn btn-primary m-2"
-      (click)="startRecording()"
-    >
-      Record
-    </button>
-    <button
-      md-raised-button
-      [disabled]="!toggle"
-      class="btn btn-danger m-2"
-      (click)="stopRecording()"
-    >
-      Stop
-    </button>
-    <button
-      md-raised-button
-      [disabled]="toggleDownload"
-      class="btn btn-success m-2"
-      (click)="download()"
-    >
-      Download
-    </button>
-    <button
-      md-raised-button
-      [disabled]="toggleDownload"
-      class="btn btn-warning m-2"
-      (click)="saveVideo('record')"
-    >
-      Upload
-    </button>
-    <form [formGroup]="addVideoForm">
-      <input
-        type="file"
-        accept="video/mp4,image/png,image/jpeg"
-        formControlName="video"
-        (change)="onVideoSelect($event)"
-      />
-      <button type="button" (click) = "uploadVideo()">Save</button>
-    </form>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3 text-center">
+      <button
+        class="upload-btn mr-md-3 mb-3 mb-md-0 br-10 bg-core-orange btn text-light font-weight-bold py-3"
+        type="button"
+        (click)="recordAndSave('browse')"
+      >
+        Browse and Upload
+      </button>
+      <button
+        class="upload-btn mb-3 mb-md-0 br-10 bg-core-orange btn text-light font-weight-bold py-3"
+        type="button"
+        (click)="recordAndSave('record')"
+      >
+        Record and Upload
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isRecordAndSave">
+  <div class="container">
+    <div class="row mt-md-5">
+      <div class="col-12 mt-3">
+        <video
+          #video
+          class="video"
+          controls=""
+          style="width: -webkit-fill-available; height: auto"
+        ></video>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <button
+          class="w-100 mr-md-3 mb-3 mb-md-0 br-10 bg-core-blue btn text-light font-weight-bold py-3"
+          type="button"
+          (click)="startRecording()"
+        >
+          Start Recording
+        </button>
+      </div>
+      <div class="col-12 col-md-4">
+        <button
+          class="w-100 mr-md-3 mb-3 mb-md-0 br-10 bg-core-blue btn text-light font-weight-bold py-3"
+          type="button"
+          (click)="stopRecording()"
+        >
+          Stop Recording
+        </button>
+      </div>
+      <div class="col-12 col-md-2">
+        <button
+          class="w-100 mr-md-3 mb-3 mb-md-0 br-10 bg-core-blue btn text-light font-weight-bold py-3"
+          type="button"
+          (click)="download()"
+        >
+          Download
+        </button>
+      </div>
+      <div class="col-12 col-md-2">
+        <button
+          class="w-100 mr-md-3 mb-3 mb-md-0 br-10 bg-core-blue btn text-light font-weight-bold py-3"
+          type="button"
+          (click)="saveVideo('record')"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isBrowseAndSave">
+  <div class="container">
+    <div class="row mt-md-5">
+      <div class="col-12 mt-3">
+        <div class="card">
+          <div class="card-header bg-core-blue text-light">Upload Video</div>
+          <div class="card-body text-right">
+            <form [formGroup]="addVideoForm">
+              <input
+                type="file"
+                class="form-control"
+                accept="video/mp4,image/png,image/jpeg"
+                formControlName="video"
+                (change)="onVideoSelect($event)"
+              />
+              <button
+                class="add-btn mt-3 mb-3 mb-md-0 br-10 bg-core-orange btn text-light font-weight-bold py-3"
+                type="button"
+                [disabled]="addVideoForm.invalid"
+                (click)="uploadVideo()"
+              >
+                Upload
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

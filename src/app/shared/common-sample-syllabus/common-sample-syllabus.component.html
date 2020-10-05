@@ -44,27 +44,46 @@
             <div class="tab-content">
               <div id="class1" class="container tab-pane active">
                 <div class="card-body">
-                  <h3 class="text-center">
-                    {{ selectedClassName }} {{ name }}
-                  </h3>
-                  <div [hidden]="selectedClassDetails[0].subjects.length >= 1">
-                    <p class="text-center">Subjects not available.</p>
-                    <p></p>
-                  </div>
-                  <app-accordion
-                    [selectedClassDetails]="selectedClassDetails"
-                    [name]="name"
-                    [hasNote]="hasNote"
-                    (addNotesChildEvent)="addNotes($event)"
-                    (viewNotesChildEvent)="viewNotes($event)"
-                    (sortByTopicChildEvent)="sortByTopic($event)"
-                    (uploadVideoRecorderChildEvent)="
-                      navigateToVideoRecorder($event)
+                  <div
+                    *ngIf="
+                      selectedClassDetails[0].subjects.length;
+                      else blank_card
                     "
-                    (viewVideoRecorderChildEvent)="navigateToViewVideo($event)"
-                    (removeChildEvent)="removeTopic($event)"
-                    (unassignSubjectChildEvent)="unassignSubject($event)"
-                  ></app-accordion>
+                  >
+                    <app-accordion
+                      [selectedClassDetails]="selectedClassDetails"
+                      [name]="name"
+                      [selectedClassName]="selectedClassName"
+                      [hasNote]="hasNote"
+                      (addNotesChildEvent)="addNotes($event)"
+                      (viewNotesChildEvent)="viewNotes($event)"
+                      (sortByTopicChildEvent)="sortByTopic($event)"
+                      (uploadVideoRecorderChildEvent)="
+                        navigateToVideoRecorder($event)
+                      "
+                      (viewVideoRecorderChildEvent)="
+                        navigateToViewVideo($event)
+                      "
+                      (removeChildEvent)="removeTopic($event)"
+                      (unassignSubjectChildEvent)="unassignSubject($event)"
+                    ></app-accordion>
+                  </div>
+
+                  <ng-template #blank_card>
+                    <div
+                      class="text-center mb-2 text-lg-left bg-core-blue text-light font-weight-bold card-header"
+                    >
+                      <span *ngIf="selectedClassName">{{
+                        selectedClassName
+                      }}</span>
+                      {{ name }}
+                    </div>
+                    <div class="p-3 p-md-5">
+                      <div class="card">
+                        <div class="card-body">Subjects not available</div>
+                      </div>
+                    </div>
+                  </ng-template>
                 </div>
               </div>
             </div>
@@ -74,3 +93,4 @@
     </div>
   </div>
 </div>
+<app-error-notification-dialog></app-error-notification-dialog>

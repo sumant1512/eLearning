@@ -13,26 +13,12 @@ export class NotesBoardComponent implements OnInit {
   @Input() subjectName: string;
   @Input() topicName: string;
   loaded: boolean;
-  isStudent: boolean = true;
-  @Output() public childEvent = new EventEmitter();
+  @Output() public navigateToBackEvent = new EventEmitter();
   constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.checkUser();
-  }
+  ngOnInit(): void {}
 
-  checkUser(): void {
-    const userType = localStorage.getItem("user_type");
-    if (userType === "Admin") {
-      this.isStudent = false;
-    }
-  }
-
-  close(): void {
-    this.childEvent.emit(false);
-  }
-
-  goBack(): void {
-    this.router.navigateByUrl("admin/syllabus");
+  navigateToBack(): void {
+    this.navigateToBackEvent.emit(true);
   }
 }

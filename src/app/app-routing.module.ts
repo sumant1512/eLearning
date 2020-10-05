@@ -43,6 +43,11 @@ const routes: Routes = [
       import("./+student/student.module").then((m) => m.StudentModule),
     canActivate: [StudentGuard],
   },
+  {
+    path: RoutesEnum.SUPER_ADMIN,
+    loadChildren: () =>
+      import("./+super-admin/super-admin.module").then((m) => m.SuperAdminModule),
+  },
   { path: "**", redirectTo: RoutesEnum.HOME, pathMatch: "full" },
 ];
 

@@ -9,6 +9,7 @@ import { HomeHeaderComponent } from "./home-header/home-header.component";
 import { CarouselComponent } from "./carousel/carousel.component";
 import { DescriptionCardComponent } from "./description-card/description-card.component";
 import { HomeFooterComponent } from "./home-footer/home-footer.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HomeFooterComponent } from "./home-footer/home-footer.component";
     DescriptionCardComponent,
     HomeFooterComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule],
+  imports: [CommonModule, HomeRoutingModule, ReactiveFormsModule, SharedModule],
   exports: [HomeHeaderComponent, HomeFooterComponent],
 })
 export class HomeModule {}

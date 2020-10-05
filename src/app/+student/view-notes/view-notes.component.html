@@ -1,5 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 mt-3">
+      <button
+        type="button"
+        class="bg-dark-blue btn btn-primary"
+        (click)="navigateToBack(true)"
+      >
+        Back
+      </button>
+    </div>
+  </div>
+</div>
 <app-notes-board
   [noteHeading]="noteHeading"
   [noteDescription]="noteDescription"
-  (childEvent)="back($event)"
+  (navigateToBackEvent)="navigateToBack($event)"
 ></app-notes-board>

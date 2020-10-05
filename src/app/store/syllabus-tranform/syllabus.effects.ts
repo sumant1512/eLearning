@@ -4,7 +4,6 @@ import { Injectable } from "@angular/core";
 import {
   SyllabusActionsUnion,
   SyllabusActions,
-  FetchSyllabus,
   FetchedSyllabus,
 } from "./syllabus.actions";
 import { mergeMap, map } from "rxjs/operators";
@@ -15,8 +14,6 @@ export class SyllabusEffects {
     private action$: Actions<SyllabusActionsUnion>,
     private syllabusService: SyllabusService
   ) {}
-
-  
 
   @Effect()
   fetchSyllabus$ = this.action$.pipe(

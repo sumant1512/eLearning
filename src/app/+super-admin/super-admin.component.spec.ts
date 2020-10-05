@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GenericDialogComponent } from './generic-dialog.component';
+import { SuperAdminComponent } from './super-admin.component';
 
-describe('GenericDialogComponent', () => {
-  let component: GenericDialogComponent;
-  let fixture: ComponentFixture<GenericDialogComponent>;
+describe('SuperAdminComponent', () => {
+  let component: SuperAdminComponent;
+  let fixture: ComponentFixture<SuperAdminComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GenericDialogComponent ]
+      declarations: [ SuperAdminComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GenericDialogComponent);
+    fixture = TestBed.createComponent(SuperAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

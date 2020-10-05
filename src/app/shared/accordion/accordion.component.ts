@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { select, Store } from "@ngrx/store";
+import { Subscription } from "rxjs";
+import { AppState } from "src/app/store/app.state";
+import { userType } from "src/app/store/auth/auth.selectors";
 import { SelectedClassDetailsType } from "./types/accordion.type";
+import * as AuthActions from "../../store/auth/auth.actions";
 
 @Component({
   selector: "app-accordion",
@@ -16,6 +21,7 @@ export class AccordionComponent implements OnInit {
     }
   }
   @Input() name: string;
+  @Input() selectedClassName: string;
   @Input() hasNote: boolean;
   @Output() removeChildEvent = new EventEmitter<number>();
   @Output() addNotesChildEvent = new EventEmitter();
@@ -24,13 +30,49 @@ export class AccordionComponent implements OnInit {
   @Output() uploadVideoRecorderChildEvent = new EventEmitter<number>();
   @Output() viewVideoRecorderChildEvent = new EventEmitter<number>();
   @Output() unassignSubjectChildEvent = new EventEmitter<number>();
+  subscription: Subscription = new Subscription();
+  isAdmin: boolean;
+  isStudent: boolean;
 
-  constructor() {}
+  constructor(private store: Store<AppState>) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getUserProfile();
+  }
 
   getStatus(): boolean {
     return this.name === "Sample Paper" ? false : true;
+  }
+
+  getUserProfile(): void {
+    this.subscription.add(
+      this.store.select("profile").subscribe((response) => {
+        if (!response.userDetails.user_id) {
+          this.fetchUserProfile();
+        } else {
+          this.getUserType();
+        }
+      })
+    );
+  }
+
+  fetchUserProfile(): void {
+    const authToken = localStorage.getItem("AUTH_TOKEN");
+    this.store.dispatch(new AuthActions.FetchProfile(authToken));
+  }
+
+  getUserType(): void {
+    this.subscription.add(
+      this.store.pipe(select(userType)).subscribe((response) => {
+        if (response === "Admin") {
+          this.isAdmin = true;
+          this.isStudent = false;
+        } else if (response === "Student") {
+          this.isStudent = true;
+          this.isAdmin = false;
+        }
+      })
+    );
   }
 
   remove(topicId) {
@@ -53,18 +95,21 @@ export class AccordionComponent implements OnInit {
       topicId: topicid,
       topicName: topicname,
     };
-    console.log(viewNotesDetails);
     this.viewNotesChildEvent.emit(viewNotesDetails);
   }
+
   sortByTopicChild(topicId) {
     this.sortByTopicChildEvent.emit(topicId);
   }
+
   navigateToVideoRecorderChild(topicId) {
     this.uploadVideoRecorderChildEvent.emit(topicId);
   }
+
   navigateToViewVideoChild(topicId) {
     this.viewVideoRecorderChildEvent.emit(topicId);
   }
+
   unassignSubjectChild(subjectId) {
     this.unassignSubjectChildEvent.emit(subjectId);
   }

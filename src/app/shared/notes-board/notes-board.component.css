@@ -20,13 +20,16 @@
     ),
     radial-gradient(circle at right, #111, rgba(51, 51, 51, 1));
   background-color: #333;
-  margin-top: 75px;
 }
 
 .heading {
   vertical-align: middle;
   font-family: "Permanent Marker", cursive;
   color: rgba(238, 238, 238, 0.7);
+}
+
+.close-btn{
+  padding-bottom: 2rem;
 }
 
 @media only screen and (min-width: 30px) and (max-width: 767px) {

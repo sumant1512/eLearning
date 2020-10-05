@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import * as CryptoJS from "crypto-js";
-import { EncryptType } from "./types/common.type";
 
 @Injectable({
   providedIn: "root",

@@ -6,6 +6,7 @@ export enum AuthActions {
   FETCH_PROFILE = "[User] Fetch User",
   FETCHED_PROFILE = "[User] Fetched User",
   USER_LOGOUT = "[User] User Logout",
+  CLEAR_PROFILE = "[User] Clear User",
 }
 
 export class UserLogin implements Action {
@@ -27,8 +28,13 @@ export class UserLogout implements Action {
   readonly type = AuthActions.USER_LOGOUT;
 }
 
+export class ClearProfile implements Action {
+  readonly type = AuthActions.CLEAR_PROFILE;
+}
+
 export type AuthActionsUnion =
   | UserLogin
   | FetchProfile
   | FetchedProfile
-  | UserLogout
+  | ClearProfile
+  | UserLogout;

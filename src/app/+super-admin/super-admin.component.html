@@ -1,0 +1,65 @@
+<header>
+  <nav class="bg-dark-blue py-3 navbar navbar-expand-lg static-top" #header>
+    <div class="container-fluid">
+      <div>
+        <a class="navbar-brand" routerLink="home">
+          <img
+            style="width: 157px"
+            src="../../../assets/siksha_durat.png"
+            alt="eLearning logo"
+          />
+        </a>
+      </div>
+
+      <div id="navbarResponsive">
+        <ul class="d-flex list-unstyled m-auto">
+          <li class="pointer">
+            <a
+              tabindex="0"
+              class="f6 mr-3 text-light font-weight-bold"
+              (click)="logout()"
+              >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="container-fluid">
+  <table class="table mt-3">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">School Name</th>
+        <th scope="col">Name</th>
+        <th scope="col">Is Approved</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let school of schoolList">
+        <th scope="row">{{ school.id }}</th>
+        <td>{{ school.schoolName }}</td>
+        <td>{{ school.name }}</td>
+        <td>
+          <div *ngIf="school.isApproved; else pending">
+            <p class="text-success"><b>Approved</b></p>
+          </div>
+          <ng-template #pending>
+            <p class="text-warning"><b>Pending...</b></p>
+          </ng-template>
+        </td>
+        <td>
+          <div *ngIf="school.isApproved; else approve_btn">
+            <button type="button" class="btn btn-danger">Block</button>
+          </div>
+          <ng-template #approve_btn>
+            <button type="button" class="btn btn-success">Approve</button>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<app-home-footer></app-home-footer>

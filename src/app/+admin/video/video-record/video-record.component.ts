@@ -1,10 +1,11 @@
 import {
   Component,
   ViewChild,
-  AfterViewInit,
   ElementRef,
   OnInit,
+  OnDestroy,
 } from "@angular/core";
+import { Location } from "@angular/common";
 import * as RecordRTC from "recordrtc";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
@@ -12,25 +13,30 @@ import { AppState } from "src/app/store/app.state";
 import * as VideoActions from "../../../store/video/video.actions";
 import { FormGroup } from "@angular/forms";
 import { addVideoForm } from "./add-video,utils";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: "app-video-record",
   templateUrl: "./video-record.component.html",
   styleUrls: ["./video-record.component.css"],
 })
-export class VideoRecordComponent implements AfterViewInit, OnInit {
+export class VideoRecordComponent implements OnInit, OnDestroy {
   @ViewChild("video", { static: false }) video: ElementRef;
   addVideoForm: FormGroup;
   private stream = new MediaStream();
   private recordRTC: any;
   toggle: boolean = false;
+  isRecordAndSave: boolean;
+  isBrowseAndSave: boolean;
   toggleDownload: boolean = true;
   classId: number;
   topicId: number;
   encryptedVideo: string;
+  subscription: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
-    private Activatedroute: ActivatedRoute
+    private Activatedroute: ActivatedRoute,
+    private _location: Location
   ) {
     this.addVideoForm = addVideoForm();
   }
@@ -40,18 +46,12 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
   }
 
   readQueryParams(): void {
-    this.Activatedroute.queryParams.subscribe((params) => {
-      this.classId = params["classId"];
-      this.topicId = params["topicId"];
-    });
-  }
-
-  ngAfterViewInit(): void {
-    // set the initial state of the video
-    let video: HTMLVideoElement = this.video.nativeElement;
-    video.muted = false;
-    video.controls = true;
-    video.autoplay = false;
+    this.subscription.add(
+      this.Activatedroute.queryParams.subscribe((params) => {
+        this.classId = params["classId"];
+        this.topicId = params["topicId"];
+      })
+    );
   }
 
   toggleControls() {
@@ -132,6 +132,16 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
     }
   }
 
+  recordAndSave(event): void {
+    if (event === "record") {
+      this.isRecordAndSave = true;
+      this.isBrowseAndSave = false;
+    } else if (event === "browse") {
+      this.isRecordAndSave = false;
+      this.isBrowseAndSave = true;
+    }
+  }
+
   onVideoSelect(event: any) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
@@ -144,5 +154,13 @@ export class VideoRecordComponent implements AfterViewInit, OnInit {
 
   uploadVideo() {
     this.saveVideo("upload");
+  }
+
+  navigateToBack(event: boolean): void {
+    this._location.back();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

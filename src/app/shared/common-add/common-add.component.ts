@@ -69,7 +69,7 @@ export class CommonAddComponent implements OnInit {
       this.fetchSyllabusTransform();
     }
   }
-  
+
   fetchSyllabusTransform(): void {
     this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
@@ -90,16 +90,17 @@ export class CommonAddComponent implements OnInit {
     if (this.name === "Topic" || this.name === "Sample Paper") return false;
     return true;
   }
+
   getStatus(): boolean {
     return this.name === "Sample Paper" ? false : true;
   }
+
   displayStatus(): boolean {
     if ("Sample Paper" === this.name) {
       var element = document.getElementById("myDIV");
       element.classList.toggle("show");
     }
     return false;
-    return true;
   }
 
   add(): void {

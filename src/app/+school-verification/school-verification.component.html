@@ -16,7 +16,7 @@
       <div class="col-sm-7 right-side mx-auto text-center">
         <div class="container">
           <div class="row h-100 justify-content-center align-items-center">
-            <form [formGroup]="otpForm" class="justify-content-center">
+            <form class="justify-content-center">
               <div class="text-center">
                 <i
                   class="text-white p-4 m-4 fa fa-commenting-o fa-lg justify-content-center align-items-center fa-5x"
@@ -34,36 +34,30 @@
                     <input
                       type="text"
                       class="d-none form-control text-center otp-input"
-                      formControlName="email"
-                      [(ngModel)]="email"
+                      name="email"
+                      value="{{ email }}"
                     />
                     <input
                       type="text"
                       class="form-control text-center otp-input"
-                      formControlName="otp"
+                      ngModel
+                      name="otp"
                       placeholder="Enter OTP"
-                      maxlength="6"
+                      #otp="ngModel"
+                      pattern="[0-9]{6}$"
                       [ngClass]="{
-                        'is-invalid':
-                          (f.otp.touched || f.otp.dirty) && f.otp.errors
+                        'is-invalid': (otp.touched || otp.dirty) && otp.errors
                       }"
+                      required
                     />
                     <div
-                      *ngIf="(f.otp.touched || f.otp.dirty) && f.otp.errors"
+                      *ngIf="(otp.touched || otp.dirty) && otp.errors"
                       class="invalid-feedback"
                     >
-                      <div
-                        class=""
-                        style="font-weight: bold;"
-                        *ngIf="f.otp.errors.required"
-                      >
-                        OTP is required*
+                      <div class="text-white" *ngIf="otp.errors.required">
+                        OTP is required!
                       </div>
-                      <div
-                        class=""
-                        style="font-weight: bold;"
-                        *ngIf="f.otp.errors.pattern"
-                      >
+                      <div class="text-white" *ngIf="otp.errors.pattern">
                         Enter 6 digits
                       </div>
                     </div>
@@ -73,9 +67,8 @@
                   <button
                     type="button"
                     class="btn text-white text-center w-25 verify-btn bg-core-orange btn-lg"
-                    name="verifyotp"
-                    (click)="verifiyOtp()"
-                    [disabled]="!this.otpForm.valid"
+                    (click)="verifyOtp(otp.value)"
+                    [disabled]="otp.invalid"
                   >
                     Verify
                   </button>

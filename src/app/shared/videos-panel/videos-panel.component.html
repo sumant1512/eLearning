@@ -11,6 +11,14 @@
         src="{{ video.video_url }}"
         controls=""
       ></video>
+      <button
+        *ngIf="isAdmin"
+        type="button"
+        class="btn btn-danger"
+        (click)="removeVideoEmit(video.video_id)"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </div>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup, AbstractControl } from "@angular/forms";
 import { Router, ActivatedRoute } from "@angular/router";
-import { otpVerificationForm } from "./school--verification.utils";
 import { VerificationService } from "../store/services/verification.service";
 
 @Component({
@@ -10,31 +8,28 @@ import { VerificationService } from "../store/services/verification.service";
   styleUrls: ["./school-verification.component.css"],
 })
 export class SchoolVerificationComponent implements OnInit {
-  otpForm: FormGroup;
-  submitted = false;
-  email;
+  email: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private verificationService: VerificationService
-  ) {
-    this.otpForm = otpVerificationForm();
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.email = this.route.snapshot.paramMap.get("email");
+    this.route.queryParams.subscribe((params) => {
+      this.email = params["email"];
+      if (!this.email) this.router.navigate(["registration"]);
+    });
   }
-  get f() {
-    return this.otpForm.controls;
-  }
-  verifiyOtp(): void {
-    const verificationDetails = this.otpForm.value;
+
+  verifyOtp(otp): void {
+    const verificationDetails = { email: this.email, otp };
     this.verificationService
       .verifyOtp(verificationDetails)
       .subscribe((response) => {
         if (response["status"]) {
-          this.router.navigateByUrl("/home");
           alert(response["message"]);
+          this.router.navigateByUrl("/home");
         } else {
           alert(response["message"]);
         }

@@ -35,12 +35,27 @@ export class VideoEffects {
   fetchVideo$ = this.action$.pipe(
     ofType(VideoActions.FETCH_VIDEO),
     map(() => {
-      return this.videoService.getVideo(); 
+      return this.videoService.getVideo();
     }),
     mergeMap((response) => {
       return response.pipe(
         map((res) => {
           return new FetchedVideo(res);
+        })
+      );
+    })
+  );
+
+  @Effect()
+  deleteVideo$ = this.action$.pipe(
+    ofType(VideoActions.DELETE_VIDEO),
+    map((action) => {
+      return this.videoService.removeVideo(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map(() => {
+          return new FetchVideo();
         })
       );
     })

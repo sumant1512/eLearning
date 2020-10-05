@@ -43,14 +43,12 @@ export class SubjectService {
   }
 
   removeSubject(id: number) {
-    return this.http
-      .delete<any>(HOST + `removeSubject/${id}`, {
-        headers: new HttpHeaders({
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
-        }),
-      })
-      .pipe(catchError(this.handleError));
+    return this.http.delete<any>(HOST + `removeSubject/${id}`, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
   }
 
   private handleError(error: HttpErrorResponse) {
