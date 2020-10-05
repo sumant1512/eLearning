@@ -1,9 +1,4 @@
-import {
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  Validators,
-} from "@angular/forms";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
 
 export function schoolRegisterForm() {
   return new FormGroup({
@@ -25,15 +20,13 @@ export function schoolRegisterForm() {
       Validators.required,
       Validators.pattern("^((\\+91 -?)|0)?[0-9]{10}$"),
     ]),
-    studentContactNo: new FormControl("", [
+    schoolContactNo: new FormControl("", [
       Validators.required,
       Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"),
     ]),
     password: new FormControl("", [
       Validators.required,
-      Validators.pattern(
-        "^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$"
-      ),
+      Validators.pattern("^[0-9]{8,}$"),
     ]),
     confirmPassword: new FormControl("", [Validators.required]),
   });

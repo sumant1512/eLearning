@@ -1,11 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import {
-  FormGroup,
-  Validators,
-  FormControl,
-  FormBuilder,
-  AbstractControl,
-} from "@angular/forms";
+import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { schoolRegisterForm } from "./registration.utils";
 import { RegistrationService } from "../store/services/registration.service";
@@ -17,10 +11,6 @@ import { RegistrationService } from "../store/services/registration.service";
 })
 export class RegistrationComponent implements OnInit {
   schoolRegisterForm: FormGroup;
-  enteredOtp: number;
-  error = false;
-  validDetails = false;
-  errorMessage: string;
 
   constructor(
     private router: Router,
@@ -32,16 +22,16 @@ export class RegistrationComponent implements OnInit {
       };
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
   get f() {
     return this.schoolRegisterForm.controls;
   }
 
   MustMatch(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+    return (schoolRegisterForm: FormGroup) => {
+      const control = schoolRegisterForm.controls[controlName];
+      const matchingControl = schoolRegisterForm.controls[matchingControlName];
 
       if (matchingControl.errors && !matchingControl.errors.mustMatch) {
         // return if another validator has already found an error on the matchingControl
@@ -57,20 +47,20 @@ export class RegistrationComponent implements OnInit {
     };
   }
 
-  registerSchool() {
+  registerSchool(): void {
     const schoolRegistrationDetails = this.schoolRegisterForm.value;
     this.registationService
       .schoolRegistration(schoolRegistrationDetails)
       .subscribe((response) => {
         if (response["status"]) {
-          this.router.navigate([
-            "/verification",
-            this.schoolRegisterForm.value.email,
-          ]);
+          alert(response["message"]);
+          this.router.navigate(["/verification"], {
+            queryParams: {
+              email: this.schoolRegisterForm.value.email,
+            },
+          });
         } else {
-          this.error = true;
-          this.errorMessage = response["message"];
-          alert(this.errorMessage);
+          alert(response["message"]);
         }
       });
   }
@@ -78,24 +68,4 @@ export class RegistrationComponent implements OnInit {
   navigateToVerification() {
     this.router.navigate(["verification"]);
   }
-
-  // sendOtp() {
-  //   const schoolRegistrationDetails = this.schoolRegisterForm.value;
-  //   var verify_detail = {
-  //     email: schoolRegistrationDetails.email,
-  //     otp: this.enteredOtp,
-  //   };
-
-  //   this.RegistrationService.verifyOtp(verify_detail).subscribe((response) => {
-  //     if (response['status']) {
-  //       const url = this.router.serializeUrl(
-  //         this.router.createUrlTree(['/home'])
-  //       );
-  //       window.open(url, '_parent');
-  //       Swal.fire('Success!', 'School verified successfully.', 'success');
-  //     } else {
-  //       Swal.fire('Sorry!', response['status'], 'error');
-  //     }
-  //   });
-  // }
 }
