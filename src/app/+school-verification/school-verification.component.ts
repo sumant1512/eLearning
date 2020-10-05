@@ -27,11 +27,11 @@ export class SchoolVerificationComponent implements OnInit {
     this.verificationService
       .verifyOtp(verificationDetails)
       .subscribe((response) => {
-        if (response["status"]) {
-          alert(response["message"]);
+        if (response["body"].status) {
+          alert(response["body"].message);
           this.router.navigateByUrl("/home");
         } else {
-          alert(response["message"]);
+          alert(response["body"].message);
         }
       });
   }
