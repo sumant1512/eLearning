@@ -17,7 +17,7 @@ import { AccordionComponent } from "./accordion/accordion.component";
 import { CommonSampleSyllabusComponent } from "./common-sample-syllabus/common-sample-syllabus.component";
 import { ViewVideosComponent } from "./view-videos/view-videos.component";
 import { ContentNotFoundComponent } from "./content-not-found/content-not-found.component";
-import { SuccessNotificationComponent } from './success-notification/success-notification.component';
+import { SuccessNotificationComponent } from "./success-notification/success-notification.component";
 
 @NgModule({
   declarations: [
@@ -51,6 +51,7 @@ import { SuccessNotificationComponent } from './success-notification/success-not
     AccordionComponent,
     ViewVideosComponent,
     ContentNotFoundComponent,
+    SuccessNotificationComponent,
   ],
 })
 export class SharedModule {}

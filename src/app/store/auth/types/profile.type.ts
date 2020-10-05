@@ -29,4 +29,5 @@ export interface UserDetailsType {
   pin_code?: string;
   city?: string;
   state?: string;
+  student_address?: string;
 }
