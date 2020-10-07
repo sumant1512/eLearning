@@ -12,6 +12,8 @@ export function studentRegistrationForm() {
     fatherName: new FormControl("", [Validators.required]),
     class: new FormControl("", [Validators.required]),
     dob: new FormControl("", [Validators.required]),
+    addressLineOne: new FormControl("", [Validators.required]),
+    addressLineTwo: new FormControl("", [Validators.required]),
     email: new FormControl("", [
       Validators.required,
       Validators.pattern(
