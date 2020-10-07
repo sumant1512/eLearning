@@ -140,6 +140,61 @@
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="mb-3 col-12 col-md-6">
+          <input
+            type="text"
+            formControlName="addressLineOne"
+            id="two"
+            class="form-control"
+            placeholder="Address Line 1"
+            [ngClass]="{
+              'is-invalid':
+                (f.addressLineOne.touched || f.addressLineOne.dirty) &&
+                f.addressLineOne.errors
+            }"
+          />
+
+          <div
+            *ngIf="
+              (f.addressLineOne.touched || f.addressLineOne.dirty) &&
+              f.addressLineOne.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.addressLineOne.errors.required">
+              Address is required*
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 col-12 col-md-6">
+          <input
+            type="text"
+            formControlName="addressLineTwo"
+            id="three"
+            class="form-control"
+            placeholder="Address Line 2"
+            [ngClass]="{
+              'is-invalid':
+                (f.addressLineTwo.touched || f.addressLineTwo.dirty) &&
+                f.addressLineTwo.errors
+            }"
+          />
+
+          <div
+            *ngIf="
+              (f.addressLineTwo.touched || f.addressLineTwo.dirty) &&
+              f.addressLineTwo.errors
+            "
+            class="invalid-feedback"
+          >
+            <div *ngIf="f.addressLineTwo.errors.required">
+              Address is required*
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="mb-3 col-12 col-md-4">
           <input
@@ -218,8 +273,12 @@
             "
             class="invalid-feedback"
           >
-            <div *ngIf="f.scholarNumber.errors.required">Enter Scholar Number</div>
-            <div *ngIf="f.scholarNumber.errors.pattern && f.scholarNumber.touched">
+            <div *ngIf="f.scholarNumber.errors.required">
+              Enter Scholar Number
+            </div>
+            <div
+              *ngIf="f.scholarNumber.errors.pattern && f.scholarNumber.touched"
+            >
               Enter a valid scholar number
             </div>
           </div>
@@ -282,5 +341,4 @@
     </form>
   </div>
 </div>
-
 <app-error-notification-dialog></app-error-notification-dialog>

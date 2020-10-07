@@ -44,6 +44,7 @@ export class AddStudentComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       new StudentActions.AddStudent(studentRegistrationDetails)
     );
+    this.studentRegistrationForm.reset();
   }
 
   fetchClassList(): void {

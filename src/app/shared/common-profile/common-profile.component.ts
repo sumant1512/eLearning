@@ -99,30 +99,36 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
   selectImage(event: any, userType: string): void {
     let imageData: ImageType;
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        switch (userType) {
-          case "user":
-            this.userImageUrl = event.target.result;
-            imageData = {
-              imageType: this.isAdmin ? "admin" : "student",
-              image: event.target.result,
-            };
-            this.uploadBtnControl = false;
-            this.onImageSelect.emit(imageData);
-            break;
-          case "school_image":
-            this.schoolImageUrl = event.target.result;
-            imageData = {
-              imageType: userType,
-              image: event.target.result,
-            };
-            this.isSchoolImageBtnDisable = true;
-            this.onImageSelect.emit(imageData);
-            break;
-        }
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+      if (!allowedExtensions.exec(event.target.files[0].name)) {
+        alert("Invalid file type");
+        event.target.value = "";
+      } else {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          switch (userType) {
+            case "user":
+              this.userImageUrl = event.target.result;
+              imageData = {
+                imageType: this.isAdmin ? "admin" : "student",
+                image: event.target.result,
+              };
+              this.uploadBtnControl = false;
+              this.onImageSelect.emit(imageData);
+              break;
+            case "school_image":
+              this.schoolImageUrl = event.target.result;
+              imageData = {
+                imageType: userType,
+                image: event.target.result,
+              };
+              this.isSchoolImageBtnDisable = true;
+              this.onImageSelect.emit(imageData);
+              break;
+          }
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
     }
   }
 
