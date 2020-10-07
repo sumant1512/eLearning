@@ -17,13 +17,13 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
   editNotesForm: FormGroup;
   classId: number;
   topicId: number;
-  noteArray: NotesListType[];
+  noteArray: NotesListType[] = [];
   resultForNotes: NotesListType[];
   loaded: boolean;
   className: string;
   subjectName: string;
   topicName: string;
-  hasNoNote: boolean = true;
+  hasNoNote: boolean = false;
   subsctiption: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
@@ -58,6 +58,8 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
         if (Object.keys(response).length) {
           this.resultForNotes = response;
           this.fetchNotes();
+        } else {
+          this.commingSoonMessageAttachment();
         }
       })
     );
@@ -74,12 +76,17 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
       });
       this.loaded = true;
     } else {
-      this.noteArray.push({
-        note_heading: "Comming Soon",
-        note_desc: "Comming Soon",
-      });
-      this.loaded = true;
+      this.commingSoonMessageAttachment();
     }
+  }
+
+  commingSoonMessageAttachment(): void {
+    this.noteArray.push({
+      note_heading: "Comming Soon",
+      note_desc: "Comming Soon",
+    });
+    this.loaded = true;
+    this.hasNoNote = true;
   }
 
   updateNotes(): void {
