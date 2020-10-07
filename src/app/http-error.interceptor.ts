@@ -8,6 +8,7 @@ import {
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError, tap } from "rxjs/operators";
+import { ErrorType } from "./shared/error-notification-dialog/types/error-notification.type";
 import { ErrorNotificationService } from "./store/services/error-notification.service";
 
 export class HttpErrorInterceptor implements HttpInterceptor {
@@ -27,13 +28,16 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       }),
       retry(1),
       catchError((error: HttpErrorResponse) => {
-        let errorMessage = "";
+        let errorMessage: ErrorType;
         if (error.error instanceof ErrorEvent) {
           // client-side error
-          errorMessage = `Error: ${error.error.message}`;
+          errorMessage.message = `Error: ${error.error.message}`;
         } else {
           // server-side error
-          errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+          errorMessage = {
+            code: error.status,
+            message: error.error.message,
+          };
         }
         this.errorService.addErrors(errorMessage);
         return throwError(errorMessage);
