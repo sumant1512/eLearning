@@ -7,7 +7,7 @@ import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AdminHeaderComponent } from "./admin-header/admin-header.component";
 import { AdminFooterComponent } from "./admin-footer/admin-footer.component";
-import { AddTeacherComponent } from "./teacher/add-teacher.component";
+import { AddTeacherComponent } from "./teacher/teacher.component";
 import { ViewTeacherComponent } from "./teacher/view-teacher/view-teacher.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";

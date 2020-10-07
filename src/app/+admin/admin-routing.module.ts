@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
-import { AddTeacherComponent } from "./teacher/add-teacher.component";
+import { AddTeacherComponent } from "./teacher/teacher.component";
 import { TopicComponent } from "./topic/topic.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
