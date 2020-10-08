@@ -9,7 +9,9 @@
   <div class="modal-dialog" role="document">
     <div class="text-center modal-content">
       <div class="bg-danger text-light modal-header">
-        <h5 class="modal-title"><b>Error</b></h5>
+        <h5 class="modal-title">
+          <b>{{ message.status }}</b>
+        </h5>
         <button
           type="button"
           class="close text-light"
@@ -21,7 +23,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>{{ message }}.</p>
+        <p>{{ message.message }}.</p>
       </div>
       <div class="modal-footer">
         <button

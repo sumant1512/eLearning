@@ -10,11 +10,11 @@ import { ImageType } from "src/app/shared/common-profile/types/common-profile.ty
 import { Subscription } from "rxjs";
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"],
+  selector: "app-admin-profile",
+  templateUrl: "./admin-profile.component.html",
+  styleUrls: ["./admin-profile.component.css"],
 })
-export class ProfileComponent implements OnInit, OnDestroy {
+export class AdminProfileComponent implements OnInit, OnDestroy {
   adminProfile: ProfileType;
   selectedImageDetails: ImageType;
   subscription: Subscription = new Subscription();

@@ -4,7 +4,7 @@ import { FormsModule } from "@angular/forms";
 
 import { AdminRoutingModule } from "./admin-routing.module";
 import { AdminComponent } from "./admin.component";
-import { ProfileComponent } from "./profile/profile.component";
+import { AdminProfileComponent } from "./admin-profile/admin-profile.component";
 import { AdminHeaderComponent } from "./admin-header/admin-header.component";
 import { AdminFooterComponent } from "./admin-footer/admin-footer.component";
 import { TeacherComponent } from "./teacher/teacher.component";
@@ -35,7 +35,7 @@ import { AddTeacherComponent } from "./teacher/add-teacher/add-teacher.component
 @NgModule({
   declarations: [
     AdminComponent,
-    ProfileComponent,
+    AdminProfileComponent,
     AdminHeaderComponent,
     AdminFooterComponent,
     AddStudentComponent,
