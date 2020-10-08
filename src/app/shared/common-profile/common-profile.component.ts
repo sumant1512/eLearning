@@ -17,7 +17,7 @@ import { ProfileType } from "../../store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
 import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
-import { CONSTANTS } from "src/app/+admin/profile/profile.constants";
+import { CONSTANTS } from "src/app/+admin/admin-profile/profile.constants";
 import { ImageType } from "./types/common-profile.type";
 
 @Component({

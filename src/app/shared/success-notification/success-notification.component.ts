@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ErrorNotificationService } from "src/app/store/services/error-notification.service";
+import { SuccessMessageType } from "./types/success-notification.type";
 
 @Component({
   selector: "app-success-notification",
@@ -9,10 +10,9 @@ import { ErrorNotificationService } from "src/app/store/services/error-notificat
 export class SuccessNotificationComponent implements OnInit {
   @ViewChild("modalDisplay", { static: false }) modalDisplay: ElementRef;
   view: boolean = false;
-  message: string = "";
+  message: SuccessMessageType;
 
-  constructor(private errorService: ErrorNotificationService) {
-  }
+  constructor(private errorService: ErrorNotificationService) {}
 
   ngOnInit() {
     this.initializeSuccess();

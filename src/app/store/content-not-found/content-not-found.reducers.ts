@@ -2,7 +2,6 @@ import {
   ContentNotFoundActions,
   ContentNotFoundActionsUnion,
 } from "./content-not-found.actions";
-import { ProfileType } from "./types/content-not-found.type";
 
 const isContentNotFound: boolean = false;
 

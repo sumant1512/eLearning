@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from "./admin.component";
-import { ProfileComponent } from "./profile/profile.component";
+import { AdminProfileComponent } from "./admin-profile/admin-profile.component";
 import { TopicComponent } from "./topic/topic.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
@@ -24,7 +24,7 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: "", component: AdminLandingPageComponent },
-      { path: ProfileRoutesEnum.PROFILE, component: ProfileComponent },
+      { path: ProfileRoutesEnum.PROFILE, component: AdminProfileComponent },
       { path: ProfileRoutesEnum.STUDENT, component: StudentListComponent },
       { path: ProfileRoutesEnum.TEACHER, component: TeacherComponent },
       { path: ProfileRoutesEnum.CLASS, component: ClassComponent },

@@ -27,15 +27,9 @@ export class ErrorNotificationDialogComponent implements OnInit {
   private initializeErrors() {
     this.errorService.getErrors().subscribe((errors) => {
       if (errors) {
-        if (errors.code === 404) {
-          // this.store.dispatch(
-          //   new ContentNotFoundActions.SetContentNotFoundFlag(true)
-          // );
-        } else {
-          this.view = true;
-          this.error = errors;
-          document.getElementsByTagName("body")[0].classList.add("modal-open");
-        }
+        this.view = true;
+        this.error = errors;
+        document.getElementsByTagName("body")[0].classList.add("modal-open");
       }
     });
   }

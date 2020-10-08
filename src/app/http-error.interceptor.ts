@@ -13,6 +13,7 @@ import { ErrorType } from "./shared/error-notification-dialog/types/error-notifi
 import { AppState } from "./store/app.state";
 import { ErrorNotificationService } from "./store/services/error-notification.service";
 import * as ContentNotFoundActions from "../app/store/content-not-found/content-not-found.actions";
+import { SuccessMessageType } from "./shared/success-notification/types/success-notification.type";
 
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
@@ -26,13 +27,19 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap((data) => {
         if (data instanceof HttpResponse) {
-          let successMessage: string;
-          // this.store.dispatch(
-          //   new ContentNotFoundActions.SetContentNotFoundFlag(true)
-          // );
-          successMessage = "Success";
-          this.errorService.addSuccess(successMessage);
-          return throwError(successMessage);
+          this.store.dispatch(
+            new ContentNotFoundActions.SetContentNotFoundFlag(false)
+          );
+          if (data.body.status) {
+            let successMessage: SuccessMessageType;
+            console.log(data);
+            successMessage = {
+              status: "Success",
+              message: data.body.message,
+            };
+            this.errorService.addSuccess(successMessage);
+            return throwError(successMessage);
+          }
         }
       }),
       retry(1),
@@ -43,12 +50,18 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMessage.message = `Error: ${error.error.message}`;
         } else {
           // server-side error
-          errorMessage = {
-            code: error.status,
-            message: error.error.message,
-          };
-          this.errorService.addErrors(errorMessage);
-          return throwError(errorMessage);
+          if (error.status === 404) {
+            this.store.dispatch(
+              new ContentNotFoundActions.SetContentNotFoundFlag(true)
+            );
+          } else {
+            errorMessage = {
+              code: error.status,
+              message: error.error.message,
+            };
+            this.errorService.addErrors(errorMessage);
+            return throwError(errorMessage);
+          }
         }
       })
     );
