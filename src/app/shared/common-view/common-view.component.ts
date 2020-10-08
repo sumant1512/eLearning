@@ -14,11 +14,24 @@ import { SamplePaperListType } from "src/app/store/sample-paper/types/sample-pap
 export class CommonViewComponent implements OnInit {
   editForm: FormGroup;
   assignSubjectForm: FormGroup;
+  loaded: boolean;
   @Input() viewList:
     | ClassListType[]
     | SubjectListType[]
     | TopicListType[]
     | SamplePaperListType[];
+  @Input("viewList") set setViewList(
+    data:
+      | ClassListType[]
+      | SubjectListType[]
+      | TopicListType[]
+      | SamplePaperListType[]
+  ) {
+    if (data) {
+      this.loaded = true;
+      this.viewList = data;
+    }
+  }
   @Input() name: string;
   @Output() childEvent = new EventEmitter();
   @Output() editChildEvent = new EventEmitter();

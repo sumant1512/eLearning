@@ -23,7 +23,8 @@ export class ClassComponent implements OnInit, OnDestroy {
   isMobile = false;
   isTablet;
   isSliderOpen = false;
-  isAddClassFormOpen;
+  isAddClassFormOpen: boolean;
+  isContentFound: boolean = true;
   subsctiption: Subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {}
@@ -46,12 +47,23 @@ export class ClassComponent implements OnInit, OnDestroy {
     this.isAddClassFormOpen = true;
   }
 
+  // function to get content not found status
+  isContentAvailable(): void {
+    this.subsctiption.add(
+      this.store.select("isContentFound").subscribe((response) => {
+        this.isContentFound = response;
+      })
+    );
+  }
+
   fetchClassList(): void {
     this.store.dispatch(new ClassActions.FetchClass());
     this.subsctiption.add(
       this.store.select("classList").subscribe((response) => {
         if (Object.keys(response).length) {
           this.classList = response;
+        } else {
+          this.isContentAvailable();
         }
       })
     );
@@ -82,7 +94,6 @@ export class ClassComponent implements OnInit, OnDestroy {
   sliderOpen() {
     this.isSliderOpen = true;
     var element = this.slider.nativeElement.classList.toggle("show");
-
     var icon = document.getElementById("favIcon");
     if (icon.classList.contains("fa-angle-double-up")) {
       icon.classList.remove("fa-angle-double-up");

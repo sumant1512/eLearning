@@ -10,7 +10,7 @@ import { SyllabusListType } from "./syllabus-tranform/types/syllabus.type";
 import { VideoListType } from "./video/types/video.type";
 
 export type AppState = Partial<{
-  isContentNotFound: boolean;
+  isContentFound: boolean;
   profile: ProfileType;
   studentSamplePaperSyllabusList: SubjectWithTopicAndSamplePaperType[];
   classList: ClassListType[];

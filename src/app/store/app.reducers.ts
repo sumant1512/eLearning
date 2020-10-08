@@ -14,7 +14,7 @@ import { videoReducer } from "./video/video.reducers";
 import { contentNotFoundReducer } from "./content-not-found/content-not-found.reducers";
 
 export const appReducers: ActionReducerMap<AppState> = {
-  isContentNotFound: contentNotFoundReducer,
+  isContentFound: contentNotFoundReducer,
   profile: profileReducer,
   studentSamplePaperSyllabusList: studentSamplePaperSyllabusReducer,
   classList: classReducer,
