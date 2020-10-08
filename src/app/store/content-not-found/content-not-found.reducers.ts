@@ -3,10 +3,10 @@ import {
   ContentNotFoundActionsUnion,
 } from "./content-not-found.actions";
 
-const isContentNotFound: boolean = false;
+const isContentFound: boolean = false;
 
 export function contentNotFoundReducer(
-  state = isContentNotFound,
+  state = isContentFound,
   action: ContentNotFoundActionsUnion
 ): any {
   switch (action.type) {

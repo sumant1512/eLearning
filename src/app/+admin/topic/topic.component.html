@@ -38,12 +38,15 @@
       </div>
     </ng-template>
     <div [ngClass]="isMobile || isAddClassFormOpen ? 'col-lg-8' : 'col-lg-12'">
-      <app-common-view
-        [viewList]="topicList"
-        name="Topic"
-        (childEvent)="removeTopic($event)"
-        (editChildEvent)="editTopic($event)"
-      ></app-common-view>
+      <div *ngIf="isContentFound; else contentNotFoundCard">
+        <app-common-view
+          [viewList]="topicList"
+          name="Topic"
+          (childEvent)="removeTopic($event)"
+          (editChildEvent)="editTopic($event)"
+        ></app-common-view>
+      </div>
+      <ng-template #contentNotFoundCard> Content Not Found </ng-template>
     </div>
   </div>
 </div>

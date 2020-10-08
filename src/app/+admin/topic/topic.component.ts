@@ -28,7 +28,8 @@ export class TopicComponent implements OnInit, OnDestroy {
   classList: ClassListType[];
   isSliderOpen = false;
   isMobile = false;
-  isAddClassFormOpen = false;
+  isAddClassFormOpen: boolean = false;
+  isContentFound: boolean = true;
   subscription: Subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {}
@@ -51,11 +52,22 @@ export class TopicComponent implements OnInit, OnDestroy {
     this.isAddClassFormOpen = true;
   }
 
+  // function to get content not found status
+  isContentAvailable(): void {
+    this.subscription.add(
+      this.store.select("isContentFound").subscribe((response) => {
+        this.isContentFound = response;
+      })
+    );
+  }
+
   fetchTopics(): void {
     this.store.dispatch(new TopicActions.FetchTopic());
     this.store.select("topicList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.topicList = response;
+      } else {
+        this.isContentAvailable();
       }
     });
   }
