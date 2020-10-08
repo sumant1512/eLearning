@@ -1,1 +1,109 @@
-<p>view-teacher works!</p>
+
+<div class="container-fluid shadow">
+    <div class="row pt-3 pt-md-4">
+      <div class="col-12 text-center">
+        <h3 class="dark-blue font-weight-bold">Teacher List</h3>
+      </div>
+    </div>
+    <div>
+      <div class="row">
+        <div class="col-12">
+          <h4 class="dark-blue font-weight-bold">Search</h4>
+        </div>
+      </div>
+      <div class="row">
+        <!-- <div class="mb-3 mb-md-0 col-12 col-md-4">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="studentName"
+            placeholder="Search by scholar number"
+            aria-label="Search"
+          />
+        </div> -->
+        <div class="mb-3 mb-md-0 col-12 col-md-4">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="teacherName"
+            placeholder="Search by name"
+            aria-label="Search"
+          />
+        </div>
+        <!-- <div class="mb-3 mb-md-0 col-12 col-md-4">
+          <select class="form-control">
+            <option disabled>Choose your class</option>
+            <option *ngFor="let class of classList" value="{{ class.class_id }}">
+              {{ class.class_name }}
+            </option>
+          </select>
+        </div> -->
+      </div>
+      <div class="row my-3">
+        <div class="col-12 text-right">
+          <button (click)="startSession()" type="button" class="btn btn-warning">
+            Start Session
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="student-table">
+      <table class="table-width table table-hover">
+        <thead class="bg-dark-blue text-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Class</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="!students">
+          <tr *ngFor="let i of [].constructor(8)">
+            <td class="p-2" *ngFor="let i of [].constructor(5)">
+              <app-profile-skeleton Cheight="31"></app-profile-skeleton>
+            </td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="students">
+          <tr
+            *ngFor="
+              let student of students | StudentFilter: studentName;
+              let i = index
+            "
+          >
+            <td>{{ student.student_id }}</td>
+            <td>{{ student.first_name + " " + student.last_name }}</td>
+            <td>{{ student.email }}</td>
+            <td>
+              <span *ngFor="let class of classList">
+                <span *ngIf="student.class_id == class.class_id">
+                  {{ class.class_name }}
+                </span>
+              </span>
+            </td>
+            <td>
+              <i
+                (click)="removeStudent(student.student_id)"
+                class="fa fa-minus-circle"
+              >
+              </i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <h3
+        *ngIf="
+          students !== undefined &&
+          (students | StudentFilter: studentName).length === 0
+        "
+        class="text-center mt-5"
+      >
+        No results found
+      </h3>
+    </div>
+  </div>
+  
+  
+  

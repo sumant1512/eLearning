@@ -8,10 +8,11 @@ import { SyllabusActionsUnion } from "./syllabus-tranform/syllabus.actions";
 import { SamplePaperTransformActionsUnion } from "./sample-paper-transform/sample-paper-transform.actions";
 import { NotesActionsUnion } from "./notes/notes.actions";
 import { StudentSamplePaperSyllabusActionsUnion } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
-import {VideoActionsUnion,} from "./video/video.actions";
-
+import { VideoActionsUnion } from "./video/video.actions";
+import { ContentNotFoundActionsUnion } from "./content-not-found/content-not-found.actions";
 
 export type AppActionsUnion =
+  | ContentNotFoundActionsUnion
   | AuthActionsUnion
   | StudentSamplePaperSyllabusActionsUnion
   | ClassActionsUnion
