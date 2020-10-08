@@ -6,13 +6,19 @@ import {
   HttpErrorResponse,
   HttpResponse,
 } from "@angular/common/http";
+import { Store } from "@ngrx/store";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError, tap } from "rxjs/operators";
 import { ErrorType } from "./shared/error-notification-dialog/types/error-notification.type";
+import { AppState } from "./store/app.state";
 import { ErrorNotificationService } from "./store/services/error-notification.service";
+import * as ContentNotFoundActions from "../app/store/content-not-found/content-not-found.actions";
 
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private errorService: ErrorNotificationService) {}
+  constructor(
+    private errorService: ErrorNotificationService,
+    private store: Store<AppState>
+  ) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -21,6 +27,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       tap((data) => {
         if (data instanceof HttpResponse) {
           let successMessage: string;
+          // this.store.dispatch(
+          //   new ContentNotFoundActions.SetContentNotFoundFlag(true)
+          // );
           successMessage = "Success";
           this.errorService.addSuccess(successMessage);
           return throwError(successMessage);
@@ -38,9 +47,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             code: error.status,
             message: error.error.message,
           };
+          this.errorService.addErrors(errorMessage);
+          return throwError(errorMessage);
         }
-        this.errorService.addErrors(errorMessage);
-        return throwError(errorMessage);
       })
     );
   }

@@ -7,7 +7,7 @@ import { AdminComponent } from "./admin.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { AdminHeaderComponent } from "./admin-header/admin-header.component";
 import { AdminFooterComponent } from "./admin-footer/admin-footer.component";
-import { AddTeacherComponent } from "./teacher/teacher.component";
+import { TeacherComponent } from "./teacher/teacher.component";
 import { ViewTeacherComponent } from "./teacher/view-teacher/view-teacher.component";
 import { ViewSyllabusComponent } from "./view-syllabus/view-syllabus.component";
 import { AdminSettingsComponent } from "./admin-settings/admin-settings.component";
@@ -30,6 +30,7 @@ import { VideoRecordComponent } from "./video/video-record/video-record.componen
 import { StudentListComponent } from "./student-list/student-list.component";
 import { ViewStudentComponent } from "./student-list/view-student/view-student.component";
 import { AddStudentComponent } from "./student-list/add-student/add-student.component";
+import { AddTeacherComponent } from "./teacher/add-teacher/add-teacher.component";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { AddStudentComponent } from "./student-list/add-student/add-student.comp
     AdminHeaderComponent,
     AdminFooterComponent,
     AddStudentComponent,
-    AddTeacherComponent,
+    TeacherComponent,
     ViewStudentComponent,
     ViewTeacherComponent,
     ClassComponent,
@@ -58,6 +59,7 @@ import { AddStudentComponent } from "./student-list/add-student/add-student.comp
     SearchPipe,
     VideoComponent,
     StudentListComponent,
+    AddTeacherComponent,
   ],
   imports: [
     CommonModule,
