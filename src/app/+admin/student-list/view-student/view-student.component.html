@@ -69,8 +69,7 @@
           *ngFor="
             let student of students
               | StudentFilter: studentName
-              | StudentFilter: studentId;
-            let i = index
+              | StudentFilter: studentId
           "
         >
           <td>{{ student.student_id }}</td>
