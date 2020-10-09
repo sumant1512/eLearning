@@ -16,6 +16,7 @@ import { Subscription } from "rxjs";
 export class ViewStudentComponent implements OnInit, OnDestroy {
   students: StudentType[];
   studentName: string;
+  studentId: number;
   classList: ClassListType[];
   subscription: Subscription = new Subscription();
   constructor(
