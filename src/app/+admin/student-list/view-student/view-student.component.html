@@ -15,7 +15,7 @@
         <input
           class="form-control"
           type="text"
-          [(ngModel)]="studentName"
+          [(ngModel)]="studentId"
           placeholder="Search by scholar number"
           aria-label="Search"
         />
@@ -30,8 +30,8 @@
         />
       </div>
       <div class="mb-3 mb-md-0 col-12 col-md-4">
-        <select class="form-control">
-          <option disabled>Choose your class</option>
+        <select [(ngModel)]="className" class="form-control">
+          <option value="all">Choose your class</option>
           <option *ngFor="let class of classList" value="{{ class.class_id }}">
             {{ class.class_name }}
           </option>
@@ -67,7 +67,9 @@
       <tbody *ngIf="students">
         <tr
           *ngFor="
-            let student of students | StudentFilter: studentName;
+            let student of students
+              | StudentFilter: studentName
+              | StudentFilter: studentId;
             let i = index
           "
         >
@@ -75,7 +77,12 @@
           <td>{{ student.first_name + " " + student.last_name }}</td>
           <td>{{ student.email }}</td>
           <td>
-            <span *ngFor="let class of classList">
+            <span
+              *ngFor="
+                let class of classList | StudentFilter: className;
+                let i = index
+              "
+            >
               <span *ngIf="student.class_id == class.class_id">
                 {{ class.class_name }}
               </span>

@@ -28,11 +28,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
       tap((data) => {
         if (data instanceof HttpResponse) {
           this.store.dispatch(
-            new ContentNotFoundActions.SetContentNotFoundFlag(true)
+            new ContentNotFoundActions.SetContentFoundFlag(true)
           );
-          if (data.body.status) {
+          if (data.body.message) {
             let successMessage: SuccessMessageType;
-            console.log(data);
             successMessage = {
               status: "Success",
               message: data.body.message,
@@ -52,7 +51,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           // server-side error
           if (error.status === 404) {
             this.store.dispatch(
-              new ContentNotFoundActions.SetContentNotFoundFlag(false)
+              new ContentNotFoundActions.SetContentFoundFlag(false)
             );
           } else {
             errorMessage = {
