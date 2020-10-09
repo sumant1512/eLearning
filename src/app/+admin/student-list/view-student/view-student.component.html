@@ -30,7 +30,7 @@
         />
       </div>
       <div class="mb-3 mb-md-0 col-12 col-md-4">
-        <select [(ngModel)]="className" class="form-control">
+        <select class="form-control">
           <option value="all">Choose your class</option>
           <option *ngFor="let class of classList" value="{{ class.class_id }}">
             {{ class.class_name }}
@@ -93,16 +93,6 @@
         </tr>
       </tbody>
     </table>
-
-    <h3
-      *ngIf="
-        students !== undefined &&
-        (students | StudentFilter: studentName).length === 0
-      "
-      class="text-center mt-5"
-    >
-      No results found
-    </h3>
   </div>
 </div>
 
