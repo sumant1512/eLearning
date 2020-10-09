@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from "@angular/core";
   name: "StudentFilter",
 })
 export class SearchPipe implements PipeTransform {
-  transform(value: any, input: string | number): any {
+  transform(value: any, input: any): any {
     let filteredValue = [];
     if (!value) return null;
     if (!input) return value;
