@@ -1,9 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ErrorNotificationService } from "src/app/store/services/error-notification.service";
 import { ErrorType } from "./types/error-notification.type";
-import * as ContentNotFoundActions from "../../store/content-not-found/content-not-found.actions";
-import { Store } from "@ngrx/store";
-import { AppState } from "src/app/store/app.state";
 
 @Component({
   selector: "app-error-notification-dialog",
@@ -15,10 +12,7 @@ export class ErrorNotificationDialogComponent implements OnInit {
   view: boolean = false;
   error: ErrorType;
 
-  constructor(
-    private errorService: ErrorNotificationService,
-    private store: Store<AppState>
-  ) {}
+  constructor(private errorService: ErrorNotificationService) {}
 
   ngOnInit() {
     this.initializeErrors();
