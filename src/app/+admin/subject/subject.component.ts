@@ -25,6 +25,7 @@ export class SubjectComponent implements OnInit, OnDestroy {
   isMobile = false;
   isSliderOpen = false;
   isAddClassFormOpen = false;
+  isContentFound: boolean = true;
   subscription: Subscription = new Subscription();
 
   constructor(
@@ -51,12 +52,23 @@ export class SubjectComponent implements OnInit, OnDestroy {
     this.isAddClassFormOpen = true;
   }
 
+  // function to get content not found status
+  isContentAvailable(): void {
+    this.subscription.add(
+      this.store.select("isContentFound").subscribe((response) => {
+        this.isContentFound = response;
+      })
+    );
+  }
+
   fetchSubjects(): void {
     this.store.dispatch(new SubjectActions.FetchSubject());
     this.subscription.add(
       this.store.select("subjectList").subscribe((response) => {
         if (Object.keys(response).length) {
           this.subjectList = response;
+        } else {
+          this.isContentAvailable();
         }
       })
     );
@@ -94,16 +106,17 @@ export class SubjectComponent implements OnInit, OnDestroy {
   }
 
   sliderOpen() {
-    this.isSliderOpen = true;
-    var element = this.slider.nativeElement.classList.toggle("show");
-
-    var icon = document.getElementById("favIcon");
-    if (icon.classList.contains("fa-angle-double-up")) {
-      icon.classList.remove("fa-angle-double-up");
-      icon.classList.add("fa-angle-double-down");
-    } else {
-      icon.classList.remove("fa-angle-double-down");
-      icon.classList.add("fa-angle-double-up");
+    if (this.isMobile) {
+      this.isSliderOpen = true;
+      var element = this.slider.nativeElement.classList.toggle("show");
+      var icon = document.getElementById("favIcon");
+      if (icon.classList.contains("fa-angle-double-up")) {
+        icon.classList.remove("fa-angle-double-up");
+        icon.classList.add("fa-angle-double-down");
+      } else {
+        icon.classList.remove("fa-angle-double-down");
+        icon.classList.add("fa-angle-double-up");
+      }
     }
   }
 

@@ -28,7 +28,7 @@ export class CommonSampleSyllabusComponent implements OnInit {
   selectedClassDetails: SelectedClassDetailsType[];
   selectedClassName: string;
   selectedClassId: number;
-  resultForNotes: NotesListType[];
+  resultForNotes: NotesListType[] = [];
   resultForSyllabus: SyllabusListType[];
   resultForSamperPaper: SamplePaperListType[];
 

@@ -144,11 +144,17 @@ export class VideoRecordComponent implements OnInit, OnDestroy {
 
   onVideoSelect(event: any) {
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        this.encryptedVideo = event.target.result;
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+      if (allowedExtensions.exec(event.target.files[0].name)) {
+        alert("Invalid file type");
+        event.target.value = "";
+      } else {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          this.encryptedVideo = event.target.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
     }
   }
 

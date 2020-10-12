@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { ErrorNotificationService } from "src/app/store/services/error-notification.service";
+import { ErrorType } from "./types/error-notification.type";
 
 @Component({
   selector: "app-error-notification-dialog",
@@ -9,7 +10,7 @@ import { ErrorNotificationService } from "src/app/store/services/error-notificat
 export class ErrorNotificationDialogComponent implements OnInit {
   @ViewChild("modalDisplay", { static: false }) modalDisplay: ElementRef;
   view: boolean = false;
-  message: string = "";
+  error: ErrorType;
 
   constructor(private errorService: ErrorNotificationService) {}
 
@@ -21,7 +22,7 @@ export class ErrorNotificationDialogComponent implements OnInit {
     this.errorService.getErrors().subscribe((errors) => {
       if (errors) {
         this.view = true;
-        this.message = errors;
+        this.error = errors;
         document.getElementsByTagName("body")[0].classList.add("modal-open");
       }
     });

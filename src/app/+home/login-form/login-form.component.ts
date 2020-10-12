@@ -6,6 +6,7 @@ import { loginForm } from "./login-form.utils";
 import { Store } from "@ngrx/store";
 import { AppState } from "src/app/store/app.state";
 import * as AuthActions from ".././../store/auth/auth.actions";
+import { CommonService } from "src/app/store/common/common.service";
 
 @Component({
   selector: "app-login-form",
@@ -17,7 +18,11 @@ export class LoginFormComponent implements OnInit {
   submitted = false;
   loader: boolean;
 
-  constructor(private store: Store<AppState>, private router: Router) {
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private commonService: CommonService
+  ) {
     this.loginForm = loginForm();
   }
 
@@ -28,7 +33,11 @@ export class LoginFormComponent implements OnInit {
 
   login() {
     this.loader = true;
-    const classDetail = this.loginForm.value;
+    let password = this.commonService.encrypt(this.loginForm.value.password);
+    const classDetail = {
+      email: this.loginForm.value.email,
+      password: password,
+    };
     this.store.dispatch(new AuthActions.UserLogin(classDetail));
   }
   register() {

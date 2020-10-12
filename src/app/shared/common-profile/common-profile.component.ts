@@ -17,7 +17,7 @@ import { ProfileType } from "../../store/auth/types/profile.type";
 import * as AuthActions from "../../store/auth/auth.actions";
 import * as StudentSamplePaperSyllabusActions from "../../store/student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 import { SubjectWithTopicAndSamplePaperType } from "../../store/student-sample_paper-syllabus/types/student-sample_paper-syllabus.types";
-import { CONSTANTS } from "src/app/+admin/profile/profile.constants";
+import { CONSTANTS } from "src/app/+admin/admin-profile/profile.constants";
 import { ImageType } from "./types/common-profile.type";
 
 @Component({
@@ -99,30 +99,36 @@ export class CommonProfileComponent implements OnInit, OnDestroy {
   selectImage(event: any, userType: string): void {
     let imageData: ImageType;
     if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-      reader.onload = (event: any) => {
-        switch (userType) {
-          case "user":
-            this.userImageUrl = event.target.result;
-            imageData = {
-              imageType: this.isAdmin ? "admin" : "student",
-              image: event.target.result,
-            };
-            this.uploadBtnControl = false;
-            this.onImageSelect.emit(imageData);
-            break;
-          case "school_image":
-            this.schoolImageUrl = event.target.result;
-            imageData = {
-              imageType: userType,
-              image: event.target.result,
-            };
-            this.isSchoolImageBtnDisable = true;
-            this.onImageSelect.emit(imageData);
-            break;
-        }
-      };
-      reader.readAsDataURL(event.target.files[0]);
+      var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+      if (!allowedExtensions.exec(event.target.files[0].name)) {
+        alert("Invalid file type");
+        event.target.value = "";
+      } else {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          switch (userType) {
+            case "user":
+              this.userImageUrl = event.target.result;
+              imageData = {
+                imageType: this.isAdmin ? "admin" : "student",
+                image: event.target.result,
+              };
+              this.uploadBtnControl = false;
+              this.onImageSelect.emit(imageData);
+              break;
+            case "school_image":
+              this.schoolImageUrl = event.target.result;
+              imageData = {
+                imageType: userType,
+                image: event.target.result,
+              };
+              this.isSchoolImageBtnDisable = true;
+              this.onImageSelect.emit(imageData);
+              break;
+          }
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
     }
   }
 

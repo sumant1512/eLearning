@@ -18,7 +18,7 @@
         <div class="d-flex justify-content-center">
           <div class="col-12 p-2">
             <div (click)="sliderOpen()" class="pointer text-center">
-              <i id="favIcon" class= "charcoal fa-3x fa fa-angle-double-up"  ></i>
+              <i id="favIcon" class="charcoal fa-3x fa fa-angle-double-up"></i>
             </div>
             <app-common-add
               name="Topic"
@@ -38,12 +38,19 @@
       </div>
     </ng-template>
     <div [ngClass]="isMobile || isAddClassFormOpen ? 'col-lg-8' : 'col-lg-12'">
-      <app-common-view
-        [viewList]="topicList"
-        name="Topic"
-        (childEvent)="removeTopic($event)"
-        (editChildEvent)="editTopic($event)"
-      ></app-common-view>
+      <div *ngIf="isContentFound; else contentNotFoundCard">
+        <app-common-view
+          [viewList]="topicList"
+          name="Topic"
+          (childEvent)="removeTopic($event)"
+          (editChildEvent)="editTopic($event)"
+        ></app-common-view>
+      </div>
+      <ng-template #contentNotFoundCard>
+        <app-content-not-found></app-content-not-found
+      ></ng-template>
     </div>
   </div>
 </div>
+
+<app-success-notification></app-success-notification>

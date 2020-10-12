@@ -8,10 +8,11 @@ import { SyllabusEffects } from "./syllabus-tranform/syllabus.effects";
 import { SamplePaperTransformEffects } from "./sample-paper-transform/sample-paper-transform.effects";
 import { NotesEffects } from "./notes/notes.effects";
 import { StudentSamplePaperSyllabusEffects } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.effects";
-import {  VideoEffects } from "./video/video.effects";
-
+import { VideoEffects } from "./video/video.effects";
+import { ContentNotFoundEffects } from "./content-not-found/content-not-found.effects";
 
 export const AppEffects = [
+  ContentNotFoundEffects,
   AuthEffects,
   StudentSamplePaperSyllabusEffects,
   ClassEffects,
