@@ -14,6 +14,7 @@ import { AppState } from "./store/app.state";
 import { ErrorNotificationService } from "./store/services/error-notification.service";
 import * as ContentNotFoundActions from "../app/store/content-not-found/content-not-found.actions";
 import { SuccessMessageType } from "./shared/success-notification/types/success-notification.type";
+import { contentNotFoundExceptionUrl, successUrl } from "./routing.constants";
 
 export class HttpErrorInterceptor implements HttpInterceptor {
   constructor(
@@ -30,7 +31,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           this.store.dispatch(
             new ContentNotFoundActions.SetContentFoundFlag(true)
           );
-          if (data.body.message) {
+          if (successUrl.includes(data.url)) {
             let successMessage: SuccessMessageType;
             successMessage = {
               status: "Success",
@@ -49,7 +50,10 @@ export class HttpErrorInterceptor implements HttpInterceptor {
           errorMessage.message = `Error: ${error.error.message}`;
         } else {
           // server-side error
-          if (error.status === 404) {
+          if (
+            error.status === 404 &&
+            !contentNotFoundExceptionUrl.includes(error.url)
+          ) {
             this.store.dispatch(
               new ContentNotFoundActions.SetContentFoundFlag(false)
             );
