@@ -7,9 +7,7 @@
       <div class="row">
         <div class="card-body">
           <div class="col-sm-3offset-sm-2">
-            <p class="h2 text-center mb-3">
-              Registration
-            </p>
+            <p class="h2 text-center mb-3">Registration</p>
             <form [formGroup]="schoolRegisterForm">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
@@ -85,10 +83,10 @@
                       class="invalid-feedback"
                     >
                       <div class="ml-5" *ngIf="f.adminAdhar.errors.required">
-                        Admin Aadhar is required*
+                        <b>Admin Aadhar</b> is required*
                       </div>
                       <div class="ml-5" *ngIf="f.adminAdhar.errors.pattern">
-                        Admin Aadhar is not valid*
+                        Only 12 digit number is allowed*
                       </div>
                     </div>
                   </div>
@@ -246,8 +244,7 @@
                       class="form-control"
                       [ngClass]="{
                         'is-invalid':
-                          f.schoolContactNo.touched &&
-                          f.schoolContactNo.errors
+                          f.schoolContactNo.touched && f.schoolContactNo.errors
                       }"
                     />
                     <div
@@ -299,8 +296,8 @@
                         Password is required*
                       </div>
                       <div class="ml-5" *ngIf="f.password.errors.pattern">
-                        Password must contain a lowercase, a uppercase, a digit
-                        and a special symbol
+                        Password must have min 8 char with a lowercase, a
+                        uppercase, a digit and a special symbol.
                       </div>
                     </div>
                   </div>
@@ -316,28 +313,31 @@
                     <input
                       type="password"
                       formControlName="confirmPassword"
-                      placeholder="Confirm Password"
+                      placeholder="disabled temporary"
                       class="form-control"
                       [ngClass]="{
                         'is-invalid':
                           f.confirmPassword.touched && f.confirmPassword.errors
                       }"
                     />
+                    <div>
+                      {{ f.confirmPassword.value }}
+                    </div>
                     <div
-                      *ngIf="
-                        f.confirmPassword.touched && f.confirmPassword.errors
-                      "
+                      *ngIf="f.confirmPassword.touched"
                       class="invalid-feedback"
                     >
-                      <div
-                        class="ml-5"
-                        *ngIf="f.confirmPassword.errors.required"
-                      >
-                        Confirm password is required*
+                      <div *ngIf="f.confirmPassword.errors">
+                        <div
+                          class="ml-5"
+                          *ngIf="f.confirmPassword.errors.required"
+                        >
+                          Confirm password is required*
+                        </div>
                       </div>
                       <div
                         class="ml-5"
-                        *ngIf="f.confirmPassword.errors.mustMatch"    
+                        *ngIf="f.password.value !== f.confirmPassword.value"
                       >
                         Passwords must match
                       </div>
@@ -372,5 +372,6 @@
       </div>
     </div>
   </div>
-
-<app-home-footer></app-home-footer>
+  <app-error-notification-dialog></app-error-notification-dialog>
+  <app-home-footer></app-home-footer>
+</div>

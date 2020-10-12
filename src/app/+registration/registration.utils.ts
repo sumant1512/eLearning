@@ -26,8 +26,10 @@ export function schoolRegisterForm() {
     ]),
     password: new FormControl("", [
       Validators.required,
-      Validators.pattern("^[0-9]{8,}$"),
+      Validators.pattern(
+        "^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,15}$"
+      ),
     ]),
-    confirmPassword: new FormControl("", [Validators.required]),
+    confirmPassword: new FormControl({ value: "", disabled: true }),
   });
 }

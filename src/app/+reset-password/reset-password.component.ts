@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { Subscription } from "rxjs";
 import { CommonService } from "../store/common/common.service";
 import { ForgetPasswordService } from "../store/services/forget-password.service";
 import { VerificationService } from "../store/services/verification.service";
@@ -13,6 +14,7 @@ export class ResetPasswordComponent implements OnInit {
   displayOTPForm: boolean = false;
   displayPasswordForm: boolean = false;
   email: string;
+  subsctiption: Subscription = new Subscription();
   constructor(
     private router: Router,
     private forgetPassword: ForgetPasswordService,
@@ -26,7 +28,6 @@ export class ResetPasswordComponent implements OnInit {
     this.email = email;
     this.forgetPassword.getOTP({ email }).subscribe((response) => {
       if (response["body"].status) {
-        alert("OTP successfully sent");
         this.displayOTPForm = true;
       }
     });
@@ -37,7 +38,6 @@ export class ResetPasswordComponent implements OnInit {
       .verifyOtp({ otp, email: this.email })
       .subscribe((response) => {
         if (response["body"].status) {
-          alert(response["body"].message);
           this.displayPasswordForm = true;
         } else alert(response["body"].message);
       });
@@ -45,13 +45,14 @@ export class ResetPasswordComponent implements OnInit {
 
   updatePassword(pass): void {
     let password = this.commonService.encrypt(pass);
-    this.forgetPassword
-      .updatePassword({ email: this.email, password })
-      .subscribe((response) => {
-        if (response["body"].status) {
-          alert(response["body"].message);
-          this.router.navigate(["home"]);
-        } else alert(response["body"].message);
-      });
+    this.subsctiption.add(
+      this.forgetPassword
+        .updatePassword({ email: this.email, password })
+        .subscribe((response) => {
+          if (response["body"].status) {
+            this.router.navigate(["home"]);
+          } else alert(response["body"].message);
+        })
+    );
   }
 }
