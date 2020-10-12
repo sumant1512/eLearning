@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { Router } from "@angular/router";
 import { schoolRegisterForm } from "./registration.utils";
 import { RegistrationService } from "../store/services/registration.service";
+import { CommonService } from "../store/common/common.service";
 
 @Component({
   selector: "app-registration",
@@ -14,7 +15,8 @@ export class RegistrationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private registationService: RegistrationService
+    private registationService: RegistrationService,
+    private commonService: CommonService
   ) {
     (this.schoolRegisterForm = schoolRegisterForm()),
       {
@@ -48,7 +50,24 @@ export class RegistrationComponent implements OnInit {
   }
 
   registerSchool(): void {
-    const schoolRegistrationDetails = this.schoolRegisterForm.value;
+    let password = this.commonService.encrypt(
+      this.schoolRegisterForm.value.password
+    );
+    let confirmPassword = this.commonService.encrypt(
+      this.schoolRegisterForm.value.confirmPassword
+    );
+    const schoolRegistrationDetails = {
+      schoolName: this.schoolRegisterForm.value.schoolName,
+      adminName: this.schoolRegisterForm.value.adminName,
+      schoolType: this.schoolRegisterForm.value.schoolType,
+      adminAdhar: this.schoolRegisterForm.value.adminAdhar,
+      schoolRegistrationNo: this.schoolRegisterForm.value.schoolRegistrationNo,
+      email: this.schoolRegisterForm.value.email,
+      adminContactNo: this.schoolRegisterForm.value.adminContactNo,
+      schoolContactNo: this.schoolRegisterForm.value.schoolContactNo,
+      password: password,
+      confirmPassword: confirmPassword,
+    };
     this.registationService
       .schoolRegistration(schoolRegistrationDetails)
       .subscribe((response) => {
