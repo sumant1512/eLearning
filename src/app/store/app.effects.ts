@@ -10,6 +10,7 @@ import { NotesEffects } from "./notes/notes.effects";
 import { StudentSamplePaperSyllabusEffects } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.effects";
 import { VideoEffects } from "./video/video.effects";
 import { ContentNotFoundEffects } from "./content-not-found/content-not-found.effects";
+import { TeacherEffects } from "./teacher/teacher.effects";
 
 export const AppEffects = [
   ContentNotFoundEffects,
@@ -20,6 +21,7 @@ export const AppEffects = [
   TopicEffects,
   SamplePaperEffects,
   StudentEffects,
+  TeacherEffects,
   SyllabusEffects,
   NotesEffects,
   SamplePaperTransformEffects,

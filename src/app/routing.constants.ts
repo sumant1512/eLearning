@@ -19,6 +19,8 @@ export const successUrl = [
   `${HOST}addSubject`,
   `${HOST}addTopic`,
   `${HOST}studentRegistration`,
+  `${HOST}teacherRegistration`,
+  `${HOST}removeStudent/:id`,
   `${HOST}editSubjectName`,
   `${HOST}editClassName`,
   `${HOST}editTopicName`,
