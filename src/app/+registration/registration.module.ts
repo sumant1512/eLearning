@@ -4,6 +4,7 @@ import { RegistrationRoutingModule } from "./registration-routing.module";
 import { RegistrationComponent } from "./registration.component";
 import { HomeModule } from "../+home/home.module";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   declarations: [RegistrationComponent],
@@ -14,6 +15,7 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     HomeModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class RegistrationModule {}

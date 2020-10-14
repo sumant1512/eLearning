@@ -9,7 +9,7 @@ import {
     return new FormGroup({
       firstName: new FormControl("", [Validators.required]),
       lastName: new FormControl("", [Validators.required]),
-      fatherName: new FormControl("", [Validators.required]),
+      relatorName: new FormControl("", [Validators.required]),
      
       dob: new FormControl("", [Validators.required]),
       addressLineOne: new FormControl("", [Validators.required]),

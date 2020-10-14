@@ -1,3 +1,5 @@
+import { HOST } from "config.constants";
+
 export enum RoutesEnum {
   HOME = "home",
   REGISTRATION = "registration",
@@ -9,3 +11,22 @@ export enum RoutesEnum {
   STUDENT = "student",
   SUPER_ADMIN = "super-admin",
 }
+
+export const contentNotFoundExceptionUrl = [`${HOST}sendOTP`];
+
+export const successUrl = [
+  `${HOST}addClass`,
+  `${HOST}addSubject`,
+  `${HOST}addTopic`,
+  `${HOST}studentRegistration`,
+  `${HOST}teacherRegistration`,
+  `${HOST}removeStudent/:id`,
+  `${HOST}editSubjectName`,
+  `${HOST}editClassName`,
+  `${HOST}editTopicName`,
+  `${HOST}sendOTP`,
+  `${HOST}verifyOTP`,
+  `${HOST}updatePassword`,
+];
+
+export const contentNotFoundUrl = [""];

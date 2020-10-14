@@ -1,15 +1,11 @@
 import { Injectable } from "@angular/core";
-import {
-  HttpClient,
-  HttpHeaders,
-} from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { HOST } from "config.constants";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ForgetPasswordService {
-
   constructor(private http: HttpClient) {}
 
   getOTP(email) {
@@ -20,7 +16,7 @@ export class ForgetPasswordService {
   }
 
   updatePassword(details) {
-    return this.http.post<any>(HOST + "updatePassword", details,{
+    return this.http.post<any>(HOST + "updatePassword", details, {
       observe: "response",
       headers: new HttpHeaders().set("Content-Type", "application/json"),
     });

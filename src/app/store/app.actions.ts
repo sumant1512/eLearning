@@ -10,6 +10,7 @@ import { NotesActionsUnion } from "./notes/notes.actions";
 import { StudentSamplePaperSyllabusActionsUnion } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.actions";
 import { VideoActionsUnion } from "./video/video.actions";
 import { ContentNotFoundActionsUnion } from "./content-not-found/content-not-found.actions";
+import { TeacherActionsUnion } from "./teacher/teacher.actions";
 
 export type AppActionsUnion =
   | ContentNotFoundActionsUnion
@@ -20,6 +21,7 @@ export type AppActionsUnion =
   | TopicActionsUnion
   | SamplePaperActionsUnion
   | StudentActionsUnion
+  | TeacherActionsUnion
   | SyllabusActionsUnion
   | NotesActionsUnion
   | SamplePaperTransformActionsUnion
