@@ -46,13 +46,12 @@
           <th scope="col">ID</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Class</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody *ngIf="!teachers">
         <tr *ngFor="let i of [].constructor(8)">
-          <td class="p-2" *ngFor="let i of [].constructor(5)">
+          <td class="p-2" *ngFor="let i of [].constructor(4)">
             <app-profile-skeleton Cheight="31"></app-profile-skeleton>
           </td>
         </tr>
@@ -62,13 +61,6 @@
           <td>{{ teacher.teacher_id }}</td>
           <td>{{ teacher.first_name + " " + teacher.last_name }}</td>
           <td>{{ teacher.email }}</td>
-          <td>
-            <span *ngFor="let class of classList; let i = index">
-              <span *ngIf="teacher.class_id == class.class_id">
-                {{ class.class_name }}
-              </span>
-            </span>
-          </td>
           <td>
             <i
               (click)="removeTeacher(teacher.teacher_id)"
