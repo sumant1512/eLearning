@@ -12,6 +12,7 @@ import { notesReducer } from "./notes/notes.reducers";
 import { studentSamplePaperSyllabusReducer } from "./student-sample_paper-syllabus/student-sample_paper-syllabus.reducers";
 import { videoReducer } from "./video/video.reducers";
 import { contentNotFoundReducer } from "./content-not-found/content-not-found.reducers";
+import { teacherReducer } from "./teacher/teacher.reducers";
 
 export const appReducers: ActionReducerMap<AppState> = {
   isContentFound: contentNotFoundReducer,
@@ -22,6 +23,7 @@ export const appReducers: ActionReducerMap<AppState> = {
   topicList: topicReducer,
   samplePaperList: samplePaperReducer,
   students: studentReducer,
+  teachers: teacherReducer,
   syllabusList: syllabusReducer,
   notesList: notesReducer,
   samplePaperTransformList: samplePaperTransformReducer,
