@@ -71,11 +71,10 @@ export class CommonAddComponent implements OnInit {
   }
 
   fetchSyllabusTransform(): void {
+    this.store.dispatch(new SyllabusActions.FetchSyllabus());
     this.store.select("syllabusList").subscribe((response) => {
       if (Object.keys(response).length) {
         this.resultForSyllabus = response;
-      } else {
-        this.store.dispatch(new SyllabusActions.FetchSyllabus());
       }
     });
   }

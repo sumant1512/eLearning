@@ -5,6 +5,7 @@ export enum TeacherActions {
   DELETE_TEACHER = "[Teacher] Delete Teacher",
   FETCH_TEACHER = "[Teacher] Fetch Teacher",
   FETCHED_TEACHER = "[Teacher] Fetched Teacher",
+  TAG_SUBJECT_TO_TEACHER = "[Teacher] Tag Subject To Teacher",
 }
 
 export class AddTeacher implements Action {
@@ -26,8 +27,14 @@ export class FetchedTeacher implements Action {
   constructor(public payload: any) {}
 }
 
+export class TagSubjectToTeacher implements Action {
+  readonly type = TeacherActions.TAG_SUBJECT_TO_TEACHER;
+  constructor(public payload: any) {}
+}
+
 export type TeacherActionsUnion =
   | AddTeacher
   | DeleteTeacher
   | FetchTeacher
-  | FetchedTeacher;
+  | FetchedTeacher
+  | TagSubjectToTeacher;

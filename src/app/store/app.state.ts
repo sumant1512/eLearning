@@ -8,7 +8,7 @@ import { SubjectWithTopicAndSamplePaperType } from "./student-sample_paper-sylla
 import { StudentType } from "./students/types/student.types";
 import { SyllabusListType } from "./syllabus-tranform/types/syllabus.type";
 import { VideoListType } from "./video/types/video.type";
-import { TeacherType } from "./teacher/types/teacher.types";
+import { TeacherTypeWithAssingedClassList } from "./teacher/types/teacher.types";
 
 export type AppState = Partial<{
   isContentFound: boolean;
@@ -19,7 +19,7 @@ export type AppState = Partial<{
   topicList: TopicListType[];
   samplePaperList: SamplePaperListType[];
   students: StudentType[];
-  teachers: TeacherType[];
+  teachers: TeacherTypeWithAssingedClassList;
   syllabusList: SyllabusListType[];
   notesList: NotesListType[];
   samplePaperTransformList: any;
