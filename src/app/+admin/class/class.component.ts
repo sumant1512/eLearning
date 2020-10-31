@@ -25,7 +25,7 @@ export class ClassComponent implements OnInit, OnDestroy {
   isSliderOpen = false;
   isAddClassFormOpen: boolean;
   isContentFound: boolean = true;
-  subsctiption: Subscription = new Subscription();
+  subscription: Subscription = new Subscription();
 
   constructor(private store: Store<AppState>) {}
 
@@ -49,7 +49,7 @@ export class ClassComponent implements OnInit, OnDestroy {
 
   // function to get content not found status
   isContentAvailable(): void {
-    this.subsctiption.add(
+    this.subscription.add(
       this.store.select("isContentFound").subscribe((response) => {
         this.isContentFound = response;
       })
@@ -58,7 +58,7 @@ export class ClassComponent implements OnInit, OnDestroy {
 
   fetchClassList(): void {
     this.store.dispatch(new ClassActions.FetchClass());
-    this.subsctiption.add(
+    this.subscription.add(
       this.store.select("classList").subscribe((response) => {
         if (Object.keys(response).length) {
           this.classList = response;
@@ -115,6 +115,6 @@ export class ClassComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subsctiption.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }

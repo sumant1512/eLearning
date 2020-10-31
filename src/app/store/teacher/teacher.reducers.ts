@@ -1,12 +1,18 @@
 import { TeacherActions, TeacherActionsUnion } from "./teacher.actions";
-import { TeacherType } from "./types/teacher.types";
+import {
+  TeacherType,
+  TeacherTypeWithAssingedClassList,
+} from "./types/teacher.types";
 
-const teacherList: TeacherType[] = [];
+const teacherList: TeacherTypeWithAssingedClassList = {
+  teacher_list: [],
+  assinged_class_subject: [],
+};
 
 export function teacherReducer(
   state = teacherList,
   action: TeacherActionsUnion
-): TeacherType[] {
+): TeacherTypeWithAssingedClassList {
   switch (action.type) {
     case TeacherActions.FETCHED_TEACHER:
       return action.payload;

@@ -30,6 +30,16 @@ export class TeacherService {
     });
   }
 
+  // service to tag subject to teacher
+  tagSubjectToTeacher(subjectDetails) {
+    return this.http.post<any>(HOST + "tagSubjectToTeacher", subjectDetails, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+  }
+
   removeTeacher(id: number) {
     return this.http.delete<any>(HOST + `removeTeacher/${id}`, {
       headers: new HttpHeaders({

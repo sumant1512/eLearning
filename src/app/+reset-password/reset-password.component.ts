@@ -14,7 +14,7 @@ export class ResetPasswordComponent implements OnInit {
   displayOTPForm: boolean = false;
   displayPasswordForm: boolean = false;
   email: string;
-  subsctiption: Subscription = new Subscription();
+  subscription: Subscription = new Subscription();
   constructor(
     private router: Router,
     private forgetPassword: ForgetPasswordService,
@@ -45,7 +45,7 @@ export class ResetPasswordComponent implements OnInit {
 
   updatePassword(pass): void {
     let password = this.commonService.encrypt(pass);
-    this.subsctiption.add(
+    this.subscription.add(
       this.forgetPassword
         .updatePassword({ email: this.email, password })
         .subscribe((response) => {

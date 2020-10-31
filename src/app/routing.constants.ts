@@ -27,6 +27,7 @@ export const successUrl = [
   `${HOST}sendOTP`,
   `${HOST}verifyOTP`,
   `${HOST}updatePassword`,
+  `${HOST}tagSubjectToTeacher`,
 ];
 
 export const contentNotFoundUrl = [""];

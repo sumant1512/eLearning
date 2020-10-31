@@ -1,0 +1,10 @@
+.teacher-image {
+    width: 74px;
+    height: 74px;
+    border-radius: 50%;
+}
+
+.teacher-name {
+    font-size: 15px;
+    font-weight: 700;
+}

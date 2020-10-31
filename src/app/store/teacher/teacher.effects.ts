@@ -60,4 +60,12 @@ export class TeacherEffects {
       );
     })
   );
+
+  @Effect()
+  tagSubjectToTeacher$ = this.action$.pipe(
+    ofType(TeacherActions.TAG_SUBJECT_TO_TEACHER),
+    map((action) => {
+      return this.teacherService.tagSubjectToTeacher(action.payload);
+    })
+  );
 }

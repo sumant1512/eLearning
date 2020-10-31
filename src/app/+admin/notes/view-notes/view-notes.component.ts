@@ -24,7 +24,7 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
   subjectName: string;
   topicName: string;
   hasNoNote: boolean = false;
-  subsctiption: Subscription = new Subscription();
+  subscription: Subscription = new Subscription();
   constructor(
     private store: Store<AppState>,
     private fb: FormBuilder,
@@ -53,7 +53,7 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
 
   fetchNotesList(): void {
     this.store.dispatch(new NotesActions.FetchNotes());
-    this.subsctiption.add(
+    this.subscription.add(
       this.store.select("notesList").subscribe((response) => {
         if (Object.keys(response).length) {
           this.resultForNotes = response;
@@ -114,6 +114,6 @@ export class ViewNotesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subsctiption.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
