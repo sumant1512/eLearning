@@ -118,43 +118,6 @@
         </div>
       </div>
     </div>
-    <!-- <table class="table-width table table-hover">
-      <thead class="bg-dark-blue text-light">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="!teachers">
-        <tr *ngFor="let i of [].constructor(8)">
-          <td class="p-2" *ngFor="let i of [].constructor(4)">
-            <app-profile-skeleton Cheight="31"></app-profile-skeleton>
-          </td>
-        </tr>
-      </tbody>
-      <tbody *ngIf="teachers">
-        <tr *ngFor="let teacher of teachers">
-          <td>{{ teacher.teacher_id }}</td>
-          <td>{{ teacher.first_name + " " + teacher.last_name }}</td>
-          <td>{{ teacher.email }}</td>
-          <td>
-            <i
-              (click)="removeTeacher(teacher.teacher_id)"
-              class="fa fa-minus-circle"
-            >
-            </i>
-            <i
-              (click)="selectTeacher(teacher.teacher_id)"
-              data-toggle="modal"
-              data-target="#tagTeacherId"
-              class="fa fa-user-plus mr-3"
-            ></i>
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
   </div>
 </div>
 

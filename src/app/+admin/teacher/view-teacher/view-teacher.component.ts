@@ -111,9 +111,8 @@ export class ViewTeacherComponent implements OnInit {
   }
 
   tagSubjectToTeacher(): void {
-    this.store.dispatch(
-      new TeacherActions.TagSubjectToTeacher(this.tagSubjectForm.value)
-    );
+    const subjectDetails = this.tagSubjectForm.value;
+    this.store.dispatch(new TeacherActions.TagSubjectToTeacher(subjectDetails));
   }
 
   getUnAssingedClassList() {}
