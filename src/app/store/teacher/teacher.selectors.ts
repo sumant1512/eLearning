@@ -18,6 +18,6 @@ export const assingedClassSubjectList: MemoizedSelector<
   AssingedClassSubjectList[]
 > = createSelector(fetchTeacherDetails, (state) => {
   if (state) {
-    return state.assinged_class_subject;
+    return state.tagged_subject_with_teacher;
   }
 });

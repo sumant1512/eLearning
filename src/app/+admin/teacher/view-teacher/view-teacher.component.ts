@@ -57,6 +57,7 @@ export class ViewTeacherComponent implements OnInit {
       this.store.pipe(select(teacherList)).subscribe((response) => {
         if (response.length) {
           this.teachers = response;
+          this.store.dispatch(new TeacherActions.FetchTaggedSubjectToTeacher());
         }
       })
     );

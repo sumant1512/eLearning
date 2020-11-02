@@ -6,6 +6,7 @@ import {
   TeacherActions,
   FetchTeacher,
   FetchedTeacher,
+  FetchedTaggedSubjectToTeacher,
 } from "./teacher.actions";
 import { mergeMap, map, tap } from "rxjs/operators";
 
@@ -56,6 +57,21 @@ export class TeacherEffects {
       return response.pipe(
         map((res) => {
           return new FetchedTeacher(res);
+        })
+      );
+    })
+  );
+
+  @Effect()
+  fetchTaggedSubjectWithTeacher$ = this.action$.pipe(
+    ofType(TeacherActions.FETCH_TAGGED_SUBJECT_TO_TEACHER),
+    map((action) => {
+      return this.teacherService.getTaggedSubjectWithTeacher();
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map((res) => {
+          return new FetchedTaggedSubjectToTeacher(res);
         })
       );
     })
