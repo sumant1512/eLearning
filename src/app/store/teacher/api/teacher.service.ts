@@ -30,6 +30,16 @@ export class TeacherService {
     });
   }
 
+   // service for View of all registered Teachers  api call
+   getTaggedSubjectWithTeacher(): Observable<any[]> {
+    return this.http.get<any[]>(HOST + "getTaggedSubjectWithTeacher", {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("AUTH_TOKEN"),
+      }),
+    });
+  }
+
   // service to tag subject to teacher
   tagSubjectToTeacher(subjectDetails) {
     return this.http.post<any>(HOST + "tagSubjectToTeacher", subjectDetails, {

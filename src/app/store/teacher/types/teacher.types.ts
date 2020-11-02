@@ -1,6 +1,6 @@
 export interface TeacherTypeWithAssingedClassList {
   teacher_list: TeacherType[];
-  assinged_class_subject?: AssingedClassSubjectList[];
+  tagged_subject_with_teacher?: AssingedClassSubjectList[];
 }
 
 export interface TeacherType {
@@ -15,7 +15,7 @@ export interface TeacherType {
   gender: string;
   city: string;
   state: string;
-  assinged_class_subject?: object[];
+  tagged_subject_with_teacher?: object[];
   registered_on: string;
   last_updated_on: string;
 }
