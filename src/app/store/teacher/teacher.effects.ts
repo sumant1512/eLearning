@@ -66,6 +66,13 @@ export class TeacherEffects {
     ofType(TeacherActions.TAG_SUBJECT_TO_TEACHER),
     map((action) => {
       return this.teacherService.tagSubjectToTeacher(action.payload);
+    }),
+    mergeMap((response) => {
+      return response.pipe(
+        map((res) => {
+          console.log(response);
+        })
+      );
     })
   );
 }
